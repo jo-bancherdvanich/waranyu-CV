@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Australia's renewable electricity transition — a Power BI dashboard and R forecast to 2035, by Waranyu Bancherdvanich."
+    />
+    <title>Australia's renewable transition | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
+        <nav aria-label="Primary navigation">
+          <a href="index.html#projects">← All projects</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+        <a class="github-link" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <main id="main">
+        <article class="case">
+          <p class="eyebrow">02 / Forecasting</p>
+          <h1>Is Australia on track for 82% renewable electricity?</h1>
+          <p class="lede">
+            An analytical brief for a government audience: twenty years of Australian electricity data, benchmarked against three comparison countries and forecast to 2035, to answer one question honestly.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <figure class="case-shot">
+            <img src="images/renewable-dashboard.png" alt="Power BI dashboard showing Australia's renewable electricity share over time, source mix, international comparison, and a forecast to 2035" />
+            <figcaption>The single-page analytical dashboard</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt>Role</dt>
+              <dd>Sole author — ETL, data model, DAX, R forecast, report</dd>
+            </div>
+            <div>
+              <dt>Tools</dt>
+              <dd>Power BI · Power Query · DAX · R · Galaxy schema</dd>
+            </div>
+            <div>
+              <dt>Context</dt>
+              <dd>ISYS6013 Business Intelligence and Analytics, Curtin University</dd>
+            </div>
+          </dl>
+
+          <section class="case-block">
+            <h2>The question</h2>
+            <p>
+              The Australian government has committed to <strong>82% renewable electricity by 2030</strong>. Written as a brief for a DCCEEW-style audience, this project asks the practical version of that commitment: <strong>is Australia on track, and if not, how far short will it fall?</strong>
+            </p>
+            <p>It breaks into four sub-questions the dashboard has to answer:</p>
+            <ul>
+              <li>How has Australia's renewable share changed since 2005?</li>
+              <li>Which technologies are actually driving that growth?</li>
+              <li>How does Australia compare with China, Germany and New Zealand?</li>
+              <li>What does a forecast to 2035 suggest about reaching the target?</li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>The data</h2>
+            <p>
+              Four national datasets, each in a different format, unit, and source taxonomy — reconciling them was most of the work.
+            </p>
+            <ul>
+              <li><strong>Australia</strong> — DCCEEW Australian Energy Statistics, Table O. Financial years converted to calendar years on an end-year convention.</li>
+              <li><strong>New Zealand</strong> — MBIE Electricity Statistics. Net generation, which differs from gross by roughly 1–2%.</li>
+              <li><strong>Germany</strong> — Umweltbundesamt / AGEE-Stat, extracted manually from the official PDF.</li>
+              <li><strong>China</strong> — Our World in Data, sourcing IEA, used as an authoritative intermediary where English NBS data was not freely available.</li>
+            </ul>
+            <p>
+              All four were standardised in Power Query into five consistent renewable categories — solar, wind, hydro, biomass, geothermal — with GWh converted to TWh. Every transformation is recorded in a data decisions log rather than left implicit.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>What the data showed</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number">01</span>
+                <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about 9% in 2005 to 35% in 2024 — but a linear forecast reaches only <strong>44.6% by 2035</strong>, roughly half the 82%-by-2030 target.</p>
+              </li>
+              <li>
+                <span class="finding-number">02</span>
+                <p><strong>Solar and wind are carrying the transition, not hydro.</strong> Solar grew from ~0.1 TWh to ~48.6 TWh and wind from ~0.9 TWh to ~31.0 TWh between 2005 and 2024, while hydro stayed roughly flat. The growth is entirely in the newer technologies.</p>
+              </li>
+              <li>
+                <span class="finding-number">03</span>
+                <p><strong>International comparison depends entirely on the measure you pick.</strong> China generates the most renewable electricity by volume (~3,398 TWh), but Australia's renewable <em>share</em> of 35.0% slightly edged China's 33.7% in 2024. New Zealand (85.5%) and Germany (54.5%) remain well ahead on share. Choosing volume or share tells two opposite stories — so the dashboard shows both.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>How it was built</h2>
+            <p>
+              <strong>Galaxy schema, not a single fact table.</strong> Two fact tables (renewable generation and total generation) share three dimensions: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error structurally impossible.
+            </p>
+            <p>
+              <strong>Forecasting in R rather than Power BI's built-in tool.</strong> Two linear-regression visuals — one for generation in TWh, one for renewable share — project to 2035 with a 95% prediction interval. R was chosen because it prints the regression equation, R², and p-value directly onto the chart, making the method transparent and checkable by the reader. Both models fit well: <strong>R² ≈ 0.845–0.847, p &lt; 0.001</strong>.
+            </p>
+            <p>
+              <strong>One page, five visuals, scoped slicers</strong> — filtering one question never silently breaks the answer to another.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>Limitations I'd state up front</h2>
+            <p>
+              The forecast is a simple linear regression and should be read as a planning signal, not a prediction. Renewable growth accelerated after the mid-2010s, so including the slower early years makes the trend deliberately conservative — the real figure may land higher. Saying so is part of the analysis, not a footnote to it.
+            </p>
+          </section>
+
+          <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </main>
+
+      <footer>
+        <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+        <span>Designed for the web, ready to print.</span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="FreshMart data warehouse and sales dashboard — a Kimball star schema, Power Query ETL, and an executive Power BI dashboard, by Waranyu Bancherdvanich."
+    />
+    <title>FreshMart data warehouse | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
+        <nav aria-label="Primary navigation">
+          <a href="index.html#projects">← All projects</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+        <a class="github-link" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <main id="main">
+        <article class="case">
+          <p class="eyebrow">01 / Business intelligence</p>
+          <h1>FreshMart data warehouse and sales dashboard</h1>
+          <p class="lede">
+            An end-to-end business intelligence build for a fictional Australian supermarket chain: five raw operational CSVs, audited and cleaned, modelled as a Kimball star schema, and surfaced as an executive dashboard.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <figure class="case-shot">
+            <img src="images/freshmart-dashboard.png" alt="FreshMart sales performance dashboard showing revenue, gross margin, store performance by region, and product category breakdowns" />
+            <figcaption>The executive sales performance dashboard</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt>Role</dt>
+              <dd>Sole author — design, ETL, modelling, dashboard</dd>
+            </div>
+            <div>
+              <dt>Tools</dt>
+              <dd>Power BI · Power Query · DAX · Kimball dimensional modelling</dd>
+            </div>
+            <div>
+              <dt>Context</dt>
+              <dd>ISYS6013 Business Intelligence and Analytics, Curtin University</dd>
+            </div>
+          </dl>
+
+          <section class="case-block">
+            <h2>The problem</h2>
+            <p>
+              FreshMart sells products to customers across twelve stores, and that activity was scattered across five disconnected operational files. Nobody could answer a question as basic as <strong>which regions and categories actually drive profit</strong> without manually stitching spreadsheets together — and the raw data was not clean enough to trust if they had.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>The data</h2>
+            <p>Five raw CSV extracts, modelled into a single star schema:</p>
+            <ul>
+              <li><strong>Sales</strong> — 17,697 transaction lines, the fact table at the centre</li>
+              <li><strong>Customer</strong> — demographics, loyalty tier, postcode, membership date</li>
+              <li><strong>Product</strong> — 60 products with brand, category, subcategory, unit cost</li>
+              <li><strong>Store</strong> — 12 stores across four regions, with format and floor area</li>
+              <li><strong>Promotion</strong> — 21 promotions with type, dates, and discount rate</li>
+              <li><strong>Date</strong> — a generated calendar dimension for time intelligence</li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>Cleaning it first</h2>
+            <p>
+              Every source table was audited in Power Query before it went anywhere near the model. The issues were real, not hypothetical:
+            </p>
+            <ul>
+              <li>Duplicate customer records sharing a CustomerID with slightly different membership dates — removed by CustomerID</li>
+              <li>Product categories spelled inconsistently across records (<strong>dairy</strong>, <strong>Diary</strong>, <strong>bakery</strong>) — standardised via value replacement</li>
+              <li><strong>93 sales rows referencing customer C9999</strong>, an ID matching no customer — mapped to "Not Applicable" in a clean column rather than silently dropped</li>
+              <li>An <strong>N/A</strong> promotion type on the no-promotion record — relabelled, with blank dates kept null to preserve the date type</li>
+            </ul>
+            <p>
+              Dropping the 93 orphaned rows would have quietly understated revenue. Mapping them keeps the money in the totals while making the gap visible.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>How it was modelled</h2>
+            <p>
+              The warehouse follows Kimball's four-stage method. <strong>Business process:</strong> retail sales. <strong>Grain:</strong> one row per product, per customer, per store, per date, per promotion — the most detailed level available, so no future analytical question is closed off. <strong>Dimensions:</strong> Product, Customer, Store, Promotion, Date. <strong>Facts:</strong> QuantitySold, UnitPrice, DiscountAmount, COGS.
+            </p>
+            <p>
+              Facts were classified deliberately: QuantitySold, DiscountAmount and COGS are additive; UnitPrice is non-additive and used only inside calculations, never summed. Getting that distinction wrong is how dashboards end up reporting a nonsense "total unit price".
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>What the dashboard shows</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number">01</span>
+                <p><strong>Headline KPIs</strong> — total revenue, gross profit, and gross margin percentage, so profitability is visible next to volume rather than buried behind it.</p>
+              </li>
+              <li>
+                <span class="finding-number">02</span>
+                <p><strong>Store revenue by region</strong> across South, West, North and East, exposing which regions carry the chain and which lag.</p>
+              </li>
+              <li>
+                <span class="finding-number">03</span>
+                <p><strong>Revenue by category and subcategory</strong>, identifying what actually drives sales versus what merely takes up shelf space.</p>
+              </li>
+              <li>
+                <span class="finding-number">04</span>
+                <p><strong>Demand patterns by day of week and by month</strong>, the view that informs staffing and stock decisions.</p>
+              </li>
+              <li>
+                <span class="finding-number">05</span>
+                <p><strong>This year versus the same period last year</strong>, built with DAX time intelligence so growth is measured against a fair comparison rather than a raw total.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>What this demonstrates</h2>
+            <ul>
+              <li>Running a full BI pipeline end to end: design, then clean, then model, then analyse</li>
+              <li>Applying a recognised industry method rather than ad-hoc design</li>
+              <li>Auditing data quality and documenting every cleaning decision and its justification</li>
+              <li>Reasoning about grain and fact additivity — the choices that make a warehouse reusable</li>
+            </ul>
+          </section>
+
+          <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </main>
+
+      <footer>
+        <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+        <span>Designed for the web, ready to print.</span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

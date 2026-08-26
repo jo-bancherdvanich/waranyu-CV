@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A normalised 16-table Oracle SQL database for a soccer competition — ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich."
+    />
+    <title>Football club database | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
+        <nav aria-label="Primary navigation">
+          <a href="index.html#projects">← All projects</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+        <a class="github-link" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <main id="main">
+        <article class="case">
+          <p class="eyebrow">03 / Database design</p>
+          <h1>A soccer competition, modelled properly</h1>
+          <p class="lede">
+            Clubs, players, games, referees, goals, cards and awards — turned into a normalised 16-table Oracle database with full DDL, sample data, and the analytical queries a competition organiser would actually run.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <figure class="case-shot">
+            <img src="images/football-erd.png" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
+            <figcaption>The entity-relationship diagram</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt>Role</dt>
+              <dd>Group project (Group 13, three members) — I contributed across design, schema, and SQL implementation</dd>
+            </div>
+            <div>
+              <dt>Tools</dt>
+              <dd>Oracle SQL · ERD design · Normalisation</dd>
+            </div>
+            <div>
+              <dt>Context</dt>
+              <dd>ISYS5000 Database, Curtin University</dd>
+            </div>
+          </dl>
+
+          <section class="case-block">
+            <h2>The problem</h2>
+            <p>
+              A soccer competition generates a surprising amount of interlocking data. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions — <strong>"what's the ladder?"</strong> — become impossible to answer without duplicating data everywhere.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>The design</h2>
+            <p>
+              The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through junction tables. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
+            </p>
+            <p>
+              Substitutions are captured inside the player-appearance table using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters — see below.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>What the queries answer</h2>
+            <p>
+              The analytical layer is the interesting part: joins, aggregation, subqueries, HAVING clauses and LEFT JOINs, each written to answer a question an organiser would genuinely ask.
+            </p>
+            <ul class="findings">
+              <li>
+                <span class="finding-number">01</span>
+                <p><strong>Season ladder</strong> — total competition points per club, combining result points and best-on-ground points, with goals and home/away wins.</p>
+              </li>
+              <li>
+                <span class="finding-number">02</span>
+                <p><strong>Club summary</strong> — each club's complete home and away win–loss–draw record.</p>
+              </li>
+              <li>
+                <span class="finding-number">03</span>
+                <p><strong>Top goal scorers</strong>, and every individual goal by the leading scorer with opponent and ground — found using a HAVING subquery rather than a hardcoded name.</p>
+              </li>
+              <li>
+                <span class="finding-number">04</span>
+                <p><strong>Goals per ground</strong> — average goals per game at each venue. A LEFT JOIN keeps goalless games in the denominator, which an inner join would have silently dropped and inflated every average.</p>
+              </li>
+              <li>
+                <span class="finding-number">05</span>
+                <p><strong>Best-on-ground rankings</strong> with a breakdown of 3, 2 and 1-point awards, plus each club's away form.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>Revised after feedback</h2>
+            <p>
+              The version in the repository is a corrected one. The original submission scored 74.85%, and rather than leave it there, I fixed what the marker identified:
+            </p>
+            <ul>
+              <li><strong>Removed the Substitution table.</strong> It created an unresolved many-to-many relationship — two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
+              <li><strong>Corrected two business rules.</strong> The club-to-ground relationship now describes training and ownership rather than where games are played, which is what the data actually represents.</li>
+              <li><strong>Added spectator numbers</strong> to the Game entity in the ERD and schema, instead of bolting it on with a later UPDATE.</li>
+            </ul>
+            <p>
+              These are the corrections that would have lifted the mark past 80%. Going back and making them is the part of the project I'd point to first.
+            </p>
+          </section>
+
+          <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </main>
+
+      <footer>
+        <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+        <span>Designed for the web, ready to print.</span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

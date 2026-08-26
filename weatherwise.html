@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="WeatherWise — a Python weather advisor combining the OpenWeatherMap API, Matplotlib charts, and natural-language questions, by Waranyu Bancherdvanich."
+    />
+    <title>WeatherWise | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
+        <nav aria-label="Primary navigation">
+          <a href="index.html#projects">← All projects</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+        <a class="github-link" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <main id="main">
+        <article class="case">
+          <p class="eyebrow">04 / Python</p>
+          <h1>WeatherWise — a weather advisor you can just ask</h1>
+          <p class="lede">
+            Live weather data, charts, and rule-based advice wrapped in an interface that answers plain-language questions like "should I go outside tomorrow?"
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <figure class="case-shot">
+            <img src="images/weatherwise-demo.png" alt="WeatherWise notebook interface showing a temperature forecast chart and interactive controls" />
+            <figcaption>The interactive notebook interface and forecast chart</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt>Role</dt>
+              <dd>Built on an assignment starter template — visualisations, caching, forecast indexing and interface are my own</dd>
+            </div>
+            <div>
+              <dt>Tools</dt>
+              <dd>Python · OpenWeatherMap API · Matplotlib · ipywidgets</dd>
+            </div>
+            <div>
+              <dt>Context</dt>
+              <dd>Curtin University coursework project</dd>
+            </div>
+          </dl>
+
+          <section class="case-block">
+            <h2>The idea</h2>
+            <p>
+              Weather apps answer the question they were designed for, not the one you actually have. You don't want a wall of numbers — you want to know whether tomorrow is worth going outside for. WeatherWise takes live data and turns it into that answer, through charts, rule-based advice, and questions typed in ordinary English.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2>How it works</h2>
+            <p>A straightforward <strong>data → analysis → output</strong> pipeline:</p>
+            <ul>
+              <li><strong>Retrieve</strong> — pull current conditions and a 5-day forecast from the OpenWeatherMap API, which returns readings in 3-hour blocks</li>
+              <li><strong>Process</strong> — aggregate those 3-hourly readings into meaningful daily summaries of temperature, humidity and rainfall</li>
+              <li><strong>Visualise</strong> — chart temperature and precipitation trends with Matplotlib</li>
+              <li><strong>Advise</strong> — apply rule-based logic to turn the numbers into an actual recommendation</li>
+              <li><strong>Converse</strong> — parse natural-language questions and answer them from the same processed data</li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>What I contributed</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number">01</span>
+                <p><strong>The temperature and precipitation visualisations</strong> — the charts that make a five-day forecast readable at a glance instead of as a table.</p>
+              </li>
+              <li>
+                <span class="finding-number">02</span>
+                <p><strong>Data-caching logic</strong> that stores API responses and avoids repeated calls. Public weather APIs are rate-limited, so re-fetching the same forecast on every interaction will eventually break the app.</p>
+              </li>
+              <li>
+                <span class="finding-number">03</span>
+                <p><strong>Fixed the "tomorrow" forecast indexing.</strong> The API returns 3-hour blocks, not days, so naive indexing silently returns the wrong day's weather — the kind of bug that produces confident, plausible, wrong answers. Mapping blocks to full days fixed it.</p>
+              </li>
+              <li>
+                <span class="finding-number">04</span>
+                <p><strong>The interactive ipywidgets interface</strong>, turning a notebook of function calls into something a non-technical person can use.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2>Why it's here</h2>
+            <p>
+              This one is less about statistics and more about the surrounding craft: consuming an external API, reshaping awkwardly-formatted data into the grain you need, caching sensibly, and building an interface for someone who isn't you. Those problems show up in analytics work constantly.
+            </p>
+          </section>
+
+          <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </main>
+
+      <footer>
+        <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+        <span>Designed for the web, ready to print.</span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
