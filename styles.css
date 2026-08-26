@@ -45,7 +45,9 @@ nav a:hover, .github-link:hover { color: var(--accent); }
 h1, h2, h3, p { margin-top: 0; }
 h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.15rem); line-height: .94; letter-spacing: -.02em; }
 .lede { max-width: 590px; color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.55; }
-.intro-actions { display: flex; align-items: center; gap: 1.4rem; margin-top: 2.4rem; }
+.availability { display: inline-flex; align-items: center; gap: .6rem; margin: 1.9rem 0 0; padding: .5rem .85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--accent); font-family: "DM Mono", monospace; font-size: .72rem; text-transform: uppercase; }
+.availability::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(94, 203, 245, .22); }
+.intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin-top: 2rem; }
 .button { display: inline-flex; align-items: center; gap: .75rem; font-size: .9rem; font-weight: 600; text-decoration: none; transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
 .primary { padding: 1rem 1.2rem; background: var(--accent); color: var(--bg); }
 .primary:hover { background: var(--accent-soft); box-shadow: 0 0 28px rgba(94, 203, 245, .35); }
@@ -111,6 +113,8 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .capability-list li span:last-child { color: var(--muted); font-size: .72rem; text-transform: uppercase; }
 .contact { padding: 10rem 0; }
 .contact h2 { max-width: 800px; margin-bottom: 2rem; font-size: clamp(2.8rem, 6vw, 6rem); line-height: .97; letter-spacing: -.02em; }
+.contact-note { max-width: 620px; margin-bottom: 2.4rem; color: var(--muted); font-size: 1.05rem; line-height: 1.55; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 1.2rem 2.6rem; }
 .contact-link { font-size: 1.2rem; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--accent); transition: color .2s ease; }
 .contact-link:hover { color: var(--accent); }
 footer { display: flex; justify-content: space-between; padding: 1.8rem 0; border-top: 1px solid var(--line); color: var(--muted); text-transform: uppercase; }
