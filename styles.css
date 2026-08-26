@@ -86,14 +86,21 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .project-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 40px rgba(94, 203, 245, .12); }
 .project-card .card-top { color: var(--accent); }
 .project-card-featured {
-  grid-row: span 2;
-  min-height: 560px;
   color: var(--bg);
   background: linear-gradient(160deg, var(--accent-soft), var(--accent) 55%, #3fb4e0);
   border-color: var(--accent);
 }
-.project-card-featured .card-top, .project-card-featured p { color: rgba(8, 11, 17, .78); }
+.project-card-featured .card-top,
+.project-card-featured p,
+.project-card-featured .project-detail { color: rgba(8, 11, 17, .78); }
+.project-card-featured .project-detail li::marker { color: rgba(8, 11, 17, .5); }
+.project-card-featured .project-tech { color: rgba(8, 11, 17, .62); }
 .project-card-featured:hover { box-shadow: 0 16px 50px rgba(94, 203, 245, .3); }
+.project-card-wide { grid-column: 1 / -1; min-height: auto; }
+.project-detail { margin: .95rem 0 0; padding-left: 1.05rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.project-detail li { margin-bottom: .3rem; }
+.project-detail li::marker { color: var(--accent); }
+.project-tech { margin: 1.1rem 0 0; font-family: "DM Mono", monospace; font-size: .68rem; text-transform: uppercase; color: var(--accent); }
 .project-mark { font-family: "DM Mono", monospace; font-size: clamp(5rem, 10vw, 9rem); font-weight: 500; }
 .card-top { display: flex; justify-content: space-between; }
 .project-card h3 { margin-bottom: .55rem; font-size: 1.55rem; }
@@ -118,8 +125,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .section { grid-template-columns: 1fr; gap: 2.3rem; padding: 4.5rem 0; }
   .timeline-item { grid-template-columns: 72px 1fr; }
   .project-grid { grid-template-columns: 1fr; }
-  .project-card-featured { grid-row: auto; min-height: 380px; }
-  .placeholder-project { min-height: 230px; }
+  .project-card { min-height: auto; }
   .contact { padding: 7rem 0; }
   footer { gap: 1rem; flex-direction: column; }
 }

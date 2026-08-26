@@ -22,6 +22,7 @@
       <header class="topbar">
         <a class="wordmark" href="#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
         <nav aria-label="Primary navigation">
+          <a href="#education">Education</a>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
@@ -56,8 +57,8 @@
           <div><span class="metric-number">03</span><span>Based in<br />Perth, Australia</span></div>
         </section>
 
-        <section class="section experience" id="experience" aria-labelledby="experience-title">
-          <div class="section-label"><span>01</span><h2 id="experience-title">Experience and education</h2></div>
+        <section class="section education" id="education" aria-labelledby="education-title">
+          <div class="section-label"><span>01</span><h2 id="education-title">Education</h2></div>
           <div class="timeline">
             <article class="timeline-item">
               <div class="timeline-date">2025 — 2027</div>
@@ -69,14 +70,28 @@
               </div>
             </article>
             <article class="timeline-item">
-              <div class="timeline-date">2023 — NOW</div>
+              <div class="timeline-date">2019 — 2023</div>
               <div>
-                <p class="role">Bartender and Wait Staff</p>
-                <p class="company">Six Senses Gourmet, Leederville</p>
-                <p class="description">Working front of house in a fast-paced restaurant while studying full time. Managing orders, payments, and customer requests accurately under pressure.</p>
-                <ul class="tags" aria-label="Skills used"><li>Customer service</li><li>Working under pressure</li></ul>
+                <p class="role">Bachelor of Science and Technology</p>
+                <p class="company">Thammasat University, Thailand — major Statistics, minor Finance</p>
+                <p class="description">The statistical foundation behind the analysis work: regression, time-series methods, and interpreting what a model is actually telling you.</p>
+                <ul class="tags" aria-label="Skills used"><li>Statistics</li><li>Finance</li><li>Regression</li></ul>
               </div>
             </article>
+            <article class="timeline-item">
+              <div class="timeline-date">2026</div>
+              <div>
+                <p class="role">Google Data Analytics Certificate</p>
+                <p class="company">Coursera and Google</p>
+                <p class="description">Foundations of data, asking questions to drive decisions, and preparing data for exploration.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section experience" id="experience" aria-labelledby="experience-title">
+          <div class="section-label"><span>02</span><h2 id="experience-title">Experience</h2></div>
+          <div class="timeline">
             <article class="timeline-item">
               <div class="timeline-date">2022 — 2023</div>
               <div>
@@ -87,38 +102,74 @@
               </div>
             </article>
             <article class="timeline-item">
-              <div class="timeline-date">2019 — 2023</div>
+              <div class="timeline-date">2023</div>
               <div>
-                <p class="role">Bachelor of Science and Technology</p>
-                <p class="company">Thammasat University, Thailand — major Statistics, minor Finance</p>
-                <p class="description">The statistical foundation behind the analysis work: regression, time-series methods, and interpreting what a model is actually telling you.</p>
-                <ul class="tags" aria-label="Skills used"><li>Statistics</li><li>Finance</li><li>Regression</li></ul>
+                <p class="role">Best Business Case Pitch</p>
+                <p class="company">NSO Data Camp, Thailand</p>
+                <p class="description">Won for "Branding is All About Counting", a pitch built on turning brand data into a business case.</p>
               </div>
             </article>
           </div>
         </section>
 
         <section class="section projects" id="projects" aria-labelledby="projects-title">
-          <div class="section-label"><span>02</span><h2 id="projects-title">Selected work</h2></div>
+          <div class="section-label"><span>03</span><h2 id="projects-title">Selected work</h2></div>
           <div class="project-grid">
             <a class="project-card project-card-featured" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">
               <div class="card-top"><span>01 / BUSINESS INTELLIGENCE</span><span aria-hidden="true">↗</span></div>
-              <div class="project-mark">&#931;</div>
-              <div><h3>FreshMart sales dashboard</h3><p>A Power BI retail dashboard built on a star schema, with Power Query cleaning and DAX measures for revenue, margin, and product performance — surfacing district-level gaps that raw sales tables hid.</p></div>
+              <div>
+                <h3>FreshMart sales dashboard</h3>
+                <p>A Power BI retail dashboard that turns raw transaction data into a view of where the money actually comes from.</p>
+                <ul class="project-detail">
+                  <li>Modelled the data as a star schema and built the ETL in Power Query</li>
+                  <li>Cleaned the source: duplicate removal, category correction, data type validation</li>
+                  <li>Wrote DAX measures for revenue, margin, product and store performance</li>
+                  <li>Surfaced district-level performance gaps invisible in the raw tables</li>
+                </ul>
+                <p class="project-tech">Power BI · Power Query · DAX · Dimensional modelling</p>
+              </div>
             </a>
             <a class="project-card" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">
-              <div class="card-top"><span>02 / POWER BI</span><span aria-hidden="true">↗</span></div>
-              <div><h3>Australia's renewable transition</h3><p>A Power BI dashboard tracking renewable electricity from 2005 to 2024, with DAX measures for generation mix and an R linear regression forecasting renewable share to 2035 with prediction intervals.</p></div>
+              <div class="card-top"><span>02 / FORECASTING</span><span aria-hidden="true">↗</span></div>
+              <div>
+                <h3>Australia's renewable transition</h3>
+                <p>A dashboard tracking Australia's shift to renewable electricity from 2005 to 2024, and where it lands by 2035.</p>
+                <ul class="project-detail">
+                  <li>Standardised multi-country data, including source mapping and GWh-to-TWh conversion</li>
+                  <li>Built DAX measures for renewable share, generation split, and source mix</li>
+                  <li>Forecast renewable generation with R linear regression and prediction intervals</li>
+                </ul>
+                <p class="project-tech">Power BI · DAX · R · Time-series forecasting</p>
+              </div>
             </a>
             <a class="project-card" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">
-              <div class="card-top"><span>03 / ORACLE SQL</span><span aria-hidden="true">↗</span></div>
-              <div><h3>Football club database</h3><p>A relational model for club management: ERD and business rules, a logical schema with constraints, then Oracle SQL tables built and tested for relational integrity.</p></div>
+              <div class="card-top"><span>03 / DATABASE DESIGN</span><span aria-hidden="true">↗</span></div>
+              <div>
+                <h3>Football club database</h3>
+                <p>A relational database for football club management, designed from business rules up.</p>
+                <ul class="project-detail">
+                  <li>Drew the ERD and defined the business rules linking each entity</li>
+                  <li>Designed a normalised logical schema with constraints and relationships</li>
+                  <li>Built and tested the Oracle SQL tables for relational integrity</li>
+                </ul>
+                <p class="project-tech">Oracle SQL · ERD · Normalisation</p>
+              </div>
             </a>
             <a class="project-card" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">
               <div class="card-top"><span>04 / PYTHON</span><span aria-hidden="true">↗</span></div>
-              <div><h3>WeatherWise</h3><p>A Python weather advisor that pulls live OpenWeatherMap data into charts and plain-language answers, built in a Jupyter notebook.</p></div>
+              <div>
+                <h3>WeatherWise</h3>
+                <p>An interactive weather advisor that answers questions in plain language, built in a Jupyter notebook.</p>
+                <ul class="project-detail">
+                  <li>Pulls live conditions and 5-day forecasts from the OpenWeatherMap API</li>
+                  <li>Charts temperature and rainfall with Matplotlib and ipywidgets controls</li>
+                  <li>Rule-based outdoor activity advice, plus natural-language question parsing</li>
+                  <li>Caches responses to avoid repeat API calls</li>
+                </ul>
+                <p class="project-tech">Python · Matplotlib · ipywidgets · REST API</p>
+              </div>
             </a>
-            <a class="project-card" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
+            <a class="project-card project-card-wide" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
               <div class="card-top"><span>05 / GITHUB</span><span aria-hidden="true">↗</span></div>
               <div><h3>Everything else</h3><p>Coursework, experiments, and works in progress on my GitHub profile.</p></div>
             </a>
@@ -126,7 +177,7 @@
         </section>
 
         <section class="section capabilities" aria-labelledby="capabilities-title">
-          <div class="section-label"><span>03</span><h2 id="capabilities-title">Capabilities</h2></div>
+          <div class="section-label"><span>04</span><h2 id="capabilities-title">Capabilities</h2></div>
           <ul class="capability-list">
             <li><span>01</span>Power BI and Tableau <span>Visualise</span></li>
             <li><span>02</span>SQL and data modelling <span>Structure</span></li>
@@ -138,7 +189,7 @@
         
 
         <section class="contact" id="contact" aria-labelledby="contact-title">
-          <p class="eyebrow">04 / Contact</p>
+          <p class="eyebrow">05 / Contact</p>
           <h2 id="contact-title">Let's make the next useful thing.</h2>
           <a class="contact-link" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">Connect on GitHub <span aria-hidden="true">↗</span></a>
           <a class="contact-link" href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
