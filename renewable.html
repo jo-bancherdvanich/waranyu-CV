@@ -124,6 +124,22 @@
           </section>
 
           <section class="case-block">
+            <h2>The forecast, live</h2>
+            <p>
+              The dashboard's forecast runs in R so the reader can check the method. Here is the same linear regression, computed in your browser from the project's actual data — equation, fit, and 95% prediction interval included.
+            </p>
+            <div id="rf-widget" class="rf">
+              <div class="rf-tabs" role="tablist" aria-label="Forecast measure">
+                <button type="button" class="rf-tab is-active" data-mode="share" role="tab" aria-selected="true">Renewable share %</button>
+                <button type="button" class="rf-tab" data-mode="twh" role="tab" aria-selected="false">Generation TWh</button>
+              </div>
+              <div class="rf-chart"></div>
+              <p class="rf-stats"></p>
+              <p class="rf-note">Dots are DCCEEW annual data, 2005–2024. The shaded band is the 95% prediction interval; the line extends the historical trend to 2035. On the current trajectory, the 82%-by-2030 target is out of reach — which is the report's central finding.</p>
+            </div>
+          </section>
+
+          <section class="case-block">
             <h2>How it was built</h2>
             <p>
               <strong>Galaxy schema, not a single fact table.</strong> Two fact tables (renewable generation and total generation) share three dimensions: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error structurally impossible.
@@ -156,5 +172,6 @@
       </footer>
     </div>
     <script src="app.js"></script>
+    <script src="renewable-forecast.js"></script>
   </body>
 </html>
