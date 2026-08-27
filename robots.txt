@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jo-bancherdvanich.github.io/waranyu-CV/sitemap.xml
