@@ -62,6 +62,51 @@
             </div>
           </dl>
 
+          <section class="case-block" id="try-it">
+            <h2>Try it</h2>
+            <p>
+              The notebook's forecast logic, running here in your browser on live data. Same advice thresholds, same question parser — no install, no sign-up, no API key.
+            </p>
+
+            <div id="ww-demo" class="ww">
+              <form class="ww-search" role="search">
+                <label class="sr-only" for="ww-city">City</label>
+                <input class="ww-city" id="ww-city" type="text" value="Perth" autocomplete="off" placeholder="Try a city — Perth, Bangkok, Tokyo" />
+                <button class="button primary" type="submit">Get forecast</button>
+              </form>
+
+              <div class="ww-chips">
+                <button type="button" class="ww-chip">Perth</button>
+                <button type="button" class="ww-chip">Bangkok</button>
+                <button type="button" class="ww-chip">Reykjavik</button>
+                <button type="button" class="ww-chip">Singapore</button>
+              </div>
+
+              <p class="ww-status" role="status" aria-live="polite"></p>
+
+              <div class="ww-panel" hidden>
+                <h3 class="ww-place"></h3>
+                <p class="ww-summary"></p>
+                <p class="ww-advice"></p>
+
+                <div class="ww-tabs" role="tablist" aria-label="Chart type">
+                  <button type="button" class="ww-tab is-active" data-view="temp" role="tab" aria-selected="true">Temperature</button>
+                  <button type="button" class="ww-tab" data-view="rain" role="tab" aria-selected="false">Rainfall</button>
+                </div>
+                <div class="ww-chart"></div>
+
+                <form class="ww-qform">
+                  <label class="sr-only" for="ww-question">Ask a weather question</label>
+                  <input class="ww-question" id="ww-question" type="text" autocomplete="off" placeholder="Will it rain tomorrow? How warm is it today?" />
+                  <button class="button text-button" type="submit">Ask</button>
+                </form>
+                <p class="ww-answer" hidden></p>
+              </div>
+
+              <p class="ww-credit">Live data from <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>. The Python original uses OpenWeatherMap.</p>
+            </div>
+          </section>
+
           <section class="case-block">
             <h2>The idea</h2>
             <p>
@@ -123,5 +168,6 @@
       </footer>
     </div>
     <script src="app.js"></script>
+    <script src="weatherwise-demo.js"></script>
   </body>
 </html>
