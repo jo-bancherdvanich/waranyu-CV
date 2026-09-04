@@ -85,8 +85,10 @@ nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
   margin-left: -50vw;
   height: calc(100% + 88px);
   background: url("images/renewable-dashboard.png") center 20% / cover no-repeat;
-  opacity: .14;
-  filter: grayscale(.45) contrast(1.1);
+  opacity: .1;
+  /* Heavy blur so the charts read as colour and shape, never as text */
+  filter: grayscale(.5) blur(26px) saturate(1.2);
+  transform: scale(1.12);
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 55%, transparent 92%);
   mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 55%, transparent 92%);
   pointer-events: none;
@@ -366,6 +368,65 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   font-size: .72rem;
   text-transform: uppercase;
 }
+/* How I work */
+.principles .section-label span { color: var(--c2); }
+.principle-list { counter-reset: p; margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+.principle-list li {
+  position: relative;
+  padding: 1.5rem 1.6rem 1.5rem 3.6rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: border-color .25s ease, transform .25s ease;
+}
+.principle-list li::before {
+  counter-increment: p;
+  content: "0" counter(p);
+  position: absolute;
+  left: 1.4rem;
+  top: 1.6rem;
+  color: var(--c2);
+  font-family: "DM Mono", monospace;
+  font-size: .74rem;
+}
+.principle-list li:hover { border-color: var(--c2); transform: translateY(-2px); }
+.principle-list h3 { margin-bottom: .5rem; font-size: 1.12rem; font-weight: 600; }
+.principle-list p { margin: 0; max-width: 720px; color: var(--muted); font-size: .96rem; line-height: 1.6; }
+
+/* Questions */
+.faq .section-label span { color: var(--c3); }
+.faq-list { display: grid; gap: .6rem; }
+.faq-list details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color .25s ease;
+}
+.faq-list details[open], .faq-list details:hover { border-color: var(--c3); }
+.faq-list summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.15rem 3rem 1.15rem 1.4rem;
+  position: relative;
+  font-size: 1.02rem;
+  font-weight: 500;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: "+";
+  position: absolute;
+  right: 1.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c3);
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform .25s ease;
+}
+.faq-list details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq-list p { margin: 0; padding: 0 1.4rem 1.35rem; max-width: 760px; color: var(--muted); font-size: .96rem; line-height: 1.62; }
+
 .contact { padding: 10rem 0; }
 .contact h2 { max-width: 800px; margin-bottom: 2rem; font-size: clamp(2.8rem, 6vw, 6rem); line-height: .97; letter-spacing: -.02em; }
 .contact-note { max-width: 620px; margin-bottom: 2.4rem; color: var(--muted); font-size: 1.05rem; line-height: 1.55; }
@@ -389,8 +450,9 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   background-image: var(--case-bg);
   background-size: cover;
   background-position: center 22%;
-  opacity: .13;
-  filter: grayscale(.45) contrast(1.08);
+  opacity: .1;
+  filter: grayscale(.5) blur(26px) saturate(1.2);
+  transform: scale(1.12);
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 25%, transparent 95%);
   mask-image: linear-gradient(180deg, transparent 0%, #000 25%, transparent 95%);
   pointer-events: none;
