@@ -6,6 +6,11 @@
   --line: #1e2b39;
   --accent: #5ecbf5;
   --accent-soft: #9fe0ff;
+  /* A small friendly palette, reused across nav, sections and metrics */
+  --c1: #5ecbf5;
+  --c2: #7ee0c1;
+  --c3: #ffcf8f;
+  --c4: #ff9d8f;
 }
 
 * { box-sizing: border-box; }
@@ -36,9 +41,37 @@ a { color: inherit; }
 .topbar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .wordmark { font-size: 1.65rem; font-weight: 700; text-decoration: none; letter-spacing: 0; }
 .wordmark span { color: var(--accent); }
-nav { display: flex; gap: 2rem; }
-nav a, .github-link { font-family: "DM Mono", monospace; font-size: .75rem; text-decoration: none; text-transform: uppercase; letter-spacing: 0; color: var(--muted); transition: color .2s ease; }
-nav a:hover, .github-link:hover { color: var(--accent); }
+nav { display: flex; gap: 1.9rem; }
+nav a, .github-link {
+  position: relative;
+  font-size: .95rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  transition: color .2s ease;
+}
+/* Each link gets its own colour, so the nav reads as a palette, not a wall */
+nav a:nth-child(1) { --link: var(--c1); }
+nav a:nth-child(2) { --link: var(--c2); }
+nav a:nth-child(3) { --link: var(--c3); }
+nav a:nth-child(4) { --link: var(--c4); }
+.github-link { --link: var(--c1); }
+nav a::after, .github-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--link, var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+nav a:hover, .github-link:hover { color: var(--link, var(--accent)); }
+nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
 .intro { min-height: 620px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr); align-items: center; gap: clamp(3rem, 9vw, 10rem); padding: 7rem 0 5rem; }
 .eyebrow, .section-label span, .timeline-date, .card-top, footer, .tags, .capability-list span { font-family: "DM Mono", monospace; font-size: .72rem; letter-spacing: 0; }
 .eyebrow { margin: 0 0 1.15rem; color: var(--accent); text-transform: uppercase; }
@@ -103,6 +136,19 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .section { padding: 7rem 0; display: grid; grid-template-columns: minmax(180px, .28fr) 1fr; gap: 3rem; border-bottom: 1px solid var(--line); }
 .section-label h2 { margin: .35rem 0 0; font-size: 1.35rem; letter-spacing: 0; }
 .section-label span { color: var(--accent); }
+/* Give each section its own colour so the page isn't one flat blue */
+.education .section-label span, .education .timeline-date { color: var(--c1); }
+.education .timeline { border-top-color: var(--c1); }
+.certificates .section-label span, .certificates .timeline-date { color: var(--c2); }
+.certificates .timeline { border-top-color: var(--c2); }
+.certificates .tags li { color: var(--c2); }
+.projects .section-label span { color: var(--c3); }
+.capabilities .section-label span { color: var(--c4); }
+.capabilities .capability-list { border-top-color: var(--c4); }
+.capabilities .capability-list li span:first-child { color: var(--c4); }
+.metrics div:nth-child(1) .metric-number { color: var(--c2); }
+.metrics div:nth-child(2) .metric-number { color: var(--c3); }
+.metrics div:nth-child(3) .metric-number { color: var(--c4); }
 .timeline { border-top: 1px solid var(--accent); }
 .timeline-item { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; padding: 1.65rem 0; border-bottom: 1px solid var(--line); }
 .timeline-date { color: var(--accent); }
