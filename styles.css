@@ -53,9 +53,49 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .primary:hover { background: var(--accent-soft); box-shadow: 0 0 28px rgba(94, 203, 245, .35); }
 .text-button { border-bottom: 1px solid var(--muted); padding-bottom: .25rem; }
 .text-button:hover { border-color: var(--accent); color: var(--accent); }
-.portrait-wrap { margin: 0; align-self: end; }
-.portrait-wrap img { display: block; width: min(100%, 365px); aspect-ratio: 1; object-fit: cover; filter: grayscale(1) contrast(1.1) brightness(.95); background: var(--surface); border: 1px solid var(--line); }
-.portrait-wrap figcaption { margin-top: .75rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
+/* Hero entrance — elements rise into place in sequence */
+@keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes appear-zoom { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+.intro-copy > * { animation: appear .55s ease-out backwards; }
+.intro-copy .eyebrow { animation-delay: 0ms; }
+.intro-copy h1 { animation-delay: 90ms; }
+.intro-copy .lede { animation-delay: 180ms; }
+.intro-copy .availability { animation-delay: 270ms; }
+.intro-copy .intro-actions { animation-delay: 360ms; }
+
+/* Gradient headline, with a solid fallback for browsers without background-clip */
+#intro-title {
+  color: var(--ink);
+  background: linear-gradient(168deg, var(--ink) 30%, #8fb0c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  #intro-title { color: transparent; }
+}
+
+/* Framed portrait with a glow behind it */
+.portrait-wrap {
+  position: relative;
+  align-self: end;
+  margin: 0;
+  padding: .5rem;
+  border-radius: 16px;
+  background: rgba(94, 203, 245, .05);
+  animation: appear-zoom .7s ease-out .45s backwards;
+}
+.portrait-wrap::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -12% -8% 45%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(94, 203, 245, .38), transparent 70%);
+  filter: blur(38px);
+  pointer-events: none;
+}
+.portrait-wrap img { display: block; width: min(100%, 365px); aspect-ratio: 1; object-fit: cover; filter: grayscale(1) contrast(1.1) brightness(.95); background: var(--surface); border: 1px solid rgba(232, 242, 250, .12); border-top-color: rgba(232, 242, 250, .2); border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
+.portrait-wrap figcaption { margin-top: .75rem; padding: 0 .25rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .metrics div { display: flex; gap: 1.2rem; padding: 1.6rem 0; align-items: center; font-size: .86rem; line-height: 1.4; }
 .metrics div + div { border-left: 1px solid var(--line); padding-left: 2rem; }
@@ -413,9 +453,11 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .intro-copy > *, .portrait-wrap { animation: none !important; }
   html { scroll-behavior: auto; }
 }
 
