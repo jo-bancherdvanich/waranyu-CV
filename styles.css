@@ -2,7 +2,7 @@
   --bg: #080b11;
   --surface: #10161f;
   --ink: #e8f2fa;
-  --muted: #8ea6bd;
+  --muted: #a7bed3;
   --line: #1e2b39;
   --accent: #5ecbf5;
   --accent-soft: #9fe0ff;
@@ -44,7 +44,7 @@ nav a:hover, .github-link:hover { color: var(--accent); }
 .eyebrow { margin: 0 0 1.15rem; color: var(--accent); text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.15rem); line-height: .94; letter-spacing: -.02em; }
-.lede { max-width: 590px; color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.55; }
+.lede { max-width: 590px; color: #cfe0ee; font-size: clamp(1.08rem, 1.5vw, 1.32rem); line-height: 1.6; }
 .availability { display: inline-flex; align-items: center; gap: .6rem; margin: 1.9rem 0 0; padding: .5rem .85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--accent); font-family: "DM Mono", monospace; font-size: .72rem; text-transform: uppercase; }
 .availability::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(94, 203, 245, .22); }
 .intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin-top: 2rem; }
@@ -66,7 +66,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 /* Gradient headline, with a solid fallback for browsers without background-clip */
 #intro-title {
   color: var(--ink);
-  background: linear-gradient(168deg, var(--ink) 30%, #8fb0c9);
+  background: linear-gradient(168deg, var(--ink) 55%, #c2d6e6);
   -webkit-background-clip: text;
   background-clip: text;
 }
