@@ -170,7 +170,13 @@
     status: root.querySelector(".ww-status"),
     panel: root.querySelector(".ww-panel"),
     place: root.querySelector(".ww-place"),
-    summary: root.querySelector(".ww-summary"),
+    temp: root.querySelector(".ww-temp"),
+    desc: root.querySelector(".ww-desc"),
+    high: root.querySelector(".ww-high"),
+    low: root.querySelector(".ww-low"),
+    humidity: root.querySelector(".ww-humidity"),
+    wind: root.querySelector(".ww-wind"),
+    legend: root.querySelector(".ww-legend"),
     advice: root.querySelector(".ww-advice"),
     tabs: root.querySelectorAll(".ww-tab"),
     chart: root.querySelector(".ww-chart"),
@@ -180,7 +186,7 @@
     chips: root.querySelectorAll(".ww-chip")
   };
 
-  var state = { days: [], place: "", view: "temp" };
+  var state = { days: [], current: null, place: "", view: "temp" };
 
   function setStatus(msg, isError) {
     els.status.textContent = msg || "";
@@ -190,6 +196,9 @@
   function renderChart() {
     if (!state.days.length) return;
     els.chart.innerHTML = state.view === "temp" ? lineChart(state.days) : barChart(state.days);
+    els.legend.innerHTML = state.view === "temp"
+      ? "<span>Daily high</span><span class=\"is-min\">Daily low</span>"
+      : "<span>Rainfall (mm)</span>";
     els.tabs.forEach(function (t) {
       var on = t.dataset.view === state.view;
       t.classList.toggle("is-active", on);
@@ -199,14 +208,20 @@
 
   function render() {
     var d = state.days[0];
-    var avg = (d.tMax + d.tMin) / 2;
+    var c = state.current;
+    var nowTemp = c && typeof c.temp === "number" ? c.temp : (d.tMax + d.tMin) / 2;
+
     els.place.textContent = state.place;
-    els.summary.innerHTML =
-      '<span class="ww-temp">' + Math.round(avg) + '°C</span>' +
-      '<span class="ww-desc">' + d.desc + '</span>' +
-      '<span class="ww-range">' + d.tMin.toFixed(1) + '° to ' + d.tMax.toFixed(1) + '° · ' +
-      d.rain.toFixed(1) + ' mm · wind ' + d.wind.toFixed(0) + ' km/h</span>';
-    els.advice.textContent = temperatureAdvice(avg);
+    els.temp.textContent = Math.round(nowTemp) + "°C";
+    els.desc.textContent = (c && c.desc) || d.desc;
+    els.high.textContent = d.tMax.toFixed(1) + "°";
+    els.low.textContent = d.tMin.toFixed(1) + "°";
+    els.humidity.textContent = c && typeof c.humidity === "number" ? Math.round(c.humidity) + "%" : "—";
+    els.wind.textContent =
+      "Wind " + ((c && typeof c.wind === "number" ? c.wind : d.wind).toFixed(0)) +
+      " km/h · rain today " + d.rain.toFixed(1) + " mm";
+
+    els.advice.textContent = temperatureAdvice(nowTemp);
     els.panel.hidden = false;
     renderChart();
   }
@@ -222,11 +237,18 @@
         setStatus("Fetching the forecast for " + state.place + "…");
         return fetch(FORECAST + "?latitude=" + p.latitude + "&longitude=" + p.longitude +
           "&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weather_code" +
+          "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code" +
           "&timezone=auto&forecast_days=5");
       })
       .then(function (r) { return r.json(); })
       .then(function (f) {
         if (!f.daily || !f.daily.time) throw new Error("The weather service returned no forecast. Try again in a moment.");
+        state.current = f.current ? {
+          temp: f.current.temperature_2m,
+          humidity: f.current.relative_humidity_2m,
+          wind: f.current.wind_speed_10m,
+          desc: describe(f.current.weather_code)
+        } : null;
         state.days = f.daily.time.map(function (t, i) {
           return {
             date: t,

@@ -265,26 +265,91 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .ww-status.is-error { color: #ff9b8a; }
 
 .ww-panel { margin-top: 1.1rem; }
-.ww-place {
-  margin: 0 0 .3rem;
+
+/* Weather card */
+.ww-card, .ww-chartcard {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+}
+.ww-card { margin-bottom: 1rem; }
+.ww-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  padding-bottom: .85rem;
+  border-bottom: 1px solid var(--line);
+}
+.ww-place, .ww-chart-title {
+  margin: 0;
   font-size: 1.05rem;
+  font-weight: 600;
   letter-spacing: .01em;
 }
-.ww-summary {
-  margin: 0 0 .5rem;
-  display: flex;
-  align-items: baseline;
-  gap: .7rem;
-  flex-wrap: wrap;
+.ww-card-sub {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
 }
+.ww-now { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
 .ww-temp {
-  font-size: 2.1rem;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: 700;
   color: var(--accent);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
-.ww-desc { color: var(--ink); font-size: .95rem; text-transform: capitalize; }
-.ww-range { color: var(--muted); font-size: .82rem; font-family: "DM Mono", monospace; }
+.ww-desc { color: var(--muted); font-size: .95rem; text-transform: capitalize; }
+.ww-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; margin-top: 1.15rem; }
+.ww-tile {
+  padding: .75rem .5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  text-align: center;
+}
+.ww-tile-label {
+  display: block;
+  margin-bottom: .3rem;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .66rem;
+  text-transform: uppercase;
+}
+.ww-tile strong { font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ww-wind {
+  margin: .9rem 0 0;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .72rem;
+  text-transform: uppercase;
+}
+.ww-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: .9rem 0 0;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+}
+.ww-legend span { display: inline-flex; align-items: center; gap: .45rem; }
+.ww-legend span::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  background: var(--surface);
+}
+.ww-legend .is-min::before { border-color: var(--accent-soft); }
 .ww-advice {
   margin: 0 0 1rem;
   padding: .6rem .8rem;
@@ -294,7 +359,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   font-size: .9rem;
 }
 
-.ww-tabs { display: flex; gap: .3rem; margin-bottom: .5rem; }
+.ww-tabs { display: flex; gap: .3rem; }
 .ww-tab {
   padding: .35rem .8rem;
   border: 1px solid var(--line);
@@ -313,7 +378,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 }
 .ww-chart { overflow-x: auto; }
 .ww-chart svg { width: 100%; height: auto; display: block; min-width: 300px; }
-.ww-grid { stroke: var(--line); stroke-width: 1; }
+.ww-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 8; }
 .ww-axis { fill: var(--muted); font-size: 10px; font-family: "DM Mono", monospace; }
 .ww-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
 .ww-line-min { stroke: var(--accent-soft); stroke-width: 1.5; stroke-dasharray: 4 3; opacity: .75; }

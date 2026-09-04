@@ -98,15 +98,36 @@
               <p class="ww-status" role="status" aria-live="polite"></p>
 
               <div class="ww-panel" hidden>
-                <h3 class="ww-place"></h3>
-                <p class="ww-summary"></p>
+                <div class="ww-card">
+                  <div class="ww-card-head">
+                    <h3 class="ww-place"></h3>
+                    <span class="ww-card-sub">Live conditions</span>
+                  </div>
+                  <div class="ww-now">
+                    <span class="ww-temp"></span>
+                    <span class="ww-desc"></span>
+                  </div>
+                  <div class="ww-tiles">
+                    <div class="ww-tile"><span class="ww-tile-label">High</span><strong class="ww-high"></strong></div>
+                    <div class="ww-tile"><span class="ww-tile-label">Low</span><strong class="ww-low"></strong></div>
+                    <div class="ww-tile"><span class="ww-tile-label">Humidity</span><strong class="ww-humidity"></strong></div>
+                  </div>
+                  <p class="ww-wind"></p>
+                </div>
+
                 <p class="ww-advice"></p>
 
-                <div class="ww-tabs" role="tablist" aria-label="Chart type">
-                  <button type="button" class="ww-tab is-active" data-view="temp" role="tab" aria-selected="true">Temperature</button>
-                  <button type="button" class="ww-tab" data-view="rain" role="tab" aria-selected="false">Rainfall</button>
+                <div class="ww-chartcard">
+                  <div class="ww-card-head">
+                    <h3 class="ww-chart-title">Five-day outlook</h3>
+                    <div class="ww-tabs" role="tablist" aria-label="Chart type">
+                      <button type="button" class="ww-tab is-active" data-view="temp" role="tab" aria-selected="true">Temperature</button>
+                      <button type="button" class="ww-tab" data-view="rain" role="tab" aria-selected="false">Rainfall</button>
+                    </div>
+                  </div>
+                  <div class="ww-chart"></div>
+                  <p class="ww-legend"></p>
                 </div>
-                <div class="ww-chart"></div>
 
                 <form class="ww-qform">
                   <label class="sr-only" for="ww-question">Ask a weather question</label>
