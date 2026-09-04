@@ -114,6 +114,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .placeholder-item { opacity: .7; }
 .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .project-card {
+  position: relative;
   min-height: 270px;
   display: flex;
   flex-direction: column;
@@ -123,7 +124,39 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   background: var(--surface);
   border: 1px solid var(--line);
   text-decoration: none;
+  overflow: hidden;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+/* Dot texture, revealed on hover */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, rgba(232, 242, 250, .07) 1px, transparent 1px);
+  background-size: 4px 4px;
+  transition: opacity .3s ease;
+}
+.project-card-featured::after { background-image: radial-gradient(circle at center, rgba(8, 11, 17, .07) 1px, transparent 1px); }
+.project-card:hover::after { opacity: 1; }
+.project-card > * { position: relative; z-index: 1; }
+/* "Read the case study" — appears on hover, always visible on touch */
+.project-cta {
+  display: block;
+  margin-top: .9rem;
+  opacity: 0;
+  color: var(--accent);
+  font-family: "DM Mono", monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  transition: opacity .25s ease;
+}
+.project-card-featured .project-cta { color: rgba(8, 11, 17, .8); }
+.project-card:hover .project-cta, .project-card:focus-visible .project-cta { opacity: 1; }
+@media (hover: none) {
+  .project-cta { opacity: 1; }
 }
 .project-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 40px rgba(94, 203, 245, .12); }
 .project-card .card-top { color: var(--accent); }
