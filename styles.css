@@ -73,7 +73,7 @@ nav a::after, .github-link::after {
 }
 nav a:hover, .github-link:hover { color: var(--link, var(--accent)); }
 nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
-.intro { position: relative; min-height: 620px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr); align-items: center; gap: clamp(3rem, 9vw, 10rem); padding: 7rem 0 5rem; }
+.intro { position: relative; min-height: 620px; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); align-items: center; gap: clamp(3rem, 9vw, 10rem); padding: 7rem 0 5rem; }
 /* Full-bleed dashboard behind the hero — my own work as the backdrop */
 .intro::before {
   content: "";
@@ -146,8 +146,12 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   filter: blur(38px);
   pointer-events: none;
 }
-.portrait-wrap img { display: block; width: min(100%, 365px); aspect-ratio: 1; object-fit: cover; filter: grayscale(1) contrast(1.1) brightness(.95); background: var(--surface); border: 1px solid rgba(232, 242, 250, .12); border-top-color: rgba(232, 242, 250, .2); border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
-.portrait-wrap figcaption { margin-top: .75rem; padding: 0 .25rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
+.portrait-link { display: block; border-radius: 10px; overflow: hidden; }
+.portrait-wrap img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; background: var(--surface); border: 1px solid rgba(232, 242, 250, .12); border-top-color: rgba(232, 242, 250, .22); border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, .5); transition: transform .35s ease; }
+.portrait-link:hover img { transform: scale(1.02); }
+.portrait-wrap figcaption { margin-top: .8rem; padding: 0 .25rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
+.portrait-wrap figcaption a { color: var(--c3); text-decoration: none; }
+.portrait-wrap figcaption a:hover { text-decoration: underline; }
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .metrics div { display: flex; gap: 1.2rem; padding: 1.6rem 0; align-items: center; font-size: .86rem; line-height: 1.4; }
 .metrics div + div { border-left: 1px solid var(--line); padding-left: 2rem; }
@@ -259,9 +263,63 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .project-card h3 { margin-bottom: .55rem; font-size: 1.55rem; }
 .project-card p { max-width: 380px; margin-bottom: 0; color: var(--muted); line-height: 1.5; }
 .capability-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--accent); }
-.capability-list li { display: grid; grid-template-columns: 60px 1fr 100px; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--line); font-size: clamp(1.25rem, 2.4vw, 2rem); font-weight: 500; }
-.capability-list li span:first-child { color: var(--accent); }
-.capability-list li span:last-child { color: var(--muted); font-size: .72rem; text-transform: uppercase; }
+.capability-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: .6rem;
+  padding: 1.15rem .9rem;
+  border-bottom: 1px solid var(--line);
+  border-radius: 10px;
+  transition: background .25s ease, transform .25s ease;
+}
+.capability-list li:nth-child(1) { --cap: var(--c1); }
+.capability-list li:nth-child(2) { --cap: var(--c2); }
+.capability-list li:nth-child(3) { --cap: var(--c3); }
+.capability-list li:nth-child(4) { --cap: var(--c4); }
+.capability-list li:nth-child(5) { --cap: var(--c1); }
+.capability-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  height: 76%;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--cap);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform .28s ease;
+}
+.capability-list li:hover { background: color-mix(in srgb, var(--cap) 8%, transparent); transform: translateX(4px); }
+.capability-list li:hover::before { transform: scaleY(1); }
+.cap-num { grid-column: 1; grid-row: 1 / span 2; color: var(--cap); font-family: "DM Mono", monospace; font-size: .82rem; }
+.cap-name { grid-column: 2; font-size: clamp(1.2rem, 2.3vw, 1.9rem); font-weight: 500; line-height: 1.15; }
+.cap-where {
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: .35rem;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  opacity: .8;
+}
+.cap-verb {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  padding: .3rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--cap);
+  font-family: "DM Mono", monospace;
+  font-size: .66rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: border-color .25s ease;
+}
+.capability-list li:hover .cap-verb { border-color: var(--cap); }
 /* Full-bleed image banner — breaks out of the shell's padding */
 .banner {
   position: relative;
@@ -317,7 +375,30 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 footer { display: flex; justify-content: space-between; padding: 1.8rem 0; border-top: 1px solid var(--line); color: var(--muted); text-transform: uppercase; }
 
 /* ---------- Case study pages ---------- */
-.case { max-width: 940px; margin: 0 auto; padding: 5.5rem 0 6rem; }
+.case { position: relative; max-width: 940px; margin: 0 auto; padding: 5.5rem 0 6rem; }
+/* Each case study wears its own screenshot behind the title */
+.case::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -88px;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  height: 560px;
+  background-image: var(--case-bg);
+  background-size: cover;
+  background-position: center 22%;
+  opacity: .13;
+  filter: grayscale(.45) contrast(1.08);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 25%, transparent 95%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 25%, transparent 95%);
+  pointer-events: none;
+}
+.case-freshmart { --case-bg: url("images/freshmart-dashboard.png"); }
+.case-renewable { --case-bg: url("images/renewable-dashboard.png"); }
+.case-football { --case-bg: url("images/football-erd.png"); }
+.case-weather { --case-bg: url("images/weatherwise-demo.png"); }
 .case h1 { max-width: 100%; margin-bottom: 1.4rem; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: 1.02; letter-spacing: -.02em; }
 .case .lede { max-width: 100%; }
 .case-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin: 2.3rem 0 0; }
@@ -345,7 +426,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .topbar { min-height: 72px; }
   nav { display: none; }
   .intro { grid-template-columns: 1fr; min-height: auto; padding: 4.5rem 0; gap: 2.5rem; }
-  .portrait-wrap { width: 58%; }
+  .portrait-wrap { width: 100%; }
   .metrics { grid-template-columns: 1fr; }
   .metrics div + div { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
   .section { grid-template-columns: 1fr; gap: 2.3rem; padding: 4.5rem 0; }
