@@ -40,9 +40,12 @@
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a class="github-link" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
+        <div class="topbar-right">
+          <a class="github-link" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
           GitHub <span aria-hidden="true">↗</span>
         </a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light theme">&#9728;</button>
+      </div>
       </header>
 
       <main id="main">
@@ -61,10 +64,10 @@
             </div>
           </div>
           <figure class="portrait-wrap">
-            <a class="portrait-link" href="renewable.html">
-              <img src="images/renewable-dashboard.png" alt="Power BI dashboard of Australia's renewable electricity share from 2005 to 2024, with an R forecast to 2035" />
+            <a class="portrait-link" href="renewable.html" aria-label="Australia's renewable transition case study">
+              <div id="hero-chart" class="hero-chart"></div>
             </a>
-            <figcaption>Australia's renewable transition &middot; Power BI and R &middot; <a href="renewable.html">Read the case study &rarr;</a></figcaption>
+            <figcaption>Australia's renewable share, 2005&ndash;2024, forecast to 2035 &middot; <a href="renewable.html">Read the case study &rarr;</a></figcaption>
           </figure>
         </section>
 
@@ -304,5 +307,6 @@
       </footer>
     </div>
     <script src="app.js"></script>
+    <script src="hero-chart.js"></script>
   </body>
 </html>
