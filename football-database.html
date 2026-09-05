@@ -98,6 +98,35 @@
             </p>
           </section>
 
+          <section class="case-block" id="run-it">
+            <h2>Run the queries</h2>
+            <p>
+              Four of the analytical queries, running here on the same sample season the Oracle script inserts — 8 clubs, 96 players, 56 games, 154 goals. Pick a question and the result is computed in your browser.
+            </p>
+
+            <div id="sql-demo" class="sq">
+              <div class="sq-tabs" role="tablist" aria-label="Choose a query">
+                <button type="button" class="sq-tab is-active" data-query="ladder" role="tab" aria-selected="true">Season ladder</button>
+                <button type="button" class="sq-tab" data-query="scorers" role="tab" aria-selected="false">Top goal scorers</button>
+                <button type="button" class="sq-tab" data-query="grounds" role="tab" aria-selected="false">Goals per ground</button>
+                <button type="button" class="sq-tab" data-query="topgoals" role="tab" aria-selected="false">Top scorer's goals</button>
+              </div>
+
+              <p class="sq-question"></p>
+
+              <details class="sq-sql">
+                <summary>Show the SQL</summary>
+                <pre><code></code></pre>
+              </details>
+
+              <div class="sq-result">
+                <p class="sq-count"></p>
+                <div class="sq-scroll"><table class="sq-table"></table></div>
+                <p class="sq-note"></p>
+              </div>
+            </div>
+          </section>
+
           <section class="case-block">
             <h2>What the queries answer</h2>
             <p>
@@ -155,5 +184,7 @@
       </footer>
     </div>
     <script src="app.js"></script>
+    <script src="football-data.js"></script>
+    <script src="football-demo.js"></script>
   </body>
 </html>
