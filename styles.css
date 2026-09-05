@@ -265,7 +265,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   background-size: 4px 4px;
   transition: opacity .3s ease;
 }
-.project-card-featured::after { background-image: radial-gradient(circle at center, rgba(8, 11, 17, .07) 1px, transparent 1px); }
+.project-card-featured::after { background-image: radial-gradient(circle at center, rgba(7, 16, 25, .08) 1px, transparent 1px); }
 .project-card:hover::after { opacity: 1; }
 .project-card > * { position: relative; z-index: 1; }
 /* "Read the case study" — appears on hover, always visible on touch */
@@ -279,23 +279,27 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   text-transform: uppercase;
   transition: opacity .25s ease;
 }
-.project-card-featured .project-cta { color: rgba(8, 11, 17, .8); }
+.project-card-featured .project-cta { color: rgba(7, 16, 25, .85); }
 .project-card:hover .project-cta, .project-card:focus-visible .project-cta { opacity: 1; }
 @media (hover: none) {
   .project-cta { opacity: 1; }
 }
 .project-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 40px rgba(94, 203, 245, .12); }
 .project-card .card-top { color: var(--accent); }
+/* Fixed light-blue gradient in BOTH themes. It must not follow --accent:
+   in light mode that token darkens for contrast on white, which would put
+   dark text on a dark card. Pinning both keeps the contrast guaranteed. */
 .project-card-featured {
-  color: var(--bg);
-  background: linear-gradient(160deg, var(--accent-soft), var(--accent) 55%, #3fb4e0);
-  border-color: var(--accent);
+  color: #071019;
+  background: linear-gradient(160deg, #9fe0ff, #5ecbf5 55%, #3fb4e0);
+  border-color: #5ecbf5;
 }
+.project-card-featured h3 { color: #071019; }
 .project-card-featured .card-top,
 .project-card-featured p,
-.project-card-featured .project-detail { color: rgba(8, 11, 17, .78); }
-.project-card-featured .project-detail li::marker { color: rgba(8, 11, 17, .5); }
-.project-card-featured .project-tech { color: rgba(8, 11, 17, .62); }
+.project-card-featured .project-detail { color: rgba(7, 16, 25, .82); }
+.project-card-featured .project-detail li::marker { color: rgba(7, 16, 25, .55); }
+.project-card-featured .project-tech { color: rgba(7, 16, 25, .68); }
 .project-card-featured:hover { box-shadow: 0 16px 50px rgba(94, 203, 245, .3); }
 .project-card-wide { grid-column: 1 / -1; min-height: auto; }
 .project-shot {
@@ -309,7 +313,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   background: var(--bg);
   transition: opacity .2s ease;
 }
-.project-card-featured .project-shot { border-color: rgba(8, 11, 17, .25); }
+.project-card-featured .project-shot { border-color: rgba(7, 16, 25, .28); }
 .project-card:hover .project-shot { opacity: .92; }
 .project-detail { margin: .95rem 0 0; padding-left: 1.05rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
 .project-detail li { margin-bottom: .3rem; }
