@@ -294,12 +294,16 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   background: linear-gradient(160deg, #9fe0ff, #5ecbf5 55%, #3fb4e0);
   border-color: #5ecbf5;
 }
-.project-card-featured h3 { color: #071019; }
-.project-card-featured .card-top,
-.project-card-featured p,
-.project-card-featured .project-detail { color: rgba(7, 16, 25, .82); }
-.project-card-featured .project-detail li::marker { color: rgba(7, 16, 25, .55); }
-.project-card-featured .project-tech { color: rgba(7, 16, 25, .68); }
+/* The doubled class is deliberate. `.project-card-featured p` and
+   `.project-card p` have identical specificity, so the later of the two wins —
+   which was the generic muted colour. Doubling the class settles it. */
+.project-card.project-card-featured h3 { color: #071019; }
+.project-card.project-card-featured .card-top,
+.project-card.project-card-featured p,
+.project-card.project-card-featured .project-detail { color: rgba(7, 16, 25, .82); }
+.project-card.project-card-featured .project-detail li::marker { color: rgba(7, 16, 25, .55); }
+.project-card.project-card-featured .project-tech { color: rgba(7, 16, 25, .68); }
+.project-card.project-card-featured .project-cta { color: rgba(7, 16, 25, .85); }
 .project-card-featured:hover { box-shadow: 0 16px 50px rgba(94, 203, 245, .3); }
 .project-card-wide { grid-column: 1 / -1; min-height: auto; }
 .project-shot {
@@ -327,7 +331,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .capability-list li {
   position: relative;
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) auto;
+  grid-template-columns: 46px 34px minmax(0, 1fr) auto;
   align-items: center;
   column-gap: .6rem;
   padding: 1.15rem .9rem;
@@ -356,9 +360,9 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .capability-list li:hover { background: color-mix(in srgb, var(--cap) 8%, transparent); transform: translateX(4px); }
 .capability-list li:hover::before { transform: scaleY(1); }
 .cap-num { grid-column: 1; grid-row: 1 / span 2; color: var(--cap); font-family: "DM Mono", monospace; font-size: .82rem; }
-.cap-name { grid-column: 2; font-family: "Space Grotesk", sans-serif; font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 500; line-height: 1.15; }
+.cap-name { grid-column: 3; font-family: "Space Grotesk", sans-serif; font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 500; line-height: 1.15; }
 .cap-where {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 2;
   margin-top: .35rem;
   color: var(--muted);
@@ -368,7 +372,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   opacity: .8;
 }
 .cap-verb {
-  grid-column: 3;
+  grid-column: 4;
   grid-row: 1 / span 2;
   padding: .3rem .6rem;
   border: 1px solid var(--line);
@@ -1019,3 +1023,8 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .hc-end-label { fill: var(--accent); font-size: 12px; font-weight: 600; font-family: "DM Mono", monospace; }
 .hc-target { stroke: var(--c3); stroke-width: 1.5; stroke-dasharray: 7 5; }
 .hc-target-label { fill: var(--c3); font-size: 11px; font-family: "DM Mono", monospace; }
+
+/* Capability icons — hand-drawn inline SVG, no icon library */
+.cap-icon { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; color: var(--cap); opacity: .85; transition: opacity .25s ease, transform .25s ease; }
+.cap-icon svg { width: 22px; height: 22px; display: block; }
+.capability-list li:hover .cap-icon { opacity: 1; transform: scale(1.08); }
