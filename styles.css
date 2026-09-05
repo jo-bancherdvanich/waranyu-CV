@@ -84,7 +84,7 @@ nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
   width: 100vw;
   margin-left: -50vw;
   height: calc(100% + 88px);
-  background: url("images/renewable-dashboard.png") center 20% / cover no-repeat;
+  background: url("images/freshmart-dashboard.png") center 20% / cover no-repeat;
   opacity: .1;
   /* Heavy blur so the charts read as colour and shape, never as text */
   filter: grayscale(.5) blur(26px) saturate(1.2);
@@ -94,7 +94,7 @@ nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
   pointer-events: none;
 }
 .intro > * { position: relative; z-index: 1; }
-.eyebrow, .section-label span, .timeline-date, .card-top, footer, .tags, .capability-list span { font-family: "DM Mono", monospace; font-size: .72rem; letter-spacing: 0; }
+.eyebrow, .section-label span, .timeline-date, .card-top, footer, .tags, .cap-num, .cap-where, .cap-verb { font-family: "DM Mono", monospace; font-size: .72rem; letter-spacing: 0; }
 .eyebrow { margin: 0 0 1.15rem; color: var(--accent); text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.15rem); line-height: .94; letter-spacing: -.02em; }
@@ -157,7 +157,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .metrics div { display: flex; gap: 1.2rem; padding: 1.6rem 0; align-items: center; font-size: .86rem; line-height: 1.4; }
 .metrics div + div { border-left: 1px solid var(--line); padding-left: 2rem; }
-.metric-number { color: var(--accent); font-family: "DM Mono", monospace; font-size: 1.2rem; }
+.metric-number { color: var(--accent); font-family: "DM Mono", monospace; font-size: 1.3rem; white-space: nowrap; }
 .section { padding: 7rem 0; display: grid; grid-template-columns: minmax(180px, .28fr) 1fr; gap: 3rem; border-bottom: 1px solid var(--line); }
 .section-label h2 { margin: .35rem 0 0; font-size: 1.35rem; letter-spacing: 0; }
 .section-label span { color: var(--accent); }
@@ -297,14 +297,14 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .capability-list li:hover { background: color-mix(in srgb, var(--cap) 8%, transparent); transform: translateX(4px); }
 .capability-list li:hover::before { transform: scaleY(1); }
 .cap-num { grid-column: 1; grid-row: 1 / span 2; color: var(--cap); font-family: "DM Mono", monospace; font-size: .82rem; }
-.cap-name { grid-column: 2; font-size: clamp(1.2rem, 2.3vw, 1.9rem); font-weight: 500; line-height: 1.15; }
+.cap-name { grid-column: 2; font-family: "Space Grotesk", sans-serif; font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 500; line-height: 1.15; }
 .cap-where {
   grid-column: 2;
   grid-row: 2;
   margin-top: .35rem;
   color: var(--muted);
   font-family: "DM Mono", monospace;
-  font-size: .68rem;
+  font-size: .74rem;
   text-transform: uppercase;
   opacity: .8;
 }
@@ -316,7 +316,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   border-radius: 999px;
   color: var(--cap);
   font-family: "DM Mono", monospace;
-  font-size: .66rem;
+  font-size: .7rem;
   text-transform: uppercase;
   white-space: nowrap;
   transition: border-color .25s ease;
