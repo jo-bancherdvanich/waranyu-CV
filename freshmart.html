@@ -72,28 +72,28 @@
 
           <dl class="case-meta">
             <div>
-              <dt>Role</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
               <dd>Sole author — design, ETL, modelling, dashboard</dd>
             </div>
             <div>
-              <dt>Tools</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
               <dd>Power BI · Power Query · DAX · Kimball dimensional modelling</dd>
             </div>
             <div>
-              <dt>Context</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
               <dd>Curtin University, Perth</dd>
             </div>
           </dl>
 
           <section class="case-block">
-            <h2>The problem</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The problem</h2>
             <p>
               FreshMart sells products to customers across twelve stores, and that activity was scattered across five disconnected operational files. Nobody could answer a question as basic as <strong>which regions and categories actually drive profit</strong> without manually stitching spreadsheets together — and the raw data was not clean enough to trust if they had.
             </p>
           </section>
 
           <section class="case-block">
-            <h2>The data</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
             <p>Five raw CSV extracts, modelled into a single star schema:</p>
             <ul class="icon-list">
               <li>
@@ -124,7 +124,7 @@
           </section>
 
           <section class="case-block">
-            <h2>Cleaning it first</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v5M12 16v5M4.5 12h5M14.5 12h5"/><path d="M6.6 6.6 9 9M15 15l2.4 2.4M17.4 6.6 15 9M9 15l-2.4 2.4"/></svg></span>Cleaning it first</h2>
             <p>
               Every source table was audited in Power Query before it went anywhere near the model. The issues were real, not hypothetical:
             </p>
@@ -142,7 +142,7 @@
           </section>
 
           <section class="case-block" id="explore">
-            <h2>Explore the dashboard</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the dashboard</h2>
             <p>
               The measures behind the Power BI report, recomputed here from the same five source CSVs. Nothing on this page is typed in — the KPI row reconciles with the dashboard above to the dollar.
             </p>
@@ -164,7 +164,7 @@
           </section>
 
           <section class="case-block">
-            <h2>How it was modelled</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M6.6 6.6 10 10M17.4 6.6 14 10M6.6 17.4 10 14M17.4 17.4 14 14"/></svg></span>How it was modelled</h2>
             <p>
               The warehouse follows Kimball's four-stage method. <strong>Business process:</strong> retail sales. <strong>Grain:</strong> one row per product, per customer, per store, per date, per promotion — the most detailed level available, so no future analytical question is closed off. <strong>Dimensions:</strong> Product, Customer, Store, Promotion, Date. <strong>Facts:</strong> QuantitySold, UnitPrice, DiscountAmount, COGS.
             </p>
@@ -175,7 +175,7 @@
           </section>
 
           <section class="case-block">
-            <h2>What the dashboard shows</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the dashboard shows</h2>
             <ul class="findings">
               <li>
                 <span class="finding-number">01</span>
@@ -201,7 +201,7 @@
           </section>
 
           <section class="case-block">
-            <h2>What this demonstrates</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.8 2.8L16.5 9.5"/></svg></span>What this demonstrates</h2>
             <ul>
               <li>Running a full BI pipeline end to end: design, then clean, then model, then analyse</li>
               <li>Applying a recognised industry method rather than ad-hoc design</li>

@@ -1361,3 +1361,53 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .case-freshmart { --case-bg-block: url("images/freshmart-dashboard.png"); }
 .case-football { --case-bg-block: url("images/football-erd.png"); }
 .case-weather { --case-bg-block: url("images/weatherwise-demo.png"); }
+
+/* ---------- Heading and meta icons ---------- */
+/* Explicit colour: the headings use background-clip:text with a transparent
+   fill, which would otherwise make currentColor transparent too. */
+.h2-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -.18em;
+  margin-right: .5rem;
+  color: var(--case-accent, var(--accent));
+  -webkit-text-fill-color: currentColor;
+}
+.h2-ico svg { width: .82em; height: .82em; display: block; }
+.section-label h2 { display: flex; align-items: center; }
+.cm-ico {
+  display: inline-flex;
+  align-items: center;
+  margin-right: .4rem;
+  color: var(--case-accent, var(--accent));
+}
+.cm-ico svg { width: 14px; height: 14px; display: block; }
+.case-meta dt { display: flex; align-items: center; }
+
+/* ---------- Metrics strip: cells arrive in sequence ---------- */
+.metrics div { animation: appear .5s ease-out backwards; }
+.metrics div:nth-child(1) { animation-delay: .05s; }
+.metrics div:nth-child(2) { animation-delay: .17s; }
+.metrics div:nth-child(3) { animation-delay: .29s; }
+.metrics .metric-number { position: relative; display: inline-block; }
+.metrics .metric-number::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: .35;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .7s cubic-bezier(.4,0,.2,1);
+}
+.metrics.is-visible .metric-number::after,
+.case-metrics .metric-number::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .metrics div { animation: none; }
+  .metrics .metric-number::after { transition: none; transform: scaleX(1); }
+}

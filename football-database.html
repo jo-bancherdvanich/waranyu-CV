@@ -72,28 +72,28 @@
 
           <dl class="case-meta">
             <div>
-              <dt>Role</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
               <dd>Three-person group project — I contributed across the design, schema and SQL implementation</dd>
             </div>
             <div>
-              <dt>Tools</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
               <dd>Oracle SQL · ERD design · Normalisation</dd>
             </div>
             <div>
-              <dt>Context</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
               <dd>Curtin University, Perth</dd>
             </div>
           </dl>
 
           <section class="case-block">
-            <h2>The problem</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The problem</h2>
             <p>
               A soccer competition generates a surprising amount of interlocking data. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions — <strong>"what's the ladder?"</strong> — become impossible to answer without duplicating data everywhere.
             </p>
           </section>
 
           <section class="case-block">
-            <h2>The design</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M6.6 6.6 10 10M17.4 6.6 14 10M6.6 17.4 10 14M17.4 17.4 14 14"/></svg></span>The design</h2>
             <p>
               The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through junction tables. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
             </p>
@@ -103,7 +103,7 @@
           </section>
 
           <section class="case-block" id="run-it">
-            <h2>Run the queries</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>Run the queries</h2>
             <p>
               Four of the analytical queries, running here on the same sample season the Oracle script inserts — 8 clubs, 96 players, 56 games, 154 goals. Pick a question and the result is computed in your browser.
             </p>
@@ -132,7 +132,7 @@
           </section>
 
           <section class="case-block">
-            <h2>What the queries answer</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span>What the queries answer</h2>
             <p>
               The analytical layer is the interesting part: joins, aggregation, subqueries, HAVING clauses and LEFT JOINs, each written to answer a question an organiser would genuinely ask.
             </p>
@@ -161,7 +161,7 @@
           </section>
 
           <section class="case-block">
-            <h2>Revised after review</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5V8h-4.5"/></svg></span>Revised after review</h2>
             <p>
               The version in the repository is a revised one. Reviewing the first design, three things were wrong — so I went back and fixed them rather than leaving them:
             </p>

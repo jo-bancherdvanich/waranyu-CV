@@ -72,21 +72,21 @@
 
           <dl class="case-meta">
             <div>
-              <dt>Role</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
               <dd>Sole author — ETL, data model, DAX, R forecast, report</dd>
             </div>
             <div>
-              <dt>Tools</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
               <dd>Power BI · Power Query · DAX · R · Galaxy schema</dd>
             </div>
             <div>
-              <dt>Context</dt>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
               <dd>Curtin University, Perth</dd>
             </div>
           </dl>
 
           <section class="case-block">
-            <h2>The question</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2A2.6 2.6 0 0 1 14.5 10c0 1.8-2.5 2-2.5 3.6"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span>The question</h2>
             <p>
               The Australian government has committed to <strong>82% renewable electricity by 2030</strong>. Written as a brief for a DCCEEW-style audience, this project asks the practical version of that commitment: <strong>is Australia on track, and if not, how far short will it fall?</strong>
             </p>
@@ -100,7 +100,7 @@
           </section>
 
           <section class="case-block">
-            <h2>The data</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
             <p>
               Four national datasets, each in a different format, unit, and source taxonomy — reconciling them was most of the work.
             </p>
@@ -128,7 +128,7 @@
           </section>
 
           <section class="case-block">
-            <h2>What the data showed</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the data showed</h2>
             <ul class="findings">
               <li>
                 <span class="finding-number">01</span>
@@ -146,7 +146,7 @@
           </section>
 
           <section class="case-block">
-            <h2>The forecast, live</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>The forecast, live</h2>
             <p>
               The dashboard's forecast runs in R so the reader can check the method. Here is the same linear regression, computed in your browser from the project's actual data — equation, fit, and 95% prediction interval included.
             </p>
@@ -162,7 +162,7 @@
           </section>
 
           <section class="case-block">
-            <h2>How it was built</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>How it was built</h2>
             <p>
               <strong>Galaxy schema, not a single fact table.</strong> Two fact tables (renewable generation and total generation) share three dimensions: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error structurally impossible.
             </p>
@@ -176,7 +176,7 @@
           </section>
 
           <section class="case-block">
-            <h2>Limitations I'd state up front</h2>
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>Limitations I'd state up front</h2>
             <p>
               The forecast is a simple linear regression and should be read as a planning signal, not a prediction. Renewable growth accelerated after the mid-2010s, so including the slower early years makes the trend deliberately conservative — the real figure may land higher. Saying so is part of the analysis, not a footnote to it.
             </p>
