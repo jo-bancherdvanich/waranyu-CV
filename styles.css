@@ -1411,3 +1411,12 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .metrics div { animation: none; }
   .metrics .metric-number::after { transition: none; transform: scaleX(1); }
 }
+
+/* Heading icons take their section's colour, matching the 01/02 numbering */
+.education .h2-ico { color: var(--c1); }
+.certificates .h2-ico { color: var(--c2); }
+.projects .h2-ico { color: var(--c3); }
+.capabilities .h2-ico { color: var(--c4); }
+.principles .h2-ico { color: var(--c2); }
+.faq .h2-ico { color: var(--c3); }
+.contact .h2-ico { color: var(--c1); }
