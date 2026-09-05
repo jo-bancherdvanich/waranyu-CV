@@ -149,7 +149,7 @@ nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
   pointer-events: none;
 }
 .intro > * { position: relative; z-index: 1; }
-.eyebrow, .section-label span, .timeline-date, .card-top, footer, .tags, .cap-num, .cap-where, .cap-verb { font-family: "DM Mono", monospace; font-size: .72rem; letter-spacing: 0; }
+.eyebrow, .section-label > span, .timeline-date, .card-top, footer, .tags, .cap-num, .cap-where, .cap-verb { font-family: "DM Mono", monospace; font-size: .72rem; letter-spacing: 0; }
 .eyebrow { margin: 0 0 1.15rem; color: var(--accent); text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.15rem); line-height: .94; letter-spacing: -.02em; }
@@ -238,15 +238,15 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .metric-number { color: var(--accent); font-family: "DM Mono", monospace; font-size: 1.3rem; white-space: nowrap; }
 .section { padding: 7rem 0; display: grid; grid-template-columns: minmax(180px, .28fr) 1fr; gap: 3rem; border-bottom: 1px solid var(--line); }
 .section-label h2 { margin: .35rem 0 0; font-size: 1.35rem; letter-spacing: 0; }
-.section-label span { color: var(--accent); }
+.section-label > span { color: var(--accent); }
 /* Give each section its own colour so the page isn't one flat blue */
-.education .section-label span, .education .timeline-date { color: var(--c1); }
+.education .section-label > span, .education .timeline-date { color: var(--c1); }
 .education .timeline { border-top-color: var(--c1); }
-.certificates .section-label span, .certificates .timeline-date { color: var(--c2); }
+.certificates .section-label > span, .certificates .timeline-date { color: var(--c2); }
 .certificates .timeline { border-top-color: var(--c2); }
 .certificates .tags li { color: var(--c2); }
-.projects .section-label span { color: var(--c3); }
-.capabilities .section-label span { color: var(--c4); }
+.projects .section-label > span { color: var(--c3); }
+.capabilities .section-label > span { color: var(--c4); }
 .capabilities .capability-list { border-top-color: var(--c4); }
 .capabilities .capability-list li span:first-child { color: var(--c4); }
 .timeline { border-top: 1px solid var(--accent); }
@@ -452,7 +452,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   text-transform: uppercase;
 }
 /* How I work */
-.principles .section-label span { color: var(--c2); }
+.principles .section-label > span { color: var(--c2); }
 .principle-list { counter-reset: p; margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
 .principle-list li {
   position: relative;
@@ -477,7 +477,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .principle-list p { margin: 0; max-width: 720px; color: var(--muted); font-size: 1.02rem; line-height: 1.68; }
 
 /* Questions */
-.faq .section-label span { color: var(--c3); }
+.faq .section-label > span { color: var(--c3); }
 .faq-list { display: grid; gap: .6rem; }
 .faq-list details {
   border: 1px solid var(--line);
@@ -1374,7 +1374,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   color: var(--case-accent, var(--accent));
   -webkit-text-fill-color: currentColor;
 }
-.h2-ico svg { width: .82em; height: .82em; display: block; }
+.h2-ico svg { width: 1em; height: 1em; display: block; }
 .section-label h2 { display: flex; align-items: center; }
 .cm-ico {
   display: inline-flex;
