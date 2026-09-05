@@ -519,7 +519,6 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   font-weight: 500;
   letter-spacing: .02em;
 }
-.case-meta dt { color: var(--case-accent, var(--accent)); }
 .findings li:first-child { border-top-color: var(--case-accent, var(--accent)); }
 .finding-number { color: var(--case-accent, var(--accent)); }
 .case-block > ul li::marker { color: var(--case-accent, var(--accent)); }
@@ -529,8 +528,16 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .case-shot img { display: block; width: 100%; border: 1px solid rgba(232, 242, 250, .14); background: var(--surface); }
 .case-shot figcaption { margin-top: .8rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
 .case-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.2rem; padding: 1.6rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.case-meta dt { margin-bottom: .45rem; color: var(--accent); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
-.case-meta dd { margin: 0; font-size: .95rem; line-height: 1.45; }
+.case-meta dt {
+  margin-bottom: .6rem;
+  color: var(--case-accent, var(--accent));
+  font-family: "DM Mono", monospace;
+  font-size: .88rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.case-meta dd { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.5; }
 .case-block { margin-top: 3.4rem; }
 .case-block h2 { margin-bottom: 1.1rem; font-size: clamp(1.5rem, 2.6vw, 2rem); letter-spacing: -.01em; }
 .case-block p { max-width: 760px; color: var(--muted); font-size: 1.02rem; line-height: 1.65; }
