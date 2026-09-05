@@ -1049,3 +1049,49 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 }
 .ch-tip-label { color: var(--muted); font-family: "DM Mono", monospace; font-size: .64rem; text-transform: uppercase; }
 .ch-tip-value { color: var(--ink); font-size: .95rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- FreshMart explorer ---------- */
+.fm { margin-top: 1.4rem; }
+.fm-kpi { margin-bottom: 1.6rem; }
+.fm-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.2rem; }
+.fm-tab {
+  cursor: pointer; padding: .45rem .8rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--muted);
+  font-family: "DM Mono", monospace; font-size: .72rem;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.fm-tab:hover { color: var(--case-accent, var(--accent)); border-color: var(--case-accent, var(--accent)); }
+.fm-tab.is-active { color: var(--bg); background: var(--case-accent, var(--accent)); border-color: var(--case-accent, var(--accent)); }
+.fm-bars { display: grid; gap: .55rem; }
+.fm-row { display: grid; grid-template-columns: minmax(88px, 130px) 1fr auto; align-items: center; gap: .9rem; }
+.fm-key { font-size: .9rem; }
+.fm-track { height: 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.fm-fill { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--case-accent, var(--accent)); transition: width .7s cubic-bezier(.4,0,.2,1); }
+.fm-val { font-family: "DM Mono", monospace; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fm-raw { margin-top: 1.1rem; background: none; cursor: pointer; font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; color: var(--case-accent, var(--accent)); border: 0; border-bottom: 1px solid var(--case-accent, var(--accent)); padding: 0 0 .2rem; }
+.fm-note { margin: 1rem 0 0; max-width: 760px; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { .fm-fill { transition: none; } }
+
+/* ---------- Case study motifs: hand-drawn SVG scenes ---------- */
+.case-motif { margin-bottom: 1.6rem; color: var(--case-accent, var(--accent)); opacity: .9; }
+.case-motif svg { display: block; width: 100%; max-width: 430px; height: auto; overflow: visible; }
+@keyframes mo-spin { to { transform: rotate(360deg); } }
+@keyframes mo-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes mo-rain { 0% { opacity: 0; transform: translateY(-6px); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateY(10px); } }
+@keyframes mo-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes mo-roll { 0%, 100% { transform: translateX(-38px); } 50% { transform: translateX(38px); } }
+.mo-spin { animation: mo-spin 7s linear infinite; }
+.mo-sun { animation: mo-spin 34s linear infinite; }
+.mo-float { animation: mo-drift 3.4s ease-in-out infinite; }
+.mo-roll { animation: mo-roll 6s ease-in-out infinite; }
+.mo-rain { animation: mo-rain 1.5s ease-in infinite; }
+.mo-rain-2 { animation-delay: .5s; }
+.mo-rain-3 { animation-delay: 1s; }
+.mo-rise { transform-origin: bottom; animation: mo-grow .9s cubic-bezier(.4,0,.2,1) backwards; }
+.mo-rise:nth-of-type(2) { animation-delay: .1s; }
+.mo-rise:nth-of-type(3) { animation-delay: .2s; }
+.mo-rise:nth-of-type(4) { animation-delay: .3s; }
+@media (prefers-reduced-motion: reduce) {
+  .mo-spin, .mo-sun, .mo-float, .mo-roll, .mo-rain, .mo-rise { animation: none !important; }
+}

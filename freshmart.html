@@ -48,6 +48,7 @@
 
       <main id="main">
         <article class="case case-freshmart">
+          <div class="case-motif" aria-hidden="true"><svg viewBox="0 0 400 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M120 78V40h84v38"/><path d="M112 40h100l-8-14h-84z"/><path d="M128 26v14M144 26v14M160 26v14M176 26v14M192 26v14" opacity=".5"/><path d="M150 78V58h24v20"/><g class="mo-float"><path d="M232 48h34l-4 22h-26z"/><path d="M238 48v-7a5 5 0 0 1 10 0M252 48v-7a5 5 0 0 1 10 0" opacity=".6"/></g><path class="mo-rise" d="M296 78V62"/><path class="mo-rise" d="M314 78V46"/><path class="mo-rise" d="M332 78V54"/><path class="mo-rise" d="M350 78V32"/><path d="M14 78H386" opacity=".45"/></svg></div>
           <p class="eyebrow">01 / Business intelligence</p>
           <h1>FreshMart data warehouse and sales dashboard</h1>
           <p class="lede">
@@ -120,6 +121,28 @@
             </p>
           </section>
 
+          <section class="case-block" id="explore">
+            <h2>Explore the dashboard</h2>
+            <p>
+              The measures behind the Power BI report, recomputed here from the same five source CSVs. Nothing on this page is typed in — the KPI row reconciles with the dashboard above to the dollar.
+            </p>
+
+            <div id="fm-demo" class="fm">
+              <div class="metrics fm-kpi" aria-label="Headline measures"></div>
+
+              <div class="fm-tabs" role="tablist" aria-label="Choose a breakdown">
+                <button type="button" class="fm-tab is-active" data-view="region" role="tab" aria-selected="true">By region</button>
+                <button type="button" class="fm-tab" data-view="category" role="tab" aria-selected="false">By category</button>
+                <button type="button" class="fm-tab" data-view="month" role="tab" aria-selected="false">By month</button>
+                <button type="button" class="fm-tab" data-view="dow" role="tab" aria-selected="false">By day of week</button>
+              </div>
+
+              <div class="fm-chart"></div>
+              <button type="button" class="fm-raw button text-button" hidden>Show raw source</button>
+              <p class="fm-note"></p>
+            </div>
+          </section>
+
           <section class="case-block">
             <h2>How it was modelled</h2>
             <p>
@@ -179,5 +202,7 @@
       </footer>
     </div>
     <script src="app.js"></script>
+    <script src="freshmart-data.js"></script>
+    <script src="freshmart-demo.js"></script>
   </body>
 </html>
