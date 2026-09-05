@@ -39,6 +39,18 @@
     });
   }
 
+  /* ---- capability rows expand to say why the skill matters ------------ */
+  document.querySelectorAll(".capability-list li[role='button']").forEach(function (li) {
+    function toggle() {
+      var open = li.classList.toggle("is-open");
+      li.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    li.addEventListener("click", toggle);
+    li.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+  });
+
   /* ---- count up ------------------------------------------------------- */
   // Only plain integers animate. "R² 0.85" and "9% → 35%" are left alone.
   function countUp(el) {
@@ -61,7 +73,7 @@
   /* ---- scroll reveal and counting ------------------------------------- */
   // The case-study hero already animates itself on load, so it is left out of
   // the reveal set — two competing opacity rules would flicker.
-  var reveals = document.querySelectorAll(".section, .banner, .metrics:not(.case-metrics)");
+  var reveals = document.querySelectorAll(".section, .banner, .contact, .metrics:not(.case-metrics)");
   var counters = document.querySelectorAll(".metrics");
 
   if (reduced || !("IntersectionObserver" in window)) {
