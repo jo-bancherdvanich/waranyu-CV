@@ -71,9 +71,12 @@
   }
 
   /* ---- scroll reveal and counting ------------------------------------- */
-  // The case-study hero already animates itself on load, so it is left out of
-  // the reveal set — two competing opacity rules would flicker.
-  var reveals = document.querySelectorAll(".section, .banner, .contact, .metrics:not(.case-metrics)");
+  // The case-study hero (eyebrow, h1, lede, actions, metrics, screenshot)
+  // animates itself on load, so it stays out of the reveal set — two competing
+  // opacity rules would flicker. Everything below it reveals on scroll.
+  var reveals = document.querySelectorAll(
+    ".section, .banner, .contact, .case-block, .case-meta, .metrics:not(.case-metrics)"
+  );
   var counters = document.querySelectorAll(".metrics");
 
   if (reduced || !("IntersectionObserver" in window)) {

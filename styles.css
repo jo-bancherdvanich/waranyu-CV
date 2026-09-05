@@ -172,15 +172,38 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .intro-copy .availability { animation-delay: 270ms; }
 .intro-copy .intro-actions { animation-delay: 360ms; }
 
-/* Gradient headline, with a solid fallback for browsers without background-clip */
-#intro-title {
+/* Gradient headings, with a solid fallback for browsers without background-clip.
+   Only applied to large type — below about 1.3rem the fade is invisible and
+   just costs contrast. The featured project card is excluded: its text is
+   pinned dark against a fixed blue gradient. */
+#intro-title,
+.contact h2,
+.section-label h2,
+.case-block > h2,
+.cap-name {
   color: var(--ink);
-  background: linear-gradient(168deg, var(--ink) 55%, var(--h1-fade));
+  background: linear-gradient(170deg, var(--ink) 48%, var(--h1-fade));
   -webkit-background-clip: text;
   background-clip: text;
 }
 @supports (-webkit-background-clip: text) or (background-clip: text) {
-  #intro-title { color: transparent; }
+  #intro-title,
+  .contact h2,
+  .section-label h2,
+  .case-block > h2,
+  .cap-name { color: transparent; }
+}
+/* The counter beside a case-study heading keeps its own colour */
+.case-block > h2::before { -webkit-text-fill-color: var(--case-accent, var(--accent)); }
+/* The banner sits on a dark scrim in both themes, so it fades light-to-light */
+.banner-quote {
+  color: #f2f7fb;
+  background: linear-gradient(170deg, #f2f7fb 48%, #9fb6c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .banner-quote { color: transparent; }
 }
 
 /* Framed portrait with a glow behind it */
@@ -414,8 +437,6 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
     linear-gradient(180deg, rgba(8, 11, 17, .9), rgba(8, 11, 17, .78) 50%, rgba(8, 11, 17, .95));
 }
 .banner-quote {
-  /* The band stays dark in both themes, so its text is fixed light */
-  color: #f2f7fb;
   max-width: 880px;
   margin: 0 auto .9rem;
   font-size: clamp(1.6rem, 3.6vw, 2.9rem);
@@ -1243,3 +1264,100 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 @media (prefers-reduced-motion: reduce) {
   .contact.is-visible::before { animation: none; }
 }
+
+/* ---------- Section glow: the contact effect, spread across the page ---------- */
+.section { position: relative; }
+.section::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 12%;
+  width: min(620px, 62vw);
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--glow-section, rgba(94, 203, 245, .22)), transparent 72%);
+  filter: blur(58px);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+/* alternate sides so a long scroll does not pulse in one column */
+.section:nth-of-type(odd)::after { left: -6%; }
+.section:nth-of-type(even)::after { right: -6%; }
+.section.is-visible::after { opacity: 1; }
+:root[data-theme="light"] { --glow-section: rgba(11, 127, 166, .16); }
+/* each section tints its own glow with its palette colour */
+.education::after { --glow-section: color-mix(in srgb, var(--c1) 24%, transparent); }
+.certificates::after { --glow-section: color-mix(in srgb, var(--c2) 22%, transparent); }
+.projects::after { --glow-section: color-mix(in srgb, var(--c3) 20%, transparent); }
+.capabilities::after { --glow-section: color-mix(in srgb, var(--c4) 20%, transparent); }
+.principles::after { --glow-section: color-mix(in srgb, var(--c2) 20%, transparent); }
+.faq::after { --glow-section: color-mix(in srgb, var(--c3) 18%, transparent); }
+
+/* ---------- Case study: glow behind alternating blocks ---------- */
+.case-block { position: relative; }
+.case-block::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 6%;
+  width: min(520px, 55vw);
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--case-accent, var(--accent)) 18%, transparent), transparent 72%);
+  filter: blur(56px);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+.case-block:nth-of-type(odd)::after { left: -10%; }
+.case-block:nth-of-type(even)::after { right: -10%; }
+.case-block.is-visible::after { opacity: 1; }
+
+/* Flag icons keep their own colours rather than the accent tint */
+.il-flag { color: inherit; }
+.il-flag svg { width: 24px; height: 16px; border-radius: 3px; box-shadow: 0 0 0 1px var(--img-border); }
+
+/* ---------- Blurred dashboard backdrop, as used behind the hero ---------- */
+.projects::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  margin-left: -50vw;
+  background: url("images/renewable-dashboard.png") center 35% / cover no-repeat;
+  opacity: var(--backdrop-opacity);
+  filter: grayscale(.5) blur(30px) saturate(1.2);
+  transform: scale(1.14);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 62%, transparent 96%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 62%, transparent 96%);
+  pointer-events: none;
+}
+/* The same treatment on each case study, echoed behind its interactive block */
+.case-block#explore::before,
+.case-block#run-it::before,
+.case-block#try-it::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -6%;
+  left: 50%;
+  width: 100vw;
+  height: 112%;
+  margin-left: -50vw;
+  background-image: var(--case-bg-block);
+  background-size: cover;
+  background-position: center 40%;
+  opacity: calc(var(--backdrop-opacity) * .85);
+  filter: grayscale(.5) blur(30px) saturate(1.2);
+  transform: scale(1.14);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 60%, transparent 96%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 60%, transparent 96%);
+  pointer-events: none;
+}
+.case-freshmart { --case-bg-block: url("images/freshmart-dashboard.png"); }
+.case-football { --case-bg-block: url("images/football-erd.png"); }
+.case-weather { --case-bg-block: url("images/weatherwise-demo.png"); }
