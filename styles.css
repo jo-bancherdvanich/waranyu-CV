@@ -511,10 +511,13 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .case-block > h2::before {
   counter-increment: cb;
   content: "0" counter(cb);
+  min-width: 1.9em;
   color: var(--case-accent, var(--accent));
   font-family: "DM Mono", monospace;
-  font-size: .72rem;
-  font-weight: 400;
+  /* Sized in em so it scales with the heading instead of drifting apart */
+  font-size: .54em;
+  font-weight: 500;
+  letter-spacing: .02em;
 }
 .case-meta dt { color: var(--case-accent, var(--accent)); }
 .findings li:first-child { border-top-color: var(--case-accent, var(--accent)); }
