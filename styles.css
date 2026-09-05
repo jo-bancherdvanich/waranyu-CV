@@ -1095,3 +1095,32 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 @media (prefers-reduced-motion: reduce) {
   .mo-spin, .mo-sun, .mo-float, .mo-roll, .mo-rain, .mo-rise { animation: none !important; }
 }
+
+/* ---------- Explanatory diagrams inside case studies ---------- */
+.case-diagram {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.2rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--case-accent, var(--accent));
+}
+.case-diagram svg { display: block; width: 100%; max-width: 560px; margin: 0 auto; height: auto; }
+.case-diagram rect { fill: var(--bg); }
+.case-diagram figcaption {
+  max-width: 620px;
+  margin: 1.1rem auto 0;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.dg-t { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: "Space Grotesk", sans-serif; stroke: none; }
+.dg-s { fill: var(--muted); font-size: 8.5px; font-family: "DM Mono", monospace; stroke: none; }
+.dg-h { fill: var(--muted); font-size: 9px; font-family: "DM Mono", monospace; text-transform: uppercase; stroke: none; }
+.dg-fact rect { fill: color-mix(in srgb, var(--case-accent, var(--accent)) 14%, var(--bg)); }
+.dg-fact .dg-t { fill: var(--ink); }
+.dg-bad rect { stroke-dasharray: 4 4; opacity: .75; }
+.dg-bad-line { stroke-dasharray: 4 4; }
+.dg-bad-text, .dg-bad .dg-t { fill: var(--muted); }
+.dg-bar { fill: color-mix(in srgb, var(--case-accent, var(--accent)) 45%, transparent); stroke: none; }
