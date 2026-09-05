@@ -199,6 +199,28 @@
     els.legend.innerHTML = state.view === "temp"
       ? "<span>Daily high</span><span class=\"is-min\">Daily low</span>"
       : "<span>Rainfall (mm)</span>";
+
+    if (window.attachChartHover && state.view === "temp") {
+      // Same geometry as lineChart() so the crosshair lands on the drawn points.
+      var W = 560, H = 170, PL = 38, PR = 12, PT = 14, PB = 30;
+      var d = state.days;
+      var maxV = Math.max.apply(null, d.map(function (v) { return v.tMax; }));
+      var minV = Math.min.apply(null, d.map(function (v) { return v.tMin; }));
+      var pad = Math.max(1, (maxV - minV) * 0.15);
+      maxV += pad; minV -= pad;
+      window.attachChartHover(els.chart, {
+        top: PT,
+        bottom: H - PB,
+        points: d.map(function (v, i) {
+          return {
+            x: PL + i * (W - PL - PR) / Math.max(1, d.length - 1),
+            y: PT + (maxV - v.tMax) * (H - PT - PB) / (maxV - minV),
+            label: v.label,
+            value: v.tMin.toFixed(1) + "° to " + v.tMax.toFixed(1) + "°"
+          };
+        })
+      });
+    }
     els.tabs.forEach(function (t) {
       var on = t.dataset.view === state.view;
       t.classList.toggle("is-active", on);

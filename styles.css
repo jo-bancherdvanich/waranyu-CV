@@ -1015,7 +1015,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .hero-chart svg { display: block; width: 100%; height: auto; }
 .hc-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 8; }
 .hc-axis { fill: var(--muted); font-size: 11px; font-family: "DM Mono", monospace; }
-.hc-area { fill: var(--accent); opacity: .1; }
+.hc-area { fill: url(#hcFade); color: var(--accent); }
 .hc-line { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .hc-forecast { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 6 5; opacity: .75; }
 .hc-dot { fill: var(--accent); }
@@ -1028,3 +1028,24 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .cap-icon { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; color: var(--cap); opacity: .85; transition: opacity .25s ease, transform .25s ease; }
 .cap-icon svg { width: 22px; height: 22px; display: block; }
 .capability-list li:hover .cap-icon { opacity: 1; transform: scale(1.08); }
+
+/* ---------- Shared chart hover: crosshair + tooltip ---------- */
+.ch-cross { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; transition: opacity .12s ease; }
+.ch-halo { fill: var(--accent); fill-opacity: .22; opacity: 0; pointer-events: none; }
+.ch-dot { fill: var(--bg); stroke: var(--accent); stroke-width: 2.5; opacity: 0; pointer-events: none; }
+.ch-tip {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: .5rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.ch-tip-label { color: var(--muted); font-family: "DM Mono", monospace; font-size: .64rem; text-transform: uppercase; }
+.ch-tip-value { color: var(--ink); font-size: .95rem; font-weight: 600; font-variant-numeric: tabular-nums; }

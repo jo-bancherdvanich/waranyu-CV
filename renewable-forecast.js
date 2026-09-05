@@ -106,9 +106,20 @@
     var proj = '<circle cx="' + x(HORIZON) + '" cy="' + yy(p35) + '" r="4.5" class="rf-proj"/>' +
       '<text x="' + (x(HORIZON) + 8) + '" y="' + (yy(p35) + 4) + '" class="rf-proj-label">' + m.fmt(p35) + '</text>';
 
-    root.querySelector(".rf-chart").innerHTML =
+    var rfHost = root.querySelector(".rf-chart");
+    rfHost.innerHTML =
       '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Linear forecast of Australian renewable electricity to 2035">' +
       grid + band + target + line + dots + proj + labels + "</svg>";
+
+    if (window.attachChartHover) {
+      window.attachChartHover(rfHost, {
+        top: PT,
+        bottom: H - PB,
+        points: DATA.map(function (d) {
+          return { x: x(d.y), y: yy(d[key]), label: d.y, value: m.fmt(d[key]) };
+        })
+      });
+    }
 
     var eq = "y = " + f.slope.toFixed(2) + "x + " + f.intercept.toFixed(2);
     var p = f.tStat > 3.92 ? "p < 0.001" : "p = n.s.";

@@ -49,6 +49,12 @@
   host.innerHTML =
     '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
     'aria-label="Australia\'s renewable electricity share rose from 8.9 percent in 2005 to 35 percent in 2024, with a linear forecast reaching 44.6 percent by 2035, well short of the 82 percent target">' +
+      '<defs>' +
+        '<linearGradient id="hcFade" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0%" stop-color="currentColor" stop-opacity=".28"/>' +
+          '<stop offset="100%" stop-color="currentColor" stop-opacity="0"/>' +
+        '</linearGradient>' +
+      '</defs>' +
       grid +
       '<line x1="' + PL + '" y1="' + y(TARGET) + '" x2="' + (W - PR) + '" y2="' + y(TARGET) + '" class="hc-target"/>' +
       '<text x="' + (W - PR) + '" y="' + (y(TARGET) - 9) + '" class="hc-target-label" text-anchor="end">82% target (2030)</text>' +
@@ -59,6 +65,17 @@
       '<circle cx="' + x(2035) + '" cy="' + y(FORECAST_2035) + '" r="4" class="hc-end"/>' +
       '<text x="' + (x(2035) - 6) + '" y="' + (y(FORECAST_2035) - 12) + '" class="hc-end-label" text-anchor="end">44.6% by 2035</text>' +
     '</svg>';
+
+  // Crosshair + tooltip over the historical points
+  if (window.attachChartHover) {
+    window.attachChartHover(host, {
+      top: PT,
+      bottom: H - PB,
+      points: DATA.map(function (d) {
+        return { x: x(d[0]), y: y(d[1]), label: d[0], value: d[1].toFixed(1) + "% renewable" };
+      })
+    });
+  }
 
   // Animate the stroke drawing itself, unless the visitor asked for less motion.
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
