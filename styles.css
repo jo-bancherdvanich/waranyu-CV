@@ -457,15 +457,73 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   mask-image: linear-gradient(180deg, transparent 0%, #000 25%, transparent 95%);
   pointer-events: none;
 }
-.case-freshmart { --case-bg: url("images/freshmart-dashboard.png"); }
-.case-renewable { --case-bg: url("images/renewable-dashboard.png"); }
-.case-football { --case-bg: url("images/football-erd.png"); }
-.case-weather { --case-bg: url("images/weatherwise-demo.png"); }
+.case-freshmart { --case-bg: url("images/freshmart-dashboard.png"); --case-accent: var(--c3); }
+.case-renewable { --case-bg: url("images/renewable-dashboard.png"); --case-accent: var(--c1); }
+.case-football { --case-bg: url("images/football-erd.png"); --case-accent: var(--c4); }
+.case-weather { --case-bg: url("images/weatherwise-demo.png"); --case-accent: var(--c2); }
+
+/* Case hero — same entrance and gradient treatment as the landing page */
+.case > .eyebrow, .case > h1, .case > .lede, .case > .case-actions, .case > .case-metrics {
+  animation: appear .55s ease-out backwards;
+}
+.case > .eyebrow { animation-delay: 0ms; color: var(--case-accent, var(--accent)); }
+.case > h1 {
+  animation-delay: 90ms;
+  color: var(--ink);
+  background: linear-gradient(168deg, var(--ink) 55%, #c2d6e6);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .case > h1 { color: transparent; }
+}
+.case > .lede { animation-delay: 180ms; color: #cfe0ee; }
+.case > .case-actions { animation-delay: 270ms; }
+.case > .case-metrics { animation-delay: 360ms; }
+
+/* Numbers strip under the case hero */
+.case-metrics { margin-top: 2.6rem; }
+
+/* Framed screenshot, matching the homepage hero frame */
+.case-shot {
+  position: relative;
+  margin: 3.4rem 0 0;
+  padding: .5rem;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--case-accent, var(--accent)) 6%, transparent);
+  animation: appear-zoom .7s ease-out .45s backwards;
+}
+.case-shot::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -10% -6% 40%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--case-accent, var(--accent)) 34%, transparent), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.case-shot img { border-radius: 10px; border-color: rgba(232, 242, 250, .14); box-shadow: 0 24px 60px rgba(0, 0, 0, .5); }
+
+/* Numbered section spine, like the 01–07 on the landing page */
+.case { counter-reset: cb; }
+.case-block > h2 { display: flex; align-items: baseline; gap: .85rem; }
+.case-block > h2::before {
+  counter-increment: cb;
+  content: "0" counter(cb);
+  color: var(--case-accent, var(--accent));
+  font-family: "DM Mono", monospace;
+  font-size: .72rem;
+  font-weight: 400;
+}
+.case-meta dt { color: var(--case-accent, var(--accent)); }
+.findings li:first-child { border-top-color: var(--case-accent, var(--accent)); }
+.finding-number { color: var(--case-accent, var(--accent)); }
+.case-block > ul li::marker { color: var(--case-accent, var(--accent)); }
 .case h1 { max-width: 100%; margin-bottom: 1.4rem; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: 1.02; letter-spacing: -.02em; }
 .case .lede { max-width: 100%; }
 .case-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin: 2.3rem 0 0; }
-.case-shot { margin: 3.2rem 0 0; }
-.case-shot img { display: block; width: 100%; border: 1px solid var(--line); background: var(--surface); }
+.case-shot img { display: block; width: 100%; border: 1px solid rgba(232, 242, 250, .14); background: var(--surface); }
 .case-shot figcaption { margin-top: .8rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
 .case-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.2rem; padding: 1.6rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .case-meta dt { margin-bottom: .45rem; color: var(--accent); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
