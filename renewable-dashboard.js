@@ -48,10 +48,15 @@
       selIdx: selIdx,
       byYear: R.years.map(function () { return 0; }),
       mixFirst: {}, mixSel: {},          // source group, first year vs selected year
+      groupYear: {},                     // source group across every year
+
       bySource: {},
       volByCountry: {}, shareByCountry: {}
     };
-    R.groups.forEach(function (g) { a.mixFirst[g] = 0; a.mixSel[g] = 0; });
+    R.groups.forEach(function (g) {
+      a.mixFirst[g] = 0; a.mixSel[g] = 0;
+      a.groupYear[g] = R.years.map(function () { return 0; });
+    });
     R.sources.forEach(function (s, i) {
       if (!state.group || R.sourceGroup[i] === state.group) a.bySource[s] = 0;
     });
@@ -65,6 +70,7 @@
       if (fC[i] !== ci) continue;
 
       a.byYear[yIdx] += fG[i];
+      a.groupYear[grp][yIdx] += fG[i];
       if (yIdx === 0) a.mixFirst[grp] += fG[i];
       if (yIdx === selIdx) a.mixSel[grp] += fG[i];
       if ((!state.year || yIdx === selIdx) && a.bySource[R.sources[sIdx]] !== undefined) {
@@ -89,6 +95,9 @@
     return a;
   }
 
+  /* points handed to the shared crosshair/tooltip module after each render */
+  var hoverData = {};
+
   /* ---- colour: the selected country, then China as the comparison anchor -- */
   function countryFill(name) {
     if (name === state.country) return "var(--accent)";
@@ -107,8 +116,8 @@
       return '<button type="button" class="dash-row is-clickable' + (on ? " is-picked" : "") + '"' +
         ' data-dim="country" data-key="' + esc(k) + '">' +
         '<span class="dash-key">' + esc(k) + '</span>' +
-        '<span class="dash-track"><span class="dash-fill is-grown" style="width:' +
-        ((obj[k] / max) * 100).toFixed(1) + '%;background:' + countryFill(k) + '"></span></span>' +
+        '<span class="dash-track"><span class="dash-fill" style="width:0;background:' + countryFill(k) + '" data-w="' +
+        ((obj[k] / max) * 100).toFixed(1) + '"></span></span>' +
         '<span class="dash-val">' + opts.fmt(obj[k]) + '</span></button>';
     }).join("") + '</div>' +
       '<p class="dash-axistitle">' + opts.axis + '</p>';
@@ -158,10 +167,18 @@
       xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 8) + '" class="dash-axis" text-anchor="middle">' +
               R.years[k] + '</text>';
     });
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+    hoverData.share = {
+      top: PT, bottom: H - PB,
+      points: vals.map(function (v, k) {
+        return { x: x(k), y: y(v), label: String(R.years[k]),
+                 value: pct(v) + ' · ' + twh(a.byYear[k]) + ' TWh' };
+      })
+    };
+    return '<div class="dash-chart" data-hover="share">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
       'aria-label="Renewable share of generation, ' + esc(state.country) + ', 2005 to 2024">' +
       grid + '<path d="' + area + '" class="dash-area"/>' +
-      '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + lret + marker + xlab + '</svg>';
+      '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + lret + marker + xlab + '</svg></div>';
   }
 
   /* ---- clustered columns: first year against the selected year ---------- */
@@ -212,6 +229,66 @@
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
       'aria-label="Generation by source, ' + labelA + ' against ' + labelB + '">' +
       grid + legend + body + '</svg>' +
+      '<p class="dash-axistitle">Generation (TWh)</p>';
+  }
+
+  /* ---- one line per source group, across every year --------------------- */
+  function sourceLines(groupYear) {
+    var W = 640, H = 250, PL = 42, PR = 96, PT = 16, PB = 28;
+    var keys = Object.keys(groupYear).filter(function (g) {
+      return groupYear[g].some(function (v) { return v > 0; });
+    });
+    keys.sort(function (x, y) {
+      return groupYear[y][LATEST] - groupYear[x][LATEST];
+    });
+    if (!keys.length) return '<p class="dash-empty">Nothing in this selection.</p>';
+
+    var n = R.years.length;
+    var max = 0;
+    keys.forEach(function (g) { groupYear[g].forEach(function (v) { if (v > max) max = v; }); });
+    max = (max * 1.1) / 1000 || 1;                       // work in TWh
+    var x = function (k) { return PL + (k / (n - 1)) * (W - PL - PR); };
+    var y = function (v) { return PT + (1 - v / max) * (H - PT - PB); };
+
+    var grid = "";
+    var step = max > 200 ? 100 : max > 80 ? 25 : max > 30 ? 10 : 5;
+    for (var t = 0; t <= max; t += step) {
+      var yy = y(t).toFixed(1);
+      grid += '<line x1="' + PL + '" y1="' + yy + '" x2="' + (W - PR) + '" y2="' + yy + '" class="dash-grid"/>' +
+              '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' + t + '</text>';
+    }
+
+    var lines = keys.map(function (g, gi) {
+      var pts = groupYear[g].map(function (v, k) { return x(k).toFixed(1) + "," + y(v / 1000).toFixed(1); });
+      var endY = y(groupYear[g][LATEST] / 1000);
+      return '<polyline points="' + pts.join(" ") + '" class="dash-line dash-s' + (gi % 5) + '"/>' +
+             '<circle cx="' + x(n - 1).toFixed(1) + '" cy="' + endY.toFixed(1) + '" r="2.6" class="dash-sdot dash-s' + (gi % 5) + '"/>' +
+             '<text x="' + (W - PR + 8) + '" y="' + (endY + 3).toFixed(1) + '" class="dash-axis dash-slabel-' + (gi % 5) + '">' +
+             esc(g) + " " + (groupYear[g][LATEST] / 1000).toFixed(1) + '</text>';
+    }).join("");
+
+    var xlab = "";
+    [0, 5, 10, 15, n - 1].forEach(function (k) {
+      xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 8) + '" class="dash-axis" text-anchor="middle">' +
+              R.years[k] + '</text>';
+    });
+
+    hoverData.sources = {
+      top: PT, bottom: H - PB,
+      points: R.years.map(function (yrv, k) {
+        return {
+          x: x(k), y: y(groupYear[keys[0]][k] / 1000), label: String(yrv),
+          value: keys.map(function (g) {
+            return esc(g) + " " + (groupYear[g][k] / 1000).toFixed(1);
+          }).join("<br />")
+        };
+      })
+    };
+
+    return '<div class="dash-chart" data-hover="sources">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+      'aria-label="Generation by source group over time, ' + esc(state.country) + '">' +
+      grid + lines + xlab + '</svg></div>' +
       '<p class="dash-axistitle">Generation (TWh)</p>';
   }
 
@@ -307,6 +384,10 @@
           "Generation by source group in " + firstYear + " against " + selYear + ", in TWh.",
           clustered(a.mixFirst, a.mixSel, String(firstYear), String(selYear)), true) +
 
+        panel(esc(state.country) + "'s mix over time",
+          "Each source group's generation, " + R.years[0] + "–" + R.years[LATEST] + ", in TWh.",
+          sourceLines(a.groupYear), true) +
+
         panel(t3,
           "Volume reflects the size of a country's grid, not how clean it is.",
           hbars(a.volByCountry, { fmt: function (v) { return twh(v); }, axis: "Generation (TWh), " + selYear })) +
@@ -317,6 +398,20 @@
       '</div>' +
 
       '<p class="dash-foot">' + esc(c.policy) + ', from ' + c.policyYear + '.</p>';
+
+    afterRender();
+  }
+
+  var revealed = false;
+  function afterRender() {
+    if (window.dashGrow) window.dashGrow(root);
+    if (window.dashDrawLines) window.dashDrawLines(root);
+    if (window.attachChartHover) {
+      root.querySelectorAll('[data-hover]').forEach(function (el) {
+        window.attachChartHover(el, hoverData[el.getAttribute('data-hover')]);
+      });
+    }
+    if (!revealed && window.dashReveal) { window.dashReveal(root); revealed = true; }
   }
 
   root.addEventListener("click", function (e) {

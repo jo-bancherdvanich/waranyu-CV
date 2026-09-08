@@ -1,10 +1,14 @@
-/* FreshMart — the Power BI report, rebuilt as a live dashboard.
+/* FreshMart Sales Performance Dashboard — the Power BI report, rebuilt as a
+ * live dashboard, visual for visual.
  *
- * Every number is computed in the browser from the 17,697 transaction rows in
- * freshmart-rows.js. Slicers filter the rows; clicking a bar cross-filters the
- * rest of the report, the way a Power BI visual does. With no filters applied
- * the KPI row reconciles with the published dashboard to the dollar:
- * $321,301 revenue, 28.67% gross margin, $92,128 gross profit.
+ * The visuals mirror the published report: YTD against the same period last
+ * year, sales volume by month and by day of week, and revenue broken out by
+ * region, store, category and subcategory. Every number is computed in the
+ * browser from the 17,697 transaction rows in freshmart-rows.js. Slicers filter
+ * the rows; clicking a bar cross-filters the rest of the report, the way a
+ * Power BI visual does. With no filters applied the KPI row reconciles with the
+ * published dashboard to the dollar: $321,301 revenue, 28.67% gross margin,
+ * $92,128 gross profit.
  */
 (function () {
   "use strict";
@@ -23,16 +27,16 @@
       cQ = nums(R.cols.q), cR = nums(R.cols.r);
   var N = cS.length;
 
-  /* day index -> year, month bucket, weekday. 2022-01-01 was a Saturday. */
-  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  /* day index -> year, month of year, weekday. 2022-01-01 was a Saturday. */
+  var MONTHS = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
   var DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  var yr = new Int32Array(N), mo = new Int32Array(N), dw = new Int32Array(N);
-  var monthLabels = [], i, d;
-  for (i = 0; i < 36; i++) monthLabels.push(MONTHS[i % 12] + " " + (22 + Math.floor(i / 12)));
+  var yr = new Int32Array(N), moy = new Int32Array(N), dw = new Int32Array(N);
+  var i, d;
   for (i = 0; i < N; i++) {
     d = new Date(Date.UTC(2022, 0, 1 + cD[i]));
     yr[i] = d.getUTCFullYear();
-    mo[i] = (yr[i] - 2022) * 12 + d.getUTCMonth();
+    moy[i] = d.getUTCMonth();
     dw[i] = (cD[i] + 5) % 7;
   }
 
@@ -51,7 +55,6 @@
   var cats = uniq(R.products.map(function (p) { return p.c; })).sort();
   var years = [2022, 2023, 2024];
 
-  /* every subcategory, and which ones sit under each category */
   var subsByCat = {};
   R.products.forEach(function (p) {
     if (!subsByCat[p.c]) subsByCat[p.c] = [];
@@ -64,38 +67,59 @@
 
   /* ---- aggregation --------------------------------------------------- */
   function compute() {
-    var agg = {
+    var a = {
       rev: 0, cogs: 0, units: 0, lines: 0,
       region: {}, category: {}, subcategory: {}, store: {},
-      month: new Float64Array(36), dow: new Float64Array(7)
+      unitsByMonth: new Float64Array(12), dow: new Float64Array(7),
+      revThis: new Float64Array(12), revPrev: new Float64Array(12)
     };
-    regions.forEach(function (k) { agg.region[k] = 0; });
-    cats.forEach(function (k) { agg.category[k] = 0; });
-    (state.category ? subsByCat[state.category] : allSubs).forEach(function (k) { agg.subcategory[k] = 0; });
-    R.stores.forEach(function (s) { agg.store[s.n] = 0; });
+    regions.forEach(function (k) { a.region[k] = 0; });
+    cats.forEach(function (k) { a.category[k] = 0; });
+    (state.category ? subsByCat[state.category] : allSubs).forEach(function (k) { a.subcategory[k] = 0; });
+    R.stores.forEach(function (s) { a.store[s.n] = 0; });
+
+    /* the YTD comparison needs a "this year" even when no year is picked */
+    var thisYear = state.year || years[years.length - 1];
+    var prevYear = thisYear - 1;
 
     for (var i = 0; i < N; i++) {
       var st = R.stores[cS[i]], pr = R.products[cP[i]];
-      if (state.year && yr[i] !== state.year) continue;
       if (state.region && st.r !== state.region) continue;
       if (state.format && st.f !== state.format) continue;
       if (state.category && pr.c !== state.category) continue;
       if (state.subcategory && pr.sub !== state.subcategory) continue;
       if (state.store && st.n !== state.store) continue;
 
-      var rev = cR[i];
-      agg.rev += rev;
-      agg.cogs += cC[i];
-      agg.units += cQ[i];
-      agg.lines++;
-      agg.region[st.r] += rev;
-      agg.category[pr.c] += rev;
-      if (agg.subcategory[pr.sub] !== undefined) agg.subcategory[pr.sub] += rev;
-      agg.store[st.n] += rev;
-      agg.month[mo[i]] += rev;
-      agg.dow[dw[i]] += cQ[i];
+      /* the two YTD series ignore the year slicer by design: that is the
+         comparison the visual exists to make */
+      if (yr[i] === thisYear) a.revThis[moy[i]] += cR[i];
+      else if (yr[i] === prevYear) a.revPrev[moy[i]] += cR[i];
+
+      if (state.year && yr[i] !== state.year) continue;
+
+      a.rev += cR[i];
+      a.cogs += cC[i];
+      a.units += cQ[i];
+      a.lines++;
+      a.region[st.r] += cR[i];
+      a.category[pr.c] += cR[i];
+      if (a.subcategory[pr.sub] !== undefined) a.subcategory[pr.sub] += cR[i];
+      a.store[st.n] += cR[i];
+      a.unitsByMonth[moy[i]] += cQ[i];
+      a.dow[dw[i]] += cQ[i];
     }
-    return agg;
+
+    /* cumulative, so the visual reads as year to date */
+    a.ytd = []; a.pytd = [];
+    var rt = 0, rp = 0;
+    for (i = 0; i < 12; i++) {
+      rt += a.revThis[i]; rp += a.revPrev[i];
+      a.ytd.push(rt); a.pytd.push(rp);
+    }
+    a.thisYear = thisYear;
+    a.prevYear = prevYear;
+    a.hasPrev = rp > 0;
+    return a;
   }
 
   /* ---- formatting ---------------------------------------------------- */
@@ -104,19 +128,23 @@
     var v = c / 100;
     return v >= 1000 ? "$" + (v / 1000).toFixed(1) + "K" : "$" + Math.round(v);
   };
+  var kShort = function (c) { return (c / 100000).toFixed(1) + "K"; };
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   }
 
-  /* ---- chart builders ------------------------------------------------ */
+  /* points handed to the shared crosshair/tooltip module after each render */
+  var hoverData = {};
+
+  /* ---- charts --------------------------------------------------------- */
   function bars(obj, opts) {
     opts = opts || {};
     var keys = Object.keys(obj);
-    if (opts.sort) keys.sort(function (a, b) { return obj[b] - obj[a]; });
+    if (opts.sort) keys.sort(function (x, y) { return obj[y] - obj[x]; });
     if (opts.top) keys = keys.slice(0, opts.top);
+    if (!keys.length) return '<p class="dash-empty">Nothing in this selection.</p>';
     var max = Math.max.apply(null, keys.map(function (k) { return obj[k]; })) || 1;
     return '<div class="dash-bars">' + keys.map(function (k) {
-      var pct = (obj[k] / max) * 100;
       var on = opts.dim && state[opts.dim] === k;
       var dimmed = opts.dim && state[opts.dim] && !on;
       return '<button type="button" class="dash-row is-clickable' +
@@ -124,50 +152,104 @@
         ' data-dim="' + opts.dim + '" data-key="' + esc(k) + '"' +
         ' aria-pressed="' + (on ? "true" : "false") + '">' +
         '<span class="dash-key">' + esc(k) + '</span>' +
-        '<span class="dash-track"><span class="dash-fill is-grown" style="width:' + pct.toFixed(1) + '%"></span></span>' +
+        '<span class="dash-track"><span class="dash-fill" style="width:0" data-w="' +
+        ((obj[k] / max) * 100).toFixed(1) + '"></span></span>' +
         '<span class="dash-val">' + (opts.fmt || shortD)(obj[k]) + '</span>' +
         '</button>';
-    }).join("") + '</div>';
+    }).join("") + '</div>' + (opts.axis ? '<p class="dash-axistitle">' + opts.axis + '</p>' : "");
   }
 
-  function lineChart(vals, labels) {
-    var W = 640, H = 170, PL = 46, PR = 8, PT = 12, PB = 26;
-    var max = Math.max.apply(null, Array.prototype.slice.call(vals)) || 1;
-    var n = vals.length;
-    var x = function (i) { return PL + (i / (n - 1)) * (W - PL - PR); };
+  /* two-series line, for revenue this year against the same period last year */
+  function dualLine(sA, sB, labelA, labelB, showB) {
+    var W = 640, H = 210, PL = 52, PR = 12, PT = 30, PB = 30;
+    var all = showB ? sA.concat(sB) : sA;
+    var max = Math.max.apply(null, all) * 1.1 || 1;
+    var x = function (k) { return PL + (k / 11) * (W - PL - PR); };
     var y = function (v) { return PT + (1 - v / max) * (H - PT - PB); };
-    var pts = [], i;
-    for (i = 0; i < n; i++) pts.push(x(i).toFixed(1) + " " + y(vals[i]).toFixed(1));
-    var area = "M " + x(0).toFixed(1) + " " + (H - PB) + " L " + pts.join(" L ") +
-               " L " + x(n - 1).toFixed(1) + " " + (H - PB) + " Z";
+    var path = function (s) { return s.map(function (v, k) { return x(k).toFixed(1) + "," + y(v).toFixed(1); }).join(" "); };
+
     var grid = "";
     [0, max / 2, max].forEach(function (t) {
       var yy = y(t).toFixed(1);
       grid += '<line x1="' + PL + '" y1="' + yy + '" x2="' + (W - PR) + '" y2="' + yy + '" class="dash-grid"/>' +
-              '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' + shortD(t) + '</text>';
+              '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' +
+              kShort(t) + '</text>';
     });
     var xlab = "";
-    [0, 12, 24, 35].forEach(function (idx) {
-      xlab += '<text x="' + x(idx).toFixed(1) + '" y="' + (H - 8) + '" class="dash-axis" text-anchor="middle">' +
-              labels[idx] + '</text>';
+    [0, 3, 6, 9, 11].forEach(function (k) {
+      xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 10) + '" class="dash-axis" text-anchor="middle">' +
+              MONTHS[k].slice(0, 3) + '</text>';
     });
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" aria-label="Revenue by month">' +
-      grid + '<path d="' + area + '" class="dash-area"/>' +
-      '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + xlab + '</svg>';
+    var legend =
+      (showB ? '<rect x="' + PL + '" y="8" width="9" height="9" rx="2" class="dash-colA"/>' +
+               '<text x="' + (PL + 14) + '" y="16" class="dash-axis">' + labelB + '</text>' : "") +
+      '<rect x="' + (PL + (showB ? 128 : 0)) + '" y="8" width="9" height="9" rx="2" class="dash-colB"/>' +
+      '<text x="' + (PL + (showB ? 142 : 14)) + '" y="16" class="dash-axis">' + labelA + '</text>';
+
+    hoverData.ytd = {
+      top: PT, bottom: H - PB,
+      points: sA.map(function (v, k) {
+        return {
+          x: x(k), y: y(v), label: MONTHS[k],
+          value: dollars(v) + (showB ? " · " + labelB.split(" ").pop() + " " + dollars(sB[k]) : "")
+        };
+      })
+    };
+    return '<div class="dash-chart" data-hover="ytd">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" aria-label="' +
+      labelA + (showB ? " against " + labelB : "") + '">' + grid + legend +
+      (showB ? '<polyline points="' + path(sB) + '" class="dash-line dash-linePrev"/>' : "") +
+      '<polyline points="' + path(sA) + '" class="dash-line"/>' + xlab + '</svg></div>' +
+      '<p class="dash-axistitle">Revenue ($)</p>';
+  }
+
+  /* single-series line, for sales volume by month */
+  function volumeLine(vals) {
+    var W = 640, H = 190, PL = 52, PR = 12, PT = 18, PB = 30;
+    var lo = Math.min.apply(null, Array.prototype.slice.call(vals));
+    var hi = Math.max.apply(null, Array.prototype.slice.call(vals));
+    var pad = (hi - lo) * 0.35 || hi * 0.1 || 1;
+    var min = Math.max(0, lo - pad), max = hi + pad;
+    var x = function (k) { return PL + (k / 11) * (W - PL - PR); };
+    var y = function (v) { return PT + (1 - (v - min) / (max - min)) * (H - PT - PB); };
+    var pts = Array.prototype.slice.call(vals).map(function (v, k) {
+      return x(k).toFixed(1) + " " + y(v).toFixed(1);
+    });
+    var grid = "";
+    [min, (min + max) / 2, max].forEach(function (t) {
+      var yy = y(t).toFixed(1);
+      grid += '<line x1="' + PL + '" y1="' + yy + '" x2="' + (W - PR) + '" y2="' + yy + '" class="dash-grid"/>' +
+              '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' +
+              Math.round(t).toLocaleString() + '</text>';
+    });
+    var xlab = "";
+    [0, 3, 6, 9, 11].forEach(function (k) {
+      xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 10) + '" class="dash-axis" text-anchor="middle">' +
+              MONTHS[k].slice(0, 3) + '</text>';
+    });
+    hoverData.vol = {
+      top: PT, bottom: H - PB,
+      points: Array.prototype.slice.call(vals).map(function (v, k) {
+        return { x: x(k), y: y(v), label: MONTHS[k], value: Math.round(v).toLocaleString() + " units" };
+      })
+    };
+    return '<div class="dash-chart" data-hover="vol">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" aria-label="Sales volume by month">' +
+      grid + '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + xlab + '</svg></div>' +
+      '<p class="dash-axistitle">Units Sold</p>';
   }
 
   function columns(vals, labels, fmt) {
     var max = Math.max.apply(null, Array.prototype.slice.call(vals)) || 1;
-    return '<div class="dash-cols">' + labels.map(function (l, i) {
+    return '<div class="dash-cols">' + labels.map(function (l, k) {
       return '<div class="dash-col">' +
-        '<span class="dash-colval">' + fmt(vals[i]) + '</span>' +
-        '<span class="dash-colbar" style="height:' + ((vals[i] / max) * 100).toFixed(1) + '%"></span>' +
+        '<span class="dash-colval">' + fmt(vals[k]) + '</span>' +
+        '<span class="dash-colbar" style="height:0" data-h="' + ((vals[k] / max) * 100).toFixed(1) + '"></span>' +
         '<span class="dash-collab">' + l.slice(0, 3) + '</span>' +
         '</div>';
-    }).join("") + '</div>';
+    }).join("") + '</div><p class="dash-axistitle">Units Sold</p>';
   }
 
-  /* ---- slicers -------------------------------------------------------- */
   function slicer(dim, label, values) {
     return '<div class="dash-slicer"><span class="dash-slabel">' + label + '</span>' +
       '<div class="dash-schips">' +
@@ -179,26 +261,32 @@
       }).join("") + '</div></div>';
   }
 
-  /* ---- render --------------------------------------------------------- */
-  var TOTAL_REV = null;
+  function panel(title, chart, wide) {
+    return '<div class="dash-panel' + (wide ? " dash-wide" : "") + '"><h3>' + title + '</h3>' + chart + '</div>';
+  }
 
+  /* ---- render --------------------------------------------------------- */
   function render() {
     var a = compute();
-    if (TOTAL_REV === null) TOTAL_REV = a.rev;
     var margin = a.rev ? ((a.rev - a.cogs) / a.rev) * 100 : 0;
-    var filtered = state.year || state.region || state.format || state.category || state.subcategory || state.store;
-    var share = TOTAL_REV ? (a.rev / TOTAL_REV) * 100 : 100;
 
     var active = [];
-    [["year", "Year"], ["region", "Region"], ["format", "Format"], ["category", "Category"], ["subcategory", "Subcategory"], ["store", "Store"]]
+    [["year", "Year"], ["region", "Region"], ["format", "Store format"], ["category", "Product category"],
+     ["subcategory", "Subcategory"], ["store", "Store"]]
       .forEach(function (p) { if (state[p[0]]) active.push({ dim: p[0], label: p[1], val: state[p[0]] }); });
 
     root.innerHTML =
+      '<div class="dash-head">' +
+        '<div><h3 class="dash-title">FreshMart Sales Performance Dashboard</h3>' +
+        '<p class="dash-subtitle">Executive overview of sales, profitability, product mix, and store performance</p></div>' +
+        '<p class="dash-meta">Waranyu Bancherdvanich<br />Data to 31 December 2024</p>' +
+      '</div>' +
+
       '<div class="dash-slicers">' +
-        slicer("year", "Year", years) +
-        slicer("region", "Region", regions) +
-        slicer("format", "Store format", formats) +
-        slicer("category", "Category", cats) +
+        slicer("year", "Select Year", years) +
+        slicer("region", "Select Region", regions) +
+        slicer("category", "Select Product Category", cats) +
+        slicer("format", "Select Store Format", formats) +
       '</div>' +
 
       (active.length
@@ -210,27 +298,50 @@
           '<button type="button" class="dash-clear" data-clear="all">Clear all</button></div>'
         : '<div class="dash-active is-empty"><span class="dash-alabel">No filters applied. Click a chip or any bar to slice the whole report.</span></div>') +
 
-      '<div class="metrics dash-kpi">' +
-        '<div><span class="metric-number">' + dollars(a.rev) + '</span><span>revenue<br />' +
-          a.lines.toLocaleString() + ' transaction lines</span></div>' +
-        '<div><span class="metric-number">' + margin.toFixed(2) + '%</span><span>gross margin<br />' +
-          dollars(a.rev - a.cogs) + ' gross profit</span></div>' +
-        '<div><span class="metric-number">' + a.units.toLocaleString() + '</span><span>units sold<br />' +
-          (filtered ? share.toFixed(1) + "% of total revenue" : "across all 12 stores") + '</span></div>' +
+      '<div class="dash-grid-wrap">' +
+        panel("Revenue This Year vs Same Period Last Year",
+          dualLine(a.ytd, a.pytd, "Revenue YTD " + a.thisYear, "Revenue PYTD " + a.prevYear, a.hasPrev), true) +
+
+        panel("Sales Volume by Month", volumeLine(a.unitsByMonth), true) +
+
+        panel("Revenue by Region", bars(a.region, { dim: "region", sort: true })) +
+        panel("Revenue by Store", bars(a.store, { dim: "store", sort: true, top: 6 })) +
+
+        panel("Revenue by Product Category", bars(a.category, { dim: "category", sort: true })) +
+        panel("Revenue by Subcategory" +
+          (state.category ? ' <span class="dash-sub">within ' + esc(state.category) + '</span>'
+                          : ' <span class="dash-sub">top 6 of 28</span>'),
+          bars(a.subcategory, { dim: "subcategory", sort: true, top: state.category ? 8 : 6 })) +
+
+        panel("Sales Volume by Day of Week",
+          columns(a.dow, DAYS, function (v) { return Math.round(v).toLocaleString(); }), true) +
       '</div>' +
 
-      '<div class="dash-grid-wrap">' +
-        '<div class="dash-panel"><h3>Revenue by region</h3>' + bars(a.region, { dim: "region", sort: true }) + '</div>' +
-        '<div class="dash-panel"><h3>Revenue by category</h3>' + bars(a.category, { dim: "category", sort: true }) + '</div>' +
-        '<div class="dash-panel dash-wide"><h3>Revenue by subcategory' +
-          (state.category ? ' <span class="dash-sub">within ' + esc(state.category) + '</span>'
-                          : ' <span class="dash-sub">top 8 of 28</span>') + '</h3>' +
-          bars(a.subcategory, { dim: "subcategory", sort: true, top: state.category ? 10 : 8 }) + '</div>' +
-        '<div class="dash-panel dash-wide"><h3>Revenue by month</h3>' + lineChart(a.month, monthLabels) + '</div>' +
-        '<div class="dash-panel"><h3>Units by day of week</h3>' +
-          columns(a.dow, DAYS, function (v) { return Math.round(v).toLocaleString(); }) + '</div>' +
-        '<div class="dash-panel"><h3>Top stores by revenue</h3>' + bars(a.store, { dim: "store", sort: true, top: 6 }) + '</div>' +
+      '<div class="dash-kpirow">' +
+        '<div class="dash-kpicard"><span class="dash-kpilabel">Total Revenue</span>' +
+          '<span class="dash-kpivalue">' + kShort(a.rev) + '</span>' +
+          '<span class="dash-kpinote">' + a.lines.toLocaleString() + ' transaction lines</span></div>' +
+        '<div class="dash-kpicard"><span class="dash-kpilabel">Gross Margin %</span>' +
+          '<span class="dash-kpivalue">' + margin.toFixed(2) + '%</span>' +
+          '<span class="dash-kpinote">' + a.units.toLocaleString() + ' units sold</span></div>' +
+        '<div class="dash-kpicard"><span class="dash-kpilabel">Gross Profit</span>' +
+          '<span class="dash-kpivalue">' + kShort(a.rev - a.cogs) + '</span>' +
+          '<span class="dash-kpinote">' + dollars(a.rev) + ' revenue</span></div>' +
       '</div>';
+
+    afterRender();
+  }
+
+  var revealed = false;
+  function afterRender() {
+    if (window.dashGrow) window.dashGrow(root);
+    if (window.dashDrawLines) window.dashDrawLines(root);
+    if (window.attachChartHover) {
+      root.querySelectorAll("[data-hover]").forEach(function (el) {
+        window.attachChartHover(el, hoverData[el.getAttribute("data-hover")]);
+      });
+    }
+    if (!revealed && window.dashReveal) { window.dashReveal(root); revealed = true; }
   }
 
   /* ---- interaction ----------------------------------------------------- */
