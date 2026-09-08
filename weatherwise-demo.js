@@ -4,10 +4,11 @@
  * can try it without installing Python or signing up for anything.
  *
  * Weather comes from Open-Meteo, which needs no API key. The advice thresholds
- * and the question parser mirror the notebook exactly:
- *   get_temperature_advice()   -> temperatureAdvice()
- *   parse_weather_question()   -> parseQuestion()
- *   answer_from_rules()        -> answerFromRules()
+ * are the notebook's, unchanged; the parser and the rule answers are ports that
+ * handle the same question types on Open-Meteo's daily grain:
+ *   get_temperature_advice()   -> temperatureAdvice()   (identical cutoffs)
+ *   parse_weather_question()   -> parseQuestion()       (stricter location match)
+ *   answer_from_rules()        -> answerFromRules()     (daily rows, not 3h blocks)
  */
 (function () {
   "use strict";
@@ -41,7 +42,7 @@
     return "🥶 Cold out. Stay cosy and keep warm.";
   }
 
-  /* ---- question parsing, mirroring parse_weather_question() ------------- */
+  /* ---- question parsing: same fields as parse_weather_question() -------- */
   function parseQuestion(q) {
     var lower = q.toLowerCase();
     var parsed = { question: q, timePeriod: null, attribute: null, location: null };
@@ -65,7 +66,7 @@
     return parsed;
   }
 
-  /* ---- rule-based answering, mirroring answer_from_rules() -------------- */
+  /* ---- rule-based answering, following answer_from_rules() -------------- */
   function answerFromRules(parsed, days, place) {
     if (!days || !days.length) return "Fetch a forecast first and I'll answer from it.";
 
