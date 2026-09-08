@@ -144,23 +144,14 @@
           <section class="case-block" id="explore">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the dashboard</h2>
             <p>
-              The measures behind the Power BI report, recomputed here from the same five source CSVs. Nothing on this page is typed in — the KPI row reconciles with the dashboard above to the dollar.
+              The Power BI report, rebuilt to run in your browser. All 17,697 transaction lines are loaded from the same five source CSVs, and every figure below is calculated here rather than typed in. Use the slicers, or <strong>click any bar to cross-filter the whole report</strong> — the same way a Power BI visual behaves. With nothing selected the KPI row reconciles with the published dashboard to the dollar.
             </p>
 
-            <div id="fm-demo" class="fm">
-              <div class="metrics fm-kpi" aria-label="Headline measures"></div>
+            <div id="fm-dash" class="fmd" aria-label="Interactive FreshMart sales dashboard"></div>
 
-              <div class="fm-tabs" role="tablist" aria-label="Choose a breakdown">
-                <button type="button" class="fm-tab is-active" data-view="region" role="tab" aria-selected="true">By region</button>
-                <button type="button" class="fm-tab" data-view="category" role="tab" aria-selected="false">By category</button>
-                <button type="button" class="fm-tab" data-view="month" role="tab" aria-selected="false">By month</button>
-                <button type="button" class="fm-tab" data-view="dow" role="tab" aria-selected="false">By day of week</button>
-              </div>
-
-              <div class="fm-chart"></div>
-              <button type="button" class="fm-raw button text-button" hidden>Show raw source</button>
-              <p class="fm-note"></p>
-            </div>
+            <p class="fm-note">
+              No Power BI licence, account, or server involved. The whole report is plain JavaScript reading a 17,697-row table, so it keeps working for anyone who opens the page.
+            </p>
           </section>
 
           <section class="case-block">
@@ -225,5 +216,7 @@
     <script src="app.js"></script>
     <script src="freshmart-data.js"></script>
     <script src="freshmart-demo.js"></script>
+    <script src="freshmart-rows.js"></script>
+    <script src="freshmart-dashboard.js"></script>
   </body>
 </html>
