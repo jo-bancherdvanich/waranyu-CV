@@ -1,11 +1,20 @@
 /* Australia's renewable transition — the Power BI report, rebuilt as a live
- * dashboard.
+ * dashboard, visual for visual.
+ *
+ * The four visuals mirror the published report: the share trend with the 2015
+ * LRET marker, a clustered column comparing the source mix between the first
+ * and last year, and the two country comparisons that disagree with each other
+ * — China leads on volume, but not on share.
  *
  * Every figure is computed in the browser from the cleaned galaxy-schema
  * workbook in the repository: 480 generation facts across four countries and
  * fourteen sources, plus total generation for the share calculation. The
  * headline numbers reconcile with the published dashboard exactly:
- * Australia 34.98% renewable share in 2024, 97.9 TWh, solar 48.6 TWh.
+ * Australia 34.98% share in 2024, 97.9 TWh, solar 48.6 TWh, wind 31.0 TWh.
+ *
+ * Slicers are scoped the way the report scopes them: picking one year re-cuts
+ * the KPIs, the mix and the country comparisons, but the trend line keeps its
+ * full run of years, because a trend chart of one point answers nothing.
  */
 (function () {
   "use strict";
@@ -20,136 +29,190 @@
 
   var countryNames = R.countries.map(function (c) { return c.n; });
   var LATEST = R.years.length - 1;
-  var TARGET = { share: 82, year: 2030 };
+  var LRET = { year: 2015, label: "LRET target revised" };
 
-  var state = { country: "Australia", period: null, group: null };
+  var state = { country: "Australia", year: null, group: null };
 
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   }
-  var twh = function (gwh) {
-    if (gwh > 0 && gwh < 50) return "<0.1";
-    return (gwh / 1000).toFixed(1);
-  };
+  var twh = function (g) { return g >= 100 ? (g / 1000).toFixed(1) : (g / 1000).toFixed(1); };
   var pct = function (v) { return v.toFixed(1) + "%"; };
 
   /* ---- aggregation ---------------------------------------------------- */
   function compute() {
     var ci = countryNames.indexOf(state.country);
-    var yearsOn = R.years.map(function (y, i) {
-      return !state.period || R.yearPeriod[i] === state.period;
-    });
+    var selIdx = state.year ? R.years.indexOf(state.year) : LATEST;
 
     var a = {
-      byYear: R.years.map(function () { return 0; }),      // selected country, filtered sources
-      bySource: {}, byGroup: {},
-      byCountryLatest: {}, shareByCountry: {},
-      firstIdx: yearsOn.indexOf(true),
-      lastIdx: yearsOn.lastIndexOf(true)
+      selIdx: selIdx,
+      byYear: R.years.map(function () { return 0; }),
+      mixFirst: {}, mixSel: {},          // source group, first year vs selected year
+      bySource: {},
+      volByCountry: {}, shareByCountry: {}
     };
+    R.groups.forEach(function (g) { a.mixFirst[g] = 0; a.mixSel[g] = 0; });
     R.sources.forEach(function (s, i) {
       if (!state.group || R.sourceGroup[i] === state.group) a.bySource[s] = 0;
     });
-    R.groups.forEach(function (g) { a.byGroup[g] = 0; });
-    countryNames.forEach(function (c) { a.byCountryLatest[c] = 0; });
+    countryNames.forEach(function (c) { a.volByCountry[c] = 0; });
 
     for (var i = 0; i < N; i++) {
       var yIdx = fY[i], sIdx = fS[i], grp = R.sourceGroup[sIdx];
-      if (!yearsOn[yIdx]) continue;
       if (state.group && grp !== state.group) continue;
 
-      if (yIdx === a.lastIdx) a.byCountryLatest[countryNames[fC[i]]] += fG[i];
+      if (yIdx === selIdx) a.volByCountry[countryNames[fC[i]]] += fG[i];
       if (fC[i] !== ci) continue;
 
       a.byYear[yIdx] += fG[i];
-      if (a.bySource[R.sources[sIdx]] !== undefined) a.bySource[R.sources[sIdx]] += fG[i];
-      a.byGroup[grp] += fG[i];
+      if (yIdx === 0) a.mixFirst[grp] += fG[i];
+      if (yIdx === selIdx) a.mixSel[grp] += fG[i];
+      if ((!state.year || yIdx === selIdx) && a.bySource[R.sources[sIdx]] !== undefined) {
+        a.bySource[R.sources[sIdx]] += fG[i];
+      }
     }
 
-    /* share of total generation, per year, for the selected country */
     a.shareByYear = R.years.map(function (y, i) {
       var tot = R.totals[ci][i];
       return tot ? (a.byYear[i] / tot) * 100 : 0;
     });
     countryNames.forEach(function (c, idx) {
-      var tot = R.totals[idx][a.lastIdx];
-      a.shareByCountry[c] = tot ? (a.byCountryLatest[c] / tot) * 100 : 0;
+      var tot = R.totals[idx][selIdx];
+      a.shareByCountry[c] = tot ? (a.volByCountry[c] / tot) * 100 : 0;
     });
 
-    a.latestRenewable = a.byYear[a.lastIdx];
-    a.latestTotal = R.totals[ci][a.lastIdx];
-    a.latestShare = a.shareByYear[a.lastIdx];
-    a.firstShare = a.shareByYear[a.firstIdx];
+    a.selRenewable = a.byYear[selIdx];
+    a.selTotal = R.totals[ci][selIdx];
+    a.selShare = a.shareByYear[selIdx];
+    a.baseIdx = state.year ? Math.max(0, selIdx - 1) : 0;
+    a.baseShare = a.shareByYear[a.baseIdx];
     return a;
   }
 
-  /* ---- charts ---------------------------------------------------------- */
-  function bars(obj, opts) {
-    opts = opts || {};
-    var keys = Object.keys(obj).filter(function (k) { return opts.keepZero || obj[k] > 0; });
-    if (opts.sort) keys.sort(function (x, y) { return obj[y] - obj[x]; });
-    if (opts.top) keys = keys.slice(0, opts.top);
-    var max = Math.max.apply(null, keys.map(function (k) { return obj[k]; })) || 1;
-    if (!keys.length) return '<p class="dash-empty">Nothing in this selection.</p>';
-    return '<div class="dash-bars">' + keys.map(function (k) {
-      var on = opts.dim && state[opts.dim] === k;
-      var dimmed = opts.dim && state[opts.dim] && !on;
-      return '<button type="button" class="dash-row' + (opts.dim ? " is-clickable" : "") +
-        (on ? " is-picked" : "") + (dimmed ? " is-dimmed" : "") + '"' +
-        (opts.dim ? ' data-dim="' + opts.dim + '" data-key="' + esc(k) + '"' : " disabled") +
-        '><span class="dash-key">' + esc(k) + '</span>' +
-        '<span class="dash-track"><span class="dash-fill is-grown" style="width:' +
-        ((obj[k] / max) * 100).toFixed(1) + '%"></span></span>' +
-        '<span class="dash-val">' + opts.fmt(obj[k]) + '</span></button>';
-    }).join("") + '</div>';
+  /* ---- colour: the selected country, then China as the comparison anchor -- */
+  function countryFill(name) {
+    if (name === state.country) return "var(--accent)";
+    if (name === "China") return "var(--c4)";
+    return "var(--muted)";
   }
 
-  function shareLine(vals, a) {
-    var W = 640, H = 250, PL = 40, PR = 10, PT = 16, PB = 26;
-    var idx = [];
-    R.years.forEach(function (y, i) { if (i >= a.firstIdx && i <= a.lastIdx) idx.push(i); });
-    var showTarget = state.country === "Australia" && !state.group;
-    var max = Math.max(Math.max.apply(null, idx.map(function (i) { return vals[i]; })),
-                       showTarget ? TARGET.share : 0) * 1.08 || 1;
-    var x = function (k) { return PL + (k / (idx.length - 1)) * (W - PL - PR); };
+  /* ---- horizontal bars, coloured per country ---------------------------- */
+  function hbars(obj, opts) {
+    var keys = Object.keys(obj).filter(function (k) { return obj[k] > 0; });
+    keys.sort(function (x, y) { return obj[y] - obj[x]; });
+    if (!keys.length) return '<p class="dash-empty">Nothing in this selection.</p>';
+    var max = Math.max.apply(null, keys.map(function (k) { return obj[k]; })) || 1;
+    return '<div class="dash-bars">' + keys.map(function (k) {
+      var on = state.country === k;
+      return '<button type="button" class="dash-row is-clickable' + (on ? " is-picked" : "") + '"' +
+        ' data-dim="country" data-key="' + esc(k) + '">' +
+        '<span class="dash-key">' + esc(k) + '</span>' +
+        '<span class="dash-track"><span class="dash-fill is-grown" style="width:' +
+        ((obj[k] / max) * 100).toFixed(1) + '%;background:' + countryFill(k) + '"></span></span>' +
+        '<span class="dash-val">' + opts.fmt(obj[k]) + '</span></button>';
+    }).join("") + '</div>' +
+      '<p class="dash-axistitle">' + opts.axis + '</p>';
+  }
+
+  /* ---- the share trend, with the 2015 LRET marker ----------------------- */
+  function shareLine(a) {
+    var W = 640, H = 220, PL = 40, PR = 12, PT = 16, PB = 26;
+    var vals = a.shareByYear, n = vals.length;
+    var max = Math.max.apply(null, vals) * 1.18 || 1;
+    var x = function (k) { return PL + (k / (n - 1)) * (W - PL - PR); };
     var y = function (v) { return PT + (1 - v / max) * (H - PT - PB); };
-    var pts = idx.map(function (i, k) { return x(k).toFixed(1) + " " + y(vals[i]).toFixed(1); });
+    var pts = vals.map(function (v, k) { return x(k).toFixed(1) + " " + y(v).toFixed(1); });
     var area = "M " + x(0).toFixed(1) + " " + (H - PB) + " L " + pts.join(" L ") +
-               " L " + x(idx.length - 1).toFixed(1) + " " + (H - PB) + " Z";
+               " L " + x(n - 1).toFixed(1) + " " + (H - PB) + " Z";
+
     var grid = "";
-    [0, max / 2, max].forEach(function (t) {
+    var step = max > 60 ? 20 : max > 30 ? 10 : 5;
+    for (var t = 0; t <= max; t += step) {
       var yy = y(t).toFixed(1);
       grid += '<line x1="' + PL + '" y1="' + yy + '" x2="' + (W - PR) + '" y2="' + yy + '" class="dash-grid"/>' +
               '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' +
-              t.toFixed(0) + '%</text>';
-    });
-    var target = "";
-    if (showTarget) {
-      var ty = y(TARGET.share).toFixed(1);
-      target = '<line x1="' + PL + '" y1="' + ty + '" x2="' + (W - PR) + '" y2="' + ty + '" class="dash-target"/>' +
-               '<text x="' + (W - PR) + '" y="' + (+ty - 5) + '" class="dash-axis dash-targetlab" text-anchor="end">' +
-               TARGET.share + '% target (' + TARGET.year + ')</text>';
+              t + '%</text>';
     }
+
+    var lret = "";
+    var li = R.years.indexOf(LRET.year);
+    if (li >= 0) {
+      var lx = x(li).toFixed(1);
+      lret = '<line x1="' + lx + '" y1="' + PT + '" x2="' + lx + '" y2="' + (H - PB) + '" class="dash-event"/>' +
+             '<text x="' + (+lx - 6) + '" y="' + (PT + 10) + '" class="dash-axis dash-eventlab" text-anchor="end">' +
+             LRET.label + '</text>' +
+             '<circle cx="' + lx + '" cy="' + y(vals[li]).toFixed(1) + '" r="3.2" class="dash-eventdot"/>';
+    }
+
+    var marker = "";
+    if (state.year) {
+      var mx = x(a.selIdx).toFixed(1), my = y(vals[a.selIdx]).toFixed(1);
+      marker = '<line x1="' + mx + '" y1="' + PT + '" x2="' + mx + '" y2="' + (H - PB) + '" class="dash-marker"/>' +
+               '<circle cx="' + mx + '" cy="' + my + '" r="4" class="dash-dot"/>' +
+               '<text x="' + mx + '" y="' + (+my - 9) + '" class="dash-axis dash-markerlab" text-anchor="middle">' +
+               pct(vals[a.selIdx]) + '</text>';
+    }
+
     var xlab = "";
-    [0, Math.floor((idx.length - 1) / 2), idx.length - 1].forEach(function (k) {
+    [0, 5, 10, 15, n - 1].forEach(function (k) {
       xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 8) + '" class="dash-axis" text-anchor="middle">' +
-              R.years[idx[k]] + '</text>';
+              R.years[k] + '</text>';
     });
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" aria-label="Renewable share over time">' +
-      grid + target + '<path d="' + area + '" class="dash-area"/>' +
-      '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + xlab + '</svg>';
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+      'aria-label="Renewable share of generation, ' + esc(state.country) + ', 2005 to 2024">' +
+      grid + '<path d="' + area + '" class="dash-area"/>' +
+      '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + lret + marker + xlab + '</svg>';
   }
 
-  function yearColumns(a) {
-    var idx = [];
-    R.years.forEach(function (y, i) { if (i >= a.firstIdx && i <= a.lastIdx) idx.push(i); });
-    var max = Math.max.apply(null, idx.map(function (i) { return a.byYear[i]; })) || 1;
-    return '<div class="dash-cols" style="grid-template-columns:repeat(' + idx.length + ',minmax(0,1fr))">' +
-      idx.map(function (i) {
-        return '<div class="dash-col" title="' + R.years[i] + ": " + twh(a.byYear[i]) + ' TWh">' +
-          '<span class="dash-colbar" style="height:' + ((a.byYear[i] / max) * 100).toFixed(1) + '%"></span>' +
-          '<span class="dash-collab">' + String(R.years[i]).slice(2) + '</span></div>';
-      }).join("") + '</div>';
+  /* ---- clustered columns: first year against the selected year ---------- */
+  function clustered(first, second, labelA, labelB) {
+    var keys = Object.keys(second).filter(function (k) { return second[k] > 0 || first[k] > 0; });
+    keys.sort(function (x, y) { return second[x] - second[y]; });
+    var W = 640, H = 240, PL = 46, PR = 10, PT = 34, PB = 34;
+    var max = Math.max(
+      Math.max.apply(null, keys.map(function (k) { return first[k]; })),
+      Math.max.apply(null, keys.map(function (k) { return second[k]; }))
+    ) * 1.18 || 1;
+    var band = (W - PL - PR) / keys.length;
+    var bw = Math.min(26, band * 0.3);
+    var y = function (v) { return PT + (1 - v / max) * (H - PT - PB); };
+
+    var grid = "";
+    var top = max / 1000, tstep = top > 400 ? 200 : top > 150 ? 100 : top > 60 ? 25 : top > 20 ? 10 : 5;
+    for (var tv = 0; tv <= top; tv += tstep) {
+      var yy = y(tv * 1000).toFixed(1);
+      grid += '<line x1="' + PL + '" y1="' + yy + '" x2="' + (W - PR) + '" y2="' + yy + '" class="dash-grid"/>' +
+              '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' +
+              tv + '</text>';
+    }
+
+    var body = keys.map(function (k, i) {
+      var cx = PL + band * i + band / 2;
+      var x1 = cx - bw - 2, x2 = cx + 2;
+      var out = "";
+      [[first[k], x1, "dash-colA", labelA], [second[k], x2, "dash-colB", labelB]].forEach(function (p) {
+        var h = Math.max(1, (H - PT - PB) * (p[0] / max));
+        out += '<rect x="' + p[1].toFixed(1) + '" y="' +
+               (H - PB - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) +
+               '" rx="2" class="' + p[2] + '"/>' +
+               '<text x="' + (p[1] + bw / 2).toFixed(1) + '" y="' + (H - PB - h - 4).toFixed(1) +
+               '" class="dash-axis dash-collabel" text-anchor="middle">' + (p[0] / 1000).toFixed(1) + '</text>';
+      });
+      out += '<text x="' + cx.toFixed(1) + '" y="' + (H - 10) + '" class="dash-axis" text-anchor="middle">' +
+             esc(k) + '</text>';
+      return out;
+    }).join("");
+
+    var legend =
+      '<rect x="' + PL + '" y="10" width="9" height="9" rx="2" class="dash-colA"/>' +
+      '<text x="' + (PL + 14) + '" y="18" class="dash-axis">' + labelA + '</text>' +
+      '<rect x="' + (PL + 52) + '" y="10" width="9" height="9" rx="2" class="dash-colB"/>' +
+      '<text x="' + (PL + 66) + '" y="18" class="dash-axis">' + labelB + '</text>';
+
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+      'aria-label="Generation by source, ' + labelA + ' against ' + labelB + '">' +
+      grid + legend + body + '</svg>' +
+      '<p class="dash-axistitle">Generation (TWh)</p>';
   }
 
   function slicer(dim, label, values, allLabel) {
@@ -164,22 +227,54 @@
       })).join("") + "</div></div>";
   }
 
+  function panel(title, sub, chart, wide) {
+    return '<div class="dash-panel' + (wide ? " dash-wide" : "") + '">' +
+      '<h3>' + title + '</h3><p class="dash-subtitle">' + sub + '</p>' + chart + '</div>';
+  }
+
   /* ---- render ---------------------------------------------------------- */
   function render() {
     var a = compute();
     var c = R.countries[countryNames.indexOf(state.country)];
-    var span = R.years[a.firstIdx] + "–" + R.years[a.lastIdx];
-    var delta = a.latestShare - a.firstShare;
+    var selYear = R.years[a.selIdx];
+    var firstYear = R.years[0];
     var scope = state.group ? state.group.toLowerCase() + " only" : "all renewables";
+    var span = state.year ? String(state.year) : firstYear + "–" + R.years[LATEST];
+    var delta = a.selShare - a.baseShare;
+
+    /* headline statements, computed rather than typed, so they stay true
+       whichever country and year are selected */
+    /* with a source group picked, these are that source's numbers, not all renewables */
+    var metric = state.group ? state.group.toLowerCase() : "renewable";
+    var rose = a.selShare >= a.shareByYear[0] ? "rose" : "fell";
+    var t1 = esc(state.country) + "'s " + metric + " share " + rose + " from " +
+             Math.round(a.shareByYear[0]) + "% to " + Math.round(a.selShare) + "% since " + firstYear;
+
+    var growth = Object.keys(a.mixSel).map(function (k) {
+      return { k: k, d: a.mixSel[k] - a.mixFirst[k] };
+    }).sort(function (x, y) { return y.d - x.d; });
+    var movers = growth.filter(function (g) { return g.d > 0; }).slice(0, 2).map(function (g) { return g.k; });
+    var t2 = (movers.length ? movers.join(" and ") : "The mix") + " reshape" +
+             (movers.length === 1 ? "s" : "") + " " + esc(state.country) + "'s renewable mix";
+
+    var volRank = Object.keys(a.volByCountry).sort(function (x, y) { return a.volByCountry[y] - a.volByCountry[x]; });
+    var shareRank = Object.keys(a.shareByCountry).sort(function (x, y) { return a.shareByCountry[y] - a.shareByCountry[x]; });
+    var t3 = esc(volRank[0]) + " leads " + metric + " generation by volume";
+    var myShare = shareRank.indexOf(state.country);
+    var t4 = myShare === 0
+      ? esc(state.country) + " leads on " + metric + " share"
+      : myShare < shareRank.length - 1
+        ? esc(state.country) + " edges " + esc(shareRank[myShare + 1]) + " on " + metric + " share"
+        : esc(state.country) + " trails on " + metric + " share";
 
     var active = [];
-    if (state.period) active.push({ dim: "period", label: "Period", val: state.period });
+    if (state.year) active.push({ dim: "year", label: "Year", val: state.year });
     if (state.group) active.push({ dim: "group", label: "Source", val: state.group });
 
     root.innerHTML =
       '<div class="dash-slicers">' +
         slicer("country", "Country", countryNames, null) +
-        slicer("period", "Period", R.periods, "All years") +
+        slicer("year", "Year", R.years, "All years") +
         slicer("group", "Source group", R.groups, "All sources") +
       '</div>' +
 
@@ -191,38 +286,34 @@
           }).join("") +
           '<button type="button" class="dash-clear" data-clear="all">Clear all</button></div>'
         : '<div class="dash-active is-empty"><span class="dash-alabel">Showing ' + esc(state.country) +
-          ', ' + span + ', ' + scope + '. Click a country or a source to change the view.</span></div>') +
+          ', ' + span + ', ' + scope + '. Click a country, a year or a source to change the view.</span></div>') +
 
       '<div class="metrics dash-kpi">' +
-        '<div><span class="metric-number">' + pct(a.latestShare) + '</span><span>renewable share in ' +
-          R.years[a.lastIdx] + '<br />' + (delta >= 0 ? "up " : "down ") + Math.abs(delta).toFixed(1) +
-          ' points since ' + R.years[a.firstIdx] + '</span></div>' +
-        '<div><span class="metric-number">' + twh(a.latestRenewable) + '</span><span>TWh renewable<br />' +
-          scope + ', ' + R.years[a.lastIdx] + '</span></div>' +
-        '<div><span class="metric-number">' + twh(a.latestTotal) + '</span><span>TWh generated in total<br />' +
+        '<div><span class="metric-number">' + pct(a.selShare) + '</span><span>renewable share in ' + selYear +
+          '<br />' + (delta >= 0 ? "up " : "down ") + Math.abs(delta).toFixed(1) + ' points on ' +
+          R.years[a.baseIdx] + '</span></div>' +
+        '<div><span class="metric-number">' + twh(a.selRenewable) + '</span><span>TWh renewable<br />' +
+          scope + ', ' + selYear + '</span></div>' +
+        '<div><span class="metric-number">' + twh(a.selTotal) + '</span><span>TWh generated in total<br />' +
           esc(c.region) + ' · net zero by ' + esc(c.netZero) + '</span></div>' +
       '</div>' +
 
       '<div class="dash-grid-wrap">' +
-        '<div class="dash-panel dash-wide"><h3>Renewable share of generation ' +
-          '<span class="dash-sub">' + esc(state.country) + ", " + span + '</span></h3>' +
-          shareLine(a.shareByYear, a) + '</div>' +
+        panel(t1,
+          "Growth accelerated after the 2015 LRET revision targeted an extra 33,000 GWh annually by 2020.",
+          shareLine(a), true) +
 
-        '<div class="dash-panel"><h3>Renewable share by country ' +
-          '<span class="dash-sub">' + R.years[a.lastIdx] + '</span></h3>' +
-          bars(a.shareByCountry, { dim: "country", sort: true, fmt: pct }) + '</div>' +
+        panel(t2,
+          "Generation by source group in " + firstYear + " against " + selYear + ", in TWh.",
+          clustered(a.mixFirst, a.mixSel, String(firstYear), String(selYear)), true) +
 
-        '<div class="dash-panel"><h3>Generation by source group ' +
-          '<span class="dash-sub">' + esc(state.country) + '</span></h3>' +
-          bars(a.byGroup, { dim: "group", sort: true, fmt: function (v) { return twh(v) + " TWh"; } }) + '</div>' +
+        panel(t3,
+          "Volume reflects the size of a country's grid, not how clean it is.",
+          hbars(a.volByCountry, { fmt: function (v) { return twh(v); }, axis: "Generation (TWh), " + selYear })) +
 
-        '<div class="dash-panel dash-wide"><h3>Renewable generation by year ' +
-          '<span class="dash-sub">' + esc(state.country) + ', TWh</span></h3>' +
-          yearColumns(a) + '</div>' +
-
-        '<div class="dash-panel dash-wide"><h3>Generation by individual source ' +
-          '<span class="dash-sub">' + esc(state.country) + ", " + span + ' total</span></h3>' +
-          bars(a.bySource, { sort: true, fmt: function (v) { return twh(v) + " TWh"; } }) + '</div>' +
+        panel(t4,
+          "Share shows which countries actually rely on renewable energy.",
+          hbars(a.shareByCountry, { fmt: pct, axis: (state.group ? state.group : "Renewable") + " share (%), " + selYear })) +
       '</div>' +
 
       '<p class="dash-foot">' + esc(c.policy) + ', from ' + c.policyYear + '.</p>';
@@ -233,13 +324,14 @@
     if (!t) return;
     if (t.hasAttribute("data-clear")) {
       var w = t.getAttribute("data-clear");
-      if (w === "all") { state.period = null; state.group = null; }
+      if (w === "all") { state.year = null; state.group = null; }
       else { state[w] = null; }
       return render();
     }
     var dim = t.getAttribute("data-dim"), key = t.getAttribute("data-key");
     if (dim === "country") { state.country = key || state.country; }
     else if (key === "") { state[dim] = null; }
+    else if (dim === "year") { state.year = state.year === +key ? null : +key; }
     else { state[dim] = state[dim] === key ? null : key; }
     render();
   });
