@@ -145,6 +145,19 @@
             </ul>
           </section>
 
+          <section class="case-block" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the dashboard</h2>
+            <p>
+              The Power BI report, rebuilt to run in your browser. All 480 generation facts are loaded from the same cleaned workbook, across four countries and fourteen sources, and every figure is calculated here rather than typed in. <strong>Switch country, narrow to a single source group, or cut the timeline into its four policy eras</strong> — the whole report follows.
+            </p>
+
+            <div id="re-dash" class="dash" aria-label="Interactive renewable electricity dashboard"></div>
+
+            <p class="dash-foot">
+              Share is renewable generation divided by that country's total generation in the same year, which is why the ranking changes depending on whether you read volume or share.
+            </p>
+          </section>
+
           <section class="case-block">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>The forecast, live</h2>
             <p>
@@ -197,5 +210,7 @@
     <script src="app.js"></script>
     <script src="chart-hover.js"></script>
     <script src="renewable-forecast.js"></script>
+    <script src="renewable-rows.js"></script>
+    <script src="renewable-dashboard.js"></script>
   </body>
 </html>
