@@ -1,9 +1,12 @@
 /* Football club database — runnable queries
  *
- * Four of the analytical queries from sql/03_analytical_queries.sql, computed
- * in the browser over the same sample data the Oracle script inserts. The SQL
- * shown beside each result is the real query from the repository; the JS below
- * reproduces its logic so a visitor can see the output without an Oracle box.
+ * Eight queries computed in the browser over the same sample data the Oracle
+ * script inserts. Five are adapted from sql/03_analytical_queries.sql — the
+ * ladder (Q1), goals per ground (Q4), top scorers (Q5), the top scorer's goals
+ * (Q6) and best on ground (Q7). The other three — goal timing, clean sheets and
+ * goals per round — were written for this page and are not in the repository.
+ * The SQL shown beside each result is the query the JS below reproduces,
+ * reformatted to fit the panel.
  */
 (function () {
   "use strict";
@@ -78,7 +81,8 @@
     return {
       cols: ["Player", "Club", "Goals"],
       rows: rows.slice(0, 15),
-      note: "154 goals across the season, grouped by the player behind each appearance. Showing the top 15."
+      note: "154 goals across the season, grouped by the player behind each appearance — on playerID, not on the name. " +
+        "That matters here: two different players in this competition are both called Grant Jarvis, at the same club. Showing the top 15."
     };
   }
 
@@ -103,7 +107,8 @@
     return {
       cols: ["Ground", "Games Played", "Goals", "Avg Goals / Game"],
       rows: rows,
-      note: "A LEFT JOIN keeps goalless games in the denominator. An inner join would drop them and quietly inflate every average on this table."
+      note: "Five games this season finished 0-0. A LEFT JOIN keeps them in the denominator; an inner join would drop them " +
+        "and inflate three of these eight averages — Eagle Bay Centre would read 2.25 rather than 1.29."
     };
   }
 
@@ -303,7 +308,7 @@
 "JOIN GamePlayer gp ON gp.gamePlayerID = sg.gamePlayerID\n" +
 "JOIN Player pl     ON pl.playerID     = gp.playerID\n" +
 "JOIN Club cl       ON cl.clubID       = pl.clubID\n" +
-"GROUP BY pl.firstName, pl.lastName, cl.clubName\n" +
+"GROUP BY pl.playerID, pl.firstName, pl.lastName, cl.clubName\n" +
 "ORDER BY COUNT(sg.gamePlayerID) DESC;"
     },
     grounds: {
@@ -435,7 +440,7 @@
 "JOIN GamePlayer gp    ON gp.gamePlayerID  = bp.gamePlayerID\n" +
 "JOIN Player pl        ON pl.playerID      = gp.playerID\n" +
 "JOIN Club cl          ON cl.clubID        = pl.clubID\n" +
-"GROUP BY pl.firstName, pl.lastName, cl.clubName\n" +
+"GROUP BY pl.playerID, pl.firstName, pl.lastName, cl.clubName\n" +
 "ORDER BY SUM(bog.points) DESC, \"Firsts\" DESC;"
     }
   };
