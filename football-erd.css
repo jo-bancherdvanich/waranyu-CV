@@ -1,0 +1,220 @@
+/* Interactive ERD viewer — football-database.html only.
+ *
+ * Kept in its own stylesheet rather than styles.css so the diagram can be
+ * dropped on one page without loading its rules everywhere else. Every colour
+ * comes from the site tokens so both themes work untouched.
+ */
+
+.erd {
+  margin: 3.4rem 0 0;
+  padding: 0;
+}
+
+.erd-frame {
+  position: relative;
+  padding: .5rem;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--case-accent, var(--accent)) 6%, transparent);
+}
+
+/* ---- toolbar ---------------------------------------------------------- */
+.erd-bar {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 0 .35rem .55rem;
+  font-family: "DM Mono", monospace;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.erd-legend { display: inline-flex; align-items: center; gap: .35rem; }
+.erd-key {
+  display: inline-block;
+  width: 4px;
+  height: 11px;
+  margin-left: .5rem;
+  border-radius: 2px;
+  vertical-align: -1px;
+}
+.erd-legend .erd-key:first-child { margin-left: 0; }
+.erd-key-pk { background: var(--case-accent, var(--accent)); }
+.erd-key-fk { background: var(--c2); }
+.erd-zoom {
+  margin-left: auto;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.erd-btns { display: inline-flex; gap: .3rem; }
+.erd-btn {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 .5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: .78rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+.erd-btn-wide { font-size: .66rem; letter-spacing: .06em; }
+.erd-btn:hover {
+  color: var(--case-accent, var(--accent));
+  border-color: var(--case-accent, var(--accent));
+}
+
+/* ---- stage ------------------------------------------------------------ */
+.erd-stage {
+  position: relative;
+  height: 560px;
+  overflow: hidden;
+  border: 1px solid var(--img-border);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0) 0 0 / 22px 22px,
+    var(--surface);
+  box-shadow: var(--shadow);
+  cursor: grab;
+  /* Until the diagram is activated a vertical swipe still scrolls the page,
+     so a full-width diagram on a phone is never a scroll trap. */
+  touch-action: pan-y;
+}
+.erd.is-live .erd-stage { touch-action: none; }
+.erd.is-grabbing .erd-stage { cursor: grabbing; }
+.erd-stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.erd-svg { display: block; }
+
+.erd-hint {
+  margin: .8rem .35rem 0;
+  max-width: 760px;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .7rem;
+  line-height: 1.6;
+}
+.erd figcaption {
+  margin-top: .8rem;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: .7rem;
+  text-transform: uppercase;
+}
+
+/* ---- connectors -------------------------------------------------------- */
+.erd-link-line {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.1;
+  opacity: .42;
+}
+.erd-link-tick {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .55;
+}
+.erd-link { transition: opacity .2s ease; }
+.erd-link.is-dim { opacity: .12; }
+.erd-link.is-lit .erd-link-line,
+.erd-link.is-lit .erd-link-tick {
+  stroke: var(--case-accent, var(--accent));
+  stroke-width: 1.7;
+  opacity: 1;
+}
+
+/* ---- table boxes ------------------------------------------------------- */
+.erd-box { cursor: pointer; transition: opacity .2s ease; }
+.erd-box:focus { outline: none; }
+.erd-box-bg {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.erd-box-head { fill: var(--line); stroke: none; }
+.erd-box:hover .erd-box-bg { stroke: var(--case-accent, var(--accent)); }
+.erd-box:focus-visible .erd-box-bg {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.erd-box.is-dim { opacity: .2; }
+.erd-box.is-selected .erd-box-bg {
+  stroke: var(--case-accent, var(--accent));
+  stroke-width: 2;
+}
+.erd-box.is-selected .erd-box-head { fill: color-mix(in srgb, var(--case-accent, var(--accent)) 30%, var(--line)); }
+.erd-box.is-related .erd-box-bg { stroke: var(--c2); }
+
+.erd-t-name {
+  fill: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+.erd-t-rows {
+  fill: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  text-anchor: end;
+}
+
+/* zoomed out: a column count instead of an unreadable column list */
+.erd-s-num {
+  fill: var(--case-accent, var(--accent));
+  font-family: "DM Mono", monospace;
+  font-size: 26px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+.erd-s-lab {
+  fill: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+.erd-cols { opacity: 0; pointer-events: none; }
+.erd-summary { opacity: 1; }
+.erd.show-detail .erd-cols { opacity: 1; }
+.erd.show-detail .erd-summary { opacity: 0; }
+.erd-cols, .erd-summary { transition: opacity .2s ease; }
+
+.erd-c-name {
+  fill: var(--ink);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+.erd-c-name.is-pk { fill: var(--case-accent, var(--accent)); font-weight: 500; }
+.erd-c-name.is-fk { fill: var(--c2); }
+.erd-c-name.is-opt { opacity: .62; }
+.erd-c-type {
+  fill: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 8.5px;
+  text-anchor: end;
+  opacity: .7;
+}
+.erd-mark-pk { fill: var(--case-accent, var(--accent)); }
+.erd-mark-fk { fill: var(--c2); }
+
+/* ---- reduced motion / small screens ------------------------------------ */
+.erd.erd-still .erd-link,
+.erd.erd-still .erd-cols,
+.erd.erd-still .erd-summary,
+.erd.erd-still .erd-box { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .erd-link, .erd-cols, .erd-summary, .erd-box, .erd-btn { transition: none; }
+}
+
+@media (max-width: 720px) {
+  .erd-stage { height: 400px; }
+  .erd-bar { flex-wrap: wrap; gap: .5rem; }
+  .erd-zoom { margin-left: auto; }
+}

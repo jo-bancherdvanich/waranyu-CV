@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="football-erd.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
     <link rel="canonical" href="https://waranyu-cv.vercel.app/football-database.html" />
@@ -65,9 +66,11 @@
             <div><span class="metric-number">7</span><span>analytical queries<br />answering real questions</span></div>
           </div>
 
-          <figure class="case-shot">
-            <img src="images/football-erd.png" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
-            <figcaption>The entity-relationship diagram</figcaption>
+          <figure class="erd" id="erd">
+            <noscript>
+              <img src="images/football-erd.png" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
+            </noscript>
+            <figcaption>The entity-relationship diagram — 16 tables, 18 foreign keys, read straight from the DDL</figcaption>
           </figure>
 
           <dl class="case-meta">
@@ -105,7 +108,7 @@
           <section class="case-block" id="run-it">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>Run the queries</h2>
             <p>
-              Four of the analytical queries, running here on the same sample season the Oracle script inserts — 8 clubs, 96 players, 56 games, 154 goals. Pick a question and the result is computed in your browser.
+              Eight of the analytical queries, running here on the same sample season the Oracle script inserts — 8 clubs, 96 players, 56 games, 154 goals. Pick a question and the result is computed in your browser.
             </p>
 
             <div id="sql-demo" class="sq">
@@ -114,6 +117,10 @@
                 <button type="button" class="sq-tab" data-query="scorers" role="tab" aria-selected="false">Top goal scorers</button>
                 <button type="button" class="sq-tab" data-query="grounds" role="tab" aria-selected="false">Goals per ground</button>
                 <button type="button" class="sq-tab" data-query="topgoals" role="tab" aria-selected="false">Top scorer's goals</button>
+                <button type="button" class="sq-tab" data-query="phase" role="tab" aria-selected="false">When goals are scored</button>
+                <button type="button" class="sq-tab" data-query="sheets" role="tab" aria-selected="false">Clean sheets</button>
+                <button type="button" class="sq-tab" data-query="rounds" role="tab" aria-selected="false">Goals per round</button>
+                <button type="button" class="sq-tab" data-query="bog" role="tab" aria-selected="false">Best on ground</button>
               </div>
 
               <p class="sq-question"></p>
@@ -189,6 +196,8 @@
       </footer>
     </div>
     <script src="app.js"></script>
+    <script src="football-schema.js"></script>
+    <script src="football-erd.js"></script>
     <script src="football-data.js"></script>
     <script src="football-demo.js"></script>
   </body>

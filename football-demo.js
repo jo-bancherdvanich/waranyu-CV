@@ -143,6 +143,119 @@
     };
   }
 
+  /* ---- Query 5: when goals are scored ---------------------------------- */
+  function goalsByPhase() {
+    var BANDS = [[1, 15], [16, 30], [31, 45], [46, 60], [61, 75], [76, 90]];
+    var counts = BANDS.map(function () { return 0; });
+    var outside = 0;
+    D.scoredGoal.forEach(function (sg) {
+      var m = sg.gameMinute, placed = false;
+      BANDS.forEach(function (b, i) {
+        if (!placed && m >= b[0] && m <= b[1]) { counts[i]++; placed = true; }
+      });
+      if (!placed) outside++;
+    });
+    var total = counts.reduce(function (a, b) { return a + b; }, 0);
+    var rows = BANDS.map(function (b, i) {
+      return [b[0] + "-" + b[1], counts[i], total ? (counts[i] / total * 100).toFixed(1) + "%" : "0%"];
+    });
+    return {
+      cols: ["Minute", "Goals", "Share"],
+      rows: rows,
+      note: "All " + total + " goals fall inside 90 minutes" + (outside ? ", except " + outside + " outside the bands" : "") +
+        ". Banding a continuous column is a CASE expression, not a join — the kind of thing that is easy to get " +
+        "off by one at the boundaries, so the ranges are written inclusive on both ends."
+    };
+  }
+
+  /* ---- Query 6: clean sheets ------------------------------------------- */
+  function cleanSheets() {
+    /* two ClubGame rows share a gameID, so a club kept a clean sheet in a
+       game when the OTHER row for that game scored nothing */
+    var byGame = {};
+    D.clubGame.forEach(function (cg) {
+      (byGame[cg.gameID] = byGame[cg.gameID] || []).push(cg);
+    });
+    var acc = {};
+    D.club.forEach(function (c) { acc[c.clubID] = { club: c.clubName, sheets: 0, conceded: 0, games: 0 }; });
+    Object.keys(byGame).forEach(function (gid) {
+      var pair = byGame[gid];
+      if (pair.length !== 2) return;
+      pair.forEach(function (cg, i) {
+        var opp = pair[1 - i];
+        var a = acc[cg.clubID];
+        if (!a) return;
+        a.games++;
+        a.conceded += opp.goalScored || 0;
+        if (!opp.goalScored) a.sheets++;
+      });
+    });
+    var rows = Object.keys(acc).map(function (k) {
+      var a = acc[k];
+      return [a.club, a.games, a.sheets, a.conceded, a.games ? (a.conceded / a.games).toFixed(2) : "0.00"];
+    });
+    rows.sort(function (x, y) { return y[2] - x[2] || x[3] - y[3]; });
+    return {
+      cols: ["Club", "Games", "Clean Sheets", "Conceded", "Conceded / Game"],
+      rows: rows,
+      note: "Goals conceded are not stored anywhere — they are the opponent's goalScored in the same game. " +
+        "That is a self-join of ClubGame on gameID with the club deliberately not equal to itself."
+    };
+  }
+
+  /* ---- Query 7: goals per round ---------------------------------------- */
+  function goalsPerRound() {
+    var goals = {}, games = {};
+    D.game.forEach(function (g) {
+      games[g.weekID] = (games[g.weekID] || 0) + 1;
+      goals[g.weekID] = goals[g.weekID] || 0;
+    });
+    D.clubGame.forEach(function (cg) {
+      var g = gameByID[cg.gameID];
+      if (!g) return;
+      goals[g.weekID] += cg.goalScored || 0;
+    });
+    var weeks = Object.keys(games).sort();
+    var rows = weeks.map(function (w) {
+      var played = games[w], scored = goals[w];
+      return [w, played, scored, played ? (scored / played).toFixed(2) : "0.00"];
+    });
+    return {
+      cols: ["Round", "Games", "Goals", "Goals / Game"],
+      rows: rows,
+      note: "Fourteen rounds, four games each. Grouping by the week rather than the date is what makes the " +
+        "rounds comparable — the fixtures inside a round are not all played on the same day."
+    };
+  }
+
+  /* ---- Query 8: best-on-ground leaders --------------------------------- */
+  function bogLeaders() {
+    var acc = {};
+    D.bogPlayer.forEach(function (bp) {
+      var gp = gamePlayerByID[bp.gamePlayerID];
+      if (!gp) return;
+      var bog = bogByID[bp.bogID];
+      if (!bog) return;
+      var a = acc[gp.playerID] = acc[gp.playerID] || { pts: 0, first: 0, awards: 0 };
+      a.pts += bog.points || 0;
+      a.awards++;
+      if (bog.rank === 1) a.first++;
+    });
+    var rows = Object.keys(acc).map(function (pid) {
+      var p = playerByID[pid];
+      var c = p ? clubByID[p.clubID] : null;
+      var a = acc[pid];
+      return [fullName(p), c ? c.clubName : "—", a.awards, a.first, a.pts];
+    });
+    rows.sort(function (x, y) { return y[4] - x[4] || y[3] - x[3] || x[0].localeCompare(y[0]); });
+    return {
+      cols: ["Player", "Club", "Awards", "Firsts", "BOG Points"],
+      rows: rows.slice(0, 15),
+      note: "Three awards a game across 56 games is 168 rows, and the points come from BestOnGround rather " +
+        "than being hardcoded — so changing what a first placing is worth changes this table and the ladder together."
+    };
+  }
+
   /* ---- the SQL shown beside each result ------------------------------- */
   var QUERIES = {
     ladder: {
@@ -242,6 +355,88 @@
 "      GROUP BY gp3.playerID))\n" +
 ")\n" +
 "ORDER BY gm.gameDate, sg.gameMinute;"
+    },
+    phase: {
+      label: "When goals are scored",
+      question: "Are goals spread evenly through a match, or do they cluster?",
+      run: goalsByPhase,
+      sql:
+"SELECT\n" +
+"  CASE\n" +
+"    WHEN sg.gameMinute BETWEEN  1 AND 15 THEN '1-15'\n" +
+"    WHEN sg.gameMinute BETWEEN 16 AND 30 THEN '16-30'\n" +
+"    WHEN sg.gameMinute BETWEEN 31 AND 45 THEN '31-45'\n" +
+"    WHEN sg.gameMinute BETWEEN 46 AND 60 THEN '46-60'\n" +
+"    WHEN sg.gameMinute BETWEEN 61 AND 75 THEN '61-75'\n" +
+"    ELSE '76-90'\n" +
+"  END                                    AS \"Minute\",\n" +
+"  COUNT(*)                               AS \"Goals\",\n" +
+"  ROUND(100 * COUNT(*)\n" +
+"        / SUM(COUNT(*)) OVER (), 1)      AS \"Share\"\n" +
+"FROM ScoredGoal sg\n" +
+"GROUP BY\n" +
+"  CASE\n" +
+"    WHEN sg.gameMinute BETWEEN  1 AND 15 THEN '1-15'\n" +
+"    WHEN sg.gameMinute BETWEEN 16 AND 30 THEN '16-30'\n" +
+"    WHEN sg.gameMinute BETWEEN 31 AND 45 THEN '31-45'\n" +
+"    WHEN sg.gameMinute BETWEEN 46 AND 60 THEN '46-60'\n" +
+"    WHEN sg.gameMinute BETWEEN 61 AND 75 THEN '61-75'\n" +
+"    ELSE '76-90'\n" +
+"  END\n" +
+"ORDER BY 1;"
+    },
+    sheets: {
+      label: "Clean sheets",
+      question: "Which club defended best, and how many goals did each concede?",
+      run: cleanSheets,
+      sql:
+"SELECT\n" +
+"  cl.clubName                                    AS \"Club\",\n" +
+"  COUNT(*)                                       AS \"Games\",\n" +
+"  SUM(CASE WHEN opp.goalScored = 0 THEN 1 ELSE 0 END) AS \"Clean Sheets\",\n" +
+"  SUM(opp.goalScored)                            AS \"Conceded\",\n" +
+"  ROUND(SUM(opp.goalScored) / COUNT(*), 2)       AS \"Conceded / Game\"\n" +
+"FROM ClubGame cg\n" +
+"JOIN ClubGame opp ON opp.gameID = cg.gameID\n" +
+"                 AND opp.clubID <> cg.clubID\n" +
+"JOIN Club cl      ON cl.clubID  = cg.clubID\n" +
+"GROUP BY cl.clubName\n" +
+"ORDER BY \"Clean Sheets\" DESC, \"Conceded\" ASC;"
+    },
+    rounds: {
+      label: "Goals per round",
+      question: "Did scoring rise or fall as the season went on?",
+      run: goalsPerRound,
+      sql:
+"SELECT\n" +
+"  gm.weekID                                     AS \"Round\",\n" +
+"  COUNT(DISTINCT gm.gameID)                     AS \"Games\",\n" +
+"  SUM(cg.goalScored)                            AS \"Goals\",\n" +
+"  ROUND(SUM(cg.goalScored)\n" +
+"        / COUNT(DISTINCT gm.gameID), 2)         AS \"Goals / Game\"\n" +
+"FROM Game gm\n" +
+"JOIN ClubGame cg ON cg.gameID = gm.gameID\n" +
+"GROUP BY gm.weekID\n" +
+"ORDER BY gm.weekID;"
+    },
+    bog: {
+      label: "Best on ground",
+      question: "Who collected the most best-on-ground points across the season?",
+      run: bogLeaders,
+      sql:
+"SELECT\n" +
+"  pl.firstName || ' ' || pl.lastName            AS \"Player\",\n" +
+"  cl.clubName                                   AS \"Club\",\n" +
+"  COUNT(*)                                      AS \"Awards\",\n" +
+"  SUM(CASE WHEN bog.rank = 1 THEN 1 ELSE 0 END) AS \"Firsts\",\n" +
+"  SUM(bog.points)                               AS \"BOG Points\"\n" +
+"FROM BogPlayer bp\n" +
+"JOIN BestOnGround bog ON bog.bogID        = bp.bogID\n" +
+"JOIN GamePlayer gp    ON gp.gamePlayerID  = bp.gamePlayerID\n" +
+"JOIN Player pl        ON pl.playerID      = gp.playerID\n" +
+"JOIN Club cl          ON cl.clubID        = pl.clubID\n" +
+"GROUP BY pl.firstName, pl.lastName, cl.clubName\n" +
+"ORDER BY SUM(bog.points) DESC, \"Firsts\" DESC;"
     }
   };
 
