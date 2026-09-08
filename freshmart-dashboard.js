@@ -143,20 +143,38 @@
     if (opts.sort) keys.sort(function (x, y) { return obj[y] - obj[x]; });
     if (opts.top) keys = keys.slice(0, opts.top);
     if (!keys.length) return '<p class="dash-empty">Nothing in this selection.</p>';
-    var max = Math.max.apply(null, keys.map(function (k) { return obj[k]; })) || 1;
+    var vals = keys.map(function (k) { return obj[k]; });
+    var max = Math.max.apply(null, vals) || 1;
+    var min = Math.min.apply(null, vals);
+
+    /* When every bar is within a few per cent of the others, a zero baseline
+     * draws seven identical bars and hides the ranking the visual exists to
+     * show. Truncate the axis in that case, and say so underneath, so the
+     * shortened baseline is stated rather than implied. */
+    var base = 0;
+    if (keys.length > 1 && min / max > 0.6) {
+      var span = max - min;
+      var mag = Math.pow(10, Math.floor(Math.log(span) / Math.LN10));
+      base = Math.max(0, Math.floor((min - span * 0.6) / mag) * mag);
+    }
+    var note = base > 0
+      ? "Axis starts at " + (opts.fmt || shortD)(base) + ", not zero"
+      : (opts.axis || "");
+
     return '<div class="dash-bars">' + keys.map(function (k) {
       var on = opts.dim && state[opts.dim] === k;
       var dimmed = opts.dim && state[opts.dim] && !on;
+      var w = max > base ? ((obj[k] - base) / (max - base)) * 100 : 0;
       return '<button type="button" class="dash-row is-clickable' +
         (on ? " is-picked" : "") + (dimmed ? " is-dimmed" : "") + '"' +
         ' data-dim="' + opts.dim + '" data-key="' + esc(k) + '"' +
         ' aria-pressed="' + (on ? "true" : "false") + '">' +
         '<span class="dash-key">' + esc(k) + '</span>' +
         '<span class="dash-track"><span class="dash-fill" style="width:0" data-w="' +
-        ((obj[k] / max) * 100).toFixed(1) + '"></span></span>' +
+        Math.max(1.5, w).toFixed(1) + '"></span></span>' +
         '<span class="dash-val">' + (opts.fmt || shortD)(obj[k]) + '</span>' +
         '</button>';
-    }).join("") + '</div>' + (opts.axis ? '<p class="dash-axistitle">' + opts.axis + '</p>' : "");
+    }).join("") + '</div>' + (note ? '<p class="dash-axistitle">' + note + '</p>' : "");
   }
 
   /* two-series line, for revenue this year against the same period last year */
@@ -239,15 +257,48 @@
       '<p class="dash-axistitle">Units Sold</p>';
   }
 
-  function columns(vals, labels, fmt) {
-    var max = Math.max.apply(null, Array.prototype.slice.call(vals)) || 1;
-    return '<div class="dash-cols">' + labels.map(function (l, k) {
-      return '<div class="dash-col">' +
-        '<span class="dash-colval">' + fmt(vals[k]) + '</span>' +
-        '<span class="dash-colbar" style="height:0" data-h="' + ((vals[k] / max) * 100).toFixed(1) + '"></span>' +
-        '<span class="dash-collab">' + l.slice(0, 3) + '</span>' +
-        '</div>';
-    }).join("") + '</div><p class="dash-axistitle">Units Sold</p>';
+  /* Day-of-week columns on a truncated axis.
+   *
+   * The seven days sit within about 15% of each other, so a zero baseline
+   * flattens them into seven identical bars and hides the pattern the visual
+   * exists to show. The published report truncates the axis for the same
+   * reason. The axis is drawn with its baseline labelled so the truncation is
+   * visible rather than implied. */
+  function columns(vals, labels) {
+    var W = 640, H = 230, PL = 46, PR = 10, PT = 26, PB = 34;
+    var arr = Array.prototype.slice.call(vals);
+    var lo = Math.min.apply(null, arr), hi = Math.max.apply(null, arr);
+    var step = hi - lo > 4000 ? 2000 : hi - lo > 1500 ? 1000 : 500;
+    var base = Math.max(0, Math.floor(lo / step) * step - (hi - lo < step ? step : 0));
+    var top = Math.ceil(hi / step) * step;
+    if (top <= base) top = base + step;
+    var band = (W - PL - PR) / arr.length;
+    var bw = Math.min(46, band * 0.56);
+    var y = function (v) { return PT + (1 - (v - base) / (top - base)) * (H - PT - PB); };
+
+    var grid = "";
+    for (var t = base; t <= top + 0.5; t += step) {
+      var yy = y(t).toFixed(1);
+      grid += '<line x1="' + PL + '" y1="' + yy + '" x2="' + (W - PR) + '" y2="' + yy + '" class="dash-grid"/>' +
+              '<text x="' + (PL - 6) + '" y="' + (+yy + 3.5) + '" class="dash-axis" text-anchor="end">' +
+              (t / 1000).toFixed(0) + 'K</text>';
+    }
+
+    var body = arr.map(function (v, k) {
+      var cx = PL + band * k + band / 2;
+      var h = Math.max(1, (H - PT - PB) * ((v - base) / (top - base)));
+      return '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + (H - PB - h).toFixed(1) +
+             '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="3" class="dash-colB">' +
+             '<title>' + labels[k] + ": " + Math.round(v).toLocaleString() + ' units</title></rect>' +
+             '<text x="' + cx.toFixed(1) + '" y="' + (H - PB - h - 5).toFixed(1) +
+             '" class="dash-axis dash-collabel" text-anchor="middle">' + (v / 1000).toFixed(1) + 'K</text>' +
+             '<text x="' + cx.toFixed(1) + '" y="' + (H - 12) + '" class="dash-axis" text-anchor="middle">' +
+             labels[k].slice(0, 3) + '</text>';
+    }).join("");
+
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+      'aria-label="Sales volume by day of week">' + grid + body + '</svg>' +
+      '<p class="dash-axistitle">Units Sold · axis starts at ' + (base / 1000).toFixed(0) + 'K</p>';
   }
 
   function slicer(dim, label, values) {

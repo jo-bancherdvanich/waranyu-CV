@@ -1565,3 +1565,11 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .dash-fill, .dash-colbar, .dash-enter, .dash-chip { transition: none; }
   .dash-enter { opacity: 1; transform: none; }
 }
+
+/* Icon lists cycle the palette so each row is distinguishable at a glance.
+ * --c1..--c4 are not overridden by the per-case accent, so these stay
+ * distinct on every project page and in both themes. */
+.icon-list li:nth-child(4n+1) .il-icon { color: var(--c1); }
+.icon-list li:nth-child(4n+2) .il-icon { color: var(--c2); }
+.icon-list li:nth-child(4n+3) .il-icon { color: var(--c3); }
+.icon-list li:nth-child(4n+4) .il-icon { color: var(--c4); }
