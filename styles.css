@@ -1670,3 +1670,51 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .project-actions { gap: .45rem; }
   .project-btn { padding: .55rem .85rem; font-size: .9rem; }
 }
+
+/* ---- the walking figure ------------------------------------------------
+ * Sits on a hairline at the foot of the viewport and doubles as the scroll
+ * indicator: its position along the strip is how far down the page you are.
+ * Never intercepts a click, and never appears for reduced-motion readers —
+ * walker.js returns early for those, so there is no static fallback to style. */
+.walker {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 54px;
+  pointer-events: none; z-index: 40;
+}
+.walker::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--line) 12%, var(--line) 88%, transparent);
+  opacity: .8;
+}
+.walker-fig {
+  position: absolute; bottom: 8px; width: 40px; height: 52px;
+  color: var(--case-accent, var(--accent));
+  opacity: .5;
+  transition: left .12s linear, opacity .3s ease;
+}
+.walker.is-walking .walker-fig { opacity: .9; }
+.walker-fig svg { width: 100%; height: 100%; display: block; }
+
+/* Limbs only move while the page is moving. transform-box keeps the rotation
+   origin on the hip and shoulder rather than the whole canvas. */
+.wk-leg, .wk-arm { transform-box: fill-box; transform-origin: top center; }
+.walker.is-walking .wk-leg-f { animation: wk-swing .5s ease-in-out infinite; }
+.walker.is-walking .wk-leg-b { animation: wk-swing .5s ease-in-out infinite reverse; }
+.walker.is-walking .wk-arm-f { animation: wk-swing-arm .5s ease-in-out infinite reverse; }
+.walker.is-walking .wk-arm-b { animation: wk-swing-arm .5s ease-in-out infinite; }
+.walker.is-walking .walker-fig svg { animation: wk-bob .5s ease-in-out infinite; }
+
+@keyframes wk-swing {
+  0%, 100% { transform: rotate(16deg); }
+  50%      { transform: rotate(-16deg); }
+}
+@keyframes wk-swing-arm {
+  0%, 100% { transform: rotate(10deg); }
+  50%      { transform: rotate(-10deg); }
+}
+@keyframes wk-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1.5px); }
+}
+
+@media (prefers-reduced-motion: reduce) { .walker { display: none; } }
+@media (max-width: 760px) { .walker { display: none; } }
