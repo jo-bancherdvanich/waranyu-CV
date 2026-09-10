@@ -104,27 +104,48 @@
   var linkEls = [];
   S.rels.forEach(function (r, i) {
     var parent = S.pos[r.to], child = S.pos[r.from];
-    var right = parent.x + M.w < child.x;
-    var x1 = right ? parent.x + M.w : parent.x;
-    var x2 = right ? child.x : child.x + M.w;
-    var y1 = rowY(r.to, r.toCol);
-    var y2 = rowY(r.from, r.col);
-    var bend = Math.max(46, Math.abs(x2 - x1) * 0.42);
-    var d = "M" + x1 + " " + y1 +
-      "C" + (x1 + (right ? bend : -bend)) + " " + y1 + " " +
-      (x2 - (right ? bend : -bend)) + " " + y2 + " " + x2 + " " + y2;
+    /* Tables stacked in adjacent bands overlap horizontally, and routing those
+       out of the side produced the long sideways swoops that crossed
+       everything else. Leave the box through whichever face actually points at
+       the other table: sideways when they sit apart, vertically when one is
+       above the other. */
+    var apart = parent.x + M.w < child.x || child.x + M.w < parent.x;
+    var d, tickA, tickB;
+
+    if (apart) {
+      var right = parent.x + M.w < child.x;
+      var x1 = right ? parent.x + M.w : parent.x;
+      var x2 = right ? child.x : child.x + M.w;
+      var y1 = rowY(r.to, r.toCol);
+      var y2 = rowY(r.from, r.col);
+      var bend = Math.max(46, Math.abs(x2 - x1) * 0.42);
+      d = "M" + x1 + " " + y1 +
+        "C" + (x1 + (right ? bend : -bend)) + " " + y1 + " " +
+        (x2 - (right ? bend : -bend)) + " " + y2 + " " + x2 + " " + y2;
+      var s = right ? 1 : -1;
+      tickA = "M" + (x1 + s * 7) + " " + (y1 - 5) + "v10";
+      tickB = "M" + (x2 - s * 9) + " " + (y2 - 5) + "L" + x2 + " " + y2 +
+              "L" + (x2 - s * 9) + " " + (y2 + 5) + "M" + (x2 - s * 9) + " " + y2 + "H" + x2;
+    } else {
+      var down = parent.y < child.y;                      // parent sits above
+      var px = parent.x + M.w / 2, cx = child.x + M.w / 2;
+      var py = down ? parent.y + parent.h : parent.y;
+      var cy = down ? child.y : child.y + child.h;
+      var vb = Math.max(30, Math.abs(cy - py) * 0.5);
+      var sv = down ? 1 : -1;
+      d = "M" + px + " " + py +
+        "C" + px + " " + (py + sv * vb) + " " + cx + " " + (cy - sv * vb) + " " + cx + " " + cy;
+      tickA = "M" + (px - 5) + " " + (py + sv * 7) + "h10";
+      tickB = "M" + (cx - 5) + " " + (cy - sv * 9) + "L" + cx + " " + cy +
+              "L" + (cx + 5) + " " + (cy - sv * 9) + "M" + cx + " " + (cy - sv * 9) + "V" + cy;
+    }
 
     var g = el("g", { class: "erd-link", "data-from": r.from, "data-to": r.to });
     g.appendChild(el("path", { class: "erd-link-line", d: d }));
     /* one bar at the parent (exactly one) and a crow's foot at the child
        (many) — every relationship in this schema is one-to-many */
-    var s = right ? 1 : -1;
-    g.appendChild(el("path", { class: "erd-link-tick", d: "M" + (x1 + s * 7) + " " + (y1 - 5) + "v10" }));
-    g.appendChild(el("path", {
-      class: "erd-link-tick",
-      d: "M" + (x2 - s * 9) + " " + (y2 - 5) + "L" + x2 + " " + y2 + "L" + (x2 - s * 9) + " " + (y2 + 5) +
-         "M" + (x2 - s * 9) + " " + y2 + "H" + x2
-    }));
+    g.appendChild(el("path", { class: "erd-link-tick", d: tickA }));
+    g.appendChild(el("path", { class: "erd-link-tick", d: tickB }));
     g.dataset.i = i;
     linkLayer.appendChild(g);
     linkEls.push(g);

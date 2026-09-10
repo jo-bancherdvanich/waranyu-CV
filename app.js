@@ -70,6 +70,32 @@
     requestAnimationFrame(step);
   }
 
+  /* ---- mobile navigation ---------------------------------------------- */
+  // Below 720px the nav collapses behind a button. Closing on link click,
+  // outside click and Escape keeps it from stranding the reader.
+  var navToggle = document.querySelector(".nav-toggle");
+  var primaryNav = document.getElementById("primary-nav");
+  if (navToggle && primaryNav) {
+    var setNavOpen = function (open) {
+      primaryNav.classList.toggle("is-open", open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    navToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setNavOpen(!primaryNav.classList.contains("is-open"));
+    });
+    primaryNav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setNavOpen(false);
+    });
+    document.addEventListener("click", function (e) {
+      if (!primaryNav.contains(e.target) && !navToggle.contains(e.target)) setNavOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setNavOpen(false);
+    });
+  }
+
   /* ---- scroll reveal and counting ------------------------------------- */
   // The case-study hero (eyebrow, h1, lede, actions, metrics, screenshot)
   // animates itself on load, so it stays out of the reveal set — two competing

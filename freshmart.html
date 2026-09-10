@@ -34,7 +34,7 @@
     <div class="site-shell">
       <header class="topbar">
         <a class="wordmark" href="index.html#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
-        <nav aria-label="Primary navigation">
+        <nav id="primary-nav" aria-label="Primary navigation">
           <a href="index.html#projects">← All projects</a>
           <a href="index.html#contact">Contact</a>
         </nav>
@@ -43,13 +43,14 @@
           Repository <span aria-hidden="true">↗</span>
         </a>
         <button type="button" class="theme-toggle" aria-label="Switch to light theme">&#9728;</button>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
       </header>
 
       <main id="main">
         <article class="case case-freshmart">
           <div class="case-motif" aria-hidden="true"><svg viewBox="0 0 400 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M120 78V40h84v38"/><path d="M112 40h100l-8-14h-84z"/><path d="M128 26v14M144 26v14M160 26v14M176 26v14M192 26v14" opacity=".5"/><path d="M150 78V58h24v20"/><g class="mo-float"><path d="M232 48h34l-4 22h-26z"/><path d="M238 48v-7a5 5 0 0 1 10 0M252 48v-7a5 5 0 0 1 10 0" opacity=".6"/></g><path class="mo-rise" d="M296 78V62"/><path class="mo-rise" d="M314 78V46"/><path class="mo-rise" d="M332 78V54"/><path class="mo-rise" d="M350 78V32"/><path d="M14 78H386" opacity=".45"/></svg></div>
-          <p class="eyebrow">01 / Business intelligence</p>
+          <p class="eyebrow">02 / Business intelligence</p>
           <h1>FreshMart data warehouse and sales dashboard</h1>
           <p class="lede">
             An end-to-end business intelligence build for a fictional Australian supermarket chain: five raw operational CSVs, audited and cleaned, modelled as a Kimball star schema, and surfaced as an executive dashboard.

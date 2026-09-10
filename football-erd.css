@@ -218,3 +218,17 @@
   .erd-bar { flex-wrap: wrap; gap: .5rem; }
   .erd-zoom { margin-left: auto; }
 }
+
+/* ---- the originally submitted diagram, tucked behind a disclosure ------- */
+.erd-original { margin-top: 1.1rem; }
+.erd-original > summary {
+  display: inline-block; cursor: pointer;
+  padding: .45rem .9rem;
+  font-family: "DM Mono", monospace; font-size: .72rem;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px;
+}
+.erd-original > summary:hover { color: var(--case-accent, var(--accent)); border-color: var(--case-accent, var(--accent)); }
+.erd-original[open] > summary { margin-bottom: 1rem; }
+.erd-original .case-shot { margin: 0; }

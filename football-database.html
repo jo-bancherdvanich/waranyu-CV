@@ -35,7 +35,7 @@
     <div class="site-shell">
       <header class="topbar">
         <a class="wordmark" href="index.html#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
-        <nav aria-label="Primary navigation">
+        <nav id="primary-nav" aria-label="Primary navigation">
           <a href="index.html#projects">← All projects</a>
           <a href="index.html#contact">Contact</a>
         </nav>
@@ -44,6 +44,7 @@
           Repository <span aria-hidden="true">↗</span>
         </a>
         <button type="button" class="theme-toggle" aria-label="Switch to light theme">&#9728;</button>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
       </header>
 
@@ -72,6 +73,16 @@
             </noscript>
             <figcaption>The entity-relationship diagram — 16 tables, 18 foreign keys, read straight from the DDL</figcaption>
           </figure>
+
+          <details class="erd-original">
+            <summary>Compare with the diagram I submitted</summary>
+            <figure class="case-shot">
+              <img src="images/football-erd.png" alt="The originally submitted entity-relationship diagram, drawn by hand, showing the same 16 tables in four bands" loading="lazy" />
+              <figcaption>
+                The original hand-drawn ERD. The interactive version above follows its layout, but takes every column name and relationship from <code>01_create_tables.sql</code> — so where the drawing and the DDL disagree, the DDL wins.
+              </figcaption>
+            </figure>
+          </details>
 
           <dl class="case-meta">
             <div>
