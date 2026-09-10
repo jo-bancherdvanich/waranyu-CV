@@ -1641,3 +1641,32 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .dash-slicers .dash-slicer:nth-child(3) .dash-chip.is-on { background: var(--c3); border-color: var(--c3); }
 .dash-slicers .dash-slicer:nth-child(4) .dash-chip.is-on { background: var(--c4); border-color: var(--c4); }
 .dash-slicers .dash-chip.is-on { color: var(--bg); }
+
+/* ---- project card actions ---------------------------------------------
+ * The cards used to be one big link, which gave the reader no choice between
+ * playing with the result and reading how it was built. Two explicit actions
+ * now; the card still navigates as a whole via app.js. */
+.project-actions { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.1rem 0 0; }
+.project-btn {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .5rem .95rem;
+  font-size: .88rem; font-weight: 500; text-decoration: none;
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--line); border-radius: 999px;
+  transition: color .18s, border-color .18s, background .18s, transform .18s;
+}
+.project-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.project-btn.is-primary { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.project-btn.is-primary:hover { color: var(--bg); filter: brightness(1.08); }
+.project-card { cursor: pointer; }
+
+/* The featured card paints a fixed light panel, so its buttons need the dark
+   text pinned rather than inherited — same reason the doubled class exists. */
+.project-card.project-card-featured .project-btn { color: rgba(7, 16, 25, .9); border-color: rgba(7, 16, 25, .28); }
+.project-card.project-card-featured .project-btn.is-primary { color: #f4fbff; background: rgba(7, 16, 25, .88); border-color: rgba(7, 16, 25, .88); }
+.project-card.project-card-featured .project-btn:hover { border-color: rgba(7, 16, 25, .6); }
+
+@media (max-width: 720px) {
+  .project-actions { gap: .45rem; }
+  .project-btn { padding: .55rem .85rem; font-size: .9rem; }
+}

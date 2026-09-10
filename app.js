@@ -96,6 +96,18 @@
     });
   }
 
+  /* ---- project cards ---------------------------------------------------- */
+  // The cards carry two real links now, so the card itself is no longer an
+  // anchor. Clicking the surrounding area still opens the case study, but a
+  // click that landed on a link or a button is left alone.
+  document.querySelectorAll(".project-card[data-href]").forEach(function (card) {
+    card.addEventListener("click", function (e) {
+      if (e.target.closest("a, button")) return;
+      if (window.getSelection && String(window.getSelection())) return;
+      window.location.href = card.getAttribute("data-href");
+    });
+  });
+
   /* ---- scroll reveal and counting ------------------------------------- */
   // The case-study hero (eyebrow, h1, lede, actions, metrics, screenshot)
   // animates itself on load, so it stays out of the reveal set — two competing
