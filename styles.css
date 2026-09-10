@@ -11,6 +11,8 @@
   --c2: #7ee0c1;
   --c3: #ffcf8f;
   --c4: #ff9d8f;
+  --c5: #c9a6f7;
+  --c6: #f7a8d8;
   /* Tokens that have to flip with the theme */
   --lede-ink: #cfe0ee;
   --h1-fade: #c2d6e6;
@@ -36,6 +38,8 @@
   --c2: #0d7f62;
   --c3: #9a6410;
   --c4: #b0433a;
+  --c5: #6b3fa0;
+  --c6: #a63d7a;
   --lede-ink: #2a3a48;
   --h1-fade: #52697c;
   --img-border: rgba(15, 25, 34, .16);
@@ -1075,6 +1079,10 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .ch-cross { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; transition: opacity .12s ease; }
 .ch-halo { fill: var(--accent); fill-opacity: .22; opacity: 0; pointer-events: none; }
 .ch-dot { fill: var(--bg); stroke: var(--accent); stroke-width: 2.5; opacity: 0; pointer-events: none; }
+/* display:flex below beats the hidden attribute, which is only display:none
+ * from the UA sheet — without this an empty tooltip sits in the corner of
+ * every chart whenever the pointer is away. */
+.ch-tip[hidden] { display: none; }
 .ch-tip {
   position: absolute;
   z-index: 3;
@@ -1617,3 +1625,19 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .dash-collab { font-size: .76rem; }
   .dash-axistitle { font-size: .74rem; }
 }
+
+/* The three KPI cards each take a palette colour so the row is not one block
+ * of a single hue. Order matches the reading order: revenue, margin, profit. */
+.dash-kpirow .dash-kpicard:nth-child(1) .dash-kpivalue { color: var(--c1); }
+.dash-kpirow .dash-kpicard:nth-child(2) .dash-kpivalue { color: var(--c2); }
+.dash-kpirow .dash-kpicard:nth-child(3) .dash-kpivalue { color: var(--c3); }
+.dash-kpirow .dash-kpicard:nth-child(1) { border-top: 2px solid var(--c1); }
+.dash-kpirow .dash-kpicard:nth-child(2) { border-top: 2px solid var(--c2); }
+.dash-kpirow .dash-kpicard:nth-child(3) { border-top: 2px solid var(--c3); }
+
+/* Slicer groups take their own colour so the four filters read as four things */
+.dash-slicers .dash-slicer:nth-child(1) .dash-chip.is-on { background: var(--c1); border-color: var(--c1); }
+.dash-slicers .dash-slicer:nth-child(2) .dash-chip.is-on { background: var(--c2); border-color: var(--c2); }
+.dash-slicers .dash-slicer:nth-child(3) .dash-chip.is-on { background: var(--c3); border-color: var(--c3); }
+.dash-slicers .dash-slicer:nth-child(4) .dash-chip.is-on { background: var(--c4); border-color: var(--c4); }
+.dash-slicers .dash-chip.is-on { color: var(--bg); }

@@ -71,6 +71,22 @@
   Object.keys(subsByCat).forEach(function (k) { subsByCat[k].sort(); });
   var allSubs = uniq(R.products.map(function (p) { return p.sub; })).sort();
 
+  /* Categorical scale. The index comes from a fixed list rather than the
+     sorted order, so Meat stays the same colour whatever it is filtered to.
+     Time series keep the single page accent — colour there would imply a
+     grouping that does not exist. */
+  var SCALE = ["var(--c1)", "var(--c2)", "var(--c3)", "var(--c4)", "var(--c5)", "var(--c6)"];
+  var storeOrder = R.stores.map(function (st) { return st.n; }).sort();
+  function hue(dim, key) {
+    var list = dim === "category" ? cats
+             : dim === "region" ? regions
+             : dim === "subcategory" ? allSubs
+             : dim === "store" ? storeOrder : null;
+    if (!list) return null;
+    var i = list.indexOf(key);
+    return i < 0 ? null : SCALE[i % SCALE.length];
+  }
+
   var state = { year: null, region: null, format: null, category: null, subcategory: null, store: null };
 
   /* ---- aggregation --------------------------------------------------- */
@@ -178,8 +194,9 @@
         ' data-dim="' + opts.dim + '" data-key="' + esc(k) + '"' +
         ' aria-pressed="' + (on ? "true" : "false") + '">' +
         '<span class="dash-key">' + esc(k) + '</span>' +
-        '<span class="dash-track"><span class="dash-fill" style="width:0" data-w="' +
-        Math.max(1.5, w).toFixed(1) + '"></span></span>' +
+        '<span class="dash-track"><span class="dash-fill" style="width:0' +
+        (opts.colour && hue(opts.dim, k) ? ";background:" + hue(opts.dim, k) : "") +
+        '" data-w="' + Math.max(1.5, w).toFixed(1) + '"></span></span>' +
         '<span class="dash-val">' + (opts.fmt || shortD)(obj[k]) + '</span>' +
         '</button>';
     }).join("") + '</div>' + (note ? '<p class="dash-axistitle">' + note + '</p>' : "");
@@ -368,14 +385,14 @@
 
         panel("Sales Volume by Month", volumeLine(a.unitsByMonth), true) +
 
-        panel("Revenue by Region", bars(a.region, { dim: "region", sort: true })) +
-        panel("Revenue by Store", bars(a.store, { dim: "store", sort: true, top: 6 })) +
+        panel("Revenue by Region", bars(a.region, { dim: "region", sort: true, colour: true })) +
+        panel("Revenue by Store", bars(a.store, { dim: "store", sort: true, top: 6, colour: true })) +
 
-        panel("Revenue by Product Category", bars(a.category, { dim: "category", sort: true })) +
+        panel("Revenue by Product Category", bars(a.category, { dim: "category", sort: true, colour: true })) +
         panel("Revenue by Subcategory" +
           (state.category ? ' <span class="dash-sub">within ' + esc(state.category) + '</span>'
                           : ' <span class="dash-sub">top 6 of 28</span>'),
-          bars(a.subcategory, { dim: "subcategory", sort: true, top: state.category ? 8 : 6 })) +
+          bars(a.subcategory, { dim: "subcategory", sort: true, top: state.category ? 8 : 6, colour: true })) +
 
         panel("Sales Volume by Day of Week",
           columns(a.dow, DAYS, function (v) { return Math.round(v).toLocaleString(); }), true) +
