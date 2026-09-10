@@ -1671,50 +1671,97 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .project-btn { padding: .55rem .85rem; font-size: .9rem; }
 }
 
-/* ---- the walking figure ------------------------------------------------
- * Sits on a hairline at the foot of the viewport and doubles as the scroll
- * indicator: its position along the strip is how far down the page you are.
- * Never intercepts a click, and never appears for reduced-motion readers —
- * walker.js returns early for those, so there is no static fallback to style. */
-.walker {
-  position: fixed; left: 0; right: 0; bottom: 0; height: 54px;
-  pointer-events: none; z-index: 40;
+/* ---- the corner guide --------------------------------------------------
+ * A cartoon rather than a real 3D model: the depth is gradients, a ground
+ * shadow and a visor highlight, which keeps it dependency-free and crisp at
+ * any size. The gradient stops read these tokens, so it follows the theme. */
+:root {
+  --asst-hi: #6fd3ff;
+  --asst-lo: #2f7fb8;
+  --asst-glass-hi: #0f1c28;
+  --asst-glass-lo: #060d14;
 }
-.walker::before {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px;
-  background: linear-gradient(to right, transparent, var(--line) 12%, var(--line) 88%, transparent);
-  opacity: .8;
-}
-.walker-fig {
-  position: absolute; bottom: 8px; width: 40px; height: 52px;
-  color: var(--case-accent, var(--accent));
-  opacity: .5;
-  transition: left .12s linear, opacity .3s ease;
-}
-.walker.is-walking .walker-fig { opacity: .9; }
-.walker-fig svg { width: 100%; height: 100%; display: block; }
-
-/* Limbs only move while the page is moving. transform-box keeps the rotation
-   origin on the hip and shoulder rather than the whole canvas. */
-.wk-leg, .wk-arm { transform-box: fill-box; transform-origin: top center; }
-.walker.is-walking .wk-leg-f { animation: wk-swing .5s ease-in-out infinite; }
-.walker.is-walking .wk-leg-b { animation: wk-swing .5s ease-in-out infinite reverse; }
-.walker.is-walking .wk-arm-f { animation: wk-swing-arm .5s ease-in-out infinite reverse; }
-.walker.is-walking .wk-arm-b { animation: wk-swing-arm .5s ease-in-out infinite; }
-.walker.is-walking .walker-fig svg { animation: wk-bob .5s ease-in-out infinite; }
-
-@keyframes wk-swing {
-  0%, 100% { transform: rotate(16deg); }
-  50%      { transform: rotate(-16deg); }
-}
-@keyframes wk-swing-arm {
-  0%, 100% { transform: rotate(10deg); }
-  50%      { transform: rotate(-10deg); }
-}
-@keyframes wk-bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-1.5px); }
+:root[data-theme="light"] {
+  --asst-hi: #7cc9f0;
+  --asst-lo: #17618c;
+  --asst-glass-hi: #14202c;
+  --asst-glass-lo: #0a1119;
 }
 
-@media (prefers-reduced-motion: reduce) { .walker { display: none; } }
-@media (max-width: 760px) { .walker { display: none; } }
+.asst {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 70;
+  display: flex; align-items: flex-end; gap: .6rem;
+}
+.asst-btn {
+  order: 2;
+  width: 78px; height: 90px; padding: 0;
+  background: none; border: 0; cursor: pointer;
+  flex: 0 0 auto;
+}
+.asst-bot { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.asst-shadow { fill: rgba(0, 0, 0, .38); }
+:root[data-theme="light"] .asst-shadow { fill: rgba(10, 25, 40, .16); }
+.asst-stroke { stroke: var(--asst-lo); stroke-width: 4; stroke-linecap: round; fill: none; }
+.asst-blip { fill: var(--c3); }
+.asst-limb { fill: var(--asst-lo); }
+.asst-belly { fill: rgba(255, 255, 255, .14); }
+.asst-eye { fill: var(--c1); }
+.asst-smile { stroke: var(--c1); stroke-width: 2.6; stroke-linecap: round; fill: none; opacity: .85; }
+.asst-gloss { stroke: rgba(255, 255, 255, .5); stroke-width: 3.5; stroke-linecap: round; fill: none; }
+
+/* the bubble */
+.asst-bubble {
+  order: 1;
+  position: relative;
+  max-width: 260px;
+  padding: .8rem .95rem .7rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+.asst-bubble::after {
+  content: ""; position: absolute; right: -7px; bottom: 22px;
+  width: 12px; height: 12px;
+  background: var(--surface);
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  transform: rotate(-45deg);
+}
+.asst-text { margin: 0; font-size: .88rem; line-height: 1.5; color: var(--ink); }
+.asst-more {
+  display: block; margin-top: .45rem;
+  font-family: "DM Mono", monospace; font-size: .62rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+.asst-close {
+  order: 3; align-self: flex-start;
+  width: 22px; height: 22px; padding: 0; margin-bottom: 62px;
+  font-size: .95rem; line-height: 1;
+  color: var(--muted); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 50%; cursor: pointer;
+}
+.asst-close:hover { color: var(--ink); border-color: var(--accent); }
+
+/* motion: a slow hover, a blink, and a pop when the line changes */
+.asst-float { animation: asst-float 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.asst-eyes { animation: asst-blink 5.4s infinite; transform-box: fill-box; transform-origin: center; }
+.asst-blip { animation: asst-pulse 2.2s ease-in-out infinite; }
+.asst-btn:hover .asst-float { animation-duration: 1.6s; }
+.asst-bubble.is-pop { animation: asst-pop .32s cubic-bezier(.2,1.2,.4,1); }
+
+@keyframes asst-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes asst-blink { 0%,92%,100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes asst-pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes asst-pop { from { opacity: 0; transform: translateY(6px) scale(.97); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .asst-float, .asst-eyes, .asst-blip, .asst-bubble.is-pop { animation: none; }
+}
+@media (max-width: 760px) {
+  .asst { right: .75rem; bottom: .75rem; }
+  .asst-bubble { max-width: 180px; padding: .6rem .7rem .55rem; }
+  .asst-text { font-size: .8rem; }
+  .asst-btn { width: 58px; height: 68px; }
+  .asst-close { margin-bottom: 46px; }
+}
