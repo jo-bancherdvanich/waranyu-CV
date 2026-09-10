@@ -1765,3 +1765,17 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .asst-btn { width: 58px; height: 68px; }
   .asst-close { margin-bottom: 46px; }
 }
+
+/* Folded away: the bubble goes, the character stays so there is a way back.
+ * A permanent dismissal left no route to reopen it, which was the bug. */
+.asst.is-quiet .asst-bubble,
+.asst.is-quiet .asst-close { display: none; }
+.asst.is-quiet .asst-btn { opacity: .62; }
+.asst.is-quiet .asst-btn:hover { opacity: 1; }
+.asst.is-quiet .asst-btn::after {
+  content: "";
+  position: absolute; top: 4px; right: 6px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c3);
+}
+.asst-btn { position: relative; }

@@ -6,13 +6,23 @@
  * size, and correct in both themes.
  *
  * What it says depends on the page, so it acts as a guide to the work rather
- * than decoration. Dismissing it is remembered.
+ * than decoration. Closing the bubble only folds it away — the character stays
+ * as the way back in, and that choice lasts the session rather than forever.
  */
 (function () {
   "use strict";
 
-  var KEY = "wb-assistant-hidden";
-  try { if (localStorage.getItem(KEY) === "1") return; } catch (e) { /* private mode */ }
+  var KEY = "wb-assistant-quiet";
+  /* An earlier build hid this permanently. Clear that flag so anyone who
+     dismissed it then gets the guide back. */
+  try { localStorage.removeItem("wb-assistant-hidden"); } catch (e) { /* private mode */ }
+  function quiet(v) {
+    try {
+      if (v === undefined) return sessionStorage.getItem(KEY) === "1";
+      if (v) sessionStorage.setItem(KEY, "1"); else sessionStorage.removeItem(KEY);
+    } catch (e) { /* private mode: fall back to showing it */ }
+    return v;
+  }
 
   /* ---- what it says, per page ----------------------------------------- */
   var page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
@@ -99,7 +109,7 @@
         '</g>' +
       '</svg>' +
     '</button>' +
-    '<button type="button" class="asst-close" aria-label="Hide the guide">&times;</button>';
+    '<button type="button" class="asst-close" aria-label="Hide the message">&times;</button>';
   document.body.appendChild(host);
 
   var textEl = host.querySelector(".asst-text");
@@ -116,19 +126,31 @@
 
   say(0);
   host.querySelector(".asst-btn").addEventListener("click", function () {
+    /* if it was folded away, the first tap brings the message back */
+    if (host.classList.contains("is-quiet")) { fold(false); return; }
     i++;
     say(i);
   });
-  host.querySelector(".asst-close").addEventListener("click", function () {
-    host.remove();
-    try { localStorage.setItem(KEY, "1"); } catch (e) { /* ignore */ }
+  /* folding, not removing — the character stays as the way back in */
+  function fold(on) {
+    host.classList.toggle("is-quiet", on);
+    quiet(on);
+  }
+  host.querySelector(".asst-close").addEventListener("click", function (e) {
+    e.stopPropagation();
+    fold(true);
   });
+  if (quiet()) host.classList.add("is-quiet");
 
   /* say the next line every so often, but never while the reader is hovering */
   var paused = false;
   host.addEventListener("mouseenter", function () { paused = true; });
   host.addEventListener("mouseleave", function () { paused = false; });
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    setInterval(function () { if (!paused) { i++; say(i); } }, 9000);
+    setInterval(function () {
+      if (paused || host.classList.contains("is-quiet")) return;
+      i++;
+      say(i);
+    }, 9000);
   }
 })();
