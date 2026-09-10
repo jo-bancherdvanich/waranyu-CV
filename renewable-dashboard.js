@@ -23,6 +23,14 @@
   if (!root || !window.RENEWABLE_ROWS) return;
   var R = window.RENEWABLE_ROWS;
 
+  /* Chart geometry is responsive. The SVGs scale to their container, so on a
+   * phone a 640-unit viewBox squeezed into ~316px rendered 9px axis labels at
+   * about 4px — unreadable. A narrower viewBox raises the scale factor, and
+   * .is-narrow bumps the label size in viewBox units on top of that. */
+  function narrow() { return window.innerWidth <= 720; }
+  function vbW() { return narrow() ? 400 : 640; }
+  function svgCls() { return "dash-svg" + (narrow() ? " is-narrow" : ""); }
+
   var nums = function (s) { return s.split(",").map(Number); };
   var fC = nums(R.cols.c), fY = nums(R.cols.y), fS = nums(R.cols.s), fG = nums(R.cols.g);
   var N = fC.length;
@@ -125,7 +133,7 @@
 
   /* ---- the share trend, with the 2015 LRET marker ----------------------- */
   function shareLine(a) {
-    var W = 640, H = 220, PL = 40, PR = 12, PT = 16, PB = 26;
+    var W = vbW(), H = 220, PL = 40, PR = 12, PT = 16, PB = 26;
     var vals = a.shareByYear, n = vals.length;
     var max = Math.max.apply(null, vals) * 1.18 || 1;
     var x = function (k) { return PL + (k / (n - 1)) * (W - PL - PR); };
@@ -163,7 +171,7 @@
     }
 
     var xlab = "";
-    [0, 5, 10, 15, n - 1].forEach(function (k) {
+    (narrow() ? [3, 9, 15, n - 1] : [0, 5, 10, 15, n - 1]).forEach(function (k) {
       xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 8) + '" class="dash-axis" text-anchor="middle">' +
               R.years[k] + '</text>';
     });
@@ -175,7 +183,7 @@
       })
     };
     return '<div class="dash-chart" data-hover="share">' +
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="' + svgCls() + '" role="img" ' +
       'aria-label="Renewable share of generation, ' + esc(state.country) + ', 2005 to 2024">' +
       grid + '<path d="' + area + '" class="dash-area"/>' +
       '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + lret + marker + xlab + '</svg></div>';
@@ -185,7 +193,7 @@
   function clustered(first, second, labelA, labelB) {
     var keys = Object.keys(second).filter(function (k) { return second[k] > 0 || first[k] > 0; });
     keys.sort(function (x, y) { return second[x] - second[y]; });
-    var W = 640, H = 240, PL = 46, PR = 10, PT = 34, PB = 34;
+    var W = vbW(), H = 240, PL = 46, PR = 10, PT = 34, PB = 34;
     var max = Math.max(
       Math.max.apply(null, keys.map(function (k) { return first[k]; })),
       Math.max.apply(null, keys.map(function (k) { return second[k]; }))
@@ -209,14 +217,20 @@
       var out = "";
       [[first[k], x1, "dash-colA", labelA], [second[k], x2, "dash-colB", labelB]].forEach(function (p) {
         var h = Math.max(1, (H - PT - PB) * (p[0] / max));
+        /* two value labels per band will not fit side by side on a phone, so
+           only the later year is labelled there — it is the one the title is
+           making a claim about, and the earlier bar is still drawn */
+        var showVal = !narrow() || p[2] === "dash-colB";
         out += '<rect x="' + p[1].toFixed(1) + '" y="' +
                (H - PB - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) +
                '" rx="2" class="' + p[2] + '"/>' +
-               '<text x="' + (p[1] + bw / 2).toFixed(1) + '" y="' + (H - PB - h - 4).toFixed(1) +
-               '" class="dash-axis dash-collabel" text-anchor="middle">' + (p[0] / 1000).toFixed(1) + '</text>';
+               (showVal
+                 ? '<text x="' + (p[1] + bw / 2).toFixed(1) + '" y="' + (H - PB - h - 4).toFixed(1) +
+                   '" class="dash-axis dash-collabel" text-anchor="middle">' + (p[0] / 1000).toFixed(1) + '</text>'
+                 : "");
       });
       out += '<text x="' + cx.toFixed(1) + '" y="' + (H - 10) + '" class="dash-axis" text-anchor="middle">' +
-             esc(k) + '</text>';
+             esc(narrow() ? k.slice(0, 4) : k) + '</text>';
       return out;
     }).join("");
 
@@ -226,7 +240,7 @@
       '<rect x="' + (PL + 52) + '" y="10" width="9" height="9" rx="2" class="dash-colB"/>' +
       '<text x="' + (PL + 66) + '" y="18" class="dash-axis">' + labelB + '</text>';
 
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="' + svgCls() + '" role="img" ' +
       'aria-label="Generation by source, ' + labelA + ' against ' + labelB + '">' +
       grid + legend + body + '</svg>' +
       '<p class="dash-axistitle">Generation (TWh)</p>';
@@ -234,7 +248,7 @@
 
   /* ---- one line per source group, across every year --------------------- */
   function sourceLines(groupYear) {
-    var W = 640, H = 250, PL = 42, PR = 96, PT = 16, PB = 28;
+    var W = vbW(), H = 250, PL = 42, PR = 96, PT = 16, PB = 28;
     var keys = Object.keys(groupYear).filter(function (g) {
       return groupYear[g].some(function (v) { return v > 0; });
     });
@@ -263,12 +277,13 @@
       var endY = y(groupYear[g][LATEST] / 1000);
       return '<polyline points="' + pts.join(" ") + '" class="dash-line dash-s' + (gi % 5) + '"/>' +
              '<circle cx="' + x(n - 1).toFixed(1) + '" cy="' + endY.toFixed(1) + '" r="2.6" class="dash-sdot dash-s' + (gi % 5) + '"/>' +
+             (narrow() && gi > 2 ? '' :
              '<text x="' + (W - PR + 8) + '" y="' + (endY + 3).toFixed(1) + '" class="dash-axis dash-slabel-' + (gi % 5) + '">' +
-             esc(g) + " " + (groupYear[g][LATEST] / 1000).toFixed(1) + '</text>';
+             esc(g) + (narrow() ? "" : " " + (groupYear[g][LATEST] / 1000).toFixed(1)) + '</text>');
     }).join("");
 
     var xlab = "";
-    [0, 5, 10, 15, n - 1].forEach(function (k) {
+    (narrow() ? [3, 9, 15, n - 1] : [0, 5, 10, 15, n - 1]).forEach(function (k) {
       xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 8) + '" class="dash-axis" text-anchor="middle">' +
               R.years[k] + '</text>';
     });
@@ -286,7 +301,7 @@
     };
 
     return '<div class="dash-chart" data-hover="sources">' +
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="' + svgCls() + '" role="img" ' +
       'aria-label="Generation by source group over time, ' + esc(state.country) + '">' +
       grid + lines + xlab + '</svg></div>' +
       '<p class="dash-axistitle">Generation (TWh)</p>';
@@ -428,6 +443,13 @@
     else if (key === "") { state[dim] = null; }
     else if (dim === "year") { state.year = state.year === +key ? null : +key; }
     else { state[dim] = state[dim] === key ? null : key; }
+    render();
+  });
+
+  var wasNarrow = narrow();
+  window.addEventListener("resize", function () {
+    if (narrow() === wasNarrow) return;
+    wasNarrow = narrow();
     render();
   });
 

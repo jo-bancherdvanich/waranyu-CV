@@ -17,6 +17,14 @@
   if (!root || !window.FRESHMART_ROWS) return;
   var R = window.FRESHMART_ROWS;
 
+  /* Chart geometry is responsive. The SVGs scale to their container, so on a
+   * phone a 640-unit viewBox squeezed into ~316px rendered 9px axis labels at
+   * about 4px — unreadable. A narrower viewBox raises the scale factor, and
+   * .is-narrow bumps the label size in viewBox units on top of that. */
+  function narrow() { return window.innerWidth <= 720; }
+  function vbW() { return narrow() ? 400 : 640; }
+  function svgCls() { return "dash-svg" + (narrow() ? " is-narrow" : ""); }
+
   /* ---- decode the columns ------------------------------------------- */
   var nums = function (s) {
     var parts = s.split(","), out = new Int32Array(parts.length), i;
@@ -179,7 +187,7 @@
 
   /* two-series line, for revenue this year against the same period last year */
   function dualLine(sA, sB, labelA, labelB, showB) {
-    var W = 640, H = 210, PL = 52, PR = 12, PT = 30, PB = 30;
+    var W = vbW(), H = 210, PL = 52, PR = 12, PT = 30, PB = 30;
     var all = showB ? sA.concat(sB) : sA;
     var max = Math.max.apply(null, all) * 1.1 || 1;
     var x = function (k) { return PL + (k / 11) * (W - PL - PR); };
@@ -194,15 +202,20 @@
               kShort(t) + '</text>';
     });
     var xlab = "";
-    [0, 3, 6, 9, 11].forEach(function (k) {
+    (narrow() ? [2, 5, 8, 11] : [0, 3, 6, 9, 11]).forEach(function (k) {
       xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 10) + '" class="dash-axis" text-anchor="middle">' +
               MONTHS[k].slice(0, 3) + '</text>';
     });
+    /* on a phone the full series names do not fit, and the year is the part
+       that actually distinguishes them */
+    var legA = narrow() ? labelA.split(" ").pop() : labelA;
+    var legB = narrow() ? labelB.split(" ").pop() : labelB;
+    var gap = narrow() ? 64 : 128;
     var legend =
       (showB ? '<rect x="' + PL + '" y="8" width="9" height="9" rx="2" class="dash-colA"/>' +
-               '<text x="' + (PL + 14) + '" y="16" class="dash-axis">' + labelB + '</text>' : "") +
-      '<rect x="' + (PL + (showB ? 128 : 0)) + '" y="8" width="9" height="9" rx="2" class="dash-colB"/>' +
-      '<text x="' + (PL + (showB ? 142 : 14)) + '" y="16" class="dash-axis">' + labelA + '</text>';
+               '<text x="' + (PL + 14) + '" y="16" class="dash-axis">' + legB + '</text>' : "") +
+      '<rect x="' + (PL + (showB ? gap : 0)) + '" y="8" width="9" height="9" rx="2" class="dash-colB"/>' +
+      '<text x="' + (PL + (showB ? gap + 14 : 14)) + '" y="16" class="dash-axis">' + legA + '</text>';
 
     hoverData.ytd = {
       top: PT, bottom: H - PB,
@@ -214,7 +227,7 @@
       })
     };
     return '<div class="dash-chart" data-hover="ytd">' +
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" aria-label="' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="' + svgCls() + '" role="img" aria-label="' +
       labelA + (showB ? " against " + labelB : "") + '">' + grid + legend +
       (showB ? '<polyline points="' + path(sB) + '" class="dash-line dash-linePrev"/>' : "") +
       '<polyline points="' + path(sA) + '" class="dash-line"/>' + xlab + '</svg></div>' +
@@ -223,7 +236,7 @@
 
   /* single-series line, for sales volume by month */
   function volumeLine(vals) {
-    var W = 640, H = 190, PL = 52, PR = 12, PT = 18, PB = 30;
+    var W = vbW(), H = 190, PL = 52, PR = 12, PT = 18, PB = 30;
     var lo = Math.min.apply(null, Array.prototype.slice.call(vals));
     var hi = Math.max.apply(null, Array.prototype.slice.call(vals));
     var pad = (hi - lo) * 0.35 || hi * 0.1 || 1;
@@ -241,7 +254,7 @@
               Math.round(t).toLocaleString() + '</text>';
     });
     var xlab = "";
-    [0, 3, 6, 9, 11].forEach(function (k) {
+    (narrow() ? [2, 5, 8, 11] : [0, 3, 6, 9, 11]).forEach(function (k) {
       xlab += '<text x="' + x(k).toFixed(1) + '" y="' + (H - 10) + '" class="dash-axis" text-anchor="middle">' +
               MONTHS[k].slice(0, 3) + '</text>';
     });
@@ -252,7 +265,7 @@
       })
     };
     return '<div class="dash-chart" data-hover="vol">' +
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" aria-label="Sales volume by month">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" class="' + svgCls() + '" role="img" aria-label="Sales volume by month">' +
       grid + '<polyline points="' + pts.join(" ") + '" class="dash-line"/>' + xlab + '</svg></div>' +
       '<p class="dash-axistitle">Units Sold</p>';
   }
@@ -265,7 +278,7 @@
    * reason. The axis is drawn with its baseline labelled so the truncation is
    * visible rather than implied. */
   function columns(vals, labels) {
-    var W = 640, H = 230, PL = 46, PR = 10, PT = 26, PB = 34;
+    var W = vbW(), H = 230, PL = 46, PR = 10, PT = 26, PB = 34;
     var arr = Array.prototype.slice.call(vals);
     var lo = Math.min.apply(null, arr), hi = Math.max.apply(null, arr);
     var step = hi - lo > 4000 ? 2000 : hi - lo > 1500 ? 1000 : 500;
@@ -296,7 +309,7 @@
              labels[k].slice(0, 3) + '</text>';
     }).join("");
 
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="dash-svg" role="img" ' +
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="' + svgCls() + '" role="img" ' +
       'aria-label="Sales volume by day of week">' + grid + body + '</svg>' +
       '<p class="dash-axistitle">Units Sold · axis starts at ' + (base / 1000).toFixed(0) + 'K</p>';
   }
@@ -415,6 +428,13 @@
       var val = dim === "year" ? +key : key;
       state[dim] = state[dim] === val ? null : val;
     }
+    render();
+  });
+
+  var wasNarrow = narrow();
+  window.addEventListener("resize", function () {
+    if (narrow() === wasNarrow) return;
+    wasNarrow = narrow();
     render();
   });
 

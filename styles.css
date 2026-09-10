@@ -1603,3 +1603,17 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   #primary-nav a::after { display: none; }
   .topbar .github-link { font-size: .82rem; }
 }
+
+/* Phone-sized charts. The SVG scales to its container, so a label sized in
+ * viewBox units shrinks with it: 9px in a 640-unit box rendered at roughly 4px
+ * on a 390px screen. The dashboards narrow the viewBox to 400 units at this
+ * width; these sizes are the other half of the fix. */
+.dash-svg.is-narrow .dash-axis { font-size: 14px; }
+.dash-svg.is-narrow .dash-collabel { font-size: 13px; }
+.dash-svg.is-narrow .dash-eventlab,
+.dash-svg.is-narrow .dash-markerlab { font-size: 13px; }
+@media (max-width: 720px) {
+  .dash-colval { font-size: .74rem; }
+  .dash-collab { font-size: .76rem; }
+  .dash-axistitle { font-size: .74rem; }
+}
