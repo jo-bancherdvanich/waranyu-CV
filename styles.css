@@ -2720,3 +2720,80 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
   transform-origin: left;
   pointer-events: none;
 }
+
+/* ---- Education: colour and a picture ---------------------------------------
+ * Each card carries its own colour from the chart palette (blue for the
+ * masters, green for the statistics degree): a coloured top edge, a large
+ * line illustration in the corner, tinted tags and a soft glow behind. */
+.timeline-item { --edu: var(--c1); position: relative; overflow: hidden; }
+.edu-bach { --edu: var(--c2); }
+.timeline-item::before {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--edu), color-mix(in srgb, var(--edu) 0%, transparent));
+}
+.timeline-item::after {
+  content: "";
+  position: absolute; z-index: 0;
+  right: -12%; top: -30%;
+  width: 60%; aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--edu) 26%, transparent), transparent 72%);
+  pointer-events: none;
+}
+.timeline-item > * { position: relative; z-index: 1; }
+.edu-art {
+  position: absolute; z-index: 0;
+  right: 1.2rem; top: 1.2rem;
+  width: clamp(88px, 11vw, 132px); aspect-ratio: 1;
+  color: var(--edu);
+  opacity: .9;
+}
+.edu-art svg { width: 100%; height: 100%; display: block; }
+.edu-bars { stroke: var(--edu); }
+#education .timeline-date { color: var(--edu); }
+#education .tags li { border-color: color-mix(in srgb, var(--edu) 40%, var(--line)); color: var(--edu); background: color-mix(in srgb, var(--edu) 9%, var(--bg)); }
+.timeline-item .role { padding-right: clamp(96px, 12vw, 140px); }
+.timeline-item .company { padding-right: clamp(96px, 12vw, 140px); }
+#certificates .timeline-item { --edu: var(--c3); }
+#certificates .timeline-item:nth-child(2) { --edu: var(--c5); }
+#certificates .timeline-date { color: var(--edu); }
+#certificates .tags li { border-color: color-mix(in srgb, var(--edu) 40%, var(--line)); color: var(--edu); background: color-mix(in srgb, var(--edu) 9%, var(--bg)); }
+@media (max-width: 720px) {
+  .edu-art { width: 72px; right: .9rem; top: .9rem; opacity: .7; }
+  .timeline-item .role, .timeline-item .company { padding-right: 76px; }
+}
+
+/* ---- Capabilities: coloured tiles ------------------------------------------
+ * Each row takes a palette colour: a filled icon badge, a tinted number,
+ * a coloured verb chip and a faint tint across the row on hover. */
+.capability-list li:nth-child(1) { --cap: var(--c1); }
+.capability-list li:nth-child(2) { --cap: var(--c2); }
+.capability-list li:nth-child(3) { --cap: var(--c3); }
+.capability-list li:nth-child(4) { --cap: var(--c4); }
+.capability-list li:nth-child(5) { --cap: var(--c5); }
+.capability-list li { border-left: 3px solid transparent; }
+.capability-list li:hover, .capability-list li.is-open { border-left-color: var(--cap); background: color-mix(in srgb, var(--cap) 9%, transparent); }
+.capability-list li::before { display: none; }
+.cap-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  color: var(--bg);
+  background: var(--cap);
+  opacity: 1;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--cap) 35%, transparent);
+}
+.capability-list li:hover .cap-icon, .capability-list li.is-open .cap-icon { color: var(--bg); transform: scale(1.06) rotate(-4deg); }
+.cap-icon svg { width: 22px; height: 22px; }
+.cap-num { color: var(--cap); font-weight: 500; }
+.cap-verb { color: var(--cap); border-color: color-mix(in srgb, var(--cap) 45%, var(--line)); background: color-mix(in srgb, var(--cap) 10%, transparent); }
+.capability-list li:hover .cap-verb, .capability-list li.is-open .cap-verb { border-color: var(--cap); color: var(--cap); }
+.cap-where { color: var(--cap); opacity: .85; }
+.capability-list li { grid-template-columns: 46px 52px minmax(0, 1fr) auto 22px; column-gap: .8rem; }
+@media (max-width: 720px) {
+  .capability-list li { grid-template-columns: 46px minmax(0, 1fr) auto; }
+  .cap-icon { width: 38px; height: 38px; border-radius: 10px; }
+}
+:root[data-theme="light"] .cap-icon { color: #ffffff; }
+:root[data-theme="light"] .capability-list li:hover .cap-icon, :root[data-theme="light"] .capability-list li.is-open .cap-icon { color: #ffffff; }
