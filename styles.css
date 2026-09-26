@@ -1794,6 +1794,21 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .dock-link:hover .dock-tip, .dock-link:focus-visible .dock-tip,
 .dock-contact:hover .dock-tip, .dock-contact:focus-visible .dock-tip { opacity: 1; transform: translate(-50%, 0); }
 @media (hover: none) { .dock-tip { display: block; opacity: 0 !important; } }
+/* The label that stays: shown on tap and when a new section arrives */
+.dock-label {
+  position: absolute; bottom: calc(100% + 12px); left: 50%;
+  padding: .45rem .8rem;
+  color: #f4f8fb; background: #080b11;
+  border: 1px solid rgba(255, 255, 255, .14); border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+  font-size: .85rem; font-weight: 600; white-space: nowrap;
+  opacity: 0; transform: translate(-50%, 6px);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.dock-label.is-shown { opacity: 1; transform: translate(-50%, 0); }
+/* While the label is up, the hover tooltip would sit on top of it */
+.dock:has(.dock-label.is-shown) .dock-tip { opacity: 0 !important; }
 /* Room so the dock never sits on top of the footer text */
 body { padding-bottom: 5.5rem; }
 @media (max-width: 480px) {
@@ -1811,6 +1826,39 @@ body { padding-bottom: 5.5rem; }
   .dock-contact { width: 42px; height: 42px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .dock-link, .dock-contact, .dock-tip { transition: none; }
+  .dock-link, .dock-contact, .dock-tip, .dock-label { transition: none; }
 }
 @media print { .dock { display: none; } body { padding-bottom: 0; } }
+
+/* ---- case studies: no sideways scroll ------------------------------------
+ * The blurred screenshots behind a case study are full-bleed and scaled up,
+ * which pushed the page 26px wider than a phone (90px on a laptop). A wider
+ * page makes a phone zoom out and leaves the bottom dock partly off screen.
+ * Clip sideways at the shell; the clip margin keeps the backdrop reaching
+ * almost to the edge on screens wider than the 1440px shell. */
+.site-shell:has(> main > .case) {
+  overflow-x: clip;
+  overflow-clip-margin: max(0px, calc((100vw - 1440px) / 2 - 16px));
+}
+
+/* ---- smooth shapes -------------------------------------------------------
+ * Softer, rounder corners throughout, like the reference: buttons, chips and
+ * labels become full pills, cards and screenshots get generous radii. Kept in
+ * one block so the whole look can be tuned from here. */
+.primary,
+.skip-link,
+.tags li,
+.dock-tip,
+.dock-label { border-radius: 999px; }
+.primary { padding: 1rem 1.5rem; }
+.dock-label { padding: .5rem 1rem; }
+.project-card { border-radius: 24px; }
+.project-shot { border-radius: 14px; }
+.portrait-wrap { border-radius: 24px; }
+.portrait-link, .hero-chart { border-radius: 18px; }
+.case-shot { border-radius: 24px; }
+.case-shot img { border-radius: 18px; }
+.capability-list li { border-radius: 16px; }
+.principle-list li,
+.faq-list details { border-radius: 20px; }
+.nav-toggle { border-radius: 999px; }

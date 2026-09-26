@@ -84,6 +84,39 @@
   });
   var contactLink = nav.querySelector(".dock-contact");
 
+  /* ---- a name that stays long enough to read ---------------------------- */
+  // Hover tooltips vanish the moment a finger lifts, so a tap (and arriving
+  // at a new section while scrolling) shows the name in a label above the
+  // dock for a few seconds instead.
+  var bubble = document.createElement("span");
+  bubble.className = "dock-label";
+  bubble.setAttribute("aria-hidden", "true");
+  nav.appendChild(bubble);
+  var hideTimer = null, quietUntil = 0;
+  function flash(link, text) {
+    bubble.textContent = text;
+    var d = nav.getBoundingClientRect(), r = link.getBoundingClientRect();
+    // centred over the icon, but never past the edge of a narrow screen
+    var half = bubble.offsetWidth / 2 + 8;
+    var centre = Math.min(Math.max(r.left + r.width / 2, half), window.innerWidth - half);
+    bubble.style.left = (centre - d.left) + "px";
+    bubble.classList.add("is-shown");
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () { bubble.classList.remove("is-shown"); }, 3200);
+  }
+  links.forEach(function (a, k) {
+    a.addEventListener("click", function () {
+      flash(a, items[k].label);
+      // the smooth scroll passes other sections on the way; stay on this name
+      quietUntil = Date.now() + 1400;
+    });
+  });
+  contactLink.addEventListener("click", function () {
+    flash(contactLink, "Contact");
+    quietUntil = Date.now() + 1400;
+  });
+  var lastKey = null, first = true;
+
   /* ---- which section is on screen ------------------------------------- */
   // The current section is the last one whose top has passed 40% of the
   // viewport. Contact lights its own round button instead.
@@ -103,6 +136,13 @@
       if (on) a.setAttribute("aria-current", "location");
       else a.removeAttribute("aria-current");
     });
+    var key = onContact ? "contact" : (found ? items.indexOf(found) : null);
+    if (key !== lastKey && !first && key !== null && Date.now() > quietUntil) {
+      if (onContact) flash(contactLink, "Contact");
+      else flash(links[key], found.label);
+    }
+    lastKey = key;
+    first = false;
     contactLink.classList.toggle("is-current", onContact);
     if (onContact) contactLink.setAttribute("aria-current", "location");
     else contactLink.removeAttribute("aria-current");
