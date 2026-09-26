@@ -49,9 +49,9 @@
      section tone, including the banner gradient */
   --accent: #0a7096;
   --accent-soft: #085a78;
-  --highlight: #875400;
-  --tone: #eef3f8;
-  --band-top: #e4eef6;
+  --highlight: #9a5a00;
+  --tone: #e9eff5;
+  --band-top: #dde7f0;
   --c1: #0b7fa6;
   --c2: #0d7f62;
   --c3: #9a6410;
@@ -2501,3 +2501,82 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 96px; }
   @keyframes cs-grow { from { transform: scaleY(0); } }
   @keyframes ca-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
 }
+
+/* ---- design review pass ----------------------------------------------------
+ * 1. Phones: the project bullets fold behind a "Details" tap, so four cards
+ *    no longer take half the page. On wider screens they are always open
+ *    and the summary is hidden, so nothing changes there. */
+.project-more > summary { display: none; }
+.project-more .project-detail { margin-top: .95rem; }
+@media (max-width: 720px) {
+  .project-card { padding: 1.1rem; }
+  .project-card h3 { font-size: 1.4rem; }
+  .project-shot { margin: .8rem 0 .2rem; }
+  .project-more > summary {
+    display: inline-flex; align-items: center; gap: .45rem;
+    margin-top: .9rem;
+    color: var(--accent);
+    font-size: .88rem; font-weight: 600;
+    cursor: pointer; list-style: none;
+  }
+  .project-more > summary::-webkit-details-marker { display: none; }
+  .project-more > summary::after { content: "+"; font-family: "DM Mono", "DM Mono Fallback", monospace; }
+  .project-more[open] > summary::after { content: "\2013"; }
+  .project-more .project-detail { margin-top: .6rem; }
+  .project-card.project-card-featured .project-more > summary { color: #071019; }
+}
+
+/* 2. Case-study opening cards: a visible edge and a soft shadow in light
+ *    mode, and the whole illustration kept inside the page on wide screens. */
+:root[data-theme="light"] .ca-bg { stroke: rgba(15, 25, 34, .14); }
+:root[data-theme="light"] .case-art .ca-card,
+:root[data-theme="light"] .contact-art .ca-card { filter: drop-shadow(0 10px 22px rgba(15, 25, 34, .16)); }
+@media (min-width: 1000px) { .case-art { right: 0; } }
+
+/* 4. Tighter opening: one band holds the quote, the numbers and the tools */
+.banner { padding: clamp(3.6rem, 8vw, 6rem) 6vw 0; }
+.banner-stats { margin-top: 2.4rem; }
+.banner .tools-marquee { margin: 3rem calc(50% - 50vw) 0; padding: 1.2rem 0; border-top: 1px solid var(--line); border-bottom: 0; }
+
+/* 5. Capabilities: the first sentence of each explanation shows by default;
+ *    the tap reveals the rest. */
+.cap-why { opacity: 1; max-height: none; overflow: visible; margin-top: .55rem; }
+.cap-rest { display: none; }
+.capability-list li.is-open .cap-rest { display: inline; }
+.capability-list li.is-open .cap-why { margin-top: .55rem; }
+.capability-list li::after { content: "more"; font-size: .66rem; text-transform: uppercase; letter-spacing: .04em; }
+.capability-list li.is-open::after { content: "less"; transform: none; }
+@media (max-width: 720px) {
+  .capability-list li { grid-template-columns: 34px minmax(0, 1fr) auto; column-gap: .5rem; padding: 1rem .6rem; }
+  .cap-num, .cap-verb { display: none; }
+  .cap-icon { grid-column: 1; }
+  .cap-name, .cap-where, .cap-why { grid-column: 2; }
+  .capability-list li::after { grid-column: 3; }
+}
+
+/* 6. Mono labels: two sizes only (a label size and a caption size) */
+.eyebrow, .section-label > span, .timeline-date, .card-top, .tags, .cap-where, .cap-verb, .project-tech,
+.np-eyebrow, .sf-bottom, .sf-totop, .banner-stats dt, .availability, .dock-num, .case-meta dt,
+.portrait-wrap figcaption, .case-shot figcaption, .ww-card-sub, .ww-tile-label, .ww-wind, .ww-legend,
+.sq-count, .dash-slabel, .dash-alabel, .dash-axistitle, .ch-tip-label, .asst-more, .cap-num { font-size: .74rem; letter-spacing: .02em; }
+.tags li, .cap-num, .principle-list li::before { font-size: .74rem; }
+footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
+.timeline-date { font-size: clamp(1.6rem, 2.8vw, 2.3rem); letter-spacing: -.02em; }
+
+/* 7. Light mode: bands that read as bands */
+:root[data-theme="light"] #education,
+:root[data-theme="light"] #approach,
+:root[data-theme="light"] #faq { --sec-bg: #ffffff; }
+:root[data-theme="light"] .capabilities { --sec-bg: var(--tone); }
+:root[data-theme="light"] .banner,
+:root[data-theme="light"] .contact { --band-top: #dbe6f0; }
+:root[data-theme="light"] .principle-list li,
+:root[data-theme="light"] .faq-list details,
+:root[data-theme="light"] #education .timeline-item { background: var(--bg); }
+:root[data-theme="light"] .timeline-item,
+:root[data-theme="light"] .principle-list li,
+:root[data-theme="light"] .faq-list details,
+:root[data-theme="light"] .project-card:not(.project-card-featured) { box-shadow: 0 1px 2px rgba(15, 25, 34, .04), 0 8px 24px rgba(15, 25, 34, .06); }
+/* numbers share a baseline even when a label wraps to two lines */
+.banner-stats > div { justify-content: flex-end; }
+.banner-stats dt { min-height: 2.4em; display: flex; align-items: flex-start; justify-content: center; }

@@ -100,18 +100,16 @@
           </figure>
         </section>
 
-        <div class="tools-marquee" role="region" aria-label="Tools I use">
-          <div class="marquee-track"><ul class="marquee-list"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>SQL</li><li>Oracle</li><li>Python</li><li>R</li><li>Excel</li></ul><ul class="marquee-list" aria-hidden="true"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>SQL</li><li>Oracle</li><li>Python</li><li>R</li><li>Excel</li></ul></div>
-        </div>
-
         <section class="banner" aria-label="Introduction to selected work">
           <p class="banner-quote">Every chart here answers a question<br />someone <em class="h1-em">actually</em> needed answered.</p>
-          <p class="banner-sub">Four projects · Power BI · SQL · Python · R</p>
           <dl class="banner-stats">
-            <div><dt>transaction lines modelled</dt><dd><span class="stat" data-count="17697">17,697</span></dd></div>
-            <div><dt>tables in a normalised schema</dt><dd><span class="stat" data-count="16">16</span></dd></div>
-            <div><dt>renewable share forecast for 2035</dt><dd><span class="stat" data-count="44.6" data-dp="1">44.6%</span></dd></div>
+            <div><dt>projects, each with a live demo</dt><dd><span class="stat" data-count="4">4</span></dd></div>
+            <div><dt>degrees: statistics, then data analytics</dt><dd><span class="stat" data-count="2">2</span></dd></div>
+            <div><dt>award for a business case pitch</dt><dd><span class="stat" data-count="1">1</span></dd></div>
           </dl>
+          <div class="tools-marquee" role="region" aria-label="Tools I use">
+          <div class="marquee-track"><ul class="marquee-list"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>SQL</li><li>Oracle</li><li>Python</li><li>R</li><li>Excel</li></ul><ul class="marquee-list" aria-hidden="true"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>SQL</li><li>Oracle</li><li>Python</li><li>R</li><li>Excel</li></ul></div>
+          </div>
         </section>
 
         <section class="section projects" id="projects" aria-labelledby="projects-title">
@@ -123,12 +121,12 @@
               <div>
                 <h3>Australia's renewable transition</h3>
                 <p>A dashboard tracking Australia's shift to renewable electricity from 2005 to 2024, and where it lands by 2035.</p>
-                <ul class="project-detail">
+                <details class="project-more" open><summary>Details</summary><ul class="project-detail">
                   <li>Traced renewable share from 9% in 2005 to <span class="stat" data-count="35">35%</span> in 2024 — solar alone grew from 0.1 to 48.6 TWh</li>
                   <li>Forecast <span class="stat" data-count="44.6" data-dp="1">44.6%</span> renewable share by 2035 using R linear regression (R&sup2; ≈ <span class="stat" data-count="0.85" data-dp="2">0.85</span>, p &lt; 0.001)</li>
                   <li>Found Australia falls well short of its 82%-by-2030 target on current trajectory</li>
                   <li>Benchmarked against Germany (54.5%) and New Zealand (85.5%) to put the gap in context</li>
-                </ul>
+                </ul></details>
                 <p class="project-tech">Power BI · DAX · R · Time-series forecasting</p>
                 <p class="project-actions"><a class="project-btn is-primary" href="renewable.html#explore">Try the dashboard <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="renewable.html">Read the case study</a></p>
               </div>
@@ -139,12 +137,12 @@
               <div>
                 <h3>FreshMart sales dashboard</h3>
                 <p>A Power BI retail dashboard that turns raw transaction data into a view of where the money actually comes from.</p>
-                <ul class="project-detail">
+                <details class="project-more" open><summary>Details</summary><ul class="project-detail">
                   <li>Modelled <span class="stat" data-count="17697">17,697</span> transaction lines from 5,000 transactions across 60 products, 12 stores and 21 promotions into a Kimball star schema</li>
                   <li>Audited five source tables in Power Query: removed duplicate customers, standardised category spelling, and remapped 93 rows carrying an unmatched customer ID</li>
                   <li>Built DAX measures for revenue, gross margin, and year-on-year time intelligence</li>
                   <li>Delivered an executive view of performance by region, category, and day-of-week demand</li>
-                </ul>
+                </ul></details>
                 <p class="project-tech">Power BI · Power Query · DAX · Dimensional modelling</p>
                 <p class="project-actions"><a class="project-btn is-primary" href="freshmart.html#explore">Try the dashboard <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="freshmart.html">Read the case study</a></p>
               </div>
@@ -155,12 +153,12 @@
               <div>
                 <h3>Football club database</h3>
                 <p>A relational database for football club management, designed from business rules up.</p>
-                <ul class="project-detail">
+                <details class="project-more" open><summary>Details</summary><ul class="project-detail">
                   <li>Designed a <span class="stat" data-count="16">16</span>-table normalised schema from 18 documented business rules</li>
                   <li>Drew the ERD, then built and tested the Oracle SQL tables for relational integrity</li>
                   <li>Wrote <span class="stat" data-count="9">9</span> analytical queries: season ladder, top scorers, goals per ground, MVP rankings, away form</li>
                   <li>Used joins, aggregation, subqueries, HAVING and LEFT JOINs to answer each question</li>
-                </ul>
+                </ul></details>
                 <p class="project-tech">Oracle SQL · ERD · Normalisation</p>
                 <p class="project-actions"><a class="project-btn is-primary" href="football-database.html#run-it">Run the queries <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="football-database.html">Read the case study</a></p>
               </div>
@@ -171,12 +169,12 @@
               <div>
                 <h3>WeatherWise</h3>
                 <p>An interactive weather advisor that answers questions in plain language, built in a Jupyter notebook.</p>
-                <ul class="project-detail">
+                <details class="project-more" open><summary>Details</summary><ul class="project-detail">
                   <li>Pulls a 5-day forecast in 3-hour blocks from the OpenWeatherMap API</li>
                   <li>Charts temperature and rainfall with Matplotlib and ipywidgets controls</li>
                   <li>Rule-based outdoor activity advice, plus natural-language question parsing</li>
                   <li>Caches responses to avoid repeat API calls</li>
-                </ul>
+                </ul></details>
                 <p class="project-tech">Python · Matplotlib · ipywidgets · REST API</p>
                 <p class="project-actions"><a class="project-btn is-primary" href="weatherwise.html#ww-demo">Try the demo <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="weatherwise.html">Read the case study</a></p>
               </div>
@@ -244,7 +242,7 @@
               <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-1">Power BI and DAX</button></span>
               <span class="cap-where">FreshMart &middot; Renewable transition</span>
               <span class="cap-verb">Visualise</span>
-              <p class="cap-why" id="cap-why-1">A dashboard is where the analysis meets someone who has four minutes between meetings. DAX is what turns a clean model into measures they can filter without the numbers quietly breaking.</p>
+              <p class="cap-why" id="cap-why-1"><span class="cap-lead">A dashboard is where the analysis meets someone who has four minutes between meetings.</span><span class="cap-rest"> DAX is what turns a clean model into measures they can filter without the numbers quietly breaking.</span></p>
             </li>
             <li>
               <span class="cap-num">02</span>
@@ -252,7 +250,7 @@
               <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-2">SQL and data modelling</button></span>
               <span class="cap-where">Football club database &middot; FreshMart star schema</span>
               <span class="cap-verb">Structure</span>
-              <p class="cap-why" id="cap-why-2">Almost every analyst job is SQL against a schema somebody else designed. Knowing how those schemas are built is what lets you spot a join that is about to double-count before you publish the number.</p>
+              <p class="cap-why" id="cap-why-2"><span class="cap-lead">Almost every analyst job is SQL against a schema somebody else designed.</span><span class="cap-rest"> Knowing how those schemas are built is what lets you spot a join that is about to double-count before you publish the number.</span></p>
             </li>
             <li>
               <span class="cap-num">03</span>
@@ -260,7 +258,7 @@
               <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-3">Python, R and Excel</button></span>
               <span class="cap-where">WeatherWise &middot; Renewable forecast</span>
               <span class="cap-verb">Analyse</span>
-              <p class="cap-why" id="cap-why-3">Python and R handle the work that will not fit in a dashboard — reshaping awkward data, calling an API, fitting a model. Excel is still where most stakeholders actually want the answer.</p>
+              <p class="cap-why" id="cap-why-3"><span class="cap-lead">Python and R handle the work that will not fit in a dashboard — reshaping awkward data, calling an API, fitting a model.</span><span class="cap-rest"> Excel is still where most stakeholders actually want the answer.</span></p>
             </li>
             <li>
               <span class="cap-num">04</span>
@@ -268,7 +266,7 @@
               <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-4">Forecasting and statistics</button></span>
               <span class="cap-where">Renewable transition &middot; Statistics degree</span>
               <span class="cap-verb">Predict</span>
-              <p class="cap-why" id="cap-why-4">Anyone can draw a trend line. Statistics is what tells you whether it means anything, and how much confidence to attach before someone plans a budget around it.</p>
+              <p class="cap-why" id="cap-why-4"><span class="cap-lead">Anyone can draw a trend line.</span><span class="cap-rest"> Statistics is what tells you whether it means anything, and how much confidence to attach before someone plans a budget around it.</span></p>
             </li>
             <li>
               <span class="cap-num">05</span>
@@ -276,7 +274,7 @@
               <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-5">Data storytelling</button></span>
               <span class="cap-where">Every project on this page</span>
               <span class="cap-verb">Explain</span>
-              <p class="cap-why" id="cap-why-5">An analysis nobody acts on has failed, however correct it was. Most of the value sits in explaining the finding to a person who is never going to read the code.</p>
+              <p class="cap-why" id="cap-why-5"><span class="cap-lead">An analysis nobody acts on has failed, however correct it was.</span><span class="cap-rest"> Most of the value sits in explaining the finding to a person who is never going to read the code.</span></p>
             </li>
           </ul>
         </section>

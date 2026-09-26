@@ -134,13 +134,29 @@
     });
   }
 
+  /* ---- project details fold on phones --------------------------------- */
+  // The bullets ship open (correct without JS and on wide screens); on a
+  // phone they start folded so four cards do not fill half the page.
+  var narrowQ = window.matchMedia("(max-width: 720px)");
+  function foldDetails() {
+    document.querySelectorAll(".project-more").forEach(function (d) {
+      if (narrowQ.matches) { if (!d.hasAttribute("data-user")) d.open = false; }
+      else d.open = true;
+    });
+  }
+  document.querySelectorAll(".project-more").forEach(function (d) {
+    d.addEventListener("toggle", function () { if (narrowQ.matches) d.setAttribute("data-user", "1"); });
+  });
+  foldDetails();
+  if (narrowQ.addEventListener) narrowQ.addEventListener("change", foldDetails);
+
   /* ---- project cards ---------------------------------------------------- */
   // The cards carry two real links now, so the card itself is no longer an
   // anchor. Clicking the surrounding area still opens the case study, but a
   // click that landed on a link or a button is left alone.
   document.querySelectorAll(".project-card[data-href]").forEach(function (card) {
     card.addEventListener("click", function (e) {
-      if (e.target.closest("a, button")) return;
+      if (e.target.closest("a, button, summary")) return;
       if (window.getSelection && String(window.getSelection())) return;
       window.location.href = card.getAttribute("data-href");
     });
