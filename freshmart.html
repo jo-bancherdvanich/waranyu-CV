@@ -165,7 +165,7 @@
               The Power BI report, rebuilt to run in your browser. All 17,697 transaction lines are loaded from the same five source CSVs, and every figure below is calculated here rather than typed in. Use the slicers, or <strong>click any bar to cross-filter the whole report</strong> — the same way a Power BI visual behaves. With nothing selected the KPI row reconciles with the published dashboard to the dollar.
             </p>
 
-            <div id="fm-dash" class="fmd" aria-label="Interactive FreshMart sales dashboard"></div>
+            <div id="fm-dash" class="fmd" role="region" aria-label="Interactive FreshMart sales dashboard"></div>
 
             <p class="fm-note">
               No Power BI licence, account, or server involved. The whole report is plain JavaScript reading a 17,697-row table, so it keeps working for anyone who opens the page.
@@ -250,6 +250,7 @@
         <div class="sf-bottom">
           <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
           <span>Last updated September 2026</span>
+          <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
           <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
         </div>
       </footer>
