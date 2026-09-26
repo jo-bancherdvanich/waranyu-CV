@@ -2806,3 +2806,7 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 :root[data-theme="light"] .edu-master { --edu: #8f6a00; }
 :root[data-theme="light"] .edu-bach { --edu: #b3122e; }
 .edu-master::before, .edu-bach::before { background: var(--edu-edge); height: 5px; }
+/* richer, filled Education illustrations */
+.edu-art { width: clamp(104px, 13vw, 156px); opacity: 1; filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--edu) 35%, transparent)); right: .9rem; top: .9rem; }
+.timeline-item .role, .timeline-item .company { padding-right: clamp(112px, 14vw, 164px); }
+@media (max-width: 720px) { .edu-art { width: 84px; opacity: .95; } .timeline-item .role, .timeline-item .company { padding-right: 88px; } }
