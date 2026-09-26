@@ -1742,64 +1742,75 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   .stagger { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
-/* ---- section navigator --------------------------------------------------
- * A black button in the corner, in both themes, that names the section on
- * screen and opens a list of every section on the page. The panel is pinned
- * to the same black so its text colours are fixed rather than themed. */
-.snav {
-  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 70;
-  display: flex; flex-direction: column; align-items: flex-end; gap: .6rem;
-  font-family: "Space Grotesk", sans-serif;
+/* ---- section dock -------------------------------------------------------
+ * A dark pill fixed to the bottom centre, one icon per section and a round
+ * contact button at the end. It is pinned to the same near-black in both
+ * themes, so its colours are fixed rather than themed. */
+.dock {
+  position: fixed; z-index: 70;
+  left: 50%; bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: .35rem;
+  max-width: calc(100vw - 1.5rem);
+  padding: .4rem;
+  background: rgba(8, 11, 17, .94);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 999px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
-.snav-btn {
-  display: inline-flex; align-items: center; gap: .6rem;
-  max-width: min(78vw, 320px);
-  padding: .8rem 1.15rem .8rem 1rem;
-  color: #f4f8fb; background: #050608;
-  border: 1px solid rgba(255, 255, 255, .16); border-radius: 999px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
-  font: inherit; font-size: .9rem; font-weight: 600;
-  cursor: pointer;
-  transition: transform .2s ease, border-color .2s ease;
+/* The dock is a <nav>, so the top menu's hover underline would reach it */
+.dock a::after { content: none; }
+.dock-list { display: flex; align-items: center; gap: .15rem; margin: 0; padding: 0; list-style: none; }
+.dock-link, .dock-contact {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  color: #a9bccb; text-decoration: none;
+  transition: color .2s ease, background .2s ease, transform .2s ease;
 }
-.snav-btn:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, .4); }
-.snav-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.snav.is-open .snav-btn { border-color: #5ecbf5; }
-.snav-ico { width: 18px; height: 18px; flex: 0 0 auto; }
-.snav-current { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-/* .snav prefix: the panel is a <nav>, and the site's own nav rules (hidden on
-   phones, flex row on desktop) must not reach it */
-.snav .snav-panel {
-  display: block;
-  width: min(88vw, 300px);
-  max-height: min(70vh, 480px);
-  overflow-y: auto;
-  padding: .45rem;
-  background: #050608;
-  border: 1px solid rgba(255, 255, 255, .16); border-radius: 16px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, .45);
+.dock-ico svg { display: block; width: 22px; height: 22px; }
+.dock-num { font-family: "DM Mono", monospace; font-size: .8rem; }
+.dock-link:hover { color: #ffffff; background: rgba(255, 255, 255, .08); }
+.dock-link.is-current { color: #5ecbf5; background: rgba(94, 203, 245, .14); }
+.dock-sep { width: 1px; height: 28px; margin: 0 .2rem; background: rgba(255, 255, 255, .16); }
+.dock-contact { width: 54px; height: 54px; color: #071019; background: #5ecbf5; }
+.dock-contact:hover, .dock-contact.is-current { background: #9fe0ff; transform: translateY(-2px); }
+.dock-link:focus-visible, .dock-contact:focus-visible { outline: 2px solid #5ecbf5; outline-offset: 2px; }
+/* Name of each icon: a tooltip above it on hover or keyboard focus, and the
+   link's accessible name the rest of the time (visually hidden, still read) */
+.dock-tip {
+  position: absolute; bottom: calc(100% + 12px); left: 50%;
+  padding: .35rem .6rem;
+  color: #f4f8fb; background: #080b11;
+  border: 1px solid rgba(255, 255, 255, .14); border-radius: 8px;
+  font-size: .78rem; font-weight: 500; white-space: nowrap;
+  opacity: 0; transform: translate(-50%, 4px);
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
 }
-.snav .snav-panel[hidden] { display: none; }
-.snav-list { margin: 0; padding: 0; list-style: none; }
-.snav-list a {
-  display: flex; align-items: baseline; gap: .8rem;
-  padding: .7rem .8rem;
-  color: #d7e3ec; text-decoration: none;
-  border-radius: 10px;
-  font-size: .95rem; line-height: 1.3;
+.dock-link:hover .dock-tip, .dock-link:focus-visible .dock-tip,
+.dock-contact:hover .dock-tip, .dock-contact:focus-visible .dock-tip { opacity: 1; transform: translate(-50%, 0); }
+@media (hover: none) { .dock-tip { display: block; opacity: 0 !important; } }
+/* Room so the dock never sits on top of the footer text */
+body { padding-bottom: 5.5rem; }
+@media (max-width: 480px) {
+  .dock { gap: .2rem; padding: .3rem; }
+  .dock-list { gap: 0; }
+  .dock-link { width: 38px; height: 38px; }
+  .dock-ico svg { width: 20px; height: 20px; }
+  .dock-contact { width: 46px; height: 46px; }
+  .dock-sep { margin: 0 .1rem; }
 }
-.snav-list a:hover, .snav-list a:focus-visible { color: #ffffff; background: rgba(255, 255, 255, .08); outline: none; }
-.snav-list a.is-current { color: #5ecbf5; }
-.snav-num { color: #8fa3b3; font-family: "DM Mono", monospace; font-size: .72rem; }
-.snav-list a.is-current .snav-num { color: #5ecbf5; }
-.snav-extra { margin-top: .3rem; padding-top: .3rem; border-top: 1px solid rgba(255, 255, 255, .12); }
-.snav-extra a { color: #8fa3b3; font-family: "DM Mono", monospace; font-size: .74rem; text-transform: uppercase; }
-@media (prefers-reduced-motion: no-preference) {
-  .snav.is-open .snav-panel { animation: snav-in .2s ease-out; }
+/* Case studies have up to nine buttons; keep them inside a small phone */
+@media (max-width: 400px) {
+  .dock-link { width: 34px; height: 34px; }
+  .dock-ico svg { width: 19px; height: 19px; }
+  .dock-contact { width: 42px; height: 42px; }
 }
-@keyframes snav-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@media (max-width: 720px) {
-  .snav { right: .75rem; bottom: .75rem; }
-  .snav-btn { padding: .7rem 1rem .7rem .85rem; font-size: .85rem; }
+@media (prefers-reduced-motion: reduce) {
+  .dock-link, .dock-contact, .dock-tip { transition: none; }
 }
-@media print { .snav { display: none; } }
+@media print { .dock { display: none; } body { padding-bottom: 0; } }
