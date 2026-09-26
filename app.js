@@ -181,6 +181,22 @@
     });
   }
 
+  /* ---- sticky top bar ------------------------------------------------ */
+  // The bar is transparent at the top of the page and gains a backing once
+  // the page has scrolled, so text never shows through it.
+  var topbar = document.querySelector(".topbar");
+  if (topbar) {
+    var barQueued = false;
+    var setBar = function () {
+      barQueued = false;
+      topbar.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    window.addEventListener("scroll", function () {
+      if (!barQueued) { barQueued = true; requestAnimationFrame(setBar); }
+    }, { passive: true });
+    setBar();
+  }
+
   /* ---- scroll progress ---------------------------------------------- */
   // A direct readout of scroll position, like a scrollbar, so it runs even
   // with reduced motion. Only transform changes.

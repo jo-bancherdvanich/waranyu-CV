@@ -2258,3 +2258,100 @@ body { padding-bottom: 5.5rem; }
   @keyframes ca-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
   .contact.is-visible .ca-card { animation: ca-float 7s ease-in-out infinite; animation-delay: calc(var(--d) * -1.7s); }
 }
+
+/* ---- next project --------------------------------------------------------
+ * The end of each case study leads straight into the next one, so a reader
+ * keeps moving through the work instead of backing out. */
+.next-project {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 42%);
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: 2rem 2.2rem;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.next-project:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 44px rgba(0, 0, 0, .25); }
+.np-text { display: flex; flex-direction: column; gap: .55rem; }
+.np-label { color: var(--accent); font-weight: 600; font-size: .95rem; }
+.np-eyebrow { color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .72rem; text-transform: uppercase; }
+.np-title { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 700; line-height: 1.05; letter-spacing: -.025em; }
+.np-blurb { max-width: 460px; color: var(--muted); line-height: 1.55; }
+.np-shot {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--img-border);
+  border-radius: 16px;
+  transition: transform .35s ease;
+}
+.next-project:hover .np-shot { transform: scale(1.03) rotate(-1deg); }
+@media (max-width: 720px) {
+  .next-project { grid-template-columns: 1fr; padding: 1.5rem; gap: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .next-project, .np-shot { transition: none; }
+  .next-project:hover, .next-project:hover .np-shot { transform: none; }
+}
+
+/* ---- sticky top bar ------------------------------------------------------
+ * The bar follows the reader down the page so the CV button is always one
+ * tap away. At the top it is transparent as before; once the page scrolls,
+ * app.js adds .is-scrolled and a blurred full-width backing fades in. Its
+ * height never changes, so nothing below it moves. */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+.topbar::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: -1px;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  border-bottom: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.topbar.is-scrolled::before { opacity: 1; }
+/* anchors land below the bar rather than under it */
+section[id], .case-block[id], [id="top"] { scroll-margin-top: 96px; }
+@media (max-width: 720px) {
+  section[id], .case-block[id] { scroll-margin-top: 80px; }
+}
+@media (prefers-reduced-motion: reduce) { .topbar::before { transition: none; } }
+@media print { .topbar { position: static; } }
+
+/* ---- page transitions ----------------------------------------------------
+ * Moving between pages cross-fades with a short rise instead of flashing.
+ * Browsers without cross-document view transitions simply navigate as
+ * before. The top bar and dock are named so they hold still while the
+ * page content changes beneath them. */
+@view-transition { navigation: auto; }
+.topbar { view-transition-name: topbar; }
+.dock { view-transition-name: dock; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+::view-transition-old(root) { animation: vt-out .22s ease-in both; }
+::view-transition-new(root) { animation: vt-in .38s cubic-bezier(.2, .8, .2, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+.topbar { transition: border-color .25s ease; }
+.topbar.is-scrolled { border-bottom-color: transparent; }
