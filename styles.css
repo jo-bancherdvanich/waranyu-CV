@@ -2201,3 +2201,60 @@ body { padding-bottom: 5.5rem; }
 @media (prefers-reduced-motion: reduce) {
   .timeline-item, .principle-list li::before { transition: none; }
 }
+
+/* ---- contact illustration --------------------------------------------------
+ * A collage of the four projects as floating mini cards, drawn in the chart
+ * palette so the page ends in colour: the renewable line from the real
+ * 2005-2024 series with its forecast (blue), FreshMart bars (amber), the
+ * football schema (coral) and WeatherWise (green). Decorative, aria-hidden.
+ * It assembles when Contact is revealed; only transform and opacity animate,
+ * plus the line drawing itself as the hero chart does. */
+@media (min-width: 1000px) {
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 460px);
+    column-gap: 3rem;
+    align-items: center;
+  }
+  .contact > :not(.contact-art) { grid-column: 1; }
+  .contact > .contact-art { grid-column: 2; grid-row: 1 / span 4; }
+}
+.contact-art { width: 100%; max-width: 460px; margin: 3rem auto 0; }
+@media (min-width: 1000px) { .contact-art { margin: 0; } }
+.contact-art svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ca-bg { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; }
+.ca-card { filter: drop-shadow(0 14px 28px rgba(0, 0, 0, .28)); }
+:root[data-theme="light"] .ca-card { filter: drop-shadow(0 12px 24px rgba(15, 25, 34, .1)); }
+.ca-chip { opacity: .9; }
+.ca-c1 { fill: var(--c1); } .ca-c3 { fill: var(--c3); } .ca-c4 { fill: var(--c4); }
+.ca-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 5; }
+.ca-area { fill: color-mix(in srgb, var(--c1) 18%, transparent); }
+.ca-line { fill: none; stroke: var(--c1); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ca-fc { fill: none; stroke: var(--c1); stroke-width: 2.4; stroke-dasharray: 6 5; stroke-linecap: round; opacity: .8; }
+.ca-dot { fill: var(--c1); }
+.ca-bar { fill: var(--c3); }
+.ca-link { fill: none; stroke: color-mix(in srgb, var(--c4) 55%, transparent); stroke-width: 1.6; }
+.ca-node { fill: color-mix(in srgb, var(--c4) 22%, var(--surface)); stroke: var(--c4); stroke-width: 1.4; }
+.ca-hub { fill: var(--c4); }
+.ca-sun { fill: none; stroke: var(--c3); stroke-width: 2.2; stroke-linecap: round; }
+.ca-cloud { fill: var(--surface); stroke: var(--c2); stroke-width: 2.2; }
+.ca-temp { fill: none; stroke: var(--c2); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* start positions: only while app.js is managing the reveal */
+  .contact.reveal .ca-card { opacity: 0; transform: translateY(26px); }
+  .contact.reveal .ca-bar { transform: scaleY(0); }
+  .contact.reveal .ca-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .contact.reveal .ca-fc, .contact.reveal .ca-dot { opacity: 0; }
+  .ca-card { transition: opacity .7s ease-out, transform .7s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--d) * 140ms + 200ms); }
+  .ca-bar { transform-box: fill-box; transform-origin: bottom; transition: transform .6s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i) * 60ms + 650ms); }
+  .ca-line { transition: stroke-dashoffset 1.4s cubic-bezier(.4, 0, .2, 1) .5s; }
+  .ca-fc, .ca-dot { transition: opacity .5s ease 1.8s; }
+  .contact.is-visible .ca-card { opacity: 1; transform: none; }
+  .contact.is-visible .ca-bar { transform: none; }
+  .contact.is-visible .ca-line { stroke-dashoffset: 0; }
+  .contact.is-visible .ca-fc, .contact.is-visible .ca-dot { opacity: .85; }
+  /* once in place, the cards drift very slightly, out of step with each other */
+  @keyframes ca-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+  .contact.is-visible .ca-card { animation: ca-float 7s ease-in-out infinite; animation-delay: calc(var(--d) * -1.7s); }
+}
