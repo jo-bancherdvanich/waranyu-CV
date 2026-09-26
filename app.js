@@ -35,8 +35,22 @@
   if (toggle) {
     toggle.addEventListener("click", function () {
       var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-      apply(next);
       try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
+      // The new theme spreads out in a circle from the button. Browsers
+      // without view transitions, and reduced motion, simply switch.
+      if (!document.startViewTransition || reduced) { apply(next); return; }
+      var r = toggle.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      var reach = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+      root.classList.add("theme-vt");
+      var vt = document.startViewTransition(function () { apply(next); });
+      vt.ready.then(function () {
+        root.animate(
+          { clipPath: ["circle(0px at " + x + "px " + y + "px)", "circle(" + reach + "px at " + x + "px " + y + "px)"] },
+          { duration: 560, easing: "cubic-bezier(.4, 0, .2, 1)", pseudoElement: "::view-transition-new(root)" }
+        );
+      }).catch(function () { /* skipped transitions still apply the theme */ });
+      vt.finished.finally(function () { root.classList.remove("theme-vt"); });
     });
   }
 

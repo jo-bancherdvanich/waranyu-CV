@@ -2427,3 +2427,38 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 96px; }
 .hw-last { animation-duration: .85s; }
 @keyframes hw-in { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .hw { opacity: 1; transform: none; animation: none; } }
+
+/* ---- theme switch: a circle from the button --------------------------------
+ * During a theme change the whole page, top bar and dock included, is one
+ * snapshot; app.js grows the new theme out of the toggle with a clip-path.
+ * The page-navigation fade is switched off for this transition. */
+.theme-vt .topbar, .theme-vt .dock { view-transition-name: none; }
+.theme-vt::view-transition-old(root),
+.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+.theme-vt::view-transition-old(root) { z-index: 1; }
+.theme-vt::view-transition-new(root) { z-index: 2; }
+
+/* ---- heading underline sweep ----------------------------------------------
+ * A short accent line draws itself under each big section heading when its
+ * section comes into view (the reveal system adds .is-visible). */
+.section-label h2,
+.case-block > h2 { position: relative; width: fit-content; }
+.section-label h2::after,
+.case-block > h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.14em;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 0%, transparent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .9s cubic-bezier(.4, 0, .2, 1) .2s;
+}
+.section.is-visible .section-label h2::after,
+.case-block.is-visible > h2::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .section-label h2::after, .case-block > h2::after { transform: scaleX(1); transition: none; }
+}
