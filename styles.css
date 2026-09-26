@@ -2462,3 +2462,42 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 96px; }
 @media (prefers-reduced-motion: reduce) {
   .section-label h2::after, .case-block > h2::after { transform: scaleX(1); transition: none; }
 }
+
+/* ---- case study opening illustration ---------------------------------------
+ * Two floating cards in the project's own colour: a mini chart (the renewable
+ * line is the real 2005-2024 series) and the project's hand-drawn scene.
+ * Beside the title on wide screens, above it on phones. Decorative. */
+.case-art { width: 100%; max-width: 380px; margin: 0 0 1.4rem; }
+.case-art > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.case-art .cs-scene { overflow: visible; stroke-width: 3.4px; }
+@media (min-width: 1000px) {
+  .case-art { position: absolute; top: 4.2rem; right: -1.5rem; width: 360px; margin: 0; }
+  .case > .eyebrow, .case > h1, .case > .lede { max-width: 560px; }
+}
+.case-art .ca-card { filter: drop-shadow(0 14px 28px rgba(0, 0, 0, .28)); }
+:root[data-theme="light"] .case-art .ca-card { filter: drop-shadow(0 12px 24px rgba(15, 25, 34, .1)); }
+.cs-chip { fill: var(--case-accent); opacity: .9; }
+.cs-area { fill: color-mix(in srgb, var(--case-accent) 18%, transparent); }
+.cs-line { fill: none; stroke: var(--case-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.cs-dash { fill: none; stroke: var(--case-accent); stroke-width: 2.4; stroke-dasharray: 6 5; stroke-linecap: round; opacity: .85; }
+.cs-dot { fill: var(--case-accent); }
+.cs-bar { fill: var(--case-accent); }
+.cs-link { fill: none; stroke: color-mix(in srgb, var(--case-accent) 55%, transparent); stroke-width: 1.6; }
+.cs-node { fill: color-mix(in srgb, var(--case-accent) 22%, var(--surface)); stroke: var(--case-accent); stroke-width: 1.4; }
+.cs-hub { fill: var(--case-accent); }
+.cs-stroke { fill: none; stroke: var(--case-accent); stroke-width: 2.4; stroke-linecap: round; }
+.cs-cloud { fill: var(--surface); stroke: var(--case-accent); stroke-width: 2.4; }
+.cs-scene { color: var(--case-accent); }
+.cs-scene [fill="var(--bg)"] { fill: var(--surface); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .case-art .ca-card { animation: cs-rise .8s cubic-bezier(.2, .8, .2, 1) both, ca-float 7s ease-in-out infinite; animation-delay: calc(var(--d) * 160ms + 300ms), calc(var(--d) * -2s + 1.2s); }
+  .case-art .cs-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: cs-draw 1.4s cubic-bezier(.4, 0, .2, 1) .7s forwards; }
+  .case-art .cs-dash, .case-art .cs-dot { animation: cs-fade .5s ease 1.9s both; }
+  .case-art .cs-bar { transform-box: fill-box; transform-origin: bottom; animation: cs-grow .6s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 60ms + 700ms); }
+  @keyframes cs-rise { from { opacity: 0; transform: translateY(26px); } }
+  @keyframes cs-draw { to { stroke-dashoffset: 0; } }
+  @keyframes cs-fade { from { opacity: 0; } }
+  @keyframes cs-grow { from { transform: scaleY(0); } }
+  @keyframes ca-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+}
