@@ -41,14 +41,14 @@
   }
 
   /* ---- capability rows expand to say why the skill matters ------------ */
-  document.querySelectorAll(".capability-list li[role='button']").forEach(function (li) {
-    function toggle() {
+  // The skill name is a real <button> (keyboard and screen readers get it
+  // for free); a click anywhere on the row does the same thing for the mouse.
+  document.querySelectorAll(".capability-list li").forEach(function (li) {
+    var btn = li.querySelector(".cap-toggle");
+    if (!btn) return;
+    li.addEventListener("click", function () {
       var open = li.classList.toggle("is-open");
-      li.setAttribute("aria-expanded", open ? "true" : "false");
-    }
-    li.addEventListener("click", toggle);
-    li.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
     });
   });
 
@@ -108,6 +108,17 @@
       wall.appendChild(col);
     }
     projects.insertBefore(wall, projects.firstChild);
+  }
+
+  // Both walls stop moving while they are off screen, so a phone is not
+  // animating two dozen images nobody can see.
+  if ("IntersectionObserver" in window) {
+    var wallIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle("is-offscreen", !entry.isIntersecting);
+      });
+    });
+    document.querySelectorAll(".hero-wall, .section-wall").forEach(function (w) { wallIO.observe(w); });
   }
 
   /* ---- project card light -------------------------------------------- */
