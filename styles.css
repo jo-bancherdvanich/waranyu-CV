@@ -2090,3 +2090,114 @@ body { padding-bottom: 5.5rem; }
 
 /* ---- 404: the hero, on its own ------------------------------------------- */
 .intro-404 { grid-template-columns: 1fr; min-height: 70vh; }
+
+/* ---- lifting the plain sections -------------------------------------------
+ * Tools marquee: set in the display face at a real size, alternating ink and
+ * muted, with accent separators, so it reads as a band rather than a footnote. */
+.tools-marquee { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.marquee-list {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 2.2rem;
+  letter-spacing: -.01em;
+  text-transform: none;
+  color: var(--muted);
+}
+.marquee-list li:nth-child(even) { color: var(--ink); }
+.marquee-list li::after { content: "\2726"; padding: 0 1.6rem; color: var(--accent); opacity: .8; font-size: .6em; vertical-align: .25em; }
+
+/* Banner: three of the page's own numbers under the quote, counting up */
+.banner-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+}
+.banner-stats > div { display: flex; flex-direction: column-reverse; align-items: center; gap: .35rem; }
+.banner-stats dd { margin: 0; }
+.banner-stats .stat {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1;
+  text-align: center;
+}
+.banner-stats dt {
+  color: var(--muted);
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
+  font-size: .72rem;
+  text-transform: uppercase;
+}
+@media (max-width: 600px) {
+  .banner-stats { grid-template-columns: 1fr; gap: 1.6rem; }
+}
+
+/* Education and certificates: entries become cards side by side, each led
+   by its dates in large display type instead of a small mono label */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  border-top: 0;
+}
+.timeline-item {
+  grid-template-columns: 1fr;
+  gap: .9rem;
+  padding: 1.8rem 1.9rem;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  transition: border-color .25s ease, transform .25s ease;
+}
+#education .timeline-item { background: var(--bg); }
+.timeline-item:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); transform: translateY(-3px); }
+.timeline-date {
+  color: var(--muted);
+  font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.timeline-item .description { font-size: .98rem; }
+@media (max-width: 720px) {
+  .timeline { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; padding: 1.4rem 1.3rem; }
+}
+
+/* How I work: a 2 x 2 grid of cards, each led by a large outlined number */
+.principle-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.principle-list li { padding: 1.9rem 2rem 2rem; }
+.principle-list li::before {
+  position: static;
+  display: block;
+  margin-bottom: 1rem;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--muted);
+  font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  font-size: clamp(2.6rem, 4.4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1;
+  transition: -webkit-text-stroke-color .25s ease;
+}
+.principle-list li:hover::before { -webkit-text-stroke-color: var(--accent); }
+.principle-list h3 { font-size: 1.3rem; }
+.principle-list p { font-size: .98rem; }
+@media (max-width: 720px) {
+  .principle-list { grid-template-columns: 1fr; }
+  .principle-list li { padding: 1.5rem 1.4rem; }
+}
+
+/* Questions: a readable measure, and larger questions */
+.faq-list { max-width: 900px; }
+.faq-list summary { font-size: 1.12rem; padding-top: 1.35rem; padding-bottom: 1.35rem; }
+
+/* Capabilities: the open row gets a thin accent edge, like the hover */
+.capability-list li.is-open::before { transform: scaleY(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-item, .principle-list li::before { transition: none; }
+}
