@@ -2030,7 +2030,7 @@ body { padding-bottom: 5.5rem; }
   justify-content: space-between;
   gap: 1.25rem;
   overflow: hidden;
-  opacity: .07;
+  opacity: .12;
   pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
@@ -2040,4 +2040,4 @@ body { padding-bottom: 5.5rem; }
 @media (prefers-reduced-motion: no-preference) {
   .section-wall .wall-track { animation-duration: 110s; }
 }
-:root[data-theme="light"] .projects > .section-wall { opacity: .09; }
+:root[data-theme="light"] .projects > .section-wall { opacity: .15; }
