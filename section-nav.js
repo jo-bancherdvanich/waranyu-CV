@@ -3,8 +3,8 @@
  * section on screen lights up as you scroll.
  *
  * It builds itself from the page rather than from a hard-coded list. On the
- * landing page each section's own heading icon is reused, so the dock and the
- * headings always match; on a case study the blocks are numbered instead.
+ * landing page and on each case study, every section's own heading icon is
+ * reused, so the dock and the headings always match.
  * No dependencies, no build step.
  */
 (function () {
@@ -49,7 +49,11 @@
         el.id = id;
       }
       n++;
-      items.push({ el: el, href: "#" + el.id, label: text, num: n < 10 ? "0" + n : String(n) });
+      // Each case-study heading has its own icon, as on the landing page;
+      // the number is only a fallback for a heading without one
+      var ico = el.querySelector(".h2-ico svg");
+      items.push({ el: el, href: "#" + el.id, label: text,
+        icon: ico ? ico.outerHTML : null, num: n < 10 ? "0" + n : String(n) });
     });
   }
   if (items.length < 2) return;
