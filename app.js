@@ -181,6 +181,34 @@
     });
   }
 
+  /* ---- hero headline entrance ----------------------------------------- */
+  // Each word of the headline rises in turn, and the italic word lands last.
+  // The words are wrapped in spans only here, so without JS (or with reduced
+  // motion) the heading is exactly the plain HTML.
+  var title = document.getElementById("intro-title");
+  if (title && !reduced && document.querySelector(".intro")) {
+    var w = 0;
+    Array.prototype.slice.call(title.childNodes).forEach(function (node) {
+      if (node.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(function (tok) {
+          if (!tok) return;
+          if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
+          var span = document.createElement("span");
+          span.className = "hw";
+          span.style.setProperty("--w", w++);
+          span.textContent = tok;
+          frag.appendChild(span);
+        });
+        title.replaceChild(frag, node);
+      } else if (node.nodeType === 1) {
+        node.classList.add("hw", "hw-last");
+      }
+    });
+    title.querySelectorAll(".hw-last").forEach(function (el) { el.style.setProperty("--w", w + 1); });
+    title.classList.add("is-split");
+  }
+
   /* ---- sticky top bar ------------------------------------------------ */
   // The bar is transparent at the top of the page and gains a backing once
   // the page has scrolled, so text never shows through it.

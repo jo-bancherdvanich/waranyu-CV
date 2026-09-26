@@ -2355,3 +2355,75 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 96px; }
 }
 .topbar { transition: border-color .25s ease; }
 .topbar.is-scrolled { border-bottom-color: transparent; }
+
+/* ---- footer: a closing band ------------------------------------------------
+ * Name in the display face, the few links a recruiter needs, and a way back
+ * to the top. The small print keeps the old footer's mono style. */
+.site-footer {
+  display: block;
+  margin-top: 0;
+  padding: 3.4rem 0 1.8rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  text-transform: none;
+  font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  font-size: 1rem;
+}
+.sf-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.6rem 3rem; }
+.sf-name {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+.sf-name span { color: var(--accent); }
+.sf-links { display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; }
+.sf-links a, .sf-totop {
+  color: var(--ink);
+  font-size: .95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+.sf-links a:hover, .sf-totop:hover { color: var(--accent); border-color: var(--accent); }
+.sf-links a::after { content: none; }
+.sf-bottom {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 2rem;
+  margin-top: 2.6rem; padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
+  font-size: .72rem;
+  text-transform: uppercase;
+}
+.sf-totop { margin-left: auto; font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .72rem; text-transform: uppercase; }
+@media (max-width: 720px) {
+  .site-footer { padding-top: 2.6rem; }
+  .sf-top { flex-direction: column; align-items: flex-start; }
+  .sf-bottom { flex-direction: column; align-items: flex-start; gap: .6rem; }
+  .sf-totop { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .sf-links a, .sf-totop { transition: none; } }
+
+/* ---- hero headline entrance ------------------------------------------------
+ * app.js wraps each word in .hw; the italic word is .hw-last and lands after
+ * the rest. The words carry solid ink here because a gradient clipped to the
+ * parent's text does not reach words that are being transformed. */
+#intro-title.is-split {
+  animation: none;
+  color: var(--ink);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.hw {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(.42em);
+  animation: hw-in .6s cubic-bezier(.2, .8, .2, 1) forwards;
+  animation-delay: calc(var(--w) * 70ms + 120ms);
+}
+.hw-last { animation-duration: .85s; }
+@keyframes hw-in { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hw { opacity: 1; transform: none; animation: none; } }
