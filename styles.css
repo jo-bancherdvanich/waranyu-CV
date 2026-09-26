@@ -2014,3 +2014,30 @@ body { padding-bottom: 5.5rem; }
   height: 460px;
   background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 34%, transparent), transparent 72%);
 }
+
+/* ---- screenshot wall behind Selected work --------------------------------
+ * The hero wall again, fainter and full width, so the dashboards drift past
+ * around the heading and between the cards. app.js builds it from the hero
+ * wall's tracks; it reuses the hero's wallUp loop and reduced-motion rule. */
+.projects > .section-wall {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  overflow: hidden;
+  opacity: .07;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+}
+.section-wall .wall-col { flex: 0 0 calc(25% - 1rem); }
+/* A slower drift than the hero: this wall is much taller */
+@media (prefers-reduced-motion: no-preference) {
+  .section-wall .wall-track { animation-duration: 110s; }
+}
+:root[data-theme="light"] .projects > .section-wall { opacity: .09; }

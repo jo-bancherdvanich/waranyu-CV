@@ -90,6 +90,26 @@
     });
   });
 
+  /* ---- screenshot wall behind Selected work --------------------------- */
+  // Built from the hero wall's own tracks rather than repeated in the HTML:
+  // four columns across the section, alternating direction. Decorative only,
+  // so it is hidden from assistive technology like the hero wall.
+  var heroWall = document.querySelector(".hero-wall");
+  var projects = document.getElementById("projects");
+  if (heroWall && projects) {
+    var tracks = heroWall.querySelectorAll(".wall-track");
+    var wall = document.createElement("div");
+    wall.className = "section-wall";
+    wall.setAttribute("aria-hidden", "true");
+    for (var c = 0; c < 4; c++) {
+      var col = document.createElement("div");
+      col.className = "wall-col" + (c % 2 ? " wall-col-rev" : "");
+      col.appendChild(tracks[c % tracks.length].cloneNode(true));
+      wall.appendChild(col);
+    }
+    projects.insertBefore(wall, projects.firstChild);
+  }
+
   /* ---- project card light -------------------------------------------- */
   // A glow that follows the pointer across each project card. Only its
   // transform changes, and it is left out on touch screens and when the
