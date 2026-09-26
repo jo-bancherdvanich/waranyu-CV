@@ -1940,11 +1940,11 @@ body { padding-bottom: 5.5rem; }
   --dock-ico: #c3d3e0;
   --dock-ico-hover: #ffffff;
   --dock-hover-bg: rgba(255, 255, 255, .09);
-  --dock-current: #5ecbf5;
-  --dock-current-bg: rgba(94, 203, 245, .16);
+  --dock-current: #7ad7ff;
+  --dock-current-bg: rgba(122, 215, 255, .16);
   --dock-label-ink: #f4f8fb;
-  --dock-contact-bg: #5ecbf5;
-  --dock-contact-hover: #9fe0ff;
+  --dock-contact-bg: #7ad7ff;
+  --dock-contact-hover: #a5e4ff;
   --dock-contact-ink: #071019;
   --dock-shadow: 0 14px 40px rgba(0, 0, 0, .45);
 }
@@ -1954,11 +1954,11 @@ body { padding-bottom: 5.5rem; }
   --dock-ico: #35485a;
   --dock-ico-hover: #0f1922;
   --dock-hover-bg: rgba(15, 25, 34, .06);
-  --dock-current: #0a7096;
-  --dock-current-bg: rgba(10, 112, 150, .12);
+  --dock-current: #0873a6;
+  --dock-current-bg: rgba(8, 115, 166, .12);
   --dock-label-ink: #0f1922;
-  --dock-contact-bg: #0a7096;
-  --dock-contact-hover: #085a78;
+  --dock-contact-bg: #0873a6;
+  --dock-contact-hover: #065d87;
   --dock-contact-ink: #ffffff;
   --dock-shadow: 0 12px 34px rgba(15, 25, 34, .16);
 }
@@ -2646,3 +2646,77 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
   .case-actions, .case-footer-actions { display: none; }
 }
 .sf-built { flex-basis: 100%; text-transform: none; letter-spacing: 0; font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif; font-size: .82rem; color: var(--muted); }
+
+/* ---- type, colour and motion pass -------------------------------------------
+ * 1. Interactive accent a touch lighter and warmer than the chart blue, so
+ *    buttons and links read as controls and the chart reads as data. */
+:root { --accent: #7ad7ff; --accent-soft: #a5e4ff; }
+:root[data-theme="light"] { --accent: #0873a6; --accent-soft: #065d87; }
+
+/* 2. Amber only where it was meant to be: the banner numbers and the metric
+ *    strips. Numbers inside card bullets are plain bold ink. */
+.project-detail .stat { color: inherit; font-weight: 700; }
+.project-card.project-card-featured .project-detail .stat { color: #071019; }
+
+/* 5. Tighter display type */
+#intro-title, .section-label h2, .contact h2, .case > h1, .case-block > h2,
+.banner-quote, .np-title, .sf-name, .timeline-date { letter-spacing: -.04em; }
+
+/* 6. Body text a step larger on desktop */
+@media (min-width: 900px) {
+  .project-card p, .project-detail, .description, .cap-why, .principle-list p,
+  .faq-list p, .contact-note, .case-block p, .case-block > ul, .icon-list li,
+  .np-blurb, .timeline-item .description { font-size: 1rem; }
+  .lede { font-size: clamp(1.12rem, 1.5vw, 1.35rem); }
+}
+
+/* 7. A calmer first second: the wall and the marquee fade in after the
+ *    headline and the chart have had their moment. */
+@media (prefers-reduced-motion: no-preference) {
+  .intro > .hero-wall { animation: wall-in 1.2s ease-out 1.1s both; }
+  .banner .tools-marquee { animation: wall-in 1s ease-out 1.4s both; }
+  @keyframes wall-in { from { opacity: 0; } }
+}
+/* opacity is the animated property, so the wall's own opacity moves to the columns */
+.intro > .hero-wall { opacity: 1; }
+.intro > .hero-wall .wall-col { opacity: .08; }
+.banner .tools-marquee { opacity: 1; }
+
+/* 8. Illustrations assemble once, then hold still */
+.contact.is-visible .ca-card, .case-art .ca-card { animation-iteration-count: 1, 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .contact.is-visible .ca-card { animation: none; }
+  .case-art .ca-card { animation: cs-rise .8s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--d) * 160ms + 300ms); }
+}
+
+/* 9. One rule for hover: cards rise 4px with a shadow; buttons change colour only */
+.project-card:hover, .timeline-item:hover, .principle-list li:hover, .next-project:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .28);
+}
+:root[data-theme="light"] .project-card:hover, :root[data-theme="light"] .timeline-item:hover,
+:root[data-theme="light"] .principle-list li:hover, :root[data-theme="light"] .next-project:hover {
+  box-shadow: 0 14px 36px rgba(15, 25, 34, .14);
+}
+.project-btn:hover, .topbar-cta:hover, .dock-contact:hover, .dash-chip:hover, .contact-link:hover .cn-ico { transform: none; }
+.dock-contact.is-current { transform: none; }
+.next-project:hover .np-shot { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .project-card:hover, .timeline-item:hover, .principle-list li:hover, .next-project:hover { transform: none; }
+}
+
+/* 10. The scroll progress line is the top bar's bottom edge, not a second
+ *     line above it. app.js sets --progress on .topbar. */
+.scroll-progress { display: none; }
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 50vw);
+  bottom: -1px;
+  width: 100vw;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left;
+  pointer-events: none;
+}

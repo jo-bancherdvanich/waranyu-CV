@@ -258,14 +258,14 @@
   /* ---- scroll progress ---------------------------------------------- */
   // A direct readout of scroll position, like a scrollbar, so it runs even
   // with reduced motion. Only transform changes.
-  var progress = document.querySelector(".scroll-progress");
+  var progress = document.querySelector(".topbar");
   if (progress) {
     var ticking = false;
     var paint = function () {
       ticking = false;
       var max = document.documentElement.scrollHeight - window.innerHeight;
       var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-      progress.style.transform = "scaleX(" + p + ")";
+      progress.style.setProperty("--progress", p);
     };
     var queue = function () {
       if (!ticking) { ticking = true; requestAnimationFrame(paint); }
