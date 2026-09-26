@@ -1976,3 +1976,41 @@ body { padding-bottom: 5.5rem; }
   border-color: var(--dock-edge);
   box-shadow: var(--dock-shadow);
 }
+
+/* ---- more of the hero's energy below it ----------------------------------
+ * Section titles are set big, like the hero, and sit above their content
+ * instead of in a narrow side column. */
+.section { grid-template-columns: 1fr; gap: 2.6rem; }
+.section-label h2 {
+  margin-top: .6rem;
+  font-size: clamp(2.2rem, 4.8vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -.025em;
+}
+.section-label .h2-ico { margin-right: .9rem; }
+.section-label .h2-ico svg { width: .62em; height: .62em; }
+/* The hero's one italic word, echoed once in the banner and once in Contact */
+.banner-quote .h1-em, .contact h2 .h1-em { font-weight: 400; }
+
+/* Project cards: a soft light that follows the pointer. app.js moves it with
+   transform only; it fades in on hover and is skipped on touch screens. */
+.project-card .card-glow {
+  position: absolute; z-index: 0; top: 0; left: 0;
+  width: 420px; height: 420px; margin: -210px 0 0 -210px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%);
+  opacity: 0;
+  transform: translate(var(--gx, 50%), var(--gy, 50%));
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.project-card-featured .card-glow { background: radial-gradient(closest-side, rgba(255, 255, 255, .45), transparent 72%); }
+.project-card:hover .card-glow { opacity: 1; }
+@media (hover: none), (prefers-reduced-motion: reduce) { .project-card .card-glow { display: none; } }
+
+/* Contact: a stronger band to finish on */
+.contact::before {
+  width: min(1000px, 95vw);
+  height: 460px;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 34%, transparent), transparent 72%);
+}

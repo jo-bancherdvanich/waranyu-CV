@@ -90,6 +90,24 @@
     });
   });
 
+  /* ---- project card light -------------------------------------------- */
+  // A glow that follows the pointer across each project card. Only its
+  // transform changes, and it is left out on touch screens and when the
+  // visitor prefers less motion.
+  if (!reduced && window.matchMedia("(hover: hover)").matches) {
+    document.querySelectorAll(".project-card").forEach(function (card) {
+      var glow = document.createElement("span");
+      glow.className = "card-glow";
+      glow.setAttribute("aria-hidden", "true");
+      card.insertBefore(glow, card.firstChild);
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        glow.style.setProperty("--gx", (e.clientX - r.left) + "px");
+        glow.style.setProperty("--gy", (e.clientY - r.top) + "px");
+      });
+    });
+  }
+
   /* ---- scroll progress ---------------------------------------------- */
   // A direct readout of scroll position, like a scrollbar, so it runs even
   // with reduced motion. Only transform changes.
