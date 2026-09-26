@@ -124,10 +124,53 @@
     bubble.classList.add("is-pop");
   }
 
-  say(0);
+  /* On a page with a hero, the bubble waits: it appears once the reader has
+     scrolled past the hero or after six seconds, whichever is first, and even
+     then only where it does not sit on top of the hero text. A tap on the
+     character is an explicit request, so it shows the message straight away. */
+  var hero = document.querySelector(".intro");
+  var heroText = hero ? hero.querySelectorAll(".intro-copy > *") : [];
+  var held = !!hero, timeUp = false, passed = false, forced = false;
+
+  function overlapsHeroText() {
+    var b = bubble.getBoundingClientRect();
+    for (var k = 0; k < heroText.length; k++) {
+      var r = heroText[k].getBoundingClientRect();
+      if (r.bottom > b.top && r.top < b.bottom && r.right > b.left && r.left < b.right) return true;
+    }
+    return false;
+  }
+  function update() {
+    if (!hero) return;
+    if (!passed && hero.getBoundingClientRect().bottom <= 0) passed = true;
+    var hold = !forced && (!(timeUp || passed) || overlapsHeroText());
+    if (hold === held) return;
+    held = hold;
+    host.classList.toggle("is-held", held);
+    if (!held) say(i);
+  }
+
+  if (hero) {
+    host.classList.add("is-held");
+    /* the line is in place, unannounced, so the hidden bubble has its real size */
+    textEl.textContent = lines[0];
+    setTimeout(function () { timeUp = true; update(); }, 6000);
+    var queued = false;
+    var onScroll = function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; update(); });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+  } else {
+    say(0);
+  }
+
   host.querySelector(".asst-btn").addEventListener("click", function () {
     /* if it was folded away, the first tap brings the message back */
     if (host.classList.contains("is-quiet")) { fold(false); return; }
+    if (held) { forced = true; update(); return; }
     i++;
     say(i);
   });
@@ -148,7 +191,7 @@
   host.addEventListener("mouseleave", function () { paused = false; });
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     setInterval(function () {
-      if (paused || host.classList.contains("is-quiet")) return;
+      if (paused || held || host.classList.contains("is-quiet")) return;
       i++;
       say(i);
     }, 9000);
