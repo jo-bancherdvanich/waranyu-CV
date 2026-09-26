@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -31,6 +31,7 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <div class="site-shell">
       <header class="topbar">
         <a class="wordmark" href="#top" aria-label="Waranyu Bancherdvanich home">WB<span>.</span></a>
@@ -51,9 +52,31 @@
 
       <main id="main">
         <section class="intro" id="top" aria-labelledby="intro-title">
+          <div class="hero-wall" aria-hidden="true">
+            <div class="wall-col"><div class="wall-track">
+              <img src="images/renewable-dashboard.png" alt="" width="1337" height="752" loading="lazy" decoding="async" />
+              <img src="images/freshmart-dashboard.png" alt="" width="1447" height="818" loading="lazy" decoding="async" />
+              <img src="images/football-erd.png" alt="" width="1114" height="696" loading="lazy" decoding="async" />
+              <img src="images/weatherwise-demo.png" alt="" width="587" height="724" loading="lazy" decoding="async" />
+              <img src="images/renewable-dashboard.png" alt="" width="1337" height="752" loading="lazy" decoding="async" />
+              <img src="images/freshmart-dashboard.png" alt="" width="1447" height="818" loading="lazy" decoding="async" />
+              <img src="images/football-erd.png" alt="" width="1114" height="696" loading="lazy" decoding="async" />
+              <img src="images/weatherwise-demo.png" alt="" width="587" height="724" loading="lazy" decoding="async" />
+            </div></div>
+            <div class="wall-col wall-col-rev"><div class="wall-track">
+              <img src="images/football-erd.png" alt="" width="1114" height="696" loading="lazy" decoding="async" />
+              <img src="images/weatherwise-demo.png" alt="" width="587" height="724" loading="lazy" decoding="async" />
+              <img src="images/renewable-dashboard.png" alt="" width="1337" height="752" loading="lazy" decoding="async" />
+              <img src="images/freshmart-dashboard.png" alt="" width="1447" height="818" loading="lazy" decoding="async" />
+              <img src="images/football-erd.png" alt="" width="1114" height="696" loading="lazy" decoding="async" />
+              <img src="images/weatherwise-demo.png" alt="" width="587" height="724" loading="lazy" decoding="async" />
+              <img src="images/renewable-dashboard.png" alt="" width="1337" height="752" loading="lazy" decoding="async" />
+              <img src="images/freshmart-dashboard.png" alt="" width="1447" height="818" loading="lazy" decoding="async" />
+            </div></div>
+          </div>
           <div class="intro-copy">
             <p class="eyebrow">Data Analytics Student / Curtin University</p>
-            <h1 id="intro-title">Turning data into decisions that move the business.</h1>
+            <h1 id="intro-title">Turning data into <em class="h1-em">decisions</em> that move the business.</h1>
             <p class="lede">
               I am Waranyu Bancherdvanich, a data analytics student at Curtin University with a background in statistics and finance. I build dashboards and forecasts that turn messy data into decisions people can defend.
             </p>
@@ -72,6 +95,10 @@
           </figure>
         </section>
 
+        <div class="tools-marquee" role="region" aria-label="Tools I use">
+          <div class="marquee-track"><ul class="marquee-list"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>SQL</li><li>Oracle</li><li>Python</li><li>R</li><li>Excel</li></ul><ul class="marquee-list" aria-hidden="true"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>SQL</li><li>Oracle</li><li>Python</li><li>R</li><li>Excel</li></ul></div>
+        </div>
+
         <section class="banner" aria-label="Introduction to selected work">
           <p class="banner-quote">Every chart here answers a question<br />someone actually needed answered.</p>
           <p class="banner-sub">Four projects · Power BI · SQL · Python · R</p>
@@ -87,8 +114,8 @@
                 <h3>Australia's renewable transition</h3>
                 <p>A dashboard tracking Australia's shift to renewable electricity from 2005 to 2024, and where it lands by 2035.</p>
                 <ul class="project-detail">
-                  <li>Traced renewable share from 9% in 2005 to 35% in 2024 — solar alone grew from 0.1 to 48.6 TWh</li>
-                  <li>Forecast 44.6% renewable share by 2035 using R linear regression (R&sup2; ≈ 0.85, p &lt; 0.001)</li>
+                  <li>Traced renewable share from 9% in 2005 to <span class="stat" data-count="35">35%</span> in 2024 — solar alone grew from 0.1 to 48.6 TWh</li>
+                  <li>Forecast <span class="stat" data-count="44.6" data-dp="1">44.6%</span> renewable share by 2035 using R linear regression (R&sup2; ≈ <span class="stat" data-count="0.85" data-dp="2">0.85</span>, p &lt; 0.001)</li>
                   <li>Found Australia falls well short of its 82%-by-2030 target on current trajectory</li>
                   <li>Benchmarked against Germany (54.5%) and New Zealand (85.5%) to put the gap in context</li>
                 </ul>
@@ -103,7 +130,7 @@
                 <h3>FreshMart sales dashboard</h3>
                 <p>A Power BI retail dashboard that turns raw transaction data into a view of where the money actually comes from.</p>
                 <ul class="project-detail">
-                  <li>Modelled 17,697 transaction lines from 5,000 transactions across 60 products, 12 stores and 21 promotions into a Kimball star schema</li>
+                  <li>Modelled <span class="stat" data-count="17697">17,697</span> transaction lines from 5,000 transactions across 60 products, 12 stores and 21 promotions into a Kimball star schema</li>
                   <li>Audited five source tables in Power Query: removed duplicate customers, standardised category spelling, and remapped 93 rows carrying an unmatched customer ID</li>
                   <li>Built DAX measures for revenue, gross margin, and year-on-year time intelligence</li>
                   <li>Delivered an executive view of performance by region, category, and day-of-week demand</li>
@@ -119,9 +146,9 @@
                 <h3>Football club database</h3>
                 <p>A relational database for football club management, designed from business rules up.</p>
                 <ul class="project-detail">
-                  <li>Designed a 16-table normalised schema from 18 documented business rules</li>
+                  <li>Designed a <span class="stat" data-count="16">16</span>-table normalised schema from 18 documented business rules</li>
                   <li>Drew the ERD, then built and tested the Oracle SQL tables for relational integrity</li>
-                  <li>Wrote 9 analytical queries: season ladder, top scorers, goals per ground, MVP rankings, away form</li>
+                  <li>Wrote <span class="stat" data-count="9">9</span> analytical queries: season ladder, top scorers, goals per ground, MVP rankings, away form</li>
                   <li>Used joins, aggregation, subqueries, HAVING and LEFT JOINs to answer each question</li>
                 </ul>
                 <p class="project-tech">Oracle SQL · ERD · Normalisation</p>
