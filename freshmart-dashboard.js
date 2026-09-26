@@ -13,8 +13,36 @@
 (function () {
   "use strict";
 
-  var root = document.getElementById("fm-dash");
-  if (!root || !window.FRESHMART_ROWS) return;
+  /* The dashboard is built when it is about to scroll into view, not on page
+   * load: its 17,697 rows (freshmart-rows.js, about 280 KB) are fetched and
+   * decoded then, so the top of the page paints without waiting for them. */
+  var host = document.getElementById("fm-dash");
+  if (!host) return;
+  var started = false;
+  function start() {
+    if (started) return;
+    started = true;
+    if (window.FRESHMART_ROWS) { build(); return; }
+    var tag = document.createElement("script");
+    tag.src = "freshmart-rows.js";
+    tag.onload = build;
+    tag.onerror = function () {
+      host.innerHTML = '<p class="dash-empty">The dashboard data could not be loaded. Please refresh the page to try again.</p>';
+    };
+    document.body.appendChild(tag);
+  }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); start(); }
+    }, { rootMargin: "900px 0px" });
+    io.observe(host);
+  } else {
+    start();
+  }
+
+  function build() {
+  var root = host;
+  if (!window.FRESHMART_ROWS) return;
   var R = window.FRESHMART_ROWS;
 
   /* Chart geometry is responsive. The SVGs scale to their container, so on a
@@ -456,4 +484,5 @@
   });
 
   render();
+  }
 })();

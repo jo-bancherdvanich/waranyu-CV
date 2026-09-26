@@ -2070,3 +2070,23 @@ body { padding-bottom: 5.5rem; }
 .case-block > h2::before { font-size: .42em; font-weight: 500; }
 .case-block > h2 .h2-ico { margin-right: .2rem; }
 .case-block > h2 .h2-ico svg { width: .62em; height: .62em; }
+
+/* ---- copy email ----------------------------------------------------------- */
+.contact-links { align-items: center; }
+.contact-copy {
+  display: inline-flex; align-items: center;
+  padding: .45rem .95rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 32%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit; font-size: .85rem; font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.contact-copy:hover { border-color: var(--accent); color: var(--accent); }
+.contact-copy.is-done { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+@media (prefers-reduced-motion: reduce) { .contact-copy { transition: none; } }
+
+/* ---- 404: the hero, on its own ------------------------------------------- */
+.intro-404 { grid-template-columns: 1fr; min-height: 70vh; }
