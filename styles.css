@@ -1929,3 +1929,50 @@ body { padding-bottom: 5.5rem; }
   .case-block { margin-top: 0; padding: 2.8rem 0; }
   .case-meta { margin-bottom: 2.6rem; }
 }
+
+/* ---- dock follows the theme ---------------------------------------------
+ * A near-black dock was heavy on the light theme and blended into the dark
+ * one. It now takes its colours from tokens: a white dock with dark icons on
+ * the light theme, and a lifted slate panel with a clear edge on the dark. */
+:root {
+  --dock-bg: #172230;
+  --dock-edge: rgba(255, 255, 255, .2);
+  --dock-ico: #c3d3e0;
+  --dock-ico-hover: #ffffff;
+  --dock-hover-bg: rgba(255, 255, 255, .09);
+  --dock-current: #5ecbf5;
+  --dock-current-bg: rgba(94, 203, 245, .16);
+  --dock-label-ink: #f4f8fb;
+  --dock-contact-bg: #5ecbf5;
+  --dock-contact-hover: #9fe0ff;
+  --dock-contact-ink: #071019;
+  --dock-shadow: 0 14px 40px rgba(0, 0, 0, .45);
+}
+:root[data-theme="light"] {
+  --dock-bg: #ffffff;
+  --dock-edge: rgba(15, 25, 34, .14);
+  --dock-ico: #35485a;
+  --dock-ico-hover: #0f1922;
+  --dock-hover-bg: rgba(15, 25, 34, .06);
+  --dock-current: #0a7096;
+  --dock-current-bg: rgba(10, 112, 150, .12);
+  --dock-label-ink: #0f1922;
+  --dock-contact-bg: #0a7096;
+  --dock-contact-hover: #085a78;
+  --dock-contact-ink: #ffffff;
+  --dock-shadow: 0 12px 34px rgba(15, 25, 34, .16);
+}
+.dock { background: var(--dock-bg); border-color: var(--dock-edge); box-shadow: var(--dock-shadow); }
+.dock-link { color: var(--dock-ico); }
+.dock-link:hover { color: var(--dock-ico-hover); background: var(--dock-hover-bg); }
+.dock-link.is-current { color: var(--dock-current); background: var(--dock-current-bg); }
+.dock-sep { background: var(--dock-edge); }
+.dock-contact { color: var(--dock-contact-ink); background: var(--dock-contact-bg); }
+.dock-contact:hover, .dock-contact.is-current { background: var(--dock-contact-hover); }
+.dock-link:focus-visible, .dock-contact:focus-visible { outline-color: var(--dock-current); }
+.dock-tip, .dock-label {
+  color: var(--dock-label-ink);
+  background: var(--dock-bg);
+  border-color: var(--dock-edge);
+  box-shadow: var(--dock-shadow);
+}
