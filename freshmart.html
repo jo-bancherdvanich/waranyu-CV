@@ -10,10 +10,11 @@
     <title>FreshMart data warehouse | Waranyu Bancherdvanich</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         styles.css are sized to match, so the swap barely moves text -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" /></noscript>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
@@ -42,6 +43,7 @@
           <a class="github-link" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">
           Repository <span aria-hidden="true">↗</span>
         </a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
         <button type="button" class="theme-toggle" aria-label="Switch to light theme">&#9728;</button>
         <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
@@ -67,7 +69,7 @@
           </div>
 
           <figure class="case-shot">
-            <img src="images/freshmart-dashboard.png" alt="FreshMart sales performance dashboard showing revenue, gross margin, store performance by region, and product category breakdowns" />
+            <img width="1447" height="818" src="images/freshmart-dashboard.webp" alt="FreshMart sales performance dashboard showing revenue, gross margin, store performance by region, and product category breakdowns" />
             <figcaption>The executive sales performance dashboard</figcaption>
           </figure>
 

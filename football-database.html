@@ -10,10 +10,11 @@
     <title>Football club database | Waranyu Bancherdvanich</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         styles.css are sized to match, so the swap barely moves text -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" /></noscript>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="football-erd.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -43,6 +44,7 @@
           <a class="github-link" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">
           Repository <span aria-hidden="true">↗</span>
         </a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
         <button type="button" class="theme-toggle" aria-label="Switch to light theme">&#9728;</button>
         <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
@@ -69,7 +71,7 @@
 
           <figure class="erd" id="erd">
             <noscript>
-              <img src="images/football-erd.png" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
+              <img width="1114" height="696" src="images/football-erd.webp" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
             </noscript>
             <figcaption>The entity-relationship diagram — 16 tables, 18 foreign keys, read straight from the DDL</figcaption>
           </figure>
@@ -77,7 +79,7 @@
           <details class="erd-original">
             <summary>Compare with the diagram I submitted</summary>
             <figure class="case-shot">
-              <img src="images/football-erd.png" alt="The originally submitted entity-relationship diagram, drawn by hand, showing the same 16 tables in four bands" loading="lazy" />
+              <img width="1114" height="696" src="images/football-erd.webp" alt="The originally submitted entity-relationship diagram, drawn by hand, showing the same 16 tables in four bands" loading="lazy" />
               <figcaption>
                 The original hand-drawn ERD. The interactive version above follows its layout, but takes every column name and relationship from <code>01_create_tables.sql</code> — so where the drawing and the DDL disagree, the DDL wins.
               </figcaption>

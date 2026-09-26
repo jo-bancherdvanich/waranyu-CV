@@ -1,3 +1,10 @@
+/* Local fonts sized to match the web fonts, used for the moment before those
+   arrive. Widths measured against Space Grotesk, DM Mono and Fraunces, so
+   lines wrap in the same places and nothing jumps when the swap happens. */
+@font-face { font-family: "Space Grotesk Fallback"; src: local("Arial"), local("Helvetica"), local("Liberation Sans"); size-adjust: 108.8%; }
+@font-face { font-family: "DM Mono Fallback"; src: local("Courier New"), local("Liberation Mono"), local("Menlo"); size-adjust: 100%; }
+@font-face { font-family: "Fraunces Fallback"; font-style: italic; src: local("Georgia Italic"), local("Georgia"), local("Times New Roman Italic"); size-adjust: 110%; }
+
 :root {
   --bg: #080b11;
   --surface: #10161f;
@@ -84,12 +91,15 @@
 .topbar-right { display: flex; align-items: center; }
 
 * { box-sizing: border-box; }
+/* Images carry width and height attributes so space is reserved before they
+   load; this keeps the attribute height from fixing their rendered size */
+img[width][height] { height: auto; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
   color: var(--ink);
   background: var(--bg);
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
@@ -173,7 +183,7 @@ nav a:hover::after, .github-link:hover::after { transform: scaleX(1); }
   .intro > .hero-wall { right: -1.25rem; width: 78%; gap: .75rem; }
   .wall-col { flex-basis: 42%; }
 }
-.eyebrow, .section-label > span, .timeline-date, .card-top, footer, .tags, .cap-num, .cap-where, .cap-verb { font-family: "DM Mono", monospace; font-size: .72rem; letter-spacing: 0; }
+.eyebrow, .section-label > span, .timeline-date, .card-top, footer, .tags, .cap-num, .cap-where, .cap-verb { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .72rem; letter-spacing: 0; }
 .eyebrow { margin: 0 0 1.15rem; color: var(--muted); text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.15rem); line-height: .94; letter-spacing: -.02em; }
@@ -183,7 +193,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 /* The one word set in Fraunces italic. It sits inside a background-clip:text
    heading, so the fill has to be set explicitly or it would stay transparent. */
 .h1-em {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Fraunces", "Fraunces Fallback", Georgia, serif;
   font-style: italic;
   font-weight: 400;
   letter-spacing: -.01em;
@@ -191,7 +201,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   -webkit-text-fill-color: var(--accent);
 }
 .lede { max-width: 590px; color: var(--lede-ink); font-size: clamp(1.08rem, 1.5vw, 1.32rem); line-height: 1.6; }
-.availability { display: inline-flex; align-items: center; gap: .6rem; margin: 1.9rem 0 0; padding: .5rem .85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-family: "DM Mono", monospace; font-size: .72rem; text-transform: uppercase; }
+.availability { display: inline-flex; align-items: center; gap: .6rem; margin: 1.9rem 0 0; padding: .5rem .85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .72rem; text-transform: uppercase; }
 .availability::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); box-shadow: 0 0 0 3px color-mix(in srgb, var(--muted) 22%, transparent); }
 .intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin-top: 2rem; }
 .button { display: inline-flex; align-items: center; gap: .75rem; font-size: .9rem; font-weight: 600; text-decoration: none; transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
@@ -279,13 +289,13 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .portrait-link { display: block; border-radius: 10px; overflow: hidden; }
 .portrait-wrap img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; background: var(--surface); border: 1px solid var(--img-border); border-radius: 10px; box-shadow: var(--shadow); transition: transform .35s ease; }
 .portrait-link:hover img { transform: scale(1.02); }
-.portrait-wrap figcaption { margin-top: .8rem; padding: 0 .25rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
+.portrait-wrap figcaption { margin-top: .8rem; padding: 0 .25rem; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem; text-transform: uppercase; }
 .portrait-wrap figcaption a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .portrait-wrap figcaption a:hover { color: var(--accent-soft); }
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .metrics div { display: flex; gap: 1.2rem; padding: 1.6rem 0; align-items: center; font-size: .86rem; line-height: 1.4; }
 .metrics div + div { border-left: 1px solid var(--line); padding-left: 2rem; }
-.metric-number { color: var(--highlight); font-family: "DM Mono", monospace; font-size: 1.3rem; white-space: nowrap; }
+.metric-number { color: var(--highlight); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: 1.3rem; white-space: nowrap; }
 .section { padding: 7rem 0; display: grid; grid-template-columns: minmax(180px, .28fr) 1fr; gap: 3rem; border-bottom: 1px solid var(--line); }
 .section-label h2 { margin: .35rem 0 0; font-size: 1.35rem; letter-spacing: 0; }
 .section-label > span { color: var(--muted); }
@@ -334,7 +344,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   margin-top: .9rem;
   opacity: 0;
   color: var(--accent);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .68rem;
   text-transform: uppercase;
   transition: opacity .25s ease;
@@ -382,8 +392,8 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .project-detail { margin: .95rem 0 0; padding-left: 1.05rem; color: var(--muted); font-size: .95rem; line-height: 1.6; }
 .project-detail li { margin-bottom: .3rem; }
 .project-detail li::marker { color: var(--muted); }
-.project-tech { margin: 1.1rem 0 0; font-family: "DM Mono", monospace; font-size: .68rem; text-transform: uppercase; color: var(--muted); }
-.project-mark { font-family: "DM Mono", monospace; font-size: clamp(5rem, 10vw, 9rem); font-weight: 500; }
+.project-tech { margin: 1.1rem 0 0; font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .68rem; text-transform: uppercase; color: var(--muted); }
+.project-mark { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: clamp(5rem, 10vw, 9rem); font-weight: 500; }
 .card-top { display: flex; justify-content: space-between; }
 .project-card h3 { margin-bottom: .55rem; font-size: 1.55rem; }
 .project-card p { max-width: 380px; margin-bottom: 0; color: var(--muted); line-height: 1.5; }
@@ -415,14 +425,14 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 }
 .capability-list li:hover { background: color-mix(in srgb, var(--cap) 8%, transparent); transform: translateX(4px); }
 .capability-list li:hover::before { transform: scaleY(1); }
-.cap-num { grid-column: 1; grid-row: 1 / span 2; color: var(--muted); font-family: "DM Mono", monospace; font-size: .82rem; }
-.cap-name { grid-column: 3; font-family: "Space Grotesk", sans-serif; font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 500; line-height: 1.15; }
+.cap-num { grid-column: 1; grid-row: 1 / span 2; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .82rem; }
+.cap-name { grid-column: 3; font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif; font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 500; line-height: 1.15; }
 .cap-where {
   grid-column: 3;
   grid-row: 2;
   margin-top: .35rem;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .74rem;
   text-transform: uppercase;
   opacity: .8;
@@ -434,7 +444,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .7rem;
   text-transform: uppercase;
   white-space: nowrap;
@@ -466,7 +476,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
 .banner-sub {
   margin: 0;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .72rem;
   text-transform: uppercase;
 }
@@ -487,7 +497,7 @@ h1 { max-width: 780px; margin-bottom: 1.5rem; font-size: clamp(3.1rem, 7.1vw, 7.
   left: 1.4rem;
   top: 1.6rem;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .74rem;
 }
 .principle-list li:hover { border-color: var(--accent); transform: translateY(-2px); }
@@ -559,30 +569,24 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 }
 /* Each case page redefines --accent itself, so every component inside it —
    charts, chips, tooltips, metric numbers — picks up the project colour
-   without needing its own override. */
+   without needing its own override.
+   Update: --accent is no longer redefined here. Controls on every page share
+   the site accent; --case-accent is now read only by charts and dashboards. */
 .case-freshmart {
-  --case-bg: url("images/freshmart-dashboard.png");
+  --case-bg: url("images/freshmart-dashboard.webp");
   --case-accent: var(--c3);
-  --accent: var(--c3);
-  --accent-soft: color-mix(in srgb, var(--c3) 72%, white);
 }
 .case-renewable {
-  --case-bg: url("images/renewable-dashboard.png");
+  --case-bg: url("images/renewable-dashboard.webp");
   --case-accent: var(--c1);
-  --accent: var(--c1);
-  --accent-soft: color-mix(in srgb, var(--c1) 72%, white);
 }
 .case-football {
-  --case-bg: url("images/football-erd.png");
+  --case-bg: url("images/football-erd.webp");
   --case-accent: var(--c4);
-  --accent: var(--c4);
-  --accent-soft: color-mix(in srgb, var(--c4) 72%, white);
 }
 .case-weather {
-  --case-bg: url("images/weatherwise-demo.png");
+  --case-bg: url("images/weatherwise-demo.webp");
   --case-accent: var(--c2);
-  --accent: var(--c2);
-  --accent-soft: color-mix(in srgb, var(--c2) 72%, white);
 }
 
 /* Case hero — same entrance and gradient treatment as the landing page */
@@ -636,7 +640,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   content: "0" counter(cb);
   min-width: 1.6em;
   color: var(--case-accent, var(--accent));
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   /* In em so it scales with the heading. DM Mono has a much smaller cap-height
      than Space Grotesk, so this sits well above a strict mathematical match. */
   font-size: .78em;
@@ -650,12 +654,12 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .case .lede { max-width: 100%; }
 .case-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin: 2.3rem 0 0; }
 .case-shot img { display: block; width: 100%; border: 1px solid var(--img-border); background: var(--surface); }
-.case-shot figcaption { margin-top: .8rem; color: var(--muted); font-family: "DM Mono", monospace; font-size: .7rem; text-transform: uppercase; }
+.case-shot figcaption { margin-top: .8rem; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem; text-transform: uppercase; }
 .case-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.2rem; padding: 1.6rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .case-meta dt {
   margin-bottom: .6rem;
   color: var(--case-accent, var(--accent));
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .88rem;
   font-weight: 500;
   letter-spacing: .08em;
@@ -672,7 +676,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .findings { list-style: none; margin: 1.4rem 0 0; padding: 0; }
 .findings li { padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
 .findings li:first-child { border-top: 1px solid var(--accent); }
-.finding-number { display: block; margin-bottom: .5rem; color: var(--accent); font-family: "DM Mono", monospace; font-size: 1.5rem; line-height: 1; }
+.finding-number { display: block; margin-bottom: .5rem; color: var(--accent); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: 1.5rem; line-height: 1; }
 .findings p { margin: 0; max-width: 760px; }
 .case-footer-actions { margin-top: 4rem; padding-top: 2.4rem; border-top: 1px solid var(--line); }
 
@@ -686,7 +690,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   border-radius: 999px;
   background: var(--surface);
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .72rem;
   transition: color .2s ease, border-color .2s ease, background .2s ease;
 }
@@ -704,7 +708,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   list-style: none;
   padding: .7rem 1rem;
   color: var(--case-accent, var(--accent));
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .72rem;
   text-transform: uppercase;
 }
@@ -714,7 +718,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   padding: 0 1rem 1rem;
   overflow-x: auto;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .74rem;
   line-height: 1.65;
   white-space: pre;
@@ -722,7 +726,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .sq-count {
   margin: 0 0 .5rem;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .7rem;
   text-transform: uppercase;
 }
@@ -735,7 +739,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   border-bottom: 1px solid var(--line);
   background: var(--bg);
   color: var(--case-accent, var(--accent));
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .66rem;
   font-weight: 500;
   text-align: left;
@@ -743,7 +747,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   white-space: nowrap;
 }
 .sq-table td { padding: .6rem .9rem; border-bottom: 1px solid rgba(30, 43, 57, .6); white-space: nowrap; }
-.sq-table td.num { font-family: "DM Mono", monospace; font-variant-numeric: tabular-nums; color: var(--muted); }
+.sq-table td.num { font-family: "DM Mono", "DM Mono Fallback", monospace; font-variant-numeric: tabular-nums; color: var(--muted); }
 .sq-table tbody tr:last-child td { border-bottom: 0; }
 .sq-table tbody tr:hover td { background: rgba(255, 255, 255, .025); }
 .sq-note { margin: .9rem 0 0; max-width: 760px; color: var(--muted); font-size: .98rem; line-height: 1.65; }
@@ -885,7 +889,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 }
 .ww-card-sub {
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .68rem;
   text-transform: uppercase;
 }
@@ -910,7 +914,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   display: block;
   margin-bottom: .3rem;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .66rem;
   text-transform: uppercase;
 }
@@ -918,7 +922,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .ww-wind {
   margin: .9rem 0 0;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .72rem;
   text-transform: uppercase;
 }
@@ -928,7 +932,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   gap: 1.5rem;
   margin: .9rem 0 0;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .68rem;
   text-transform: uppercase;
 }
@@ -971,7 +975,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .ww-chart { overflow-x: auto; }
 .ww-chart svg { width: 100%; height: auto; display: block; min-width: 300px; }
 .ww-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 8; }
-.ww-axis { fill: var(--muted); font-size: 10px; font-family: "DM Mono", monospace; }
+.ww-axis { fill: var(--muted); font-size: 10px; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 .ww-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
 .ww-line-min { stroke: var(--accent-soft); stroke-width: 1.5; stroke-dasharray: 4 3; opacity: .75; }
 .ww-band { fill: rgba(94, 203, 245, .12); stroke: none; }
@@ -1041,17 +1045,17 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .rf-chart { overflow-x: auto; }
 .rf-chart svg { width: 100%; height: auto; display: block; min-width: 300px; }
 .rf-grid { stroke: var(--line); stroke-width: 1; }
-.rf-axis { fill: var(--muted); font-size: 10px; font-family: "DM Mono", monospace; }
+.rf-axis { fill: var(--muted); font-size: 10px; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 .rf-band { fill: rgba(94, 203, 245, .1); stroke: none; }
 .rf-fit { stroke: var(--accent); stroke-width: 2.2; }
 .rf-dot { fill: var(--accent-soft); }
 .rf-target { stroke: #f0a35e; stroke-width: 1.4; stroke-dasharray: 5 4; }
-.rf-target-label { fill: #f0a35e; font-size: 10px; font-family: "DM Mono", monospace; }
+.rf-target-label { fill: #f0a35e; font-size: 10px; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 .rf-proj { fill: var(--accent); stroke: var(--bg); stroke-width: 1.5; }
-.rf-proj-label { fill: var(--accent); font-size: 11px; font-weight: 600; font-family: "DM Mono", monospace; }
+.rf-proj-label { fill: var(--accent); font-size: 11px; font-weight: 600; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 .rf-stats {
   margin: .7rem 0 0;
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .78rem;
   color: var(--ink);
   overflow-x: auto;
@@ -1073,15 +1077,15 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .hero-chart { display: block; width: 100%; border-radius: 10px; border: 1px solid var(--img-border); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
 .hero-chart svg { display: block; width: 100%; height: auto; }
 .hc-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 8; }
-.hc-axis { fill: var(--muted); font-size: 11px; font-family: "DM Mono", monospace; }
+.hc-axis { fill: var(--muted); font-size: 11px; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 .hc-area { fill: url(#hcFade); color: var(--c1); }
 .hc-line { fill: none; stroke: var(--c1); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .hc-forecast { fill: none; stroke: var(--c1); stroke-width: 2; stroke-dasharray: 6 5; opacity: .75; }
 .hc-dot { fill: var(--c1); }
 .hc-end { fill: var(--c1); }
-.hc-end-label { fill: var(--c1); font-size: 12px; font-weight: 600; font-family: "DM Mono", monospace; }
+.hc-end-label { fill: var(--c1); font-size: 12px; font-weight: 600; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 .hc-target { stroke: var(--c3); stroke-width: 1.5; stroke-dasharray: 7 5; }
-.hc-target-label { fill: var(--c3); font-size: 11px; font-family: "DM Mono", monospace; }
+.hc-target-label { fill: var(--c3); font-size: 11px; font-family: "DM Mono", "DM Mono Fallback", monospace; }
 
 /* Capability icons — hand-drawn inline SVG, no icon library */
 .cap-icon { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; color: var(--muted); opacity: .85; transition: opacity .25s ease, transform .25s ease; }
@@ -1111,7 +1115,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   pointer-events: none;
   white-space: nowrap;
 }
-.ch-tip-label { color: var(--muted); font-family: "DM Mono", monospace; font-size: .64rem; text-transform: uppercase; }
+.ch-tip-label { color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .64rem; text-transform: uppercase; }
 .ch-tip-value { color: var(--ink); font-size: .95rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 
 /* ---------- FreshMart explorer ---------- */
@@ -1119,7 +1123,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .dash-key { font-size: .9rem; }
 .dash-track { height: 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
 .dash-fill { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--case-accent, var(--accent)); transition: width .7s cubic-bezier(.4,0,.2,1); }
-.dash-val { font-family: "DM Mono", monospace; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dash-val { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .fm-note { margin: 1rem 0 0; max-width: 760px; color: var(--muted); font-size: .98rem; line-height: 1.65; }
 @media (prefers-reduced-motion: reduce) { .dash-fill { transition: none; } }
 
@@ -1165,9 +1169,9 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   line-height: 1.6;
   text-align: center;
 }
-.dg-t { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: "Space Grotesk", sans-serif; stroke: none; }
-.dg-s { fill: var(--muted); font-size: 8.5px; font-family: "DM Mono", monospace; stroke: none; }
-.dg-h { fill: var(--muted); font-size: 9px; font-family: "DM Mono", monospace; text-transform: uppercase; stroke: none; }
+.dg-t { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif; stroke: none; }
+.dg-s { fill: var(--muted); font-size: 8.5px; font-family: "DM Mono", "DM Mono Fallback", monospace; stroke: none; }
+.dg-h { fill: var(--muted); font-size: 9px; font-family: "DM Mono", "DM Mono Fallback", monospace; text-transform: uppercase; stroke: none; }
 .dg-fact rect { fill: color-mix(in srgb, var(--case-accent, var(--accent)) 14%, var(--bg)); }
 .dg-fact .dg-t { fill: var(--ink); }
 .dg-bad rect { stroke-dasharray: 4 4; opacity: .75; }
@@ -1198,7 +1202,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .cl-label { font-size: .96rem; font-weight: 500; }
 .cl-before {
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .92rem;
   text-decoration: line-through;
   text-decoration-color: var(--c4);
@@ -1206,7 +1210,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 }
 .cl-row.is-kept .cl-before { text-decoration: none; opacity: .5; }
 .cl-arrow { color: var(--muted); text-align: center; }
-.cl-after { color: var(--accent); font-family: "DM Mono", monospace; font-size: .92rem; font-weight: 600; white-space: nowrap; }
+.cl-after { color: var(--accent); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .92rem; font-weight: 600; white-space: nowrap; }
 .cl-note { color: var(--muted); font-size: .88rem; line-height: 1.5; }
 @media (max-width: 720px) {
   .cl-row { grid-template-columns: 1fr auto 16px auto; }
@@ -1222,7 +1226,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   align-self: center;
   margin-left: .7rem;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: 1rem;
   transition: transform .25s ease, color .25s ease;
 }
@@ -1337,9 +1341,9 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 60%, transparent 96%);
   pointer-events: none;
 }
-.case-freshmart { --case-bg-block: url("images/freshmart-dashboard.png"); }
-.case-football { --case-bg-block: url("images/football-erd.png"); }
-.case-weather { --case-bg-block: url("images/weatherwise-demo.png"); }
+.case-freshmart { --case-bg-block: url("images/freshmart-dashboard.webp"); }
+.case-football { --case-bg-block: url("images/football-erd.webp"); }
+.case-weather { --case-bg-block: url("images/weatherwise-demo.webp"); }
 
 /* ---------- Heading and meta icons ---------- */
 /* Explicit colour: the headings use background-clip:text with a transparent
@@ -1399,7 +1403,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 .dash-slicers { display: grid; gap: .85rem; padding: 1.1rem 1.2rem; margin-bottom: 1rem;
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
 .dash-slicer { display: grid; grid-template-columns: minmax(96px, 116px) 1fr; align-items: center; gap: .9rem; }
-.dash-slabel { font-family: "DM Mono", monospace; font-size: .68rem; letter-spacing: .1em;
+.dash-slabel { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .68rem; letter-spacing: .1em;
   text-transform: uppercase; color: var(--muted); }
 .dash-schips { display: flex; flex-wrap: wrap; gap: .35rem; }
 .dash-chip { padding: .3rem .7rem; font: inherit; font-size: .84rem; line-height: 1.2;
@@ -1410,7 +1414,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   border-color: var(--case-accent, var(--accent)); font-weight: 600; }
 
 .dash-active { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: 1.3rem; min-height: 30px; }
-.dash-alabel { font-family: "DM Mono", monospace; font-size: .7rem; letter-spacing: .08em;
+.dash-alabel { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem; letter-spacing: .08em;
   text-transform: uppercase; color: var(--muted); }
 .dash-active.is-empty .dash-alabel { text-transform: none; letter-spacing: 0; font-size: .85rem; font-family: inherit; }
 .dash-pill { display: inline-flex; align-items: center; gap: .3rem; padding: .25rem .6rem;
@@ -1418,7 +1422,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   border: 1px dashed var(--case-accent, var(--accent)); border-radius: 999px; cursor: pointer; }
 .dash-pill strong { color: var(--case-accent, var(--accent)); font-weight: 600; }
 .dash-pill:hover { background: color-mix(in srgb, var(--case-accent, var(--accent)) 12%, transparent); }
-.dash-clear { padding: .25rem .5rem; font-family: "DM Mono", monospace; font-size: .7rem;
+.dash-clear { padding: .25rem .5rem; font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem;
   text-transform: uppercase; color: var(--muted); background: none; border: 0;
   border-bottom: 1px solid var(--line); cursor: pointer; }
 .dash-clear:hover { color: var(--case-accent, var(--accent)); border-color: var(--case-accent, var(--accent)); }
@@ -1440,7 +1444,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 
 .dash-svg { width: 100%; height: auto; display: block; overflow: visible; }
 .dash-grid { stroke: var(--line); stroke-width: 1; }
-.dash-axis { fill: var(--muted); font-family: "DM Mono", monospace; font-size: 9px; }
+.dash-axis { fill: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: 9px; }
 .dash-line { fill: none; stroke: var(--case-accent, var(--accent)); stroke-width: 2;
   stroke-linejoin: round; stroke-linecap: round; }
 .dash-area { fill: color-mix(in srgb, var(--case-accent, var(--accent)) 16%, transparent); stroke: none; }
@@ -1449,12 +1453,12 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   align-items: end; height: 150px; }
 .dash-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
   height: 100%; gap: .35rem; }
-.dash-colval { font-family: "DM Mono", monospace; font-size: .62rem; color: var(--muted);
+.dash-colval { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .62rem; color: var(--muted);
   font-variant-numeric: tabular-nums; }
 .dash-colbar { width: 100%; max-width: 34px; border-radius: 5px 5px 0 0;
   background: var(--case-accent, var(--accent)); opacity: .82;
   transition: height .5s cubic-bezier(.4,0,.2,1); }
-.dash-collab { font-family: "DM Mono", monospace; font-size: .64rem; color: var(--muted); }
+.dash-collab { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .64rem; color: var(--muted); }
 
 @media (max-width: 720px) {
   .dash-grid-wrap { grid-template-columns: 1fr; }
@@ -1477,7 +1481,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
 /* ---- dashboard: report-style titles, event markers, clustered columns ---- */
 .dash-panel h3 { margin-bottom: .2rem; }
 .dash-subtitle { margin: 0 0 .9rem; color: var(--muted); font-size: .84rem; line-height: 1.45; }
-.dash-axistitle { margin: .6rem 0 0; color: var(--muted); font-family: "DM Mono", monospace;
+.dash-axistitle { margin: .6rem 0 0; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .68rem; letter-spacing: .04em; text-align: center; }
 
 .dash-event { stroke: var(--c4); stroke-width: 1.3; stroke-dasharray: 4 3; }
@@ -1501,14 +1505,14 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   gap: 1rem; padding-bottom: .85rem; margin-bottom: 1rem; border-bottom: 2px solid var(--case-accent, var(--accent)); }
 .dash-title { margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--ink); letter-spacing: -.01em; }
 .dash-head .dash-subtitle { margin: .2rem 0 0; font-style: italic; }
-.dash-meta { margin: 0; text-align: right; color: var(--muted); font-family: "DM Mono", monospace;
+.dash-meta { margin: 0; text-align: right; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .7rem; line-height: 1.6; }
 
 .dash-kpirow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
 .dash-kpicard { display: flex; flex-direction: column; align-items: center; gap: .3rem;
   padding: 1rem .8rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
 .dash-kpilabel { font-size: .82rem; font-weight: 600; color: var(--muted); letter-spacing: .02em; }
-.dash-kpivalue { font-family: "DM Mono", monospace; font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+.dash-kpivalue { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: clamp(1.5rem, 3.6vw, 2.1rem);
   font-weight: 500; color: var(--case-accent, var(--accent)); font-variant-numeric: tabular-nums; }
 .dash-kpinote { font-size: .76rem; color: var(--muted); }
 
@@ -1698,7 +1702,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   padding: 0;
   list-style: none;
   color: var(--muted);
-  font-family: "DM Mono", monospace;
+  font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .8rem;
   /* a fixed line box, so the web font arriving late cannot change the height */
   line-height: 1.25rem;
@@ -1783,7 +1787,7 @@ footer { display: flex; justify-content: space-between; padding: 1.8rem 0; borde
   transition: color .2s ease, background .2s ease, transform .2s ease;
 }
 .dock-ico svg { display: block; width: 22px; height: 22px; }
-.dock-num { font-family: "DM Mono", monospace; font-size: .8rem; }
+.dock-num { font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .8rem; }
 .dock-link:hover { color: #ffffff; background: rgba(255, 255, 255, .08); }
 .dock-link.is-current { color: #5ecbf5; background: rgba(94, 203, 245, .14); }
 .dock-sep { width: 1px; height: 28px; margin: 0 .2rem; background: rgba(255, 255, 255, .16); }
@@ -1873,3 +1877,55 @@ body { padding-bottom: 5.5rem; }
 .principle-list li,
 .faq-list details { border-radius: 20px; }
 .nav-toggle { border-radius: 999px; }
+
+/* ---- top bar: the one action a recruiter wants, always in reach -------- */
+.topbar-cta {
+  display: inline-flex; align-items: center; gap: .45rem;
+  margin-left: 1.2rem;
+  padding: .6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--accent); color: var(--bg);
+  font-size: .88rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+  transition: background .2s ease, transform .2s ease;
+}
+.topbar-cta:hover { background: var(--accent-soft); transform: translateY(-1px); }
+@media (max-width: 560px) {
+  /* not enough room for both: the CV wins, GitHub is still in Contact */
+  .topbar .github-link { display: none; }
+  .topbar-cta { margin-left: 0; padding: .55rem .9rem; font-size: .82rem; }
+  .theme-toggle { margin-left: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .topbar-cta { transition: none; } }
+
+/* ---- case studies: the same system as the landing page -------------------
+ * One accent for controls, muted labels, amber for key numbers, and blocks
+ * that alternate background in full-width bands like the landing sections.
+ * The project colour (--case-accent) is left to the charts. */
+.case > .eyebrow,
+.case-meta dt,
+.case .cm-ico,
+.case .h2-ico,
+.case-motif { color: var(--muted); }
+.case-block > h2::before { color: var(--muted); -webkit-text-fill-color: var(--muted); }
+.case-block > ul li::marker { color: var(--muted); }
+.case .icon-list li:nth-child(n) .il-icon { color: var(--muted); }
+.case .icon-list li:nth-child(n) .il-flag { color: inherit; }
+.findings li:first-child { border-top-color: var(--line); }
+.finding-number { color: var(--highlight); }
+.case-shot { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.case-shot::before { background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%); }
+.case-block::after { background: radial-gradient(closest-side, var(--glow-section, rgba(94, 203, 245, .18)), transparent 72%); }
+.case-block {
+  --sec-bg: var(--bg);
+  isolation: isolate;
+  margin-top: 0;
+  padding: 3.6rem 0;
+  border-image: linear-gradient(180deg, var(--line) 1px, var(--sec-bg) 1px) fill 0 / 0 / 0 100vmax;
+}
+.case-block:nth-of-type(even) { --sec-bg: var(--tone); }
+.case-meta { margin-bottom: 3.4rem; }
+.case-footer-actions { margin-top: 0; border-top-color: var(--line); }
+@media (max-width: 720px) {
+  .case-block { margin-top: 0; padding: 2.8rem 0; }
+  .case-meta { margin-bottom: 2.6rem; }
+}
