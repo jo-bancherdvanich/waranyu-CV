@@ -3629,3 +3629,10 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) { .capability-list li.is-open .cap-why { animation: none; } }
 @media print { .capability-list .cap-why { display: block; } .capability-list li::after { display: none; } }
+
+/* Case-study headings: solid ink instead of gradient text. With gradient
+   text, the heading's gradient was painted through the watermark number
+   behind it, so part of "01" showed as solid dark ink over the faint one. */
+.case-block > h2 { background: none; color: var(--ink); -webkit-text-fill-color: var(--ink); }
+.case-block > h2 .h2-ico { -webkit-text-fill-color: currentColor; }
+.case-block > h2::before { -webkit-text-fill-color: var(--st, var(--accent)); }
