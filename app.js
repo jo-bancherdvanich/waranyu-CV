@@ -65,48 +65,6 @@
     });
   });
 
-  /* ---- copy email ----------------------------------------------------- */
-  // Not everyone has a mail app set up, so the address can be copied in one
-  // click. The clipboard API needs a secure context; the textarea route
-  // covers older browsers.
-  document.querySelectorAll(".contact-copy").forEach(function (btn) {
-    var label = btn.querySelector(".cc-label");
-    var live = btn.querySelector("[aria-live]");
-    var timer = null;
-    function done(ok) {
-      label.textContent = ok ? "Copied" : "Copy failed";
-      live.textContent = ok ? "Email address copied" : "";
-      btn.classList.toggle("is-done", ok);
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        label.textContent = "Copy email";
-        live.textContent = "";
-        btn.classList.remove("is-done");
-      }, 2000);
-    }
-    btn.addEventListener("click", function () {
-      var text = btn.getAttribute("data-copy");
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(function () { done(true); }, fallback);
-      } else {
-        fallback();
-      }
-      function fallback() {
-        var ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        var ok = false;
-        try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
-        document.body.removeChild(ta);
-        done(ok);
-      }
-    });
-  });
-
   /* ---- mobile navigation ---------------------------------------------- */
   // Below 720px the nav collapses behind a button. Closing on link click,
   // outside click and Escape keeps it from stranding the reader.

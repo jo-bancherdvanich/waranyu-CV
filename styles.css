@@ -3602,3 +3602,30 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
 :root[data-theme="light"] .edu-art-seal, :root[data-theme="light"] .edu-art-curtin {
   padding: 0; background: none; box-shadow: none; filter: none;
 }
+
+/* =============================================================================
+   Capabilities: closed by default
+   Each row shows only the skill name and where it was used. A click (or
+   Enter on the name) opens the explanation; the marker on the right says
+   "More" or "Less". Earlier rules that kept every row open are overridden.
+   ============================================================================= */
+.capability-list li { cursor: pointer; grid-template-columns: 46px 52px minmax(0, 1fr) auto auto; }
+.cap-toggle { cursor: pointer; }
+.capability-list .cap-why {
+  display: none; opacity: 1; max-height: none; margin-top: 0;
+}
+.capability-list li.is-open .cap-why { display: block; margin-top: .7rem; animation: capOpen .3s ease both; }
+@keyframes capOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.capability-list li::after {
+  content: "More +"; align-self: center;
+  font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .68rem;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+  transform: none;
+}
+.capability-list li.is-open::after { content: "Less \2212"; color: var(--cap); transform: none; }
+@media (max-width: 720px) {
+  .capability-list li { grid-template-columns: 46px minmax(0, 1fr) auto; }
+  .capability-list li::after { display: block; grid-column: 3; grid-row: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .capability-list li.is-open .cap-why { animation: none; } }
+@media print { .capability-list .cap-why { display: block; } .capability-list li::after { display: none; } }
