@@ -3214,3 +3214,68 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 
 /* the GitHub card */
 .project-card-wide .project-cta { color: var(--pc); }
+
+/* ---- pipeline as a flow diagram ---------------------------------------------
+ * Numbered nodes with an icon each, joined by a line with arrowheads. Across
+ * the card on wide screens; a vertical timeline on phones. Colour follows the
+ * card (--pc) on the home page and the site accent on case pages. */
+.pipeline.flow { --fl: var(--pc, var(--accent)); display: flex; flex-wrap: nowrap; align-items: flex-start; gap: 0; margin: 1.1rem 0 0; padding: 0; overflow: visible; }
+.pipeline.flow li { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: .45rem; padding: 0 .25rem; text-align: center; white-space: normal; }
+.pipeline.flow li::before { content: none; }
+.pipeline.flow li:first-child, .pipeline.flow .pl { padding: 0; border: 0; background: none; }
+/* the connecting line, drawn from each node's centre to the next */
+.pipeline.flow li + li::after {
+  content: "";
+  position: absolute;
+  top: 19px; right: 50%; left: -50%;
+  height: 2px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--fl) 45%, transparent), var(--fl));
+  z-index: 0;
+}
+/* arrowhead */
+.pipeline.flow li + li .fl-node::before {
+  content: "";
+  position: absolute; left: -9px; top: 50%;
+  width: 0; height: 0;
+  border: 5px solid transparent; border-left: 7px solid var(--fl); border-right: 0;
+  transform: translateY(-50%);
+}
+.fl-node {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  color: var(--fl);
+  background: color-mix(in srgb, var(--fl) 12%, var(--bg));
+  border: 1.5px solid color-mix(in srgb, var(--fl) 55%, transparent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--fl) 18%, transparent);
+}
+.fl-ico svg { width: 20px; height: 20px; display: block; }
+.fl-num {
+  position: absolute; top: -7px; right: -7px;
+  min-width: 17px; height: 17px; padding: 0 4px;
+  border-radius: 999px;
+  color: var(--bg); background: var(--fl);
+  font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .6rem; font-weight: 500; line-height: 17px; text-align: center;
+}
+:root[data-theme="light"] .fl-num { color: #ffffff; }
+.fl-label { color: var(--ink); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .66rem; line-height: 1.3; letter-spacing: .01em; }
+.project-card.project-card-featured .pipeline.flow .fl-label { color: var(--ink); }
+/* hover: the row lights in sequence */
+@media (prefers-reduced-motion: no-preference) {
+  .fl-node { transition: transform .25s ease, box-shadow .25s ease; }
+  .project-card:hover .fl-node { transform: translateY(-2px); box-shadow: 0 10px 22px color-mix(in srgb, var(--fl) 28%, transparent); }
+}
+/* case pages: a little roomier */
+.case > .pipeline.flow { max-width: 760px; margin-top: 1.6rem; }
+.case > .pipeline.flow .fl-node { width: 46px; height: 46px; }
+.case > .pipeline.flow .fl-label { font-size: .72rem; }
+/* phones: vertical timeline */
+@media (max-width: 720px) {
+  .pipeline.flow { flex-direction: column; align-items: stretch; gap: .9rem; }
+  .pipeline.flow li { flex-direction: row; align-items: center; gap: .9rem; padding: 0; text-align: left; }
+  .pipeline.flow li + li::after { top: auto; bottom: 100%; left: 19px; right: auto; width: 2px; height: .9rem; background: linear-gradient(180deg, color-mix(in srgb, var(--fl) 45%, transparent), var(--fl)); }
+  .pipeline.flow li + li .fl-node::before { left: 50%; top: -8px; border: 5px solid transparent; border-top: 7px solid var(--fl); border-bottom: 0; transform: translateX(-50%); }
+  .fl-label { font-size: .78rem; }
+  .pipeline.flow li + li::before { content: none; }
+}
