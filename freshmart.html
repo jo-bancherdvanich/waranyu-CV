@@ -115,6 +115,8 @@
           <section class="case-block" data-stage="Data">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
             <p>Five raw CSV extracts, modelled into a single star schema:</p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <ul class="icon-list">
               <li>
                 <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18l2-1.5L10 21l2-1.5L14 21l2-1.5L18 21V3l-2 1.5L14 3l-2 1.5L10 3 8 4.5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
@@ -141,6 +143,7 @@
                 <span><strong>Date</strong> — a generated calendar dimension for time intelligence</span>
               </li>
             </ul>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Approach">
@@ -148,6 +151,8 @@
             <p>
               Every source table was audited in Power Query before it went anywhere near the model. The issues were real, not hypothetical:
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <ul>
               <li>Duplicate customer records sharing a CustomerID with slightly different membership dates — removed by CustomerID</li>
               <li>Product categories spelled inconsistently across records (<strong>dairy</strong>, <strong>Diary</strong>, <strong>bakery</strong>) — standardised via value replacement</li>
@@ -159,6 +164,7 @@
             <p>
               Dropping the 93 orphaned rows would have quietly understated revenue. Mapping them keeps the money in the totals while making the gap visible.
             </p>
+            </details>
           </section>
 
           <section class="case-block">
@@ -166,10 +172,13 @@
             <p>
               The warehouse follows Kimball's four-stage method. <strong>Business process:</strong> retail sales. <strong>Grain:</strong> one row per product, per customer, per store, per date, per promotion — the most detailed level available, so no future analytical question is closed off. <strong>Dimensions:</strong> Product, Customer, Store, Promotion, Date. <strong>Facts:</strong> QuantitySold, UnitPrice, DiscountAmount, COGS.
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <p>
               Facts were classified deliberately: QuantitySold, DiscountAmount and COGS are additive; UnitPrice is non-additive and used only inside calculations, never summed. Getting that distinction wrong is how dashboards end up reporting a nonsense "total unit price".
             </p>
             <figure class="case-diagram"><svg viewBox="0 0 560 262" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link " d="M96 56L216 108"/><path class="dg-link " d="M280 56L280 108"/><path class="dg-link " d="M464 56L344 108"/><path class="dg-link " d="M150 206L235 152"/><path class="dg-link " d="M410 206L326 152"/><g class=""><rect x="44" y="24" width="104" height="32" rx="5"/><text x="96" y="44" class="dg-t" text-anchor="middle">Customer</text></g><g class=""><rect x="228" y="24" width="104" height="32" rx="5"/><text x="280" y="44" class="dg-t" text-anchor="middle">Product</text></g><g class=""><rect x="412" y="24" width="104" height="32" rx="5"/><text x="464" y="44" class="dg-t" text-anchor="middle">Store</text></g><g class=""><rect x="98" y="206" width="104" height="32" rx="5"/><text x="150" y="226" class="dg-t" text-anchor="middle">Promotion</text></g><g class=""><rect x="358" y="206" width="104" height="32" rx="5"/><text x="410" y="226" class="dg-t" text-anchor="middle">Date</text></g><g class="dg-fact"><rect x="214" y="108" width="132" height="44" rx="5"/><text x="280" y="127" class="dg-t" text-anchor="middle">Sales</text><text x="280" y="141" class="dg-s" text-anchor="middle">17,697 rows</text></g></svg><figcaption>One fact table at the centre, five dimensions around it. The grain is one row per product, per customer, per store, per date, per promotion.</figcaption></figure>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Result" id="explore">
@@ -191,6 +200,8 @@
               <li>
                 <span class="finding-number">01</span>
                 <p><strong>Headline KPIs</strong> — total revenue, gross profit, and gross margin percentage, so profitability is visible next to volume rather than buried behind it.</p>
+            <details class="case-more">
+              <summary>Read more</summary>
               </li>
               <li>
                 <span class="finding-number">02</span>
@@ -209,6 +220,7 @@
                 <p><strong>This year versus the same period last year</strong>, built with DAX time intelligence so growth is measured against a fair comparison rather than a raw total.</p>
               </li>
             </ul>
+            </details>
           </section>
 
           <section class="case-block">

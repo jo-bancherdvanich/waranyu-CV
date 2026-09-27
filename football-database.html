@@ -132,9 +132,12 @@
             <p>
               The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through junction tables. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <p>
               Substitutions are captured inside the player-appearance table using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters — see below.
             </p>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Result" id="run-it">
@@ -175,6 +178,8 @@
             <p>
               The analytical layer is the interesting part: joins, aggregation, subqueries, HAVING clauses and LEFT JOINs, each written to answer a question an organiser would genuinely ask.
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <ul class="findings">
               <li>
                 <span class="finding-number">01</span>
@@ -197,6 +202,7 @@
                 <p><strong>Best-on-ground rankings</strong> with a breakdown of 3, 2 and 1-point awards, plus each club's away form.</p>
               </li>
             </ul>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Limits">
@@ -204,6 +210,8 @@
             <p>
               The version in the repository is a revised one. Reviewing the first design, three things were wrong — so I went back and fixed them rather than leaving them:
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <ul>
               <li><strong>Removed the Substitution table.</strong> It created an unresolved many-to-many relationship — two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
               <li><strong>Corrected two business rules.</strong> The club-to-ground relationship now describes training and ownership rather than where games are played, which is what the data actually represents.</li>
@@ -213,6 +221,7 @@
             <p>
               Going back to correct a design I had already finished is the part of this project I would point to first.
             </p>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Links">

@@ -112,6 +112,8 @@
             <p>
               The Australian government has committed to <strong>82% renewable electricity by 2030</strong>. Written as a brief for a DCCEEW-style audience, this project asks the practical version of that commitment: <strong>is Australia on track, and if not, how far short will it fall?</strong>
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <p>It breaks into four sub-questions the dashboard has to answer:</p>
             <ul>
               <li>How has Australia's renewable share changed since 2005?</li>
@@ -119,6 +121,7 @@
               <li>How does Australia compare with China, Germany and New Zealand?</li>
               <li>What does a forecast to 2035 suggest about reaching the target?</li>
             </ul>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Data">
@@ -126,6 +129,8 @@
             <p>
               Four national datasets, each in a different format, unit, and source taxonomy — reconciling them was most of the work.
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <ul class="icon-list">
               <li>
                 <span class="il-icon il-flag" aria-hidden="true"><svg viewBox="0 0 24 16"><defs><clipPath id="fAU"><rect width="24" height="16" rx="2"/></clipPath></defs><g clip-path="url(#fAU)"><rect width="24" height="16" fill="#00247d"/><path d="M0 0l12 8M12 0L0 8" stroke="#fff" stroke-width="1.6"/><path d="M6 0v8M0 4h12" stroke="#fff" stroke-width="2.6"/><path d="M6 0v8M0 4h12" stroke="#c8102e" stroke-width="1.3"/><circle cx="6" cy="12.5" r="1.5" fill="#fff"/><circle cx="18" cy="4" r=".9" fill="#fff"/><circle cx="21" cy="7.5" r=".9" fill="#fff"/><circle cx="18" cy="11.5" r=".9" fill="#fff"/><circle cx="15.5" cy="7.8" r=".7" fill="#fff"/><circle cx="19.5" cy="8.6" r=".5" fill="#fff"/></g></svg></span>
@@ -147,6 +152,7 @@
             <p>
               All four were standardised in Power Query into five consistent renewable categories — solar, wind, hydro, biomass, geothermal — with GWh converted to TWh. Every transformation is recorded in a data decisions log rather than left implicit.
             </p>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Approach">
@@ -154,6 +160,8 @@
             <p>
               <strong>Galaxy schema, not a single fact table.</strong> Two fact tables (renewable generation and total generation) share three dimensions: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error structurally impossible.
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <figure class="case-diagram"><svg viewBox="0 0 640 250" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link" d="M156 34H200V124H225"/><path class="dg-link" d="M156 94H200V124H225"/><path class="dg-link" d="M156 154H200V124H225"/><path class="dg-link" d="M156 214H200V124H225"/><path class="dg-link" d="M375 124H412V84H449"/><path class="dg-link" d="M412 124V164H449"/><path class="dg-arrow" d="M443 79l6 5-6 5"/><path class="dg-arrow" d="M443 159l6 5-6 5"/><path class="dg-link" d="M524 100V148" opacity=".55"/><g class=""><rect x="24" y="12" width="132" height="44" rx="5"/><text x="90" y="31" class="dg-t" text-anchor="middle">Australia</text><text x="90" y="45" class="dg-s" text-anchor="middle">DCCEEW</text></g><g class=""><rect x="24" y="72" width="132" height="44" rx="5"/><text x="90" y="91" class="dg-t" text-anchor="middle">New Zealand</text><text x="90" y="105" class="dg-s" text-anchor="middle">MBIE</text></g><g class=""><rect x="24" y="132" width="132" height="44" rx="5"/><text x="90" y="151" class="dg-t" text-anchor="middle">Germany</text><text x="90" y="165" class="dg-s" text-anchor="middle">AGEE-Stat</text></g><g class=""><rect x="24" y="192" width="132" height="44" rx="5"/><text x="90" y="211" class="dg-t" text-anchor="middle">China</text><text x="90" y="225" class="dg-s" text-anchor="middle">OWID / IEA</text></g><g class="dg-fact"><rect x="225" y="102" width="150" height="44" rx="5"/><text x="300" y="121" class="dg-t" text-anchor="middle">Power Query</text><text x="300" y="135" class="dg-s" text-anchor="middle">GWh &#8594; TWh</text></g><g class=""><rect x="449" y="68" width="150" height="32" rx="5"/><text x="524" y="88" class="dg-t" text-anchor="middle">fact_Renewable</text></g><g class=""><rect x="449" y="148" width="150" height="32" rx="5"/><text x="524" y="168" class="dg-t" text-anchor="middle">fact_TotalGen</text></g></svg><figcaption>Four national datasets, four different formats and unit systems, standardised into one galaxy schema. Two fact tables share three dimensions so totals cannot be double counted.</figcaption></figure>
             <p>
               <strong>Forecasting in R rather than Power BI's built-in tool.</strong> Two linear-regression visuals — one for generation in TWh, one for renewable share — project to 2035 with a 95% prediction interval. R was chosen because it prints the regression equation, R², and p-value directly onto the chart, making the method transparent and checkable by the reader. Both models fit well: <strong>R² ≈ 0.845–0.847, p &lt; 0.001</strong>.
@@ -161,6 +169,7 @@
             <p>
               <strong>One page, five visuals, scoped slicers</strong> — filtering one question never silently breaks the answer to another.
             </p>
+            </details>
           </section>
 
           <section class="case-block">
@@ -168,6 +177,8 @@
             <p>
               The dashboard's forecast runs in R so the reader can check the method. Here is the same linear regression, computed in your browser from the project's actual data — equation, fit, and 95% prediction interval included.
             </p>
+            <details class="case-more">
+              <summary>Read more</summary>
             <div id="rf-widget" class="rf">
               <div class="rf-tabs" role="tablist" aria-label="Forecast measure">
                 <button type="button" class="rf-tab is-active" data-mode="share" role="tab" aria-selected="true">Renewable share %</button>
@@ -177,6 +188,7 @@
               <p class="rf-stats"></p>
               <p class="rf-note">Dots are DCCEEW annual data, 2005–2024. The shaded band is the 95% prediction interval; the line extends the historical trend to 2035. On the current trajectory, the 82%-by-2030 target is out of reach — which is the report's central finding.</p>
             </div>
+            </details>
           </section>
 
           <section class="case-block" data-stage="Result">
@@ -185,6 +197,8 @@
               <li>
                 <span class="finding-number">01</span>
                 <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about 9% in 2005 to 35% in 2024 — but a linear forecast reaches only <strong>44.6% by 2035</strong>, roughly half the 82%-by-2030 target.</p>
+            <details class="case-more">
+              <summary>Read more</summary>
               </li>
               <li>
                 <span class="finding-number">02</span>
@@ -195,6 +209,7 @@
                 <p><strong>International comparison depends entirely on the measure you pick.</strong> China generates the most renewable electricity by volume (3,398.8 TWh), but Australia's renewable <em>share</em> of 35.0% slightly edged China's 33.7% in 2024. New Zealand (85.5%) and Germany (54.5%) remain well ahead on share. Choosing volume or share tells two opposite stories — so the dashboard shows both.</p>
               </li>
             </ul>
+            </details>
           </section>
 
           <section class="case-block" id="explore">

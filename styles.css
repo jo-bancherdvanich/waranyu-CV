@@ -3098,3 +3098,29 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
    strip follows the quote directly */
 .project-card .project-detail { margin-top: 1rem; }
 .banner .tools-marquee { margin-top: 2.2rem; }
+
+/* text trim: capabilities show their one sentence; no more/less toggle */
+.capability-list li::after { content: none; }
+.capability-list li { cursor: default; grid-template-columns: 46px 52px minmax(0, 1fr) auto; }
+@media (max-width: 720px) { .capability-list li { grid-template-columns: 46px minmax(0, 1fr); } }
+.cap-toggle { cursor: default; }
+
+/* ---- case studies: the first paragraph shows, the rest folds -------------- */
+.case-more { margin-top: .6rem; }
+.case-more > summary {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .45rem .9rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: .88rem; font-weight: 600;
+  list-style: none; cursor: pointer;
+  transition: background .2s ease;
+}
+.case-more > summary::-webkit-details-marker { display: none; }
+.case-more > summary::after { content: "+"; font-family: "DM Mono", "DM Mono Fallback", monospace; }
+.case-more[open] > summary::after { content: "\2013"; }
+.case-more > summary:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.case-more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.case-more > :not(summary) { margin-top: 1rem; }
+@media print { .case-more > summary { display: none; } .case-more:not([open]) > :not(summary) { display: block; } }
