@@ -3636,3 +3636,14 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
 .case-block > h2 { background: none; color: var(--ink); -webkit-text-fill-color: var(--ink); }
 .case-block > h2 .h2-ico { -webkit-text-fill-color: currentColor; }
 .case-block > h2::before { -webkit-text-fill-color: var(--st, var(--accent)); }
+
+/* =============================================================================
+   Hero "about me" facts: three numbers under the introduction, in the same
+   mono label style as the project key numbers.
+   ============================================================================= */
+.hero-facts { display: flex; flex-wrap: wrap; gap: .6rem 2.2rem; margin: 1.8rem 0 0; padding: 1.1rem 0 0; list-style: none; border-top: 1px solid var(--line); max-width: 590px; }
+.hero-facts li { display: flex; flex-direction: column; gap: .2rem; }
+.hf-num { color: var(--highlight); font-size: clamp(1.5rem, 2.4vw, 1.9rem); font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.hf-label { color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .72rem; text-transform: uppercase; }
+.intro .availability { margin-top: 1.4rem; }
+@media (max-width: 720px) { .hero-facts { gap: .6rem 1.6rem; } }

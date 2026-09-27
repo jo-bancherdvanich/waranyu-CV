@@ -212,9 +212,11 @@
     Array.prototype.slice.call(title.childNodes).forEach(function (node) {
       if (node.nodeType === 3) {
         var frag = document.createDocumentFragment();
-        node.textContent.split(/(\s+)/).forEach(function (tok) {
+        // split on ordinary spaces only, so a non-breaking space keeps two
+        // words together in one span (it cannot wrap between them)
+        node.textContent.split(/([ \t\r\n]+)/).forEach(function (tok) {
           if (!tok) return;
-          if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
+          if (/^[ \t\r\n]+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
           var span = document.createElement("span");
           span.className = "hw";
           span.style.setProperty("--w", w++);
