@@ -3389,3 +3389,8 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 /* watermark sits to the right of the heading text, clear of the stage label */
 .case-block > h2::before { left: auto; right: -.35em; top: -.42em; opacity: .1; }
 .case-block > h2 { width: fit-content; padding-right: 1.4em; }
+
+/* ---- dock hides on the way down, returns on the way up -------------------- */
+.dock { transition: transform .32s cubic-bezier(.2, .8, .2, 1), opacity .32s ease; }
+.dock.is-hidden { transform: translate(-50%, calc(100% + 1.5rem)); opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .dock { transition: none; } }

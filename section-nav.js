@@ -157,4 +157,20 @@
   window.addEventListener("scroll", queue, { passive: true });
   window.addEventListener("resize", queue);
   spy();
+
+  /* ---- hide while scrolling down, return on scrolling up ----------------- */
+  // The dock slides away as the reader scrolls down and returns as soon as
+  // they scroll up, stop, or reach the top; it never hides while the reader
+  // is using it. Only transform changes.
+  var lastY = window.scrollY, hideTimer = null, hidden = false;
+  function show() { if (hidden) { hidden = false; nav.classList.remove("is-hidden"); } }
+  function hide() { if (!hidden) { hidden = true; nav.classList.add("is-hidden"); } }
+  window.addEventListener("scroll", function () {
+    var y = window.scrollY, dy = y - lastY;
+    lastY = y;
+    if (y < 80 || dy < -4) show();
+    else if (dy > 6 && !nav.matches(":hover, :focus-within")) hide();
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(show, 900);
+  }, { passive: true });
 })();
