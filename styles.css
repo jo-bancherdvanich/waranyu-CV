@@ -3298,3 +3298,5 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
  * Numbers, tools and the main verbs are set in the ink colour at medium
  * weight, so a skimmer's eye lands on them while the sentence stays calm. */
 .hl { color: var(--ink); font-weight: 600; }
+/* the left-hand section index was removed; the dock covers navigation */
+.side-index { display: none !important; }
