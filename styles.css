@@ -3300,3 +3300,6 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .hl { color: var(--ink); font-weight: 600; }
 /* the left-hand section index was removed; the dock covers navigation */
 .side-index { display: none !important; }
+/* case pages: the flow diagram sits centred under the metrics strip */
+.case > .pipeline.flow { margin-left: auto; margin-right: auto; justify-content: center; }
+@media (max-width: 720px) { .case > .pipeline.flow { margin-left: 0; } }
