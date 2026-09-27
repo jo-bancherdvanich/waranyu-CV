@@ -3279,3 +3279,17 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
   .fl-label { font-size: .78rem; }
   .pipeline.flow li + li::before { content: none; }
 }
+
+/* ---- flow diagram: a colour per step ------------------------------------- */
+.pipeline.flow li:nth-child(1) { --fl: var(--c1); --fl-prev: var(--c1); }
+.pipeline.flow li:nth-child(2) { --fl: var(--c2); --fl-prev: var(--c1); }
+.pipeline.flow li:nth-child(3) { --fl: var(--c3); --fl-prev: var(--c2); }
+.pipeline.flow li:nth-child(4) { --fl: var(--c4); --fl-prev: var(--c3); }
+.pipeline.flow li:nth-child(5) { --fl: var(--c5); --fl-prev: var(--c4); }
+.pipeline.flow li:nth-child(6) { --fl: var(--c6); --fl-prev: var(--c5); }
+.fl-label, .project-card.project-card-featured .pipeline.flow .fl-label { color: var(--fl); font-weight: 500; }
+/* the line blends from the previous step's colour into this one */
+.pipeline.flow li + li::after { background: linear-gradient(90deg, var(--fl-prev), var(--fl)); }
+@media (max-width: 720px) {
+  .pipeline.flow li + li::after { background: linear-gradient(180deg, var(--fl-prev), var(--fl)); }
+}
