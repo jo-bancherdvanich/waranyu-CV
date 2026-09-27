@@ -3405,3 +3405,60 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .project-card .project-actions { margin-top: auto; padding-top: 1.1rem; }
 .project-card > .card-top { margin-bottom: 0; }
 .project-card .project-shot { margin-top: 1rem; }
+
+/* =============================================================================
+   Floating header pills
+   Two pills that stick as the page scrolls: the name badge at the top left
+   and the actions (GitHub, CV, theme) at the top right. The bar between them
+   is gone, so the page shows through the middle.
+   ============================================================================= */
+.topbar {
+  position: sticky; top: .9rem; z-index: 60;
+  min-height: 0; margin-bottom: -3.4rem;
+  padding: 0; border-bottom: 0;
+  align-items: flex-start;
+  pointer-events: none;
+  transition: none;
+}
+.topbar::before, .topbar::after { display: none !important; }
+.topbar.is-scrolled { border-bottom-color: transparent; }
+.topbar > * { pointer-events: auto; }
+.wordmark, .topbar-right {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .35rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+:root[data-theme="light"] .wordmark, :root[data-theme="light"] .topbar-right { box-shadow: 0 10px 26px rgba(15, 25, 34, .12); }
+.wordmark { padding-right: 1rem; font-size: 1rem; font-weight: 600; letter-spacing: -.01em; text-decoration: none; }
+.wm-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 11px;
+  background: var(--accent); color: var(--bg);
+  font-size: .78rem; font-weight: 700; letter-spacing: 0;
+}
+.wordmark .wm-badge { color: var(--bg); -webkit-text-fill-color: var(--bg); }
+:root[data-theme="light"] .wordmark .wm-badge { color: #ffffff; -webkit-text-fill-color: #ffffff; }
+.wordmark .wm-name { color: var(--ink); -webkit-text-fill-color: var(--ink); }
+.wm-name { color: var(--ink); white-space: nowrap; }
+.topbar-right { gap: .3rem; }
+.topbar .github-link { padding: .45rem .8rem; font-size: .88rem; }
+.topbar-cta { margin-left: 0; padding: .5rem 1rem; font-size: .85rem; }
+.theme-toggle { margin-left: 0; width: 34px; height: 34px; border-color: transparent; background: transparent; font-size: 1.05rem; }
+/* the hero starts a little lower so the pills do not sit on the eyebrow */
+.intro { padding-top: 8.5rem; }
+.case { padding-top: 7rem; }
+.intro-404 { padding-top: 8.5rem; }
+section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
+@media (max-width: 720px) {
+  .topbar { top: .6rem; margin-bottom: -3rem; }
+  .wm-name { display: none; }
+  .wordmark { padding-right: .35rem; }
+  .topbar .github-link { display: none; }
+  .intro { padding-top: 6.5rem; }
+  .case { padding-top: 5.5rem; }
+}
