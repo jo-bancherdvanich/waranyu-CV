@@ -3394,3 +3394,7 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .dock { transition: transform .32s cubic-bezier(.2, .8, .2, 1), opacity .32s ease; }
 .dock.is-hidden { transform: translate(-50%, calc(100% + 1.5rem)); opacity: 0; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .dock { transition: none; } }
+
+/* ---- top bar without the menu: wordmark left, actions right --------------- */
+.topbar { justify-content: space-between; }
+.nav-toggle, #primary-nav { display: none !important; }
