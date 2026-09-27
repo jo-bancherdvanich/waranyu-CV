@@ -49,6 +49,7 @@
 
       <main id="main">
         <article class="case case-renewable">
+          <img class="case-backdrop" src="images/rn-install.webp" alt="" aria-hidden="true" width="1600" height="1067" fetchpriority="low" decoding="async" />
           <div class="case-art" aria-hidden="true">
             <svg viewBox="0 0 360 260" focusable="false">
               <g class="ca-card" style="--d:0">
@@ -103,6 +104,7 @@
           </dl>
 
           <section class="case-block" data-stage="Problem">
+            <img class="cb-art" src="images/rn-solar-farm.webp" alt="" aria-hidden="true" width="741" height="399" loading="lazy" decoding="async" />
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2A2.6 2.6 0 0 1 14.5 10c0 1.8-2.5 2-2.5 3.6"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span>The question</h2>
             <p>
               The Australian government has committed to <strong>82% renewable electricity by 2030</strong>. Written as a brief for a DCCEEW-style audience, this project asks the practical version of that commitment: <strong>is Australia on track, and if not, how far short will it fall?</strong>
@@ -120,6 +122,7 @@
           </section>
 
           <section class="case-block" data-stage="Data">
+            <img class="cb-art" src="images/rn-house.webp" alt="" aria-hidden="true" width="732" height="477" loading="lazy" decoding="async" />
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
             <p>
               Four national datasets, each in a different format, unit, and source taxonomy — <b class="hl">reconciling them was most of the work</b>.
@@ -151,6 +154,7 @@
           </section>
 
           <section class="case-block" data-stage="Approach">
+            <img class="cb-art" src="images/rn-office.webp" alt="" aria-hidden="true" width="814" height="442" loading="lazy" decoding="async" />
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>How it was built</h2>
             <p>
               <strong>Galaxy schema, not a single fact table.</strong> <b class="hl">Two fact tables</b> (renewable generation and total generation) share <b class="hl">three dimensions</b>: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error <b class="hl">structurally impossible</b>.
