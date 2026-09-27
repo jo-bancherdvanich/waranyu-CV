@@ -3594,3 +3594,11 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) { .case-block .cb-art { transition: none; transform: none; } }
 @media print { .case-backdrop, .cb-art { display: none !important; } }
+
+/* Education logos: no glow. The seal and shield sit on the card as they are,
+   without the disc, ring, drop shadow or the soft colour wash behind them. */
+.edu-master::after, .edu-bach::after { display: none; }
+.edu-art-seal, .edu-art-curtin,
+:root[data-theme="light"] .edu-art-seal, :root[data-theme="light"] .edu-art-curtin {
+  padding: 0; background: none; box-shadow: none; filter: none;
+}
