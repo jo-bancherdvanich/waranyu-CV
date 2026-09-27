@@ -3398,3 +3398,10 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 /* ---- top bar without the menu: wordmark left, actions right --------------- */
 .topbar { justify-content: space-between; }
 .nav-toggle, #primary-nav { display: none !important; }
+
+/* cards align from the top; extra row height goes below the buttons, not
+   above the screenshot */
+.project-card { justify-content: flex-start; }
+.project-card .project-actions { margin-top: auto; padding-top: 1.1rem; }
+.project-card > .card-top { margin-bottom: 0; }
+.project-card .project-shot { margin-top: 1rem; }
