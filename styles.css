@@ -2847,10 +2847,11 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .project-card.project-card-featured .pipeline li + li::before { color: #071019; }
 .case > .pipeline { margin: 1.4rem 0 0; }
 @media (max-width: 720px) {
-  /* one row that scrolls inside the card, never the page */
-  .project-card .pipeline { flex-wrap: nowrap; overflow-x: auto; margin-left: -1.1rem; margin-right: -1.1rem; padding: 0 1.1rem .35rem; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
-  .project-card .pipeline::-webkit-scrollbar { height: 4px; }
-  .project-card .pipeline::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+  /* on a phone the steps stack down the card with the arrows pointing down,
+     so nothing has to be slid sideways */
+  .pipeline { flex-direction: column; align-items: flex-start; gap: .3rem; }
+  .pipeline li { flex-direction: column; align-items: flex-start; gap: .3rem; white-space: normal; }
+  .pipeline li + li::before { content: "\2193"; margin-left: .7rem; }
 }
 
 /* ---- 2. Key number boxes -------------------------------------------------- */
