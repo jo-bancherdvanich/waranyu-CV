@@ -20,7 +20,6 @@
     var btn = document.querySelector(".theme-toggle");
     if (btn) {
       var isLight = theme === "light";
-      btn.textContent = isLight ? "☾" : "☀";
       btn.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
       btn.setAttribute("aria-pressed", isLight ? "true" : "false");
     }

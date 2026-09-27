@@ -3482,3 +3482,37 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
   box-shadow: 0 10px 26px rgba(179, 18, 46, .16), 0 0 0 1px rgba(179, 18, 46, .22);
 }
 @media (max-width: 720px) { .edu-art-seal { padding: 6px; } }
+
+/* =============================================================================
+   Theme switch: a small pill with a sun on the left and a moon on the right.
+   The knob slides (transform only) to the side that is on.
+   ============================================================================= */
+.topbar .theme-toggle {
+  width: 60px; height: 32px; padding: 3px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: color-mix(in srgb, var(--tone) 70%, var(--surface));
+  color: var(--muted);
+}
+.topbar .theme-toggle:hover { color: var(--ink); border-color: var(--accent); }
+.tt-track { position: relative; display: block; width: 100%; height: 100%; }
+.tt-sun, .tt-moon {
+  position: absolute; top: 50%; width: 14px; height: 14px;
+  transform: translateY(-50%); z-index: 1;
+  transition: color .3s ease;
+}
+.tt-sun { left: 5px; }
+.tt-moon { right: 5px; }
+.tt-knob {
+  position: absolute; top: 0; left: 0;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(28px);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+/* dark: knob covers the moon, so the moon turns dark on the accent circle */
+.tt-moon { color: var(--bg); }
+:root[data-theme="light"] .tt-knob { transform: translateX(0); }
+:root[data-theme="light"] .tt-sun { color: #ffffff; }
+:root[data-theme="light"] .tt-moon { color: inherit; }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .tt-knob, .tt-sun, .tt-moon { transition: none; } }
