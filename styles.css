@@ -3094,3 +3094,7 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .faq-list p { padding-left: calc(1.4rem + 38px + .9rem); }
 @media (max-width: 720px) { .faq-list p { padding-left: 1.4rem; } }
 .principle-list li::before { font-size: clamp(2.6rem, 4.4vw, 3.6rem); font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif; letter-spacing: -.03em; }
+/* after the text trim: bullets sit straight under the pipeline; the tools
+   strip follows the quote directly */
+.project-card .project-detail { margin-top: 1rem; }
+.banner .tools-marquee { margin-top: 2.2rem; }
