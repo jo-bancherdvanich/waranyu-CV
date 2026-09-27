@@ -3516,3 +3516,15 @@ section[id], .case-block[id], [id="top"] { scroll-margin-top: 20px; }
 :root[data-theme="light"] .tt-moon { color: inherit; }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .tt-knob, .tt-sun, .tt-moon { transition: none; } }
+
+/* ---- Education: Curtin shield -----------------------------------------------
+ * The master card carries the Curtin shield as a gold disc, the same size
+ * and position as the Thammasat seal, on a soft gold glow. */
+.edu-art-curtin {
+  background: radial-gradient(circle at 50% 42%, rgba(224, 178, 58, .26), rgba(180, 140, 9, .12) 62%, rgba(180, 140, 9, 0) 100%);
+  box-shadow: 0 10px 26px rgba(180, 140, 9, .3), 0 0 0 1px rgba(224, 178, 58, .3);
+}
+:root[data-theme="light"] .edu-art-curtin {
+  background: radial-gradient(circle at 50% 42%, rgba(224, 178, 58, .3), rgba(255, 246, 220, .9) 62%, rgba(255, 246, 220, 0) 100%);
+  box-shadow: 0 10px 26px rgba(143, 106, 0, .16), 0 0 0 1px rgba(143, 106, 0, .22);
+}
