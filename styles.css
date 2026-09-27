@@ -3035,3 +3035,61 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 /* stage label: keep it clear of the sticky bar when jumped to, and give it air */
 .case-block[data-stage] { scroll-margin-top: 112px; }
 .case-block[data-stage]::before { margin-top: .2rem; }
+
+/* ---- How I work: colour and an icon per principle --------------------------- */
+.principle-list li:nth-child(1) { --pr: var(--c1); }
+.principle-list li:nth-child(2) { --pr: var(--c2); }
+.principle-list li:nth-child(3) { --pr: var(--c3); }
+.principle-list li:nth-child(4) { --pr: var(--c4); }
+.principle-list li { position: relative; overflow: hidden; padding-top: 1.6rem; }
+.principle-list li::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pr), color-mix(in srgb, var(--pr) 0%, transparent));
+}
+.principle-list li::before { -webkit-text-stroke-color: var(--pr); color: transparent; margin-bottom: .7rem; }
+.pr-ico {
+  position: absolute; right: 1.4rem; top: 1.5rem;
+  display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px;
+  border-radius: 13px;
+  color: var(--bg);
+  background: var(--pr);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--pr) 35%, transparent);
+  transition: transform .25s ease;
+}
+:root[data-theme="light"] .pr-ico { color: #ffffff; }
+.pr-ico svg { width: 22px; height: 22px; }
+.principle-list li:hover { border-color: color-mix(in srgb, var(--pr) 60%, var(--line)); }
+.principle-list li:hover .pr-ico { transform: scale(1.06) rotate(-4deg); }
+.principle-list li:hover::before { -webkit-text-stroke-color: var(--pr); }
+.principle-list h3 { padding-right: 60px; }
+@media (prefers-reduced-motion: reduce) { .pr-ico { transition: none; } .principle-list li:hover .pr-ico { transform: none; } }
+
+/* ---- Questions: an icon per question, colour on the open one --------------- */
+.faq-list details:nth-child(1) { --fq: var(--c1); }
+.faq-list details:nth-child(2) { --fq: var(--c2); }
+.faq-list details:nth-child(3) { --fq: var(--c3); }
+.faq-list details:nth-child(4) { --fq: var(--c4); }
+.faq-list details:nth-child(5) { --fq: var(--c5); }
+.faq-list summary { display: flex; align-items: center; gap: .9rem; }
+.fq-ico {
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  color: var(--fq);
+  background: color-mix(in srgb, var(--fq) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fq) 35%, transparent);
+  transition: background .2s ease, color .2s ease;
+}
+.fq-ico svg { width: 18px; height: 18px; }
+.faq-list details { border-left: 3px solid transparent; transition: border-color .25s ease; }
+.faq-list details:hover, .faq-list details[open] { border-color: color-mix(in srgb, var(--fq) 55%, var(--line)); border-left-color: var(--fq); }
+.faq-list details[open] .fq-ico { color: var(--bg); background: var(--fq); }
+:root[data-theme="light"] .faq-list details[open] .fq-ico { color: #ffffff; }
+.faq-list summary::after { color: var(--fq); }
+.faq-list p { padding-left: calc(1.4rem + 38px + .9rem); }
+@media (max-width: 720px) { .faq-list p { padding-left: 1.4rem; } }
+.principle-list li::before { font-size: clamp(2.6rem, 4.4vw, 3.6rem); font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif; letter-spacing: -.03em; }
