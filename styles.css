@@ -3293,3 +3293,8 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 @media (max-width: 720px) {
   .pipeline.flow li + li::after { background: linear-gradient(180deg, var(--fl-prev), var(--fl)); }
 }
+
+/* ---- key words: the one or two things to catch in each sentence ------------
+ * Numbers, tools and the main verbs are set in the ink colour at medium
+ * weight, so a skimmer's eye lands on them while the sentence stays calm. */
+.hl { color: var(--ink); font-weight: 600; }

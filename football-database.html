@@ -123,19 +123,19 @@
           <section class="case-block" data-stage="Problem">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The problem</h2>
             <p>
-              A soccer competition generates a surprising amount of interlocking data. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions — <strong>"what's the ladder?"</strong> — become impossible to answer without duplicating data everywhere.
+              A soccer competition generates a surprising amount of <b class="hl">interlocking data</b>. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions — <strong>"what's the ladder?"</strong> — become impossible to answer without duplicating data everywhere.
             </p>
           </section>
 
           <section class="case-block" data-stage="Approach">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M6.6 6.6 10 10M17.4 6.6 14 10M6.6 17.4 10 14M17.4 17.4 14 14"/></svg></span>The design</h2>
             <p>
-              The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through junction tables. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
+              The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through <b class="hl">junction tables</b>. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
             </p>
             <details class="case-more">
               <summary>Read more</summary>
             <p>
-              Substitutions are captured inside the player-appearance table using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters — see below.
+              Substitutions are captured <b class="hl">inside the player-appearance table</b> using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters — see below.
             </p>
             </details>
           </section>
@@ -143,7 +143,7 @@
           <section class="case-block" data-stage="Result" id="run-it">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>Run the queries</h2>
             <p>
-              Eight queries running here on the same sample season the Oracle script inserts — 8 clubs, 96 players, 56 games, 154 goals. Five are adapted from the repository's analytical script; three more were written for this page. Pick a question and the result is computed in your browser.
+              <b class="hl">Eight queries running here</b> on the same sample season the Oracle script inserts — <b class="hl">8 clubs, 96 players, 56 games, 154 goals</b>. Five are adapted from the repository's analytical script; three more were written for this page. Pick a question and the result is computed in your browser.
             </p>
 
             <div id="sql-demo" class="sq">
@@ -176,30 +176,30 @@
           <section class="case-block">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span>What the queries answer</h2>
             <p>
-              The analytical layer is the interesting part: joins, aggregation, subqueries, HAVING clauses and LEFT JOINs, each written to answer a question an organiser would genuinely ask.
+              The analytical layer is the interesting part: <b class="hl">joins, aggregation, subqueries, HAVING clauses and LEFT JOINs</b>, each written to answer a question an organiser would genuinely ask.
             </p>
             <details class="case-more">
               <summary>Read more</summary>
             <ul class="findings">
               <li>
-                <span class="finding-number">01</span>
+                <span class="finding-number"><b class="hl">01</b></span>
                 <p><strong>Season ladder</strong> — total competition points per club, combining result points and best-on-ground points, with goals and home/away wins.</p>
               </li>
               <li>
-                <span class="finding-number">02</span>
+                <span class="finding-number"><b class="hl">02</b></span>
                 <p><strong>Club summary</strong> — each club's complete home and away win–loss–draw record.</p>
               </li>
               <li>
-                <span class="finding-number">03</span>
-                <p><strong>Top goal scorers</strong>, and every individual goal by the leading scorer with opponent and ground — found using a HAVING subquery rather than a hardcoded name.</p>
+                <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>Top goal scorers</strong>, and every individual goal by the leading scorer with opponent and ground — found using a <b class="hl">HAVING subquery rather than a hardcoded name</b>.</p>
               </li>
               <li>
-                <span class="finding-number">04</span>
-                <p><strong>Goals per ground</strong> — average goals per game at each venue. A LEFT JOIN keeps goalless games in the denominator, which an inner join would have silently dropped and inflated every average.</p>
+                <span class="finding-number"><b class="hl">04</b></span>
+                <p><strong>Goals per ground</strong> — average goals per game at each venue. A <b class="hl">LEFT JOIN keeps goalless games in the denominator</b>, which an inner join would have <b class="hl">silently dropped</b> and inflated every average.</p>
               </li>
               <li>
-                <span class="finding-number">05</span>
-                <p><strong>Best-on-ground rankings</strong> with a breakdown of 3, 2 and 1-point awards, plus each club's away form.</p>
+                <span class="finding-number"><b class="hl">05</b></span>
+                <p><strong>Best-on-ground rankings</strong> with a breakdown of <b class="hl">3</b>, <b class="hl">2</b> and 1-point awards, plus each club's away form.</p>
               </li>
             </ul>
             </details>
@@ -208,18 +208,18 @@
           <section class="case-block" data-stage="Limits">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5V8h-4.5"/></svg></span>Revised after review</h2>
             <p>
-              The version in the repository is a revised one. Reviewing the first design, three things were wrong — so I went back and fixed them rather than leaving them:
+              The version in the repository is a <b class="hl">revised one</b>. Reviewing the first design, three things were wrong — so I <b class="hl">went back and fixed them rather than leaving them</b>:
             </p>
             <details class="case-more">
               <summary>Read more</summary>
             <ul>
-              <li><strong>Removed the Substitution table.</strong> It created an unresolved many-to-many relationship — two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
+              <li><strong>Removed the Substitution table.</strong> It created an <b class="hl">unresolved many-to-many</b> relationship — two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
               <li><strong>Corrected two business rules.</strong> The club-to-ground relationship now describes training and ownership rather than where games are played, which is what the data actually represents.</li>
               <li><strong>Unfiltered the away-record query.</strong> A HAVING clause had quietly narrowed it to a single club, which contradicted the query's own heading. Removing it returns every club's away record, ordered so the best one is still the top row.</li>
             </ul>
             <figure class="case-diagram"><svg viewBox="0 0 580 236" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><text x="20" y="20" class="dg-h">Before</text><path class="dg-link dg-bad-line" d="M150 56L154 100"/><path class="dg-link dg-bad-line" d="M150 164L154 120"/><g class=""><rect x="26" y="40" width="124" height="32" rx="5"/><text x="88" y="60" class="dg-t" text-anchor="middle">GamePlayer</text></g><g class=""><rect x="26" y="148" width="124" height="32" rx="5"/><text x="88" y="168" class="dg-t" text-anchor="middle">GamePlayer</text></g><g class="dg-bad"><rect x="154" y="94" width="124" height="32" rx="5"/><text x="216" y="114" class="dg-t" text-anchor="middle">Substitution</text></g><text x="20" y="218" class="dg-s dg-bad-text">Two FKs into one parent &#8212; unresolved many-to-many.</text><path d="M312 24V206" opacity=".28" stroke-dasharray="4 5"/><text x="340" y="20" class="dg-h">After</text><path class="dg-link" d="M430 106V146" opacity=".6"/><g class="dg-fact"><rect x="346" y="62" width="168" height="44" rx="5"/><text x="430" y="81" class="dg-t" text-anchor="middle">GamePlayer</text><text x="430" y="95" class="dg-s" text-anchor="middle">+ gameMinute</text></g><g class=""><rect x="346" y="146" width="168" height="44" rx="5"/><text x="430" y="165" class="dg-t" text-anchor="middle">StartPosition</text><text x="430" y="179" class="dg-s" text-anchor="middle">&#8220;Substitute&#8221;</text></g><text x="340" y="218" class="dg-s">One row per appearance, with its minute.</text></svg><figcaption>Removing the Substitution table resolved a many-to-many that should never have existed. A substitution is just an appearance with a minute and a starting position.</figcaption></figure>
             <p>
-              Going back to correct a design I had already finished is the part of this project I would point to first.
+              Going back to <b class="hl">correct a design I had already finished</b> is the part of this project I would point to first.
             </p>
             </details>
           </section>
