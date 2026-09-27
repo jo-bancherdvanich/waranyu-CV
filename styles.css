@@ -3303,3 +3303,89 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 /* case pages: the flow diagram sits centred under the metrics strip */
 .case > .pipeline.flow { margin-left: auto; margin-right: auto; justify-content: center; }
 @media (max-width: 720px) { .case > .pipeline.flow { margin-left: 0; } }
+
+/* ---- case studies: livelier sections ---------------------------------------
+ * Each stage has a colour (Problem blue, Data green, Approach amber, Result
+ * coral, Limits purple, Links blue) that runs through the label, the heading
+ * icon, a faint watermark number, the lead sentence's bar, the list chips
+ * and the Read more button. Blocks without a label inherit their stage. */
+.case-block[data-stage="Problem"], .case-block[data-stage="Problem"] ~ .case-block { --st: var(--c1); }
+.case-block[data-stage="Data"], .case-block[data-stage="Data"] ~ .case-block { --st: var(--c2); }
+.case-block[data-stage="Approach"], .case-block[data-stage="Approach"] ~ .case-block { --st: var(--c3); }
+.case-block[data-stage="Result"], .case-block[data-stage="Result"] ~ .case-block { --st: var(--c4); }
+.case-block[data-stage="Limits"], .case-block[data-stage="Limits"] ~ .case-block { --st: var(--c5); }
+.case-block[data-stage="Links"], .case-block[data-stage="Links"] ~ .case-block { --st: var(--c1); }
+.case-block { --st: var(--accent); }
+
+.case-block[data-stage]::before {
+  color: var(--st);
+  border-color: color-mix(in srgb, var(--st) 45%, var(--line));
+  background: color-mix(in srgb, var(--st) 12%, transparent);
+}
+.case-block > h2 .h2-ico { color: var(--st); }
+.case-block > h2::after { background: linear-gradient(90deg, var(--st), transparent); }
+/* the section number becomes a large faint watermark behind the heading */
+.case-block > h2 { position: relative; }
+.case-block > h2::before {
+  position: absolute; left: -.12em; top: -.55em; z-index: -1;
+  min-width: 0;
+  font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif;
+  font-size: 2.6em; font-weight: 700; letter-spacing: -.04em; line-height: 1;
+  color: var(--st); -webkit-text-fill-color: var(--st);
+  opacity: .12;
+}
+/* the lead sentence: larger, with a colour bar */
+.case-block > h2 + p {
+  position: relative;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--st);
+  color: var(--ink);
+  font-size: 1.12rem;
+  line-height: 1.6;
+}
+.case-block > h2 + p .hl { color: var(--st); }
+/* plain lists become numbered chips in the stage colour */
+.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) {
+  counter-reset: chip;
+  list-style: none;
+  display: grid; gap: .5rem;
+  margin: 1rem 0 0; padding: 0;
+  max-width: 760px;
+}
+.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li {
+  position: relative;
+  padding: .75rem 1rem .75rem 3rem;
+  border: 1px solid color-mix(in srgb, var(--st) 30%, var(--line));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--st) 6%, var(--surface));
+  margin: 0;
+}
+.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li::before {
+  counter-increment: chip;
+  content: counter(chip);
+  position: absolute; left: .8rem; top: .72rem;
+  width: 1.5rem; height: 1.5rem;
+  border-radius: 50%;
+  background: var(--st); color: var(--bg);
+  font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem; font-weight: 500;
+  line-height: 1.5rem; text-align: center;
+}
+:root[data-theme="light"] .case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li::before { color: #ffffff; }
+/* findings and icon lists take the stage colour too */
+.finding-number { color: var(--st); }
+.case .icon-list li:nth-child(n) .il-icon { color: var(--st); }
+.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li::marker { content: none; }
+/* Read more in the stage colour, and its content rises in */
+.case-more > summary { color: var(--st); border-color: color-mix(in srgb, var(--st) 45%, var(--line)); }
+.case-more > summary:hover { background: color-mix(in srgb, var(--st) 12%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .case-more[open] > :not(summary) { animation: cm-in .45s cubic-bezier(.2, .8, .2, 1) both; }
+  @keyframes cm-in { from { opacity: 0; transform: translateY(10px); } }
+}
+@media (max-width: 720px) {
+  .case-block > h2::before { font-size: 2.2em; top: -.5em; }
+  .case-block > h2 + p { font-size: 1.04rem; }
+}
+/* watermark sits to the right of the heading text, clear of the stage label */
+.case-block > h2::before { left: auto; right: -.35em; top: -.42em; opacity: .1; }
+.case-block > h2 { width: fit-content; padding-right: 1.4em; }
