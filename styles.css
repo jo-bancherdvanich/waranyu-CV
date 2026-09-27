@@ -3124,3 +3124,93 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .case-more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .case-more > :not(summary) { margin-top: 1rem; }
 @media print { .case-more > summary { display: none; } .case-more:not([open]) > :not(summary) { display: block; } }
+
+/* =============================================================================
+   Project cards: one rich, dark treatment for all four
+   The featured card's flat light-blue panel read as a highlighter with black
+   text on it. All four cards now share the same dark surface, each with its
+   own colour: a tinted gradient wash, a coloured top edge, tinted number
+   boxes and pipeline pills, and a coloured glow behind the screenshot.
+   ============================================================================= */
+.project-grid .project-card:nth-child(1) { --pc: var(--c1); }
+.project-grid .project-card:nth-child(2) { --pc: var(--c3); }
+.project-grid .project-card:nth-child(3) { --pc: var(--c4); }
+.project-grid .project-card:nth-child(4) { --pc: var(--c2); }
+.project-grid .project-card-wide { --pc: var(--c5); }
+
+.project-card,
+.project-card.project-card-featured {
+  color: var(--ink);
+  background:
+    radial-gradient(120% 70% at 100% 0%, color-mix(in srgb, var(--pc) 22%, transparent), transparent 60%),
+    linear-gradient(180deg, color-mix(in srgb, var(--pc) 7%, var(--surface)), var(--surface) 55%);
+  border-color: color-mix(in srgb, var(--pc) 35%, var(--line));
+}
+.project-card::before {
+  content: "";
+  position: absolute; z-index: 1; left: 0; right: 0; top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pc), color-mix(in srgb, var(--pc) 0%, transparent));
+  pointer-events: none;
+}
+.project-card:hover, .project-card.project-card-featured:hover {
+  border-color: var(--pc);
+  box-shadow: 0 18px 50px color-mix(in srgb, var(--pc) 22%, transparent);
+}
+.project-card .card-glow, .project-card-featured .card-glow { background: radial-gradient(closest-side, color-mix(in srgb, var(--pc) 24%, transparent), transparent 72%); }
+
+/* text and small parts: back to the site tokens on every card */
+.project-card.project-card-featured h3 { color: var(--ink); }
+.project-card.project-card-featured .card-top,
+.project-card.project-card-featured p,
+.project-card.project-card-featured .project-detail { color: var(--muted); }
+.project-card.project-card-featured .project-detail li::marker { color: var(--muted); }
+.project-card .card-top { color: var(--pc); }
+.project-card h3 { font-size: 1.7rem; letter-spacing: -.03em; }
+.project-card .project-detail .stat, .project-card.project-card-featured .project-detail .stat { color: var(--ink); }
+
+/* screenshot: framed with a coloured glow */
+.project-card .project-shot, .project-card-featured .project-shot {
+  border-color: color-mix(in srgb, var(--pc) 40%, var(--line));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .35), 0 0 0 1px color-mix(in srgb, var(--pc) 15%, transparent);
+}
+:root[data-theme="light"] .project-card .project-shot { box-shadow: 0 12px 30px rgba(15, 25, 34, .16); }
+
+/* number boxes: card colour on the edge, amber numbers on every card */
+.project-card .kn, .project-card.project-card-featured .kn {
+  border-color: color-mix(in srgb, var(--pc) 35%, var(--line));
+  background: color-mix(in srgb, var(--pc) 8%, var(--bg));
+}
+.project-card .kn .stat, .project-card.project-card-featured .kn .stat { color: var(--highlight); }
+.project-card.project-card-featured .kn-label { color: var(--muted); }
+
+/* pipeline pills and arrows in the card colour */
+.project-card .pipeline, .project-card.project-card-featured .pipeline { color: var(--muted); }
+.project-card .pipeline li:first-child, .project-card .pipeline .pl,
+.project-card.project-card-featured .pipeline li:first-child, .project-card.project-card-featured .pipeline .pl {
+  border-color: color-mix(in srgb, var(--pc) 35%, var(--line));
+  background: color-mix(in srgb, var(--pc) 8%, var(--bg));
+}
+.project-card .pipeline li + li::before, .project-card.project-card-featured .pipeline li + li::before { color: var(--pc); }
+
+/* badge and buttons */
+.project-card .live-badge, .project-card.project-card-featured .live-badge {
+  color: var(--pc);
+  border-color: color-mix(in srgb, var(--pc) 45%, var(--line));
+  background: color-mix(in srgb, var(--pc) 10%, transparent);
+}
+.project-card .live-dot, .project-card .live-dot::after,
+.project-card.project-card-featured .live-dot, .project-card.project-card-featured .live-dot::after { background: var(--pc); }
+.project-card.project-card-featured .project-btn { color: var(--ink); border-color: var(--line); }
+.project-card .project-btn.is-primary, .project-card.project-card-featured .project-btn.is-primary {
+  color: #071019; background: var(--pc); border-color: var(--pc);
+}
+:root[data-theme="light"] .project-card .project-btn.is-primary,
+:root[data-theme="light"] .project-card.project-card-featured .project-btn.is-primary { color: #ffffff; }
+.project-card .project-btn:hover, .project-card.project-card-featured .project-btn:hover { border-color: var(--pc); color: var(--pc); }
+.project-card .project-btn.is-primary:hover, .project-card.project-card-featured .project-btn.is-primary:hover { color: #071019; filter: brightness(1.08); }
+:root[data-theme="light"] .project-card .project-btn.is-primary:hover { color: #ffffff; }
+.project-card-featured::after { background-image: radial-gradient(circle at center, var(--dot) 1px, transparent 1px); }
+
+/* the GitHub card */
+.project-card-wide .project-cta { color: var(--pc); }
