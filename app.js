@@ -83,7 +83,7 @@
         label.textContent = "Copy email";
         live.textContent = "";
         btn.classList.remove("is-done");
-      }, 2200);
+      }, 2000);
     }
     btn.addEventListener("click", function () {
       var text = btn.getAttribute("data-copy");
@@ -191,6 +191,68 @@
       });
     });
     document.querySelectorAll(".hero-wall, .section-wall").forEach(function (w) { wallIO.observe(w); });
+  }
+
+  /* ---- section index (1200px and up) ---------------------------------- */
+  // The label whose section is on screen grows its line and brightens.
+  var sideIndex = document.querySelector(".side-index");
+  if (sideIndex && "IntersectionObserver" in window) {
+    var siLinks = sideIndex.querySelectorAll("a[href^='#']");
+    var siTargets = [];
+    siLinks.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute("href").slice(1));
+      if (el) siTargets.push({ el: el, a: a });
+    });
+    var siState = new Map();
+    var siIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { siState.set(e.target, e.isIntersecting ? e.intersectionRatio : 0); });
+      var best = null, bestRatio = 0;
+      siTargets.forEach(function (t) {
+        var r = siState.get(t.el) || 0;
+        if (r > bestRatio) { bestRatio = r; best = t; }
+      });
+      siTargets.forEach(function (t) {
+        var on = t === best;
+        t.a.classList.toggle("is-active", on);
+        if (on) t.a.setAttribute("aria-current", "location");
+        else t.a.removeAttribute("aria-current");
+      });
+    }, { rootMargin: "-20% 0px -50% 0px", threshold: [0, .1, .25, .5, .75, 1] });
+    siTargets.forEach(function (t) { siIO.observe(t.el); });
+  }
+
+  /* ---- cursor spotlight ------------------------------------------------ */
+  // A soft light that follows a fine pointer. Only --x and --y change, once
+  // per frame; off on touch screens and with reduced motion.
+  var spot = document.querySelector(".spotlight");
+  if (spot && !reduced && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    var sx = 0, sy = 0, spotQueued = false;
+    var paintSpot = function () {
+      spotQueued = false;
+      spot.style.setProperty("--x", sx + "px");
+      spot.style.setProperty("--y", sy + "px");
+    };
+    window.addEventListener("pointermove", function (e) {
+      sx = e.clientX; sy = e.clientY;
+      if (!spot.classList.contains("is-on")) spot.classList.add("is-on");
+      if (!spotQueued) { spotQueued = true; requestAnimationFrame(paintSpot); }
+    }, { passive: true });
+    document.addEventListener("mouseleave", function () { spot.classList.remove("is-on"); });
+  }
+
+  /* ---- hover dim: JS fallback for browsers without :has() ---------------- */
+  var grid = document.querySelector(".project-grid");
+  if (grid && !(window.CSS && CSS.supports && CSS.supports("selector(:has(a))"))) {
+    var lit = function (card, on) {
+      grid.classList.toggle("is-dimming", on);
+      grid.querySelectorAll(".project-card").forEach(function (c) { c.classList.toggle("is-lit", on && c === card); });
+    };
+    grid.querySelectorAll(".project-card").forEach(function (card) {
+      card.addEventListener("mouseenter", function () { lit(card, true); });
+      card.addEventListener("mouseleave", function () { lit(card, false); });
+      card.addEventListener("focusin", function () { lit(card, true); });
+      card.addEventListener("focusout", function () { lit(card, false); });
+    });
   }
 
   /* ---- project card light -------------------------------------------- */

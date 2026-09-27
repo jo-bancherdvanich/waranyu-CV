@@ -86,6 +86,8 @@
             <div><span class="metric-number">9</span><span>analytical queries<br />answering real questions</span></div>
           </div>
 
+          <ol class="pipeline" aria-label="Project pipeline"><li>18 business rules</li><li><span class="pl">ERD</span></li><li><span class="pl">16-table Oracle schema</span></li><li><span class="pl">9 analytical queries</span></li></ol>
+
           <figure class="erd" id="erd">
             <noscript>
               <img width="1114" height="696" src="images/football-erd.webp" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
@@ -118,14 +120,14 @@
             </div>
           </dl>
 
-          <section class="case-block">
+          <section class="case-block" data-stage="Problem">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The problem</h2>
             <p>
               A soccer competition generates a surprising amount of interlocking data. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions — <strong>"what's the ladder?"</strong> — become impossible to answer without duplicating data everywhere.
             </p>
           </section>
 
-          <section class="case-block">
+          <section class="case-block" data-stage="Approach">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M6.6 6.6 10 10M17.4 6.6 14 10M6.6 17.4 10 14M17.4 17.4 14 14"/></svg></span>The design</h2>
             <p>
               The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through junction tables. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
@@ -135,7 +137,7 @@
             </p>
           </section>
 
-          <section class="case-block" id="run-it">
+          <section class="case-block" data-stage="Result" id="run-it">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>Run the queries</h2>
             <p>
               Eight queries running here on the same sample season the Oracle script inserts — 8 clubs, 96 players, 56 games, 154 goals. Five are adapted from the repository's analytical script; three more were written for this page. Pick a question and the result is computed in your browser.
@@ -197,7 +199,7 @@
             </ul>
           </section>
 
-          <section class="case-block">
+          <section class="case-block" data-stage="Limits">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5V8h-4.5"/></svg></span>Revised after review</h2>
             <p>
               The version in the repository is a revised one. Reviewing the first design, three things were wrong — so I went back and fixed them rather than leaving them:
@@ -213,10 +215,13 @@
             </p>
           </section>
 
-          <div class="case-actions case-footer-actions">
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
             <a class="button primary" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
             <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
           </div>
+          </section>
 
           <a class="next-project" href="weatherwise.html">
             <span class="np-text">

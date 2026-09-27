@@ -85,6 +85,8 @@
             <div><span class="metric-number">R&sup2; 0.85</span><span>linear regression in R<br />p &lt; 0.001, n = 20</span></div>
           </div>
 
+          <ol class="pipeline" aria-label="Project pipeline"><li>Electricity data 2005 to 2024</li><li><span class="pl">R linear regression</span></li><li><span class="pl">Power BI dashboard</span></li><li><span class="pl">2035 forecast</span></li></ol>
+
           <figure class="case-shot">
             <img width="1337" height="752" src="images/renewable-dashboard.webp" alt="Power BI dashboard showing Australia's renewable electricity share over time, source mix, international comparison, and a forecast to 2035" />
             <figcaption>The single-page analytical dashboard</figcaption>
@@ -105,7 +107,7 @@
             </div>
           </dl>
 
-          <section class="case-block">
+          <section class="case-block" data-stage="Problem">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2A2.6 2.6 0 0 1 14.5 10c0 1.8-2.5 2-2.5 3.6"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span>The question</h2>
             <p>
               The Australian government has committed to <strong>82% renewable electricity by 2030</strong>. Written as a brief for a DCCEEW-style audience, this project asks the practical version of that commitment: <strong>is Australia on track, and if not, how far short will it fall?</strong>
@@ -119,7 +121,7 @@
             </ul>
           </section>
 
-          <section class="case-block">
+          <section class="case-block" data-stage="Data">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
             <p>
               Four national datasets, each in a different format, unit, and source taxonomy — reconciling them was most of the work.
@@ -147,7 +149,37 @@
             </p>
           </section>
 
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>How it was built</h2>
+            <p>
+              <strong>Galaxy schema, not a single fact table.</strong> Two fact tables (renewable generation and total generation) share three dimensions: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error structurally impossible.
+            </p>
+            <figure class="case-diagram"><svg viewBox="0 0 640 250" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link" d="M156 34H200V124H225"/><path class="dg-link" d="M156 94H200V124H225"/><path class="dg-link" d="M156 154H200V124H225"/><path class="dg-link" d="M156 214H200V124H225"/><path class="dg-link" d="M375 124H412V84H449"/><path class="dg-link" d="M412 124V164H449"/><path class="dg-arrow" d="M443 79l6 5-6 5"/><path class="dg-arrow" d="M443 159l6 5-6 5"/><path class="dg-link" d="M524 100V148" opacity=".55"/><g class=""><rect x="24" y="12" width="132" height="44" rx="5"/><text x="90" y="31" class="dg-t" text-anchor="middle">Australia</text><text x="90" y="45" class="dg-s" text-anchor="middle">DCCEEW</text></g><g class=""><rect x="24" y="72" width="132" height="44" rx="5"/><text x="90" y="91" class="dg-t" text-anchor="middle">New Zealand</text><text x="90" y="105" class="dg-s" text-anchor="middle">MBIE</text></g><g class=""><rect x="24" y="132" width="132" height="44" rx="5"/><text x="90" y="151" class="dg-t" text-anchor="middle">Germany</text><text x="90" y="165" class="dg-s" text-anchor="middle">AGEE-Stat</text></g><g class=""><rect x="24" y="192" width="132" height="44" rx="5"/><text x="90" y="211" class="dg-t" text-anchor="middle">China</text><text x="90" y="225" class="dg-s" text-anchor="middle">OWID / IEA</text></g><g class="dg-fact"><rect x="225" y="102" width="150" height="44" rx="5"/><text x="300" y="121" class="dg-t" text-anchor="middle">Power Query</text><text x="300" y="135" class="dg-s" text-anchor="middle">GWh &#8594; TWh</text></g><g class=""><rect x="449" y="68" width="150" height="32" rx="5"/><text x="524" y="88" class="dg-t" text-anchor="middle">fact_Renewable</text></g><g class=""><rect x="449" y="148" width="150" height="32" rx="5"/><text x="524" y="168" class="dg-t" text-anchor="middle">fact_TotalGen</text></g></svg><figcaption>Four national datasets, four different formats and unit systems, standardised into one galaxy schema. Two fact tables share three dimensions so totals cannot be double counted.</figcaption></figure>
+            <p>
+              <strong>Forecasting in R rather than Power BI's built-in tool.</strong> Two linear-regression visuals — one for generation in TWh, one for renewable share — project to 2035 with a 95% prediction interval. R was chosen because it prints the regression equation, R², and p-value directly onto the chart, making the method transparent and checkable by the reader. Both models fit well: <strong>R² ≈ 0.845–0.847, p &lt; 0.001</strong>.
+            </p>
+            <p>
+              <strong>One page, five visuals, scoped slicers</strong> — filtering one question never silently breaks the answer to another.
+            </p>
+          </section>
+
           <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>The forecast, live</h2>
+            <p>
+              The dashboard's forecast runs in R so the reader can check the method. Here is the same linear regression, computed in your browser from the project's actual data — equation, fit, and 95% prediction interval included.
+            </p>
+            <div id="rf-widget" class="rf">
+              <div class="rf-tabs" role="tablist" aria-label="Forecast measure">
+                <button type="button" class="rf-tab is-active" data-mode="share" role="tab" aria-selected="true">Renewable share %</button>
+                <button type="button" class="rf-tab" data-mode="twh" role="tab" aria-selected="false">Generation TWh</button>
+              </div>
+              <div class="rf-chart"></div>
+              <p class="rf-stats"></p>
+              <p class="rf-note">Dots are DCCEEW annual data, 2005–2024. The shaded band is the 95% prediction interval; the line extends the historical trend to 2035. On the current trajectory, the 82%-by-2030 target is out of reach — which is the report's central finding.</p>
+            </div>
+          </section>
+
+          <section class="case-block" data-stage="Result">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the data showed</h2>
             <ul class="findings">
               <li>
@@ -178,47 +210,20 @@
             </p>
           </section>
 
-          <section class="case-block">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>The forecast, live</h2>
-            <p>
-              The dashboard's forecast runs in R so the reader can check the method. Here is the same linear regression, computed in your browser from the project's actual data — equation, fit, and 95% prediction interval included.
-            </p>
-            <div id="rf-widget" class="rf">
-              <div class="rf-tabs" role="tablist" aria-label="Forecast measure">
-                <button type="button" class="rf-tab is-active" data-mode="share" role="tab" aria-selected="true">Renewable share %</button>
-                <button type="button" class="rf-tab" data-mode="twh" role="tab" aria-selected="false">Generation TWh</button>
-              </div>
-              <div class="rf-chart"></div>
-              <p class="rf-stats"></p>
-              <p class="rf-note">Dots are DCCEEW annual data, 2005–2024. The shaded band is the 95% prediction interval; the line extends the historical trend to 2035. On the current trajectory, the 82%-by-2030 target is out of reach — which is the report's central finding.</p>
-            </div>
-          </section>
-
-          <section class="case-block">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>How it was built</h2>
-            <p>
-              <strong>Galaxy schema, not a single fact table.</strong> Two fact tables (renewable generation and total generation) share three dimensions: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error structurally impossible.
-            </p>
-            <figure class="case-diagram"><svg viewBox="0 0 640 250" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link" d="M156 34H200V124H225"/><path class="dg-link" d="M156 94H200V124H225"/><path class="dg-link" d="M156 154H200V124H225"/><path class="dg-link" d="M156 214H200V124H225"/><path class="dg-link" d="M375 124H412V84H449"/><path class="dg-link" d="M412 124V164H449"/><path class="dg-arrow" d="M443 79l6 5-6 5"/><path class="dg-arrow" d="M443 159l6 5-6 5"/><path class="dg-link" d="M524 100V148" opacity=".55"/><g class=""><rect x="24" y="12" width="132" height="44" rx="5"/><text x="90" y="31" class="dg-t" text-anchor="middle">Australia</text><text x="90" y="45" class="dg-s" text-anchor="middle">DCCEEW</text></g><g class=""><rect x="24" y="72" width="132" height="44" rx="5"/><text x="90" y="91" class="dg-t" text-anchor="middle">New Zealand</text><text x="90" y="105" class="dg-s" text-anchor="middle">MBIE</text></g><g class=""><rect x="24" y="132" width="132" height="44" rx="5"/><text x="90" y="151" class="dg-t" text-anchor="middle">Germany</text><text x="90" y="165" class="dg-s" text-anchor="middle">AGEE-Stat</text></g><g class=""><rect x="24" y="192" width="132" height="44" rx="5"/><text x="90" y="211" class="dg-t" text-anchor="middle">China</text><text x="90" y="225" class="dg-s" text-anchor="middle">OWID / IEA</text></g><g class="dg-fact"><rect x="225" y="102" width="150" height="44" rx="5"/><text x="300" y="121" class="dg-t" text-anchor="middle">Power Query</text><text x="300" y="135" class="dg-s" text-anchor="middle">GWh &#8594; TWh</text></g><g class=""><rect x="449" y="68" width="150" height="32" rx="5"/><text x="524" y="88" class="dg-t" text-anchor="middle">fact_Renewable</text></g><g class=""><rect x="449" y="148" width="150" height="32" rx="5"/><text x="524" y="168" class="dg-t" text-anchor="middle">fact_TotalGen</text></g></svg><figcaption>Four national datasets, four different formats and unit systems, standardised into one galaxy schema. Two fact tables share three dimensions so totals cannot be double counted.</figcaption></figure>
-            <p>
-              <strong>Forecasting in R rather than Power BI's built-in tool.</strong> Two linear-regression visuals — one for generation in TWh, one for renewable share — project to 2035 with a 95% prediction interval. R was chosen because it prints the regression equation, R², and p-value directly onto the chart, making the method transparent and checkable by the reader. Both models fit well: <strong>R² ≈ 0.845–0.847, p &lt; 0.001</strong>.
-            </p>
-            <p>
-              <strong>One page, five visuals, scoped slicers</strong> — filtering one question never silently breaks the answer to another.
-            </p>
-          </section>
-
-          <section class="case-block">
+          <section class="case-block" data-stage="Limits">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>Limitations I'd state up front</h2>
             <p>
               The forecast is a simple linear regression and should be read as a planning signal, not a prediction. Renewable growth accelerated after the mid-2010s, so including the slower early years makes the trend deliberately conservative — the real figure may land higher. Saying so is part of the analysis, not a footnote to it.
             </p>
           </section>
 
-          <div class="case-actions case-footer-actions">
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
             <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
             <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
           </div>
+          </section>
 
           <a class="next-project" href="freshmart.html">
             <span class="np-text">
