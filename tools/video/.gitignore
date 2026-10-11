@@ -1,0 +1,5 @@
+node_modules/
+frames/
+out/
+record.log
+record*.log

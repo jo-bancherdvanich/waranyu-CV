@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="description"
+      content="Australia's renewable electricity transition — a Power BI dashboard and R forecast to 2035, by Waranyu Bancherdvanich."
+    />
+    <title>Australia's renewable transition | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         the page is readable before they arrive -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="components.css" />
+    <!-- The blurred screenshot behind the title is the largest thing on first
+         paint; fetch it now rather than after styles.css is parsed -->
+    <link rel="preload" as="image" href="images/renewable-dashboard.webp" fetchpriority="high" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="canonical" href="https://waranyu-cv.vercel.app/renewable.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Waranyu Bancherdvanich" />
+    <meta property="og:title" content="Australia's renewable transition | Waranyu Bancherdvanich" />
+    <meta property="og:description" content="Australia's renewable electricity transition — a Power BI dashboard and R forecast to 2035, by Waranyu Bancherdvanich." />
+    <meta property="og:url" content="https://waranyu-cv.vercel.app/renewable.html" />
+    <meta property="og:image" content="https://waranyu-cv.vercel.app/images/renewable-dashboard.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Australia's renewable transition | Waranyu Bancherdvanich" />
+    <meta name="twitter:description" content="Australia's renewable electricity transition — a Power BI dashboard and R forecast to 2035, by Waranyu Bancherdvanich." />
+    <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/renewable-dashboard.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
+        <div class="topbar-right">
+          <a class="github-link" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+      </div>
+      </header>
+
+      <main id="main">
+        <article class="case case-renewable">
+          <p class="eyebrow">01 / Forecasting</p>
+          <h1>Is Australia on track for 82% renewable electricity?</h1>
+          <p class="lede">
+            An analytical brief for a government audience: twenty years of Australian electricity data, benchmarked against three comparison countries and forecast to <b class="hl">2035</b>, to answer one question honestly.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <figure class="case-video" id="film" aria-describedby="case-video-desc">
+            <video class="cv-player" muted loop playsinline preload="metadata" width="1600" height="900"
+                   poster="video/renewable-transition-poster.webp" aria-label="Narrated overview of Australia's renewable electricity, 2005 to 2035, about one minute">
+              <source src="video/renewable-transition.mp4" type="video/mp4" />
+              <track kind="captions" src="video/renewable-transition.vtt" srclang="en" label="English" default />
+            </video>
+            <div class="cv-controls">
+              <button type="button" class="cv-toggle" aria-pressed="false">
+                <span class="cv-ico" aria-hidden="true"></span><span class="cv-label">Pause</span>
+              </button>
+              <button type="button" class="cv-sound" aria-pressed="false">Sound on</button>
+              <button type="button" class="cv-captions" aria-pressed="true">Captions off</button>
+            </div>
+            <figcaption>The project in one minute, narrated and captioned. The farmland and the Earth are illustrations built from the project data; every figure on screen comes from the dataset.</figcaption>
+            <p class="sr-only" id="case-video-desc">
+              The video opens on the Earth and flies down to a wind and solar farm. Two bars show the renewable share rising from 8.9% in 2005 to 35.0% in 2024 as the non-renewable share falls.
+              A bar-chart race shows solar growing from 0.1 to 48.6 TWh and wind from 0.9 to 31.0 TWh, overtaking hydro at 15.0 TWh.
+              Four countries rise out of the globe to their 2024 renewable generation (China 3,398.8 TWh, Germany 288.3, Australia 97.9, New Zealand 37.5), then fill to their renewable share (New Zealand 85.5%, Germany 54.5%, Australia 35.0%, China 33.7%).
+              Over the farmland, a line draws total renewable generation and its linear forecast to 123.4 TWh by 2035 (R&sup2; 0.845, 95% prediction interval), and a gauge shows the forecast share of 44.6% against the 82% target.
+            </p>
+          </figure>
+
+          <div class="metrics case-metrics" aria-label="Project at a glance">
+            <div><span class="metric-number">9% &rarr; 35%</span><span>renewable share<br />2005 to 2024</span></div>
+            <div><span class="metric-number">44.6%</span><span>forecast for 2035<br />against an 82% target</span></div>
+            <div><span class="metric-number">R&sup2; 0.85</span><span>linear regression in R<br />p &lt; 0.001, n = 20</span></div>
+          </div>
+
+          <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V8M16 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Electricity data 2005 to 2024</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M5 16l4-3 4 1 6-6"/><circle cx="7" cy="14" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="17" cy="9" r="1.2"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">R linear regression</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Power BI dashboard</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 8-8"/><path d="M16 7h4v4"/><path d="M4 21h16" stroke-dasharray="2 3"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">2035 forecast</span></li></ol>
+
+          <figure class="case-shot">
+            <img width="1337" height="752" src="images/renewable-dashboard.webp" alt="Power BI dashboard showing Australia's renewable electricity share over time, source mix, international comparison, and a forecast to 2035" />
+            <figcaption>The single-page analytical dashboard</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
+              <dd>Sole author — ETL, data model, DAX, R forecast, report</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
+              <dd>Power BI · Power Query · DAX · R · Galaxy schema</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
+              <dd>Curtin University, Perth</dd>
+            </div>
+          </dl>
+
+          <section class="case-block" data-stage="Problem">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2A2.6 2.6 0 0 1 14.5 10c0 1.8-2.5 2-2.5 3.6"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span>The question</h2>
+            <p>
+              The Australian government has committed to <strong>82% renewable electricity by 2030</strong>. Written as a brief for a DCCEEW-style audience, this project asks the practical version of that commitment: <strong>is Australia on track, and if not, how far short will it fall?</strong>
+            </p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <p>It breaks into <b class="hl">four sub-questions</b> the dashboard has to answer:</p>
+            <ul>
+              <li>How has Australia's renewable share changed since <b class="hl">2005</b>?</li>
+              <li>Which technologies are actually driving that growth?</li>
+              <li>How does Australia compare with China, Germany and New Zealand?</li>
+              <li>What does a forecast to <b class="hl">2035</b> suggest about reaching the target?</li>
+            </ul>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Data">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
+            <p>
+              Four national datasets, each in a different format, unit, and source taxonomy — <b class="hl">reconciling them was most of the work</b>.
+            </p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <ul class="icon-list">
+              <li>
+                <span class="il-icon il-flag" aria-hidden="true"><svg viewBox="0 0 24 16"><defs><clipPath id="fAU"><rect width="24" height="16" rx="2"/></clipPath></defs><g clip-path="url(#fAU)"><rect width="24" height="16" fill="#00247d"/><path d="M0 0l12 8M12 0L0 8" stroke="#fff" stroke-width="1.6"/><path d="M6 0v8M0 4h12" stroke="#fff" stroke-width="2.6"/><path d="M6 0v8M0 4h12" stroke="#c8102e" stroke-width="1.3"/><circle cx="6" cy="12.5" r="1.5" fill="#fff"/><circle cx="18" cy="4" r=".9" fill="#fff"/><circle cx="21" cy="7.5" r=".9" fill="#fff"/><circle cx="18" cy="11.5" r=".9" fill="#fff"/><circle cx="15.5" cy="7.8" r=".7" fill="#fff"/><circle cx="19.5" cy="8.6" r=".5" fill="#fff"/></g></svg></span>
+                <span><strong>Australia</strong> — DCCEEW Australian Energy Statistics, Table O. <b class="hl">Financial years converted to calendar years</b> on an end-year convention.</span>
+              </li>
+              <li>
+                <span class="il-icon il-flag" aria-hidden="true"><svg viewBox="0 0 24 16"><defs><clipPath id="fNZ"><rect width="24" height="16" rx="2"/></clipPath></defs><g clip-path="url(#fNZ)"><rect width="24" height="16" fill="#00247d"/><path d="M0 0l12 8M12 0L0 8" stroke="#fff" stroke-width="1.6"/><path d="M6 0v8M0 4h12" stroke="#fff" stroke-width="2.6"/><path d="M6 0v8M0 4h12" stroke="#c8102e" stroke-width="1.3"/><circle cx="19" cy="4" r="1" fill="#c8102e"/><circle cx="16" cy="8" r="1" fill="#c8102e"/><circle cx="21.5" cy="8.5" r="1" fill="#c8102e"/><circle cx="18.5" cy="12" r="1" fill="#c8102e"/></g></svg></span>
+                <span><strong>New Zealand</strong> — MBIE Electricity Statistics. <b class="hl">Net generation</b>, which differs from gross by roughly <b class="hl">1</b>–<b class="hl">2%</b>.</span>
+              </li>
+              <li>
+                <span class="il-icon il-flag" aria-hidden="true"><svg viewBox="0 0 24 16"><defs><clipPath id="fDE"><rect width="24" height="16" rx="2"/></clipPath></defs><g clip-path="url(#fDE)"><rect width="24" height="5.34" fill="#000"/><rect y="5.34" width="24" height="5.33" fill="#dd0000"/><rect y="10.67" width="24" height="5.33" fill="#ffce00"/></g></svg></span>
+                <span><strong>Germany</strong> — Umweltbundesamt / AGEE-Stat, <b class="hl">extracted manually from the official PDF</b>.</span>
+              </li>
+              <li>
+                <span class="il-icon il-flag" aria-hidden="true"><svg viewBox="0 0 24 16"><defs><clipPath id="fCN"><rect width="24" height="16" rx="2"/></clipPath></defs><g clip-path="url(#fCN)"><rect width="24" height="16" fill="#de2910"/><circle cx="5" cy="5" r="2.4" fill="#ffde00"/><circle cx="9.5" cy="2.4" r=".8" fill="#ffde00"/><circle cx="11.4" cy="4.6" r=".8" fill="#ffde00"/><circle cx="11.2" cy="7.4" r=".8" fill="#ffde00"/><circle cx="9.2" cy="9.2" r=".8" fill="#ffde00"/></g></svg></span>
+                <span><strong>China</strong> — Our World in Data, sourcing IEA, used as an <b class="hl">authoritative intermediary</b> where English NBS data was not freely available.</span>
+              </li>
+            </ul>
+            <p>
+              All four were standardised in Power Query into <b class="hl">five consistent renewable categories</b> — solar, wind, hydro, biomass, geothermal — with <b class="hl">GWh converted to TWh</b>. Every transformation is recorded in a <b class="hl">data decisions log</b> rather than left implicit.
+            </p>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>How it was built</h2>
+            <p>
+              <strong>Galaxy schema, not a single fact table.</strong> <b class="hl">Two fact tables</b> (renewable generation and total generation) share <b class="hl">three dimensions</b>: country, year, and energy source. A single fact table would have repeated total-generation values five or six times per country-year and overcounted the moment anyone summed the column. The galaxy schema makes that error <b class="hl">structurally impossible</b>.
+            </p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <figure class="case-diagram"><svg viewBox="0 0 640 250" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link" d="M156 34H200V124H225"/><path class="dg-link" d="M156 94H200V124H225"/><path class="dg-link" d="M156 154H200V124H225"/><path class="dg-link" d="M156 214H200V124H225"/><path class="dg-link" d="M375 124H412V84H449"/><path class="dg-link" d="M412 124V164H449"/><path class="dg-arrow" d="M443 79l6 5-6 5"/><path class="dg-arrow" d="M443 159l6 5-6 5"/><path class="dg-link" d="M524 100V148" opacity=".55"/><g class=""><rect x="24" y="12" width="132" height="44" rx="5"/><text x="90" y="31" class="dg-t" text-anchor="middle">Australia</text><text x="90" y="45" class="dg-s" text-anchor="middle">DCCEEW</text></g><g class=""><rect x="24" y="72" width="132" height="44" rx="5"/><text x="90" y="91" class="dg-t" text-anchor="middle">New Zealand</text><text x="90" y="105" class="dg-s" text-anchor="middle">MBIE</text></g><g class=""><rect x="24" y="132" width="132" height="44" rx="5"/><text x="90" y="151" class="dg-t" text-anchor="middle">Germany</text><text x="90" y="165" class="dg-s" text-anchor="middle">AGEE-Stat</text></g><g class=""><rect x="24" y="192" width="132" height="44" rx="5"/><text x="90" y="211" class="dg-t" text-anchor="middle">China</text><text x="90" y="225" class="dg-s" text-anchor="middle">OWID / IEA</text></g><g class="dg-fact"><rect x="225" y="102" width="150" height="44" rx="5"/><text x="300" y="121" class="dg-t" text-anchor="middle">Power Query</text><text x="300" y="135" class="dg-s" text-anchor="middle">GWh &#8594; TWh</text></g><g class=""><rect x="449" y="68" width="150" height="32" rx="5"/><text x="524" y="88" class="dg-t" text-anchor="middle">fact_Renewable</text></g><g class=""><rect x="449" y="148" width="150" height="32" rx="5"/><text x="524" y="168" class="dg-t" text-anchor="middle">fact_TotalGen</text></g></svg><figcaption>Four national datasets, four different formats and unit systems, standardised into one galaxy schema. Two fact tables share three dimensions so totals cannot be double counted.</figcaption></figure>
+            <p>
+              <strong>Forecasting in R rather than Power BI's built-in tool.</strong> Two linear-regression visuals — one for generation in TWh, one for renewable share — project to <b class="hl">2035</b> with a <b class="hl">95% prediction interval</b>. R was chosen because it prints the regression equation, R², and p-value directly onto the chart, making the method transparent and checkable by the reader. Both models fit well: <strong>R² ≈ 0.845–0.847, p &lt; 0.001</strong>.
+            </p>
+            <p>
+              <strong>One page, five visuals, scoped slicers</strong> — filtering one question never silently breaks the answer to another.
+            </p>
+            </details>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>The forecast, live</h2>
+            <p>
+              The dashboard's forecast <b class="hl">runs in R so the reader can check the method</b>. Here is the same linear regression, computed in your browser from the project's actual data — equation, fit, and <b class="hl">95% prediction interval</b> included.
+            </p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <div id="rf-widget" class="rf">
+              <div class="rf-tabs" role="tablist" aria-label="Forecast measure">
+                <button type="button" class="rf-tab is-active" data-mode="share" role="tab" aria-selected="true">Renewable share %</button>
+                <button type="button" class="rf-tab" data-mode="twh" role="tab" aria-selected="false">Generation TWh</button>
+              </div>
+              <div class="rf-chart"></div>
+              <p class="rf-stats"></p>
+              <p class="rf-note">Dots are DCCEEW annual data, 2005–2024. The shaded band is the 95% prediction interval; the line extends the historical trend to 2035. On the current trajectory, the 82%-by-2030 target is out of reach — which is the report's central finding.</p>
+            </div>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Result">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the data showed</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number"><b class="hl">01</b></span>
+                <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about <b class="hl">9%</b> in <b class="hl">2005</b> to <b class="hl">35%</b> in <b class="hl">2024</b> — but a <b class="hl">linear forecast</b> reaches only <strong>44.6% by 2035</strong>, roughly half the <b class="hl">82</b>%-by-2030 target.</p>
+            <details class="case-more">
+              <summary>Read more</summary>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">02</b></span>
+                <p><strong>Solar and wind are carrying the transition, not hydro.</strong> Solar grew from ~<b class="hl">0.1 TWh</b> to ~<b class="hl">48.6 TWh</b> and wind from ~<b class="hl">0.9 TWh</b> to ~<b class="hl">31.0 TWh</b> between <b class="hl">2005</b> and <b class="hl">2024</b>, while hydro stayed roughly flat. The growth is entirely in the newer technologies.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>International comparison depends entirely on the measure you pick.</strong> China generates the most renewable electricity by volume (<b class="hl">3,398</b>.<b class="hl">8 TWh</b>), but Australia's renewable <em>share</em> of <b class="hl">35.0%</b> slightly edged China's <b class="hl">33.7%</b> in <b class="hl">2024</b>. New Zealand (<b class="hl">85.5%</b>) and Germany (<b class="hl">54.5%</b>) remain well ahead on share. Choosing volume or share tells two opposite stories — so the dashboard shows both.</p>
+              </li>
+            </ul>
+            </details>
+          </section>
+
+          <section class="case-block" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the dashboard</h2>
+            <p>
+              The Power BI report, <b class="hl">rebuilt to run in your browser</b>. All <b class="hl">480 generation facts</b> are loaded from the same cleaned workbook, across four countries and fourteen sources, and every figure is <b class="hl">calculated here rather than typed in</b>. <strong>Switch country, narrow to a single source group, or cut the timeline into its four policy eras</strong> — the whole report follows.
+            </p>
+
+            <div id="re-dash" class="dash" aria-label="Interactive renewable electricity dashboard"></div>
+
+            <p class="dash-foot">
+              Share is renewable generation divided by that country's total generation in the same year, which is why the ranking changes depending on whether you read volume or share.
+            </p>
+          </section>
+
+          <section class="case-block" data-stage="Limits">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>Limitations I'd state up front</h2>
+            <p>
+              The forecast is a simple linear regression and should be read as a <b class="hl">planning signal, not a prediction</b>. Renewable growth accelerated after the mid-2010s, so including the slower early years makes the trend <b class="hl">deliberately conservative</b> — the real figure may land higher. Saying so is part of the analysis, not a footnote to it.
+            </p>
+          </section>
+
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+          </section>
+
+          <a class="next-project" href="freshmart.html">
+            <span class="np-text">
+              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
+              <span class="np-eyebrow">02 / Retail · Academic</span>
+              <span class="np-title">FreshMart sales dashboard</span>
+              <span class="np-blurb">A Power BI retail dashboard that turns raw transaction data into a view of where the money actually comes from.</span>
+            </span>
+            <img class="np-shot" src="images/freshmart-dashboard.webp" width="1447" height="818" alt="" loading="lazy" decoding="async" />
+          </a>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <div class="sf-top">
+          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <nav class="sf-links" aria-label="Footer">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+        <div class="sf-bottom">
+          <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+          <span>Last updated October 2026</span>
+          <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
+          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+    <script src="chart-hover.js"></script>
+    <script src="renewable-forecast.js"></script>
+    <script src="dash-interactions.js"></script>
+    <script src="renewable-rows.js"></script>
+    <script src="renewable-dashboard.js"></script>
+  </body>
+</html>

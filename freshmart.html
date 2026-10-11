@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="description"
+      content="FreshMart data warehouse and sales dashboard — a Kimball star schema, Power Query ETL, and an executive Power BI dashboard, by Waranyu Bancherdvanich."
+    />
+    <title>FreshMart data warehouse | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         the page is readable before they arrive -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="components.css" />
+    <!-- The blurred screenshot behind the title is the largest thing on first
+         paint; fetch it now rather than after styles.css is parsed -->
+    <link rel="preload" as="image" href="images/freshmart-dashboard.webp" fetchpriority="high" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="canonical" href="https://waranyu-cv.vercel.app/freshmart.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Waranyu Bancherdvanich" />
+    <meta property="og:title" content="FreshMart data warehouse | Waranyu Bancherdvanich" />
+    <meta property="og:description" content="FreshMart data warehouse and sales dashboard — a Kimball star schema, Power Query ETL, and an executive Power BI dashboard, by Waranyu Bancherdvanich." />
+    <meta property="og:url" content="https://waranyu-cv.vercel.app/freshmart.html" />
+    <meta property="og:image" content="https://waranyu-cv.vercel.app/images/freshmart-dashboard.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FreshMart data warehouse | Waranyu Bancherdvanich" />
+    <meta name="twitter:description" content="FreshMart data warehouse and sales dashboard — a Kimball star schema, Power Query ETL, and an executive Power BI dashboard, by Waranyu Bancherdvanich." />
+    <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/freshmart-dashboard.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
+        <div class="topbar-right">
+          <a class="github-link" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+      </div>
+      </header>
+
+      <main id="main">
+        <article class="case case-freshmart">
+          <p class="eyebrow">02 / Business intelligence</p>
+          <h1>FreshMart data warehouse and sales dashboard</h1>
+          <p class="lede">
+            An end-to-end business intelligence build for a fictional Australian supermarket chain: five raw operational CSVs, audited and cleaned, modelled as a Kimball star schema, and surfaced as an executive dashboard.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="metrics case-metrics" aria-label="Project at a glance">
+            <div><span class="metric-number">17,697</span><span>transaction lines<br />in the fact table</span></div>
+            <div><span class="metric-number">5</span><span>source tables audited<br />before modelling</span></div>
+            <div><span class="metric-number">93</span><span>orphaned rows remapped<br />rather than dropped</span></div>
+          </div>
+
+          <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">5 source tables</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M8.5 11l2 2 3.5-4"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Power Query audit</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="1.6"/><circle cx="20" cy="12" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="4" cy="12" r="1.6"/><path d="M12 7v2M15 12h2M12 15v2M7 12h2"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Kimball star schema</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14l-8 7 8 7H5"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">DAX measures</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">Executive dashboard</span></li></ol>
+
+          <figure class="case-shot">
+            <img width="1447" height="818" src="images/freshmart-dashboard.webp" alt="FreshMart sales performance dashboard showing revenue, gross margin, store performance by region, and product category breakdowns" />
+            <figcaption>The executive sales performance dashboard</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
+              <dd>Sole author — design, ETL, modelling, dashboard</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
+              <dd>Power BI · Power Query · DAX · Kimball dimensional modelling</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
+              <dd>Curtin University, Perth</dd>
+            </div>
+          </dl>
+
+          <section class="case-block" data-stage="Problem">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The problem</h2>
+            <p>
+              FreshMart sells products to customers across twelve stores, and that activity was scattered across <b class="hl">five disconnected operational files</b>. Nobody could answer a question as basic as <strong>which regions and categories actually drive profit</strong> without manually stitching spreadsheets together — and the raw data was not clean enough to trust if they had.
+            </p>
+          </section>
+
+          <section class="case-block" data-stage="Data">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
+            <p>Five raw CSV extracts, modelled into a <b class="hl">single star schema</b>:</p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <ul class="icon-list">
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18l2-1.5L10 21l2-1.5L14 21l2-1.5L18 21V3l-2 1.5L14 3l-2 1.5L10 3 8 4.5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
+                <span><strong>Sales</strong> — <b class="hl">17,697</b> transaction lines, <b class="hl">the fact table at the centre</b></span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+                <span><strong>Customer</strong> — demographics, loyalty tier, postcode, membership date</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+                <span><strong>Product</strong> — <b class="hl">60</b> products with brand, category, subcategory, unit cost</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v10h16V10"/><path d="M2 10l2-6h16l2 6z"/><path d="M10 20v-6h4v6"/></svg></span>
+                <span><strong>Store</strong> — <b class="hl">12</b> stores across four regions, with format and floor area</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 12 22l-9-9V4h9z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
+                <span><strong>Promotion</strong> — <b class="hl">21</b> promotions with type, dates, and discount rate</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+                <span><strong>Date</strong> — a generated calendar dimension for time intelligence</span>
+              </li>
+            </ul>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v5M12 16v5M4.5 12h5M14.5 12h5"/><path d="M6.6 6.6 9 9M15 15l2.4 2.4M17.4 6.6 15 9M9 15l-2.4 2.4"/></svg></span>Cleaning it first</h2>
+            <p>
+              Every source table was <b class="hl">audited in Power Query before it went anywhere near the model</b>. The issues were real, not hypothetical:
+            </p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <ul>
+              <li>Duplicate customer records sharing a CustomerID with slightly different membership dates — <b class="hl">removed by CustomerID</b></li>
+              <li>Product categories spelled inconsistently across records (<strong>dairy</strong>, <strong>Diary</strong>, <strong>bakery</strong>) — <b class="hl">standardised via value replacement</b></li>
+              <li><strong>93 sales rows referencing customer C9999</strong>, an ID matching no customer — <b class="hl">mapped to "Not Applicable" in a clean column rather than <b class="hl">silently dropped</b></b></li>
+              <li>An <strong>N/A</strong> promotion type on the no-promotion record — <b class="hl">relabelled</b>, with blank dates kept null to preserve the date type</li>
+            </ul>
+            <div id="fm-clean" class="cl" aria-label="What the cleaning changed"></div>
+
+            <p>
+              Dropping the <b class="hl">93</b> orphaned rows would have <b class="hl">quietly understated revenue</b>. Mapping them <b class="hl">keeps the money in the totals while making the gap visible</b>.
+            </p>
+            </details>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M6.6 6.6 10 10M17.4 6.6 14 10M6.6 17.4 10 14M17.4 17.4 14 14"/></svg></span>How it was modelled</h2>
+            <p>
+              The warehouse follows <b class="hl">Kimball's four-stage method</b>. <strong>Business process:</strong> retail sales. <strong>Grain:</strong> <b class="hl">one row per product, per customer, per store, per date, per promotion</b> — the most detailed level available, so no future analytical question is closed off. <strong>Dimensions:</strong> Product, Customer, Store, Promotion, Date. <strong>Facts:</strong> QuantitySold, UnitPrice, DiscountAmount, COGS.
+            </p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <p>
+              Facts were classified deliberately: QuantitySold, DiscountAmount and COGS are additive; UnitPrice is non-additive and used only inside calculations, <b class="hl">never summed</b>. Getting that distinction wrong is how dashboards end up reporting a nonsense "total unit price".
+            </p>
+            <figure class="case-diagram"><svg viewBox="0 0 560 262" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link " d="M96 56L216 108"/><path class="dg-link " d="M280 56L280 108"/><path class="dg-link " d="M464 56L344 108"/><path class="dg-link " d="M150 206L235 152"/><path class="dg-link " d="M410 206L326 152"/><g class=""><rect x="44" y="24" width="104" height="32" rx="5"/><text x="96" y="44" class="dg-t" text-anchor="middle">Customer</text></g><g class=""><rect x="228" y="24" width="104" height="32" rx="5"/><text x="280" y="44" class="dg-t" text-anchor="middle">Product</text></g><g class=""><rect x="412" y="24" width="104" height="32" rx="5"/><text x="464" y="44" class="dg-t" text-anchor="middle">Store</text></g><g class=""><rect x="98" y="206" width="104" height="32" rx="5"/><text x="150" y="226" class="dg-t" text-anchor="middle">Promotion</text></g><g class=""><rect x="358" y="206" width="104" height="32" rx="5"/><text x="410" y="226" class="dg-t" text-anchor="middle">Date</text></g><g class="dg-fact"><rect x="214" y="108" width="132" height="44" rx="5"/><text x="280" y="127" class="dg-t" text-anchor="middle">Sales</text><text x="280" y="141" class="dg-s" text-anchor="middle">17,697 rows</text></g></svg><figcaption>One fact table at the centre, five dimensions around it. The grain is one row per product, per customer, per store, per date, per promotion.</figcaption></figure>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Result" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the dashboard</h2>
+            <p>
+              The Power BI report, <b class="hl">rebuilt to run in your browser</b>. All <b class="hl">17,697</b> transaction lines are loaded from the same five source CSVs, and every figure below is <b class="hl">calculated here rather than typed in</b>. Use the slicers, or <strong>click any bar to cross-filter the whole report</strong> — the same way a Power BI visual behaves. With nothing selected the KPI row reconciles with the published dashboard to the dollar.
+            </p>
+
+            <div id="fm-dash" class="fmd" role="region" aria-label="Interactive FreshMart sales dashboard"></div>
+
+            <p class="fm-note">
+              <b class="hl">No Power BI licence, account, or server involved</b>. The whole report is <b class="hl">plain JavaScript</b> reading a <b class="hl">17</b>,697-row table, so it keeps working for anyone who opens the page.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the dashboard shows</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number"><b class="hl">01</b></span>
+                <p><strong>Headline KPIs</strong> — total revenue, gross profit, and gross margin percentage, so <b class="hl">profitability is visible next to volume</b> rather than buried behind it.</p>
+            <details class="case-more">
+              <summary>Read more</summary>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">02</b></span>
+                <p><strong>Store revenue by region</strong> across South, West, North and East, exposing which regions carry the chain and which lag.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>Revenue by category and subcategory</strong>, identifying what actually drives sales versus what merely takes up shelf space.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">04</b></span>
+                <p><strong>Demand patterns by day of week and by month</strong>, the view that informs staffing and stock decisions.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">05</b></span>
+                <p><strong>This year versus the same period last year</strong>, built with DAX time intelligence so growth is measured against a <b class="hl">fair comparison rather than a raw total</b>.</p>
+              </li>
+            </ul>
+            </details>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.8 2.8L16.5 9.5"/></svg></span>What this demonstrates</h2>
+            <ul>
+              <li>Running a full BI pipeline <b class="hl">end to end</b>: design, then clean, then model, then analyse</li>
+              <li>Applying a <b class="hl">recognised industry method</b> rather than ad-hoc design</li>
+              <li>Auditing data quality and <b class="hl">documenting every cleaning decision</b> and its justification</li>
+              <li>Reasoning about <b class="hl">grain and fact additivity</b> — the choices that make a warehouse reusable</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/freshmart-data-warehouse" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+          </section>
+
+          <a class="next-project" href="football-database.html">
+            <span class="np-text">
+              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
+              <span class="np-eyebrow">03 / Sport · Group project</span>
+              <span class="np-title">Football club database</span>
+              <span class="np-blurb">A relational database for football club management, designed from business rules up.</span>
+            </span>
+            <img class="np-shot" src="images/football-erd.webp" width="1114" height="696" alt="" loading="lazy" decoding="async" />
+          </a>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <div class="sf-top">
+          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <nav class="sf-links" aria-label="Footer">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+        <div class="sf-bottom">
+          <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+          <span>Last updated October 2026</span>
+          <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
+          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+    <script src="chart-hover.js"></script>
+    <script src="freshmart-data.js"></script>
+    <script src="dash-interactions.js"></script>
+    <script src="freshmart-demo.js"></script>
+    <script src="freshmart-dashboard.js"></script>
+  </body>
+</html>

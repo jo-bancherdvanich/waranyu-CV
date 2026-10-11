@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          for f in *.js; do
+            echo "checking $f"
+            node --check "$f"
+          done
+      - name: Verify every page has a title and stylesheet
+        run: |
+          test -f index.html
+          for f in *.html; do
+            grep -q '<title>' "$f" || { echo "$f: no <title>"; exit 1; }
+            grep -q 'site.css' "$f" || { echo "$f: no stylesheet"; exit 1; }
+            echo "ok $f"
+          done
+      - name: Verify internal links and images resolve
+        run: |
+          fail=0
+          for f in *.html; do
+            for t in $(grep -o 'href="[^"#:]*\.\(html\|pdf\)"' "$f" | sed 's/href="//;s/"//' | sort -u); do
+              [ -f "$t" ] || { echo "$f -> missing $t"; fail=1; }
+            done
+            for t in $(grep -o 'src="[^"#:]*\.\(png\|jpg\|svg\|js\)"' "$f" | sed 's/src="//;s/"//' | sort -u); do
+              [ -f "$t" ] || { echo "$f -> missing $t"; fail=1; }
+            done
+          done
+          [ "$fail" -eq 0 ] && echo "all internal links and assets resolve"
+          exit $fail
+      - name: Verify CSS braces balance
+        run: |
+          open=$(cat site.css components.css | grep -o '{' | wc -l)
+          close=$(cat site.css components.css | grep -o '}' | wc -l)
+          echo "$open open / $close close"
+          [ "$open" -eq "$close" ]

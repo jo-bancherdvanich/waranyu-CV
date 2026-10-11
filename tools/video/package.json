@@ -1,0 +1,13 @@
+{
+  "name": "renewable-video",
+  "private": true,
+  "description": "Builds the short renewable-transition video shown on renewable.html",
+  "dependencies": {
+    "@fontsource/dm-mono": "5",
+    "@fontsource/space-grotesk": "5",
+    "playwright-core": "*",
+    "three": "0.186.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}

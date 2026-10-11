@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Model test bench</title>
+<style>html, body { margin: 0; background: #000; } canvas { display: block; }</style>
+<script type="importmap">
+{ "imports": {
+  "three": "../node_modules/three/build/three.module.js",
+  "three/addons/": "../node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="c" width="960" height="600"></canvas>
+<script type="module">
+/* Test bench: loads one model by name (?model=coal-plant), lights it like
+ * the studio scene, and exposes window.shot(angle) for close-up photos. */
+import * as THREE from "three";
+import { Sky } from "three/addons/objects/Sky.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { GTAOPass } from "three/addons/postprocessing/GTAOPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { grain, canvasTex, mulberry32 } from "./kit.js";
+
+const q = new URLSearchParams(location.search);
+const name = q.get("model");
+const mod = await import(`./${name}.js`);
+const built = mod.build();
+
+const canvas = document.getElementById("c");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(960, 600, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.62;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
+
+const scene = new THREE.Scene();
+const sky = new Sky(); sky.scale.setScalar(5000);
+const sunDir = new THREE.Vector3(-260, 420, 320).normalize();
+Object.assign(sky.material.uniforms.turbidity, { value: 5 }); sky.material.uniforms.rayleigh.value = 1.4;
+sky.material.uniforms.sunPosition.value.copy(sunDir); scene.add(sky);
+const pm = new THREE.PMREMGenerator(renderer), es = new THREE.Scene(); const s2 = new Sky(); s2.scale.setScalar(5000);
+s2.material.uniforms.sunPosition.value.copy(sunDir); es.add(s2);
+scene.environment = pm.fromScene(es).texture; scene.environmentIntensity = 0.18;
+
+const sun = new THREE.DirectionalLight(0xfff0dc, 2.3);
+sun.position.copy(sunDir).multiplyScalar(500); sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096);
+Object.assign(sun.shadow.camera, { left: -220, right: 220, top: 220, bottom: -220, near: 10, far: 1500 });
+sun.shadow.bias = -0.0003; sun.shadow.normalBias = 0.3;
+scene.add(sun, new THREE.HemisphereLight(0xcfe0f2, 0x8a7a62, 0.4));
+
+const r = mulberry32(5);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(1200, 1200).rotateX(-Math.PI / 2),
+  new THREE.MeshStandardMaterial({ color: 0x9a948b, roughness: 1, map: canvasTex(256, 256, (c, w, h) => grain(c, w, h, "#cfcac2", 40, r), 30) }));
+ground.receiveShadow = true; scene.add(ground);
+scene.add(built.group);
+
+const camera = new THREE.PerspectiveCamera(36, 960 / 600, 1, 5000);
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const ao = new GTAOPass(scene, camera, 960, 600); ao.blendIntensity = 0.9;
+ao.updateGtaoMaterial({ radius: 4, distanceExponent: 1.4, thickness: 3, scale: 1 });
+composer.addPass(ao); composer.addPass(new OutputPass());
+
+const box = new THREE.Box3().setFromObject(built.group), c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+const R = Math.max(size.x, size.z) * 0.95 + size.y * 0.5;
+const views = {
+  front: [0, 0.32, 1.0], left: [-1, 0.35, 0.35], back: [0.4, 0.45, -1], high: [0.6, 1.1, 0.8],
+  close: [0.35, 0.18, 0.55], detail: [-0.3, 0.1, 0.42],
+};
+window.shot = (v, t = 2) => {
+  const d = views[v];
+  if (built.pose) built.pose(t);
+  camera.position.set(c.x + d[0] * R, c.y + d[1] * R, c.z + d[2] * R);
+  camera.lookAt(c.x, c.y * (v === "close" || v === "detail" ? 0.7 : 0.85), c.z);
+  composer.render();
+};
+window.ready = true;
+</script>
+</body>
+</html>

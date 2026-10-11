@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="description"
+      content="WeatherWise — a Python weather advisor combining the OpenWeatherMap API, Matplotlib charts, and natural-language questions, by Waranyu Bancherdvanich."
+    />
+    <title>WeatherWise | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         the page is readable before they arrive -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="components.css" />
+    <!-- The blurred screenshot behind the title is the largest thing on first
+         paint; fetch it now rather than after styles.css is parsed -->
+    <link rel="preload" as="image" href="images/weatherwise-demo.webp" fetchpriority="high" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="canonical" href="https://waranyu-cv.vercel.app/weatherwise.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Waranyu Bancherdvanich" />
+    <meta property="og:title" content="WeatherWise | Waranyu Bancherdvanich" />
+    <meta property="og:description" content="WeatherWise — a Python weather advisor combining the OpenWeatherMap API, Matplotlib charts, and natural-language questions, by Waranyu Bancherdvanich." />
+    <meta property="og:url" content="https://waranyu-cv.vercel.app/weatherwise.html" />
+    <meta property="og:image" content="https://waranyu-cv.vercel.app/images/weatherwise-demo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WeatherWise | Waranyu Bancherdvanich" />
+    <meta name="twitter:description" content="WeatherWise — a Python weather advisor combining the OpenWeatherMap API, Matplotlib charts, and natural-language questions, by Waranyu Bancherdvanich." />
+    <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/weatherwise-demo.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
+        <div class="topbar-right">
+          <a class="github-link" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">
+          Repository <span aria-hidden="true">↗</span>
+        </a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+      </div>
+      </header>
+
+      <main id="main">
+        <article class="case case-weather">
+          <p class="eyebrow">04 / Python</p>
+          <h1>WeatherWise — a weather advisor you can just ask</h1>
+          <p class="lede">
+            Live weather data, charts, and rule-based advice wrapped in an interface that answers plain-language questions like "should I go outside tomorrow?"
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="metrics case-metrics" aria-label="Project at a glance">
+            <div><span class="metric-number">5-day</span><span>forecast built from<br />3-hourly API readings</span></div>
+            <div><span class="metric-number">Live</span><span>OpenWeatherMap data<br />cached to avoid repeat calls</span></div>
+            <div><span class="metric-number">Plain</span><span>English questions<br />parsed and answered</span></div>
+          </div>
+
+          <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">OpenWeatherMap API</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Response cache</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Matplotlib and ipywidgets</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Plain-language advice</span></li></ol>
+
+          <figure class="case-shot">
+            <img width="587" height="724" src="images/weatherwise-demo.webp" alt="WeatherWise notebook interface showing a temperature forecast chart and interactive controls" />
+            <figcaption>The interactive notebook interface and forecast chart</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
+              <dd>Built on a provided starter template — visualisations, caching, forecast indexing and interface are my own</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
+              <dd>Python · OpenWeatherMap API · Matplotlib · ipywidgets</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
+              <dd>Curtin University, Perth</dd>
+            </div>
+          </dl>
+
+          <section class="case-block" data-stage="Problem">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 1.9V17h6v-1.5c0-.7.3-1.4.8-1.9A6 6 0 0 0 12 3z"/><path d="M9.5 20h5"/></svg></span>The idea</h2>
+            <p>
+              Weather apps answer the question they were designed for, <b class="hl">not the one you actually have</b>. You don't want a wall of numbers — you want to know whether tomorrow is <b class="hl">worth going outside for</b>. WeatherWise takes live data and turns it into that answer, through charts, rule-based advice, and questions typed in ordinary English.
+            </p>
+          </section>
+
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V20l-4 1.5V12.5z"/></svg></span>How it works</h2>
+            <p>A straightforward <strong>data → analysis → output</strong> pipeline:</p>
+            <details class="case-more">
+              <summary>Read more</summary>
+            <ul class="icon-list">
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 15.5a4 4 0 0 1 .9-7.9 5.5 5.5 0 0 1 10.5 1.6 3.5 3.5 0 0 1 .3 6.3"/><path d="M12 11v8M9 16l3 3 3-3"/></svg></span>
+                <span><strong>Retrieve</strong> — <b class="hl">one call</b> to OpenWeatherMap's 5-day forecast endpoint, which returns readings in <b class="hl">3-hour blocks</b>; the <b class="hl">nearest block stands in for current conditions</b></span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V20l-4 1.5V12.5z"/></svg></span>
+                <span><strong>Process</strong> — group those 3-hourly readings by date into <b class="hl">daily temperature and rainfall summaries</b></span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 16l5-5 3 3 7-8"/><circle cx="9" cy="11" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1.3" fill="currentColor" stroke="none"/></svg></span>
+                <span><strong>Visualise</strong> — chart temperature and precipitation trends with Matplotlib</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 1.9V17h6v-1.5c0-.7.3-1.4.8-1.9A6 6 0 0 0 12 3z"/><path d="M9.5 20h5"/></svg></span>
+                <span><strong>Advise</strong> — apply <b class="hl">rule-based logic</b> to turn the numbers into an actual recommendation</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10h-8l-4 4v-4H4z"/><path d="M8 9h8M8 12h5"/></svg></span>
+                <span><strong>Converse</strong> — parse <b class="hl">natural-language questions</b> and answer them from the same processed data</span>
+              </li>
+            </ul>
+            <figure class="case-diagram"><svg viewBox="0 0 600 196" role="img" aria-label="Pipeline diagram. The OpenWeather API returns readings in three-hourly blocks; those blocks are aggregated into a daily summary; the daily summary then branches into three outputs — a chart, rule-based advice, and a plain-English answer." fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link" d="M124 98H150"/><path class="dg-arrow" d="M144 93l6 5-6 5"/><rect x="158" y="81" width="13" height="14" rx="2" opacity=".7"/><rect x="175" y="81" width="13" height="14" rx="2" opacity=".7"/><rect x="192" y="81" width="13" height="14" rx="2" opacity=".7"/><rect x="209" y="81" width="13" height="14" rx="2" opacity=".7"/><rect x="158" y="101" width="13" height="14" rx="2" opacity=".7"/><rect x="175" y="101" width="13" height="14" rx="2" opacity=".7"/><rect x="192" y="101" width="13" height="14" rx="2" opacity=".7"/><rect x="209" y="101" width="13" height="14" rx="2" opacity=".7"/><text x="190" y="132" class="dg-s" text-anchor="middle">3-hourly blocks</text><path class="dg-link" d="M230 98H256"/><path class="dg-arrow" d="M250 93l6 5-6 5"/><rect class="dg-bar" x="264" y="85" width="13" height="30" rx="2"/><rect class="dg-bar" x="281" y="75" width="13" height="40" rx="2"/><rect class="dg-bar" x="298" y="91" width="13" height="24" rx="2"/><rect class="dg-bar" x="315" y="69" width="13" height="46" rx="2"/><rect class="dg-bar" x="332" y="81" width="13" height="34" rx="2"/><text x="304" y="132" class="dg-s" text-anchor="middle">daily summary</text><path class="dg-link" d="M353 98H392V46H430"/><path class="dg-link" d="M392 98H430"/><path class="dg-link" d="M392 98V150H430"/><path class="dg-arrow" d="M424 41l6 5-6 5"/><path class="dg-arrow" d="M424 93l6 5-6 5"/><path class="dg-arrow" d="M424 145l6 5-6 5"/><g class=""><rect x="12" y="76" width="112" height="44" rx="5"/><text x="68" y="95" class="dg-t" text-anchor="middle">OpenWeather</text><text x="68" y="109" class="dg-s" text-anchor="middle">API</text></g><g class=""><rect x="438" y="30" width="150" height="32" rx="5"/><text x="513" y="50" class="dg-t" text-anchor="middle">Chart</text></g><g class=""><rect x="438" y="82" width="150" height="32" rx="5"/><text x="513" y="102" class="dg-t" text-anchor="middle">Advice</text></g><g class=""><rect x="438" y="134" width="150" height="32" rx="5"/><text x="513" y="154" class="dg-t" text-anchor="middle">Plain-English answer</text></g></svg><figcaption>The API returns three-hour blocks, not days &#8212; eight blocks to a day. Grouping them into daily summaries is the step that makes &#8220;what is tomorrow like?&#8221; answerable &#8212; and counting those blocks wrong is what produced confident, wrong answers.</figcaption></figure>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Result" id="try-it">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>Try it</h2>
+            <p>
+              The notebook's forecast logic, <b class="hl">running here in your browser on live data</b>. Same advice thresholds, same question types — the parser is a <b class="hl">JavaScript port</b> with a stricter match for the city name. No install, no sign-up, no API key.
+            </p>
+
+            <div id="ww-demo" class="ww">
+              <form class="ww-search" role="search">
+                <label class="sr-only" for="ww-city">City</label>
+                <input class="ww-city" id="ww-city" type="text" value="Perth" autocomplete="off" placeholder="Try a city — Perth, Bangkok, Tokyo" />
+                <button class="button primary" type="submit">Get forecast</button>
+              </form>
+
+              <div class="ww-chips">
+                <button type="button" class="ww-chip">Perth</button>
+                <button type="button" class="ww-chip">Bangkok</button>
+                <button type="button" class="ww-chip">Reykjavik</button>
+                <button type="button" class="ww-chip">Singapore</button>
+              </div>
+
+              <p class="ww-status" role="status" aria-live="polite"></p>
+
+              <div class="ww-panel" hidden>
+                <div class="ww-card">
+                  <div class="ww-card-head">
+                    <h3 class="ww-place"></h3>
+                    <span class="ww-card-sub">Live conditions</span>
+                  </div>
+                  <div class="ww-now">
+                    <span class="ww-temp"></span>
+                    <span class="ww-desc"></span>
+                  </div>
+                  <div class="ww-tiles">
+                    <div class="ww-tile"><span class="ww-tile-label">High</span><strong class="ww-high"></strong></div>
+                    <div class="ww-tile"><span class="ww-tile-label">Low</span><strong class="ww-low"></strong></div>
+                    <div class="ww-tile"><span class="ww-tile-label">Humidity</span><strong class="ww-humidity"></strong></div>
+                  </div>
+                  <p class="ww-wind"></p>
+                </div>
+
+                <p class="ww-advice"></p>
+
+                <div class="ww-chartcard">
+                  <div class="ww-card-head">
+                    <h3 class="ww-chart-title">Five-day outlook</h3>
+                    <div class="ww-tabs" role="tablist" aria-label="Chart type">
+                      <button type="button" class="ww-tab is-active" data-view="temp" role="tab" aria-selected="true">Temperature</button>
+                      <button type="button" class="ww-tab" data-view="rain" role="tab" aria-selected="false">Rainfall</button>
+                    </div>
+                  </div>
+                  <div class="ww-chart"></div>
+                  <p class="ww-legend"></p>
+                </div>
+
+                <form class="ww-qform">
+                  <label class="sr-only" for="ww-question">Ask a weather question</label>
+                  <input class="ww-question" id="ww-question" type="text" autocomplete="off" placeholder="Will it rain tomorrow? How warm is it today?" />
+                  <button class="button text-button" type="submit">Ask</button>
+                </form>
+                <p class="ww-answer" hidden></p>
+              </div>
+
+              <p class="ww-credit">Live data from <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>. The Python original uses OpenWeatherMap.</p>
+            </div>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/></svg></span>What I contributed</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number"><b class="hl">01</b></span>
+                <p><strong>The temperature and precipitation visualisations</strong> — the charts that make a five-day forecast <b class="hl">readable at a glance instead of as a table</b>.</p>
+            <details class="case-more">
+              <summary>Read more</summary>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">02</b></span>
+                <p><strong>Data-caching logic</strong> that stores API responses and <b class="hl">avoids repeated calls</b>. Public weather APIs are <b class="hl">rate-limited</b>, so re-fetching the same forecast on every interaction will eventually break the app.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>Fixed the "tomorrow" forecast indexing.</strong> The API returns <b class="hl">3-hour blocks</b>, not days, so the "tomorrow" lookup was <b class="hl">reading the first eight blocks</b> — today — and answering confidently with the wrong day. Stepping a full day of eight blocks forward fixed it.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">04</b></span>
+                <p><strong>The interactive ipywidgets interface</strong>, turning a notebook of function calls into <b class="hl">something a non-technical person can use</b>.</p>
+              </li>
+            </ul>
+            </details>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1" fill="currentColor" stroke="none"/></svg></span>Why it's here</h2>
+            <p>
+              This one is less about statistics and more about the surrounding craft: <b class="hl">consuming an external API</b>, reshaping awkwardly-formatted data into the grain you need, <b class="hl">caching sensibly</b>, and building an interface for someone who isn't you. Those problems show up in analytics work constantly.
+            </p>
+          </section>
+
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+          </section>
+
+          <a class="next-project" href="renewable.html">
+            <span class="np-text">
+              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
+              <span class="np-eyebrow">01 / Energy · Academic</span>
+              <span class="np-title">Australia's renewable transition</span>
+              <span class="np-blurb">A dashboard tracking Australia's shift to renewable electricity from 2005 to 2024, and where it lands by 2035.</span>
+            </span>
+            <img class="np-shot" src="images/renewable-dashboard.webp" width="1337" height="752" alt="" loading="lazy" decoding="async" />
+          </a>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <div class="sf-top">
+          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <nav class="sf-links" aria-label="Footer">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+        <div class="sf-bottom">
+          <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+          <span>Last updated October 2026</span>
+          <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
+          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+    <script src="chart-hover.js"></script>
+    <script src="weatherwise-demo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Renewable transition video</title>
+<style>
+  @font-face { font-family: "SG"; src: url("node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+  @font-face { font-family: "SG"; src: url("node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+  @font-face { font-family: "SG"; src: url("node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "DM"; src: url("node_modules/@fontsource/dm-mono/files/dm-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "DM"; src: url("node_modules/@fontsource/dm-mono/files/dm-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+  html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #000; }
+  #stage { position: relative; width: 1280px; height: 720px; }
+  #gl { position: absolute; inset: 0; width: 1280px; height: 720px; }
+  #hud { position: absolute; inset: 0; width: 1280px; height: 720px; pointer-events: none; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="stage">
+  <canvas id="gl" width="1280" height="720"></canvas>
+  <canvas id="hud" width="1280" height="720"></canvas>
+</div>
+<script type="module" src="scene.js"></script>
+</body>
+</html>
