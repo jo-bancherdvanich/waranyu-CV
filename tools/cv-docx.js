@@ -107,7 +107,7 @@ const children = [
     bullet("Built a 20-year Excel break-even model with best, base and worst-case scenarios."),
     bullet("Ran a ±20% sensitivity analysis: audience growth, not build cost, drives payback."),
     bullet("Benchmarked against 15+ case studies (GAAGO, Solidsport, NFL on Prime Video)."),
-    bullet("Pitched the financial case to the client and an industry panel; built a React prototype.")],
+    bullet("Built a 3D venue camera render and a streaming web prototype as client deliverables.")],
     [run("Jul 2026 – Nov 2026", { font: MONO, size: 15, color: MUTED })], 2700),
   gap(),
   item([role("Digital Marketing & Data Analytics Intern"), org("Like Me Co., Ltd. – Bangkok, Thailand"),
