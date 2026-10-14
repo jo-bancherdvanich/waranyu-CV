@@ -111,7 +111,7 @@ const children = [
     bullet("Benchmarked growth and audience-retention assumptions against 15+ public case studies, including Finnish floorball streaming, GAAGO, Solidsport and the NFL’s move to Prime Video, alongside the team’s evaluation of three ownership options and four camera and analysis providers against weighted criteria."),
     bullet("Turned the analysis into board-ready slides and charts, revised after project director feedback, and presented the financial section at the final pitch to the client and an industry panel."),
     bullet("Built an interactive React prototype of the recommended streaming platform (family, coach and admin views) and a 3D render of the venue’s camera layout.")],
-    [run("2026 – Oct 2026", { font: MONO, size: 15, color: MUTED })], 2700),
+    [run("Jul 2026 – Nov 2026", { font: MONO, size: 15, color: MUTED })], 2700),
   gap(),
   item([role("Digital Marketing & Data Analytics Intern"), org("Like Me Co., Ltd. – Bangkok, Thailand"),
     bullet("Supported digital marketing campaigns through social media content, product research, and competitor analysis."),
