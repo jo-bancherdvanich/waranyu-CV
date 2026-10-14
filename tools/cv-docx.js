@@ -123,11 +123,6 @@ const children = [
     bullet("Managed multiple tasks under pressure while maintaining accuracy with orders, payments, and customer requests.")],
     [run("Nov 2023 – Present", { font: MONO, size: 15, color: MUTED })], 2700),
 
-  h2("Achievements"),
-  item([role("Best Business Case Pitch — “Branding is All About Counting”"), org("NSO Data Camp, Thailand"),
-    body("Selected for Best Business Case Pitch after presenting a data-driven business model using tourism statistics, customer segmentation, and branding strategy.")],
-    [run("2023", { font: MONO, size: 15, color: MUTED })], 1200),
-
   h2("Professional development"),
   item([role("Google Data Analytics Certificate Courses"), org("Coursera / Google"),
     body("Foundations: Data, Data, Everywhere · Ask Questions to Make Data-Driven Decisions · Prepare Data for Exploration")],
