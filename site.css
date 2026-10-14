@@ -233,7 +233,7 @@ p:last-child { margin-bottom: 0; }
 .contact-links { display: flex; flex-direction: column; gap: .6rem; align-items: flex-start; }
 .contact-link { font-size: 1.25rem; color: var(--ink); text-decoration: underline; text-underline-offset: .2em; text-decoration-color: var(--line-strong); }
 .contact-link:hover { color: var(--accent); text-decoration-color: var(--accent); }
-.contact-link:first-child { font-family: "Fraunces", Georgia, serif; font-size: 1.9rem; }
+.contact-link:first-child { font-family: "Fraunces", Georgia, serif; font-size: clamp(1.35rem, 5.4vw, 1.9rem); max-width: 100%; overflow-wrap: anywhere; }
 
 /* ---- footer -------------------------------------------------------------- */
 .site-footer { padding: 2.4rem 0 3rem; border-top: 1px solid var(--line); margin-top: 2rem; }

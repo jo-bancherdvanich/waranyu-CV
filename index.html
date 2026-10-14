@@ -97,7 +97,8 @@
                 <figure class="mini-chart" data-chart="share"><figcaption>Renewable share of electricity, 2005 to 2024, from the project data</figcaption></figure>
                 <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V8M16 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Electricity data 2005 to 2024</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M5 16l4-3 4 1 6-6"/><circle cx="7" cy="14" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="17" cy="9" r="1.2"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">R linear regression</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Power BI dashboard</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 8-8"/><path d="M16 7h4v4"/><path d="M4 21h16" stroke-dasharray="2 3"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">2035 forecast</span></li></ol>
                 <ul class="project-detail">
-                  <li>Found Australia <b class="hl">falls well short</b> of its <b class="hl">82%-by-2030 target</b> on current trajectory</li>
+                  <li><b class="hl">Forecast in R</b> that Australia reaches only <b class="hl">37.8% by 2030</b> against the <b class="hl">82% target</b>, so the target is unlikely on the current trend</li>
+                  <li><b class="hl">Linked the trend to policy</b>: the share stalled while the Renewable Energy Target was under review, then grew <b class="hl">nearly 5&times; faster</b> after the 2015 target reset</li>
                   <li><b class="hl">Benchmarked</b> against Germany (<b class="hl">54.5%</b>) and New Zealand (<b class="hl">85.5%</b>) to put the gap in context</li>
                 </ul>
                 <p class="project-actions"><a class="project-btn is-primary" href="renewable.html#explore">Try the dashboard <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="renewable.html#film">Watch the one-minute film</a><a class="project-btn" href="renewable.html">Read the case study</a></p>
@@ -113,9 +114,9 @@
                 <figure class="mini-chart" data-chart="revenue"><figcaption>Revenue by month, 2024, summed from the same 17,697 lines the dashboard reads</figcaption></figure>
                 <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">5 source tables</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M8.5 11l2 2 3.5-4"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Power Query audit</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="1.6"/><circle cx="20" cy="12" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="4" cy="12" r="1.6"/><path d="M12 7v2M15 12h2M12 15v2M7 12h2"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Kimball star schema</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14l-8 7 8 7H5"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">DAX measures</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">Executive dashboard</span></li></ol>
                 <ul class="project-detail">
-                  <li><b class="hl">Audited five source tables</b> in Power Query: <b class="hl">removed duplicate customers</b>, <b class="hl">standardised category spelling</b>, and <b class="hl">remapped 93 rows</b> carrying an unmatched customer ID</li>
-                  <li><b class="hl">Built DAX measures</b> for revenue, gross margin, and <b class="hl">year-on-year time intelligence</b></li>
-                  <li><b class="hl">Delivered an executive view</b> of performance by region, category, and day-of-week demand</li>
+                  <li><b class="hl">Cleaned data</b> from five source tables in Power Query, <b class="hl">remapping 93 orphaned sales rows</b> instead of dropping them, so revenue totals stay accurate and the data gap stays visible</li>
+                  <li><b class="hl">Modelled a Kimball star schema</b>, so managers can see which regions and categories drive profit without stitching spreadsheets together</li>
+                  <li><b class="hl">Built DAX measures</b> for revenue, gross margin and <b class="hl">year-on-year time intelligence</b>, so growth is judged like-for-like rather than as a raw total</li>
                 </ul>
                 <p class="project-actions"><a class="project-btn is-primary" href="freshmart.html#explore">Try the dashboard <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="freshmart.html">Read the case study</a></p>
               </div>
@@ -129,8 +130,9 @@
                 <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="16">16</span><span class="kn-label">tables</span></div><div class="kn"><span class="kn-num stat" data-count="9">9</span><span class="kn-label">queries</span></div><div class="kn"><span class="kn-num stat" data-count="18">18</span><span class="kn-label">business rules</span></div></div>
                 <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h6M9 16h6"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">18 business rules</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="5" rx="1"/><rect x="14" y="4" width="7" height="5" rx="1"/><rect x="8.5" y="15" width="7" height="5" rx="1"/><path d="M6.5 9v3h11V9M12 12v3"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">ERD</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">16-table Oracle schema</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">9 analytical queries</span></li></ol>
                 <ul class="project-detail">
-                  <li><b class="hl">Drew the ERD</b>, then <b class="hl">built and tested</b> the Oracle SQL tables for <b class="hl">relational integrity</b></li>
-                  <li>Used <b class="hl">joins, aggregation, subqueries, HAVING and LEFT JOINs</b> to answer each question</li>
+                  <li><b class="hl">Translated the business rules into an ERD</b> and a normalised Oracle schema, so questions like the season ladder are answered without duplicated data</li>
+                  <li><b class="hl">Created a data dictionary</b> and inserted a full sample season of <b class="hl">56 games and 154 goals</b>, so every query is tested on realistic data</li>
+                  <li>Used <b class="hl">joins, subqueries and HAVING</b>, with a <b class="hl">LEFT JOIN</b> so goalless games keep goals-per-ground averages accurate</li>
                 </ul>
                 <p class="project-actions"><a class="project-btn is-primary" href="football-database.html#run-it">Run the queries <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="football-database.html">Read the case study</a></p>
               </div>
@@ -177,6 +179,29 @@
               </div>
             </article>
             <article class="timeline-item">
+              <div class="timeline-date">Capstone project</div>
+              <div>
+                <p class="role">Building and Benchmarking a Domain-Specialist AI Model (LocoLLM)</p>
+                <p class="company">Quality and Documentation Manager &middot; Client: LocoLabo, Curtin Business School</p>
+                <p class="description">Testing the client&rsquo;s &ldquo;small model, plug-in expert&rdquo; idea: a small AI model with an Australian privacy-law expert adapter, built with free tools.</p>
+                <ul class="exp-points">
+                  <li>Tested the base AI model across 15 business areas and identified Australian privacy law as its weakest, giving the client clear evidence to approve the project focus.</li>
+                  <li>Trained a privacy-law expert adapter that reached 81% accuracy on a sealed 170-question test, using only free tools, proving the client&rsquo;s idea works.</li>
+                  <li>Used LoRA fine-tuning on the model&rsquo;s MLP layers to increase accuracy from 38% to 81%, the project&rsquo;s biggest gain and now the core of the recipe recommended to the client.</li>
+                  <li>Delivered a 6-step handover recipe and client presentation, so the next team can build an adapter for a new subject much faster.</li>
+                </ul>
+                <ul class="tags" aria-label="Skills used"><li>LoRA fine-tuning</li><li>Model evaluation</li><li>Benchmarking</li><li>Documentation</li></ul>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">Nov 2023 &mdash; Present</div>
+              <div>
+                <p class="role">Supervisor</p>
+                <p class="company">Six Senses Gourmet, Leederville, Western Australia</p>
+                <p class="description">Customer service in a fast-paced restaurant: taking orders, serving food and drinks, bartending and processing bills, while training new staff on service standards, ordering and payment processes.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
               <div class="timeline-date">Nov 2022 &mdash; Jan 2023</div>
               <div>
                 <p class="role">Digital Marketing and Data Analytics Intern</p>
@@ -219,7 +244,7 @@
             <article class="timeline-item">
               <div class="timeline-date">MAY 2026</div>
               <div>
-                <p class="role">Google Data Analytics Certificate — in progress</p>
+                <p class="role">Google Data Analytics Certificate courses</p>
                 <p class="company">Coursera and Google</p>
                                 <ul class="tags" aria-label="Topics covered"><li>Data foundations</li><li>Asking the right questions</li><li>Data preparation</li></ul>
               </div>
