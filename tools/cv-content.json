@@ -136,9 +136,8 @@
           },
           "bullets": [
             "Translated 18 business rules into an ERD and a normalised 16-table Oracle schema, so questions like the season ladder are answered without duplicated data.",
-            "Wrote 9 analytical SQL queries using joins, subqueries and HAVING, answering real organiser questions such as the ladder, top scorers and goals per ground.",
-            "Used a LEFT JOIN to keep goalless games in the averages, avoiding the inflated goals-per-ground figures an inner join would have produced.",
-            "Created a data dictionary and inserted a full sample season of 56 games and 154 goals, so the schema is documented for others and every query is tested on realistic data."
+            "Created a data dictionary and inserted a full sample season of 56 games and 154 goals, so the schema is documented for others and every query is tested on realistic data.",
+            "Wrote 9 analytical SQL queries using joins, subqueries and HAVING to answer organiser questions such as the ladder, with a LEFT JOIN so goalless games keep goals-per-ground averages accurate."
           ]
         }
       ]
