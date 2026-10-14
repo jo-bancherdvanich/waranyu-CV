@@ -54,18 +54,16 @@ const header = new Table({
   ] })],
 });
 
-const skills = new Table({
-  width: { size: CONTENT, type: WidthType.DXA }, columnWidths: [CONTENT / 2, CONTENT / 2],
-  rows: [
-    [["Data Analysis and Visualisation", "Skilled in using Power BI, Tableau, Excel, Python, and R to clean, analyse, and present data insights through dashboards and reports."],
-     ["Data Modelling and Database Design", "Knowledge of SQL, ERD design, dimensional modelling, star schema design, and database structure."]],
-    [["Forecasting and Financial Modelling", "Experienced in linear regression, time-series analysis, forecasting and prediction intervals in R, and in break-even, scenario and sensitivity modelling in Excel."],
-     ["Communication and Data Storytelling", "Able to explain data findings clearly through dashboards, reports, and presentations."]],
-  ].map((pair) => new TableRow({ children: pair.map(([t, d]) => cell([
-    new Paragraph({ spacing: { after: 0 }, children: [run(t, { bold: true })] }),
-    new Paragraph({ spacing: { after: 100 }, children: [run(d)] }),
-  ], CONTENT / 2, { margins: { top: 0, bottom: 0, left: 0, right: 220 } })) })),
-});
+const skills = [
+  ["Data Analysis and Visualisation", "Skilled in using Power BI, Tableau, Excel, Python, and R to clean, analyse, and present data insights through dashboards and reports."],
+  ["Data Modelling and Database Design", "Knowledge of SQL, ERD design, dimensional modelling, star schema design, and database structure."],
+  ["Forecasting and Financial Modelling", "Experienced in linear regression, time-series analysis, forecasting and prediction intervals in R, and in break-even, scenario and sensitivity modelling in Excel."],
+  ["Communication and Data Storytelling", "Able to explain data findings clearly through dashboards, reports, and presentations."],
+].flatMap(([t, d]) => [
+  new Paragraph({ spacing: { after: 0 }, children: [run(t, { bold: true })] }),
+  new Paragraph({ spacing: { after: 90 }, children: [run(d)] }),
+]);
+
 
 const children = [
   header,
@@ -80,7 +78,7 @@ const children = [
   item([role("Bachelor of Science and Technology"), org("Thammasat University, Thailand · Major: Statistics · Minor: Finance")], [run("2019 – 2023", { font: MONO, size: 15, color: MUTED })]),
 
   h2("Key skills"),
-  skills,
+  ...skills,
 
   h2("Academic projects"),
   item([role("FreshMart Sales Performance Dashboard"), stack("Power BI · Power Query · DAX · Data Modelling"),
@@ -132,7 +130,7 @@ const children = [
 
   h2("Professional development"),
   item([role("Google Data Analytics Certificate Courses"), org("Coursera / Google"),
-    bullet("Foundations: Data, Data, Everywhere"), bullet("Ask Questions to Make Data-Driven Decisions"), bullet("Prepare Data for Exploration")],
+    body("Foundations: Data, Data, Everywhere · Ask Questions to Make Data-Driven Decisions · Prepare Data for Exploration")],
     [run("Completed May 2026", { font: MONO, size: 15, color: MUTED })], 2900),
 
 
