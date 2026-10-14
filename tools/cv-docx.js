@@ -72,10 +72,10 @@ const children = [
   new Paragraph({ spacing: { before: 80, after: 0 }, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: INK, space: 1 } }, children: [] }),
 
   h2("Professional summary"),
-  body("Master of Information Systems and Technology student at Curtin University (CWA 83.57), specialising in data analytics and visualisation, with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027."),
+  body("Master of Information Systems and Technology student at Curtin University, specialising in data analytics and visualisation, with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027."),
 
   h2("Education and training"),
-  item([role("Master of Information Systems and Technology"), org("Curtin University, Western Australia · Specialisation: Data Analytics and Visualisation · CWA: 83.57")], [run("2025 – Present", { font: MONO, size: 15, color: MUTED })]),
+  item([role("Master of Information Systems and Technology"), org("Curtin University, Western Australia · Specialisation: Data Analytics and Visualisation")], [run("2025 – Present", { font: MONO, size: 15, color: MUTED })]),
   gap(),
   item([role("Bachelor of Science and Technology"), org("Thammasat University, Thailand · Major: Statistics · Minor: Finance")], [run("2019 – 2023", { font: MONO, size: 15, color: MUTED })]),
 
