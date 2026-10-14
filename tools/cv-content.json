@@ -116,15 +116,15 @@
         },
         {
           "title": "Renewable Electricity Transition Dashboard",
-          "org": "Power BI, Power Query, DAX, R, Linear Regression",
+          "org": "Power BI, Power Query, DAX, R, Linear Regression, Policy Analysis",
           "link": {
             "text": "See the project",
             "url": "https://waranyu-cv.vercel.app/renewable.html"
           },
           "bullets": [
-            "Reconciled electricity data from 4 national agencies into a galaxy schema with GWh-to-TWh conversion, so country totals cannot be double-counted.",
-            "Built a Power BI dashboard tracking Australia’s renewable share from 9% to 35% (2005–2024), benchmarked against Germany, New Zealand and China.",
-            "Forecast to 2035 with R linear regression (R² 0.85, 95% prediction interval), quantifying a 44.6% share against the 82% target for decision-makers."
+            "Reconciled data from 4 national agencies into a Power BI galaxy schema, tracking Australia’s renewable share from 9% to 35% (2005–2024) against Germany, New Zealand and China.",
+            "Linked the trend to policy: share stalled at 13–15% during the 2014 investment freeze over the Renewable Energy Target review, then grew 2.5 points a year after the 2015 target reset, nearly 5× the earlier pace.",
+            "Forecast with R linear regression (R² 0.85) that Australia reaches only 37.8% by 2030 and 44.6% by 2035; even the 95% upper bound for 2030 is 46.6%, so the 82% target is unlikely on the current trend."
           ]
         },
         {
