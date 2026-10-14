@@ -122,9 +122,9 @@
             "url": "https://waranyu-cv.vercel.app/renewable.html"
           },
           "bullets": [
-            "Reconciled data from 4 national agencies into a Power BI galaxy schema, tracking Australia’s renewable share from 9% to 35% (2005–2024) against Germany, New Zealand and China.",
-            "Linked the trend to policy: share stalled at 13–15% during the 2014 investment freeze over the Renewable Energy Target review, then grew 2.5 points a year after the 2015 target reset, nearly 5× the earlier pace.",
-            "Forecast with R linear regression (R² 0.85) that Australia reaches only 37.8% by 2030 and 44.6% by 2035; even the 95% upper bound for 2030 is 46.6%, so the 82% target is unlikely on the current trend."
+            "Reconciled data from national energy agencies into a Power BI galaxy schema, showing Australia’s renewable share rising from 9% to 35%, benchmarked against Germany, New Zealand and China.",
+            "Linked the trend to policy: share stalled while the Renewable Energy Target was under review, then grew nearly 5× faster after the 2015 target reset.",
+            "Forecast with R linear regression that Australia reaches only 37.8% renewable share by 2030 against the 82% target, so the target is unlikely on the current trend."
           ]
         },
         {
@@ -138,7 +138,7 @@
             "Translated 18 business rules into an ERD and a normalised 16-table Oracle schema, so questions like the season ladder are answered without duplicated data.",
             "Wrote 9 analytical SQL queries using joins, subqueries and HAVING, answering real organiser questions such as the ladder, top scorers and goals per ground.",
             "Used a LEFT JOIN to keep goalless games in the averages, avoiding the inflated goals-per-ground figures an inner join would have produced.",
-            "Created a data dictionary and inserted a full sample season (8 clubs, 96 players, 56 games, 154 goals), so the schema is documented for others and every query is tested on realistic data."
+            "Created a data dictionary and inserted a full sample season of 56 games and 154 goals, so the schema is documented for others and every query is tested on realistic data."
           ]
         }
       ]
