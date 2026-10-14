@@ -118,7 +118,7 @@ const children = [
     [run("Nov 2022 – Jan 2023", { font: MONO, size: 15, color: MUTED })], 2700),
 
   h2("Additional experience"),
-  item([role("Bartender / Wait Staff"), org("Six Senses Gourmet, Leederville, Western Australia"),
+  item([role("Supervisor"), org("Six Senses Gourmet, Leederville, Western Australia"),
     bullet("Delivered customer service in a fast-paced restaurant environment, including taking orders, serving food and drinks, bartending, and processing bills."),
     bullet("Managed multiple tasks under pressure while maintaining accuracy with orders, payments, and customer requests.")],
     [run("Nov 2023 – Present", { font: MONO, size: 15, color: MUTED })], 2700),
