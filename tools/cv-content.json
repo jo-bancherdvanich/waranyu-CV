@@ -103,43 +103,42 @@
         },
         {
           "title": "FreshMart Sales Performance Dashboard",
-          "org": "Power BI, Power Query, DAX, Data Modelling",
+          "org": "Power BI, Power Query, DAX, Kimball Star Schema",
           "link": {
             "text": "See the project",
             "url": "https://waranyu-cv.vercel.app/freshmart.html"
           },
           "bullets": [
-            "Built a Power BI retail sales dashboard using Power Query, DAX, and star schema modelling to analyse revenue, margin, product performance, and store performance.",
-            "Cleaned and standardised source data, including duplicate removal, category correction, and data type validation.",
-            "Created KPI measures and visual insights to identify sales trends, product/category performance, and district-level performance gaps."
+            "Audited 5 raw operational files in Power Query and remapped 93 orphaned sales rows instead of dropping them, keeping revenue totals accurate and the data gap visible.",
+            "Modelled 17,697 transactions across 12 stores into a Kimball star schema, so managers can see which regions and categories drive profit without stitching spreadsheets together.",
+            "Built DAX measures for revenue, gross margin and year-on-year time intelligence, so growth is judged against a fair like-for-like comparison rather than a raw total."
           ]
         },
         {
           "title": "Renewable Electricity Transition Dashboard",
-          "org": "Power BI, DAX, R, Forecasting",
+          "org": "Power BI, Power Query, DAX, R, Linear Regression",
           "link": {
             "text": "See the project",
             "url": "https://waranyu-cv.vercel.app/renewable.html"
           },
           "bullets": [
-            "Developed a Power BI dashboard to analyse Australia’s renewable electricity transition from 2005–2024 and forecast progress to 2035.",
-            "Cleaned and standardised multi-country electricity data, including energy source mapping and GWh-to-TWh conversion.",
-            "Created DAX measures for renewable share, renewable generation, non-renewable generation, and renewable source mix.",
-            "Used R-based linear regression to forecast renewable generation and renewable share with prediction intervals and model statistics."
+            "Reconciled electricity data from 4 national agencies into a galaxy schema with GWh-to-TWh conversion, so country totals cannot be double-counted.",
+            "Built a Power BI dashboard tracking Australia’s renewable share from 9% to 35% (2005–2024), benchmarked against Germany, New Zealand and China.",
+            "Forecast to 2035 with R linear regression (R² 0.85, 95% prediction interval), quantifying a 44.6% share against the 82% target for decision-makers."
           ]
         },
         {
           "title": "Football Club Database Design and SQL Implementation",
-          "org": "SQL, Oracle, ERD, Database Design",
+          "org": "Group project (3) – Oracle SQL, ERD, Normalisation",
           "link": {
             "text": "See the project",
             "url": "https://waranyu-cv.vercel.app/football-database.html"
           },
           "bullets": [
-            "Designed a relational database model for a football club management system.",
-            "Developed an ERD and business rules to define relationships between key entities.",
-            "Created a logical database schema with clear table structures, relationships, and constraints.",
-            "Built and tested Oracle SQL tables to support accurate data storage and relational integrity."
+            "Translated 18 business rules into an ERD and a normalised 16-table Oracle schema, so questions like the season ladder are answered without duplicated data.",
+            "Wrote 9 analytical SQL queries using joins, subqueries and HAVING, answering real organiser questions such as the ladder, top scorers and goals per ground.",
+            "Used a LEFT JOIN to keep goalless games in the averages, avoiding the inflated goals-per-ground figures an inner join would have produced.",
+            "Revised the finished design after review, removing a many-to-many table and correcting 2 business rules, so the schema matches what the data represents."
           ]
         }
       ]
