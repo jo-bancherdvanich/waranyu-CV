@@ -1,144 +1,69 @@
-// Builds Waranyu-Bancherdvanich-CV.docx from the same content as tools/cv-source.html.
+// Builds the Word CV from tools/cv-content.json, in a plain single-column
+// template: bold name, one contact line, uppercase section headings between
+// rules, bold entry titles with the date on the right.
+// usage: npm install docx && node tools/cv-docx.js Waranyu-Bancherdvanich-CV.docx
 const fs = require("fs");
+const path = require("path");
 const {
-  Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType,
-  BorderStyle, LevelFormat, ExternalHyperlink, TabStopType, HeadingLevel, ShadingType,
+  Document, Packer, Paragraph, TextRun, ExternalHyperlink, AlignmentType,
+  BorderStyle, LevelFormat, TabStopType,
 } = require("docx");
 
-const INK = "1C1B18", MUTED = "5D5A52", ACCENT = "0F6B45", LINE = "D8D2C4";
-const SERIF = "Georgia", SANS = "Calibri", MONO = "Consolas";
-const PAGE_W = 11906, MARGIN = 850, CONTENT = PAGE_W - 2 * MARGIN;   // A4, 15 mm margins
+const C = JSON.parse(fs.readFileSync(path.join(__dirname, "cv-content.json"), "utf8"));
+const FONT = "Calibri", INK = "000000", GREY = "404040", LINK = "1F4E79";
+const PAGE_W = 11906, MARGIN = 900, CONTENT = PAGE_W - 2 * MARGIN;   // A4, about 16 mm margins
+const SZ = 21;                                                        // 10.5 pt
 
-const run = (text, o = {}) => new TextRun({ text, font: SANS, size: 19, color: INK, ...o });
-const link = (text, url, o = {}) => new ExternalHyperlink({ link: url, children: [run(text, { color: ACCENT, underline: {}, ...o })] });
-const noBorder = { top: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" }, bottom: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" }, left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" }, right: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" } };
-const cell = (children, width, o = {}) => new TableCell({ children, width: { size: width, type: WidthType.DXA }, borders: noBorder, margins: { top: 0, bottom: 0, left: 0, right: 0 }, ...o });
+const run = (text, o = {}) => new TextRun({ text, font: FONT, size: SZ, color: INK, ...o });
+const link = (text, url, o = {}) => new ExternalHyperlink({ link: url, children: [run(text, { color: LINK, ...o })] });
+const right = [{ type: TabStopType.RIGHT, position: CONTENT }];
 
-function h2(text) {
-  return new Paragraph({
-    spacing: { before: 260, after: 90 },
-    border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: LINE, space: 2 } },
-    children: [run(text.toUpperCase(), { font: MONO, size: 15, color: ACCENT, characterSpacing: 40 })],
-  });
-}
-function role(text) { return new Paragraph({ spacing: { after: 0 }, children: [run(text, { font: SERIF, size: 21, bold: true })] }); }
-function org(text) { return new Paragraph({ spacing: { after: 40 }, children: [run(text, { color: MUTED })] }); }
-function stack(text) { return new Paragraph({ spacing: { after: 40 }, children: [run(text, { font: MONO, size: 15, color: MUTED })] }); }
-function bullet(text) { return new Paragraph({ numbering: { reference: "bullets", level: 0 }, spacing: { after: 30 }, children: [run(text)] }); }
-function body(text) { return new Paragraph({ spacing: { after: 60 }, children: [run(text)] }); }
+const children = [];
+// name and contact line
+children.push(new Paragraph({ spacing: { after: 40 }, children: [run(C.name, { size: 36, bold: true })] }));
+const contact = [];
+C.contact.forEach((c, i) => {
+  if (i) contact.push(run("  |  ", { color: GREY, size: 18 }));
+  contact.push(c.url ? link(c.text, c.url, { size: 18 }) : run(c.text, { size: 18, color: GREY }));
+});
+children.push(new Paragraph({ spacing: { after: 60 }, children: contact }));
 
-/* an entry: left column of content, right column with the date or link */
-function item(left, right, rightWidth = 2400) {
-  return new Table({
-    width: { size: CONTENT, type: WidthType.DXA }, columnWidths: [CONTENT - rightWidth, rightWidth],
-    rows: [new TableRow({ children: [
-      cell(left, CONTENT - rightWidth),
-      cell([new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { before: 30 }, children: right })], rightWidth),
-    ] })],
-  });
-}
-const gap = (n = 110) => new Paragraph({ spacing: { after: 0, before: 0, line: n, lineRule: "exact" }, children: [] });
-
-const header = new Table({
-  width: { size: CONTENT, type: WidthType.DXA }, columnWidths: [5600, CONTENT - 5600],
-  rows: [new TableRow({ children: [
-    cell([
-      new Paragraph({ spacing: { after: 40 }, children: [run("Waranyu Bancherdvanich", { font: SERIF, size: 46 }), run(".", { font: SERIF, size: 46, color: ACCENT })] }),
-      new Paragraph({ children: [run("Data analyst · Curtin master’s student · ", { size: 21, color: MUTED }), run("Perth", { size: 21, color: ACCENT, italics: true, font: SERIF })] }),
-    ], 5600),
-    cell([
-      new Paragraph({ alignment: AlignmentType.RIGHT, children: [link("jojowaranyu.career@gmail.com", "mailto:jojowaranyu.career@gmail.com", { size: 17 })] }),
-      new Paragraph({ alignment: AlignmentType.RIGHT, children: [link("waranyu-cv.vercel.app", "https://waranyu-cv.vercel.app", { size: 17 }), run(" · ", { size: 17, color: MUTED }), link("linkedin.com/in/waranyu-ban", "https://www.linkedin.com/in/waranyu-ban/", { size: 17 })] }),
-      new Paragraph({ alignment: AlignmentType.RIGHT, children: [link("github.com/jo-bancherdvanich", "https://github.com/jo-bancherdvanich", { size: 17 }), run(" · Perth, Western Australia", { size: 17, color: MUTED })] }),
-    ], CONTENT - 5600, { verticalAlign: "bottom" }),
-  ] })],
+const heading = (text) => new Paragraph({
+  spacing: { before: 200, after: 80 },
+  border: { top: { style: BorderStyle.DOUBLE, size: 4, color: "808080", space: 4 }, bottom: { style: BorderStyle.SINGLE, size: 4, color: "808080", space: 2 } },
+  children: [run(text.toUpperCase(), { bold: true, size: SZ })],
 });
 
-const skills = [
-  ["Data Analysis and Visualisation", "Skilled in using Power BI, Tableau, Excel, Python, and R to clean, analyse, and present data insights through dashboards and reports."],
-  ["Data Modelling and Database Design", "Knowledge of SQL, ERD design, dimensional modelling, star schema design, and database structure."],
-  ["Forecasting and Financial Modelling", "Experienced in linear regression, time-series analysis, forecasting and prediction intervals in R, and in break-even, scenario and sensitivity modelling in Excel."],
-  ["Communication and Data Storytelling", "Able to explain data findings clearly through dashboards, reports, and presentations."],
-].flatMap(([t, d]) => [
-  new Paragraph({ spacing: { after: 0 }, children: [run(t, { bold: true })] }),
-  new Paragraph({ spacing: { after: 90 }, children: [run(d)] }),
-]);
+// professional summary
+children.push(heading("Professional Summary"));
+children.push(new Paragraph({ spacing: { after: 40 }, children: [run(C.summary)] }));
 
-
-const children = [
-  header,
-  new Paragraph({ spacing: { before: 80, after: 0 }, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: INK, space: 1 } }, children: [] }),
-
-  h2("Professional summary"),
-  body("Master of Information Systems and Technology student at Curtin University, specialising in data analytics and visualisation, with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027."),
-
-  h2("Education and training"),
-  item([role("Master of Information Systems and Technology"), org("Curtin University, Western Australia · Specialisation: Data Analytics and Visualisation")], [run("2025 – Present", { font: MONO, size: 15, color: MUTED })]),
-  gap(),
-  item([role("Bachelor of Science and Technology"), org("Thammasat University, Thailand · Major: Statistics · Minor: Finance")], [run("2019 – 2023", { font: MONO, size: 15, color: MUTED })]),
-
-  h2("Key skills"),
-  ...skills,
-
-  h2("Academic projects"),
-  item([role("FreshMart Sales Performance Dashboard"), stack("Power BI · Power Query · DAX · Data Modelling"),
-    bullet("Built a Power BI retail sales dashboard using Power Query, DAX, and star schema modelling to analyse revenue, margin, product performance, and store performance."),
-    bullet("Cleaned and standardised source data, including duplicate removal, category correction, and data type validation."),
-    bullet("Created KPI measures and visual insights to identify sales trends, product/category performance, and district-level performance gaps.")],
-    [link("See the project ↗", "https://waranyu-cv.vercel.app/freshmart.html", { font: MONO, size: 15 })], 2000),
-  gap(),
-  item([role("Renewable Electricity Transition Dashboard"), stack("Power BI · DAX · R · Forecasting"),
-    bullet("Developed a Power BI dashboard to analyse Australia’s renewable electricity transition from 2005–2024 and forecast progress to 2035."),
-    bullet("Cleaned and standardised multi-country electricity data, including energy source mapping and GWh-to-TWh conversion."),
-    bullet("Created DAX measures for renewable share, renewable generation, non-renewable generation, and renewable source mix."),
-    bullet("Used R-based linear regression to forecast renewable generation and renewable share with prediction intervals and model statistics.")],
-    [link("See the project ↗", "https://waranyu-cv.vercel.app/renewable.html", { font: MONO, size: 15 })], 2000),
-  gap(),
-  item([role("Football Club Database Design and SQL Implementation"), stack("SQL · Oracle · ERD · Database Design"),
-    bullet("Designed a relational database model for a football club management system."),
-    bullet("Developed an ERD and business rules to define relationships between key entities."),
-    bullet("Created a logical database schema with clear table structures, relationships, and constraints."),
-    bullet("Built and tested Oracle SQL tables to support accurate data storage and relational integrity.")],
-    [link("See the project ↗", "https://waranyu-cv.vercel.app/football-database.html", { font: MONO, size: 15 })], 2000),
-
-  h2("Relevant experience"),
-  item([role("Student Consultant (Finance Lead)"), org("Curtin Consulting Group, Curtin University · Client: Hockey WA"),
-    bullet("Led the financial analysis in a 9-person team developing Hockey WA’s broadcast streaming strategy."),
-    bullet("Built a 20-year Excel break-even model across 3 scenarios, giving the board a payback range to decide on, in place of a provider arrangement that returned no revenue."),
-    bullet("Tested 5 drivers at ±20%: audience growth moved payback 7× more than build cost, refocusing the recommendation on marketing over upfront funding."),
-    bullet("Benchmarked assumptions against 15+ case studies, so every forecast could be traced to a public source."),
-    bullet("Created an 18-camera 3D venue render and a 3-view streaming prototype, turning the plan into something the client and panel could see and use.")],
-    [run("Jul 2026 – Nov 2026", { font: MONO, size: 15, color: MUTED })], 2700),
-  gap(),
-  item([role("Digital Marketing & Data Analytics Intern"), org("Like Me Co., Ltd. – Bangkok, Thailand"),
-    bullet("Supported digital marketing campaigns through social media content, product research, and competitor analysis."),
-    bullet("Conducted basic data tracking and market research to support campaign planning and business decisions."),
-    bullet("Assisted with content writing and customer trend analysis to improve marketing communication.")],
-    [run("Nov 2022 – Jan 2023", { font: MONO, size: 15, color: MUTED })], 2700),
-
-  h2("Additional experience"),
-  item([role("Supervisor"), org("Six Senses Gourmet, Leederville, Western Australia"),
-    bullet("Delivered customer service in a fast-paced restaurant environment, including taking orders, serving food and drinks, bartending, and processing bills."),
-    bullet("Managed multiple tasks under pressure while maintaining accuracy with orders, payments, and customer requests.")],
-    [run("Nov 2023 – Present", { font: MONO, size: 15, color: MUTED })], 2700),
-
-  h2("Professional development"),
-  item([role("Google Data Analytics Certificate Courses"), org("Coursera / Google"),
-    body("Foundations: Data, Data, Everywhere · Ask Questions to Make Data-Driven Decisions · Prepare Data for Exploration")],
-    [run("Completed May 2026", { font: MONO, size: 15, color: MUTED })], 2900),
-
-
-  new Paragraph({ spacing: { before: 300, after: 0 }, border: { top: { style: BorderStyle.SINGLE, size: 4, color: LINE, space: 4 } },
-    tabStops: [{ type: TabStopType.RIGHT, position: CONTENT }],
-    children: [run("References available on request", { font: MONO, size: 14, color: MUTED }), run("\tPortfolio and live dashboards: waranyu-cv.vercel.app", { font: MONO, size: 14, color: MUTED })] }),
-];
+for (const s of C.sections) {
+  children.push(heading(s.title));
+  if (s.text) { children.push(new Paragraph({ children: [run(s.text)] })); continue; }
+  if (s.skills) {
+    for (const [name, desc] of s.skills) {
+      children.push(new Paragraph({ spacing: { after: 50 }, children: [run(name + " - ", { bold: true }), run(desc)] }));
+    }
+    continue;
+  }
+  s.entries.forEach((e, k) => {
+    children.push(new Paragraph({ spacing: { before: k ? 140 : 40, after: 0 }, keepNext: true, children: [run(e.title, { bold: true })] }));
+    const rightPart = e.date ? [run("\t" + e.date)] : e.link ? [run("\t"), link(e.link.text + " ↗", e.link.url)] : [];
+    children.push(new Paragraph({ tabStops: right, spacing: { after: 20 }, keepNext: true, children: [run(e.org, { color: GREY }), ...rightPart] }));
+    if (e.note) children.push(new Paragraph({ spacing: { after: 0 }, children: [run(e.note, { color: GREY })] }));
+    for (const b of e.bullets || []) {
+      children.push(new Paragraph({ numbering: { reference: "bullets", level: 0 }, spacing: { after: 20 }, children: [run(b)] }));
+    }
+  });
+}
 
 const doc = new Document({
-  creator: "Waranyu Bancherdvanich",
-  title: "Waranyu Bancherdvanich – CV",
-  styles: { default: { document: { run: { font: SANS, size: 19, color: INK } } } },
+  creator: C.name,
+  title: C.name + " – CV",
+  styles: { default: { document: { run: { font: FONT, size: SZ, color: INK }, paragraph: { spacing: { line: 264 } } } } },
   numbering: { config: [{ reference: "bullets", levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT,
-    style: { paragraph: { indent: { left: 360, hanging: 220 } }, run: { color: ACCENT } } }] }] },
+    style: { paragraph: { indent: { left: 540, hanging: 270 } } } }] }] },
   sections: [{ properties: { page: { size: { width: PAGE_W, height: 16838 }, margin: { top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN } } }, children }],
 });
 Packer.toBuffer(doc).then((buf) => { fs.writeFileSync(process.argv[2], buf); console.log("written", buf.length); });

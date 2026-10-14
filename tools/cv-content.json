@@ -1,0 +1,79 @@
+{
+  "name": "Waranyu Bancherdvanich",
+  "contact": [
+    { "text": "jojowaranyu.career@gmail.com", "url": "mailto:jojowaranyu.career@gmail.com" },
+    { "text": "waranyu-cv.vercel.app", "url": "https://waranyu-cv.vercel.app" },
+    { "text": "linkedin.com/in/waranyu-ban", "url": "https://www.linkedin.com/in/waranyu-ban/" },
+    { "text": "github.com/jo-bancherdvanich", "url": "https://github.com/jo-bancherdvanich" },
+    { "text": "Perth, Western Australia" }
+  ],
+  "summary": "Master of Information Systems and Technology student at Curtin University, specialising in data analytics and visualisation, with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
+  "sections": [
+    { "title": "Education and Training", "entries": [
+      { "title": "Master of Information Systems and Technology", "org": "Curtin University, Western Australia", "date": "January 2025 - Present",
+        "note": "Specialisation: Data Analytics and Visualisation" },
+      { "title": "Bachelor of Science and Technology", "org": "Thammasat University, Thailand", "date": "January 2019 - December 2023",
+        "note": "Major: Statistics | Minor: Finance" }
+    ] },
+    { "title": "Relevant Experience", "entries": [
+      { "title": "Student Consultant (Finance Lead)", "org": "Curtin Consulting Group, Curtin University | Client: Hockey WA", "date": "July 2026 - November 2026",
+        "bullets": [
+          "Led the financial analysis in a 9-person team developing Hockey WA’s broadcast streaming strategy.",
+          "Built a 20-year Excel break-even model across 3 scenarios, giving the board a payback range to decide on, in place of a provider arrangement that returned no revenue.",
+          "Tested 5 drivers at ±20%: audience growth moved payback 7× more than build cost, refocusing the recommendation on marketing over upfront funding.",
+          "Benchmarked assumptions against 15+ case studies, so every forecast could be traced to a public source.",
+          "Created an 18-camera 3D venue render and a 3-view streaming prototype, turning the plan into something the client and panel could see and use."
+        ] },
+      { "title": "Digital Marketing & Data Analytics Intern", "org": "Like Me Co., Ltd, Bangkok, Thailand", "date": "November 2022 - January 2023",
+        "bullets": [
+          "Supported digital marketing campaigns through social media content, product research, and competitor analysis.",
+          "Conducted basic data tracking and market research to support campaign planning and business decisions.",
+          "Assisted with content writing and customer trend analysis to improve marketing communication."
+        ] }
+    ] },
+    { "title": "Additional Experience", "entries": [
+      { "title": "Supervisor", "org": "Six Senses Gourmet, Leederville, Western Australia", "date": "November 2023 - Present",
+        "bullets": [
+          "Delivered customer service in a fast-paced restaurant environment, including taking orders, serving food and drinks, bartending, and processing bills.",
+          "Managed multiple tasks under pressure while maintaining accuracy with orders, payments, and customer requests."
+        ] }
+    ] },
+    { "title": "Key Skills", "skills": [
+      ["Data Analysis and Visualisation", "Skilled in using Power BI, Tableau, Excel, Python, and R to clean, analyse, and present data insights through dashboards and reports."],
+      ["Data Modelling and Database Design", "Knowledge of SQL, ERD design, dimensional modelling, star schema design, and database structure."],
+      ["Forecasting and Financial Modelling", "Experienced in linear regression, time-series analysis, forecasting and prediction intervals in R, and in break-even, scenario and sensitivity modelling in Excel."],
+      ["Communication and Data Storytelling", "Able to explain data findings clearly through dashboards, reports, and presentations."]
+    ] },
+    { "title": "Academic Projects", "entries": [
+      { "title": "FreshMart Sales Performance Dashboard", "org": "Power BI, Power Query, DAX, Data Modelling", "link": { "text": "See the project", "url": "https://waranyu-cv.vercel.app/freshmart.html" },
+        "bullets": [
+          "Built a Power BI retail sales dashboard using Power Query, DAX, and star schema modelling to analyse revenue, margin, product performance, and store performance.",
+          "Cleaned and standardised source data, including duplicate removal, category correction, and data type validation.",
+          "Created KPI measures and visual insights to identify sales trends, product/category performance, and district-level performance gaps."
+        ] },
+      { "title": "Renewable Electricity Transition Dashboard", "org": "Power BI, DAX, R, Forecasting", "link": { "text": "See the project", "url": "https://waranyu-cv.vercel.app/renewable.html" },
+        "bullets": [
+          "Developed a Power BI dashboard to analyse Australia’s renewable electricity transition from 2005–2024 and forecast progress to 2035.",
+          "Cleaned and standardised multi-country electricity data, including energy source mapping and GWh-to-TWh conversion.",
+          "Created DAX measures for renewable share, renewable generation, non-renewable generation, and renewable source mix.",
+          "Used R-based linear regression to forecast renewable generation and renewable share with prediction intervals and model statistics."
+        ] },
+      { "title": "Football Club Database Design and SQL Implementation", "org": "SQL, Oracle, ERD, Database Design", "link": { "text": "See the project", "url": "https://waranyu-cv.vercel.app/football-database.html" },
+        "bullets": [
+          "Designed a relational database model for a football club management system.",
+          "Developed an ERD and business rules to define relationships between key entities.",
+          "Created a logical database schema with clear table structures, relationships, and constraints.",
+          "Built and tested Oracle SQL tables to support accurate data storage and relational integrity."
+        ] }
+    ] },
+    { "title": "Professional Development", "entries": [
+      { "title": "Google Data Analytics Certificate Courses", "org": "Coursera / Google", "date": "Completed May 2026",
+        "bullets": [
+          "Foundations: Data, Data, Everywhere",
+          "Ask Questions to Make Data-Driven Decisions",
+          "Prepare Data for Exploration"
+        ] }
+    ] },
+    { "title": "References", "text": "Available on request." }
+  ]
+}
