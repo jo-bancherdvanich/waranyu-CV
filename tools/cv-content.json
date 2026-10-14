@@ -92,7 +92,7 @@
       "title": "Academic Projects",
       "entries": [
         {
-          "title": "MGMT6052 Consultancy Project (Capstone)",
+          "title": "Building and Benchmarking a Domain-Specialist AI Model (LocoLLM)",
           "org": "Quality and Documentation Manager – Client: LocoLabo, Curtin Business School",
           "bullets": [
             "Tested the base AI model across 15 business areas and identified Australian privacy law as its weakest, giving the client clear evidence to approve the project focus.",
