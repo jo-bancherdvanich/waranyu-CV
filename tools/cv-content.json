@@ -96,11 +96,10 @@
           "org": "Quality and Documentation Manager – Client: LocoLabo, Curtin Business School",
           "date": "Aug 2026 – Oct 2026",
           "bullets": [
-            "Tested the base AI model across 15 business domains and pinpointed Australian privacy law as its weak spot (21%, with 79% of answers citing foreign law), earning client approval for the domain.",
-            "Wrote 105 training examples, then rewrote 37 that a manual review found mirrored the sealed 170-question benchmark, so the final score measured real learning.",
-            "Ran 8 LoRA fine-tuning experiments, one change per run; training the MLP layers lifted accuracy from 38% to 81%, the project’s biggest gain, while keeping 57 of 60 general-knowledge answers.",
-            "Reordered training data to place reasoning before the answer, cutting wrong “no principle applies” guesses from 54 to 5.",
-            "Produced a 27-slide client presentation and a 6-step handover recipe, so the next team can build an adapter for a new subject much faster."
+            "Tested the base AI model across 15 business areas and identified Australian privacy law as its weakest, giving the client clear evidence to approve the project focus.",
+            "Trained a privacy-law expert adapter that reached 81% accuracy on a sealed 170-question test, using only free tools, proving the client’s “small model, plug-in expert” idea works.",
+            "Found a one-line training setting that more than doubled accuracy (38% to 81%), now the core of the recipe recommended to the client.",
+            "Delivered a 6-step handover recipe and client presentation, so the next team can build an adapter for a new subject much faster."
           ]
         },
         {
