@@ -2,10 +2,10 @@
 <title>Waranyu Bancherdvanich – CV</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&display=block">
 <style>
-@page { size: A4; margin: 14mm 15mm 14mm 15mm; }
+@page { size: A4; margin: 12mm 15mm 12mm 15mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { font-family: "IBM Plex Sans", Arial, sans-serif; color: #1c1b18; font-size: 9.4pt; line-height: 1.42; }
+body { font-family: "IBM Plex Sans", Arial, sans-serif; color: #1c1b18; font-size: 9.2pt; line-height: 1.38; }
 a { color: #0f6b45; text-decoration: none; }
 .mono { font-family: "DM Mono", "Courier New", monospace; font-size: 7.4pt; letter-spacing: .04em; text-transform: uppercase; color: #5d5a52; }
 /* header */
@@ -20,7 +20,7 @@ a { color: #0f6b45; text-decoration: none; }
 /* sections */
 h2 { margin: 5mm 0 1.8mm; padding-bottom: 1mm; border-bottom: .6pt solid #d8d2c4; font-family: "DM Mono", monospace; font-size: 7.6pt; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: #0f6b45; }
 p { margin: 0; }
-.item { display: grid; grid-template-columns: 1fr 30mm; column-gap: 5mm; margin: 0 0 2.6mm; break-inside: avoid; }
+.item { display: grid; grid-template-columns: 1fr 34mm; column-gap: 5mm; margin: 0 0 2.6mm; break-inside: avoid; }
 .item .when { text-align: right; font-family: "DM Mono", monospace; font-size: 7.6pt; color: #5d5a52; padding-top: .8mm; }
 .role { font-weight: 600; font-size: 10pt; }
 .org { color: #5d5a52; margin-bottom: .6mm; }
@@ -31,7 +31,7 @@ li::marker { color: #0f6b45; }
 .skills div { break-inside: avoid; }
 .skills b { display: block; font-weight: 600; }
 .stack { font-family: "DM Mono", monospace; font-size: 7.4pt; color: #5d5a52; letter-spacing: .02em; }
-.two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; break-inside: avoid; }
 .foot { margin-top: 5mm; padding-top: 2mm; border-top: .6pt solid #d8d2c4; display: flex; justify-content: space-between; font-family: "DM Mono", monospace; font-size: 7pt; color: #5d5a52; letter-spacing: .04em; }
 .pb { break-before: page; }
 </style></head><body>
@@ -49,7 +49,7 @@ li::marker { color: #0f6b45; }
 </header>
 
 <h2>Professional summary</h2>
-<p>Master of Information Systems and Technology student at Curtin University (CWA 83.57), specialising in data analytics and visualisation, with a bachelor&rsquo;s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027.</p>
+<p>Master of Information Systems and Technology student at Curtin University (CWA 83.57), specialising in data analytics and visualisation, with a bachelor&rsquo;s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027.</p>
 
 <h2>Education and training</h2>
 <div class="item"><div><p class="role">Master of Information Systems and Technology</p><p class="org">Curtin University, Western Australia · Specialisation: Data Analytics and Visualisation · CWA: 83.57</p></div><div class="when">2025 – Present</div></div>
@@ -59,7 +59,7 @@ li::marker { color: #0f6b45; }
 <div class="skills">
   <div><b>Data Analysis and Visualisation</b>Skilled in using Power BI, Tableau, Excel, Python, and R to clean, analyse, and present data insights through dashboards and reports.</div>
   <div><b>Data Modelling and Database Design</b>Knowledge of SQL, ERD design, dimensional modelling, star schema design, and database structure.</div>
-  <div><b>Forecasting and Statistical Modelling</b>Experienced in linear regression, time-series analysis, forecasting, prediction intervals, and model interpretation using R.</div>
+  <div><b>Forecasting and Financial Modelling</b>Experienced in linear regression, time-series analysis, forecasting and prediction intervals in R, and in break-even, scenario and sensitivity modelling in Excel.</div>
   <div><b>Communication and Data Storytelling</b>Able to explain data findings clearly through dashboards, reports, and presentations.</div>
 </div>
 
@@ -83,19 +83,24 @@ li::marker { color: #0f6b45; }
   <div class="when"><a href="https://waranyu-cv.vercel.app/football-database.html">Case study ↗</a></div></div>
 
 <h2>Relevant experience</h2>
+<div class="item"><div><p class="role">Student Consultant (Finance Lead)</p><p class="org">Curtin Consulting Group, Curtin University &middot; Client: Hockey WA</p>
+  <ul><li>Led the financial analysis in a nine-person student consulting team advising Hockey WA, the state&rsquo;s not-for-profit hockey body, on how to stream and own the broadcast of games at its new six-surface hockey centre in Perth without building its own platform.</li>
+  <li>Built a 20-year break-even model in Excel with best, base and worst-case scenarios, one-off and running cost tables, revenue estimates, and an appendix tracing every figure to its source.</li>
+  <li>Ran a sensitivity analysis (each driver &plusmn;20%) showing that audience growth outweighs upfront build cost in determining payback, and used it to recommend investing in marketing rather than seeking funding for the build.</li>
+  <li>Benchmarked growth and audience-retention assumptions against 15+ public case studies, including Finnish floorball streaming, GAAGO, Solidsport and the NFL&rsquo;s move to Prime Video, alongside the team&rsquo;s evaluation of three ownership options and four camera and analysis providers against weighted criteria.</li>
+  <li>Turned the analysis into board-ready slides and charts, revised after project director feedback, and presented the financial section at the final pitch to the client and an industry panel.</li>
+  <li>Built an interactive React prototype of the recommended streaming platform (family, coach and admin views) and a 3D render of the venue&rsquo;s camera layout.</li></ul></div>
+  <div class="when">2026 &ndash; Oct 2026</div></div>
 <div class="item"><div><p class="role">Digital Marketing &amp; Data Analytics Intern</p><p class="org">Like Me Co., Ltd. – Bangkok, Thailand</p>
   <ul><li>Supported digital marketing campaigns through social media content, product research, and competitor analysis.</li>
   <li>Conducted basic data tracking and market research to support campaign planning and business decisions.</li>
-  <li>Assisted with content writing and customer trend analysis to improve marketing communication.</li>
-  <li>Developed practical experience combining marketing insight with data-informed decision-making.</li></ul></div>
+  <li>Assisted with content writing and customer trend analysis to improve marketing communication.</li></ul></div>
   <div class="when">Nov 2022 – Jan 2023</div></div>
 
 <h2>Additional experience</h2>
 <div class="item"><div><p class="role">Bartender / Wait Staff</p><p class="org">Six Senses Gourmet, Leederville, Western Australia</p>
   <ul><li>Delivered customer service in a fast-paced restaurant environment, including taking orders, serving food and drinks, bartending, and processing bills.</li>
-  <li>Communicated clearly with customers and team members to support smooth service during busy periods.</li>
-  <li>Managed multiple tasks under pressure while maintaining accuracy with orders, payments, and customer requests.</li>
-  <li>Supported a positive dining experience by responding to customer enquiries professionally.</li></ul></div>
+  <li>Managed multiple tasks under pressure while maintaining accuracy with orders, payments, and customer requests.</li></ul></div>
   <div class="when">Nov 2023 – Present</div></div>
 
 <div class="two">
@@ -111,8 +116,5 @@ li::marker { color: #0f6b45; }
   </div>
 </div>
 
-<h2>References</h2>
-<div class="item"><div><p>Available on request.</p></div></div>
-
-<div class="foot"><span>Waranyu Bancherdvanich · CV</span><span>Portfolio and live dashboards: waranyu-cv.vercel.app</span></div>
+<div class="foot"><span>References available on request</span><span>Portfolio and live dashboards: waranyu-cv.vercel.app</span></div>
 </body></html>
