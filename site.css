@@ -127,7 +127,7 @@ p:last-child { margin-bottom: 0; }
 .intro .lede { margin: 1.4rem 0 0; }
 .hero-tools { margin: 1.6rem 0 0; color: var(--ink); }
 .hero-facts { display: flex; flex-wrap: wrap; gap: .6rem 2.2rem; margin: 2rem 0 0; padding: 1.2rem 0 0; list-style: none; border-top: 1px solid var(--line); }
-.hero-facts li { display: flex; flex-direction: column; gap: .1rem; }
+.hero-facts li { display: flex; flex-direction: column; align-items: center; gap: .1rem; text-align: center; }
 .hf-num { font-family: "Fraunces", Georgia, serif; font-size: 1.7rem; font-weight: 500; line-height: 1; color: var(--ink); }
 .hf-label { font-family: "DM Mono", monospace; font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 .intro .availability { margin: 1.6rem 0 0; font-size: 1.05rem; line-height: 1.5; color: var(--ink); }
