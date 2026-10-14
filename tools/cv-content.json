@@ -97,7 +97,7 @@
           "bullets": [
             "Tested the base AI model across 15 business areas and identified Australian privacy law as its weakest, giving the client clear evidence to approve the project focus.",
             "Trained a privacy-law expert adapter that reached 81% accuracy on a sealed 170-question test, using only free tools, proving the client’s “small model, plug-in expert” idea works.",
-            "Found a one-line training setting that more than doubled accuracy (38% to 81%), now the core of the recipe recommended to the client.",
+            "Used LoRA fine-tuning on the model’s MLP layers to increase accuracy from 38% to 81%, the project’s biggest gain and now the core of the recipe recommended to the client.",
             "Delivered a 6-step handover recipe and client presentation, so the next team can build an adapter for a new subject much faster."
           ]
         },
