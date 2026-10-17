@@ -292,6 +292,10 @@ p:last-child { margin-bottom: 0; }
 .finding-number { font-family: "DM Mono", monospace; font-size: .8rem; color: var(--muted); padding-top: .25rem; }
 .finding-number .hl { color: var(--muted); font-weight: 400; }
 .findings .case-more { grid-column: 2; }
+/* The rest of a findings list, folded under Read more, continues the first
+   list rather than starting a new one with its own accent rule. */
+.case-more > .findings { margin-top: 0; }
+.case-more > .findings li:first-child { border-top: 0; }
 .case-footer-actions { margin-top: 1rem; }
 .next-project { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 36%); gap: 2rem; align-items: center; margin: 4rem 0 0; padding: 2rem 0 0; border-top: 1px solid var(--line); text-decoration: none; color: inherit; }
 .np-text { display: flex; flex-direction: column; gap: .3rem; }
