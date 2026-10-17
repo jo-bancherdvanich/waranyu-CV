@@ -74,9 +74,9 @@
           </div>
 
           <div class="metrics case-metrics" aria-label="Project at a glance">
-            <div><span class="metric-number">5-day</span><span>forecast built from<br />3-hourly API readings</span></div>
-            <div><span class="metric-number">Live</span><span>OpenWeatherMap data<br />cached to avoid repeat calls</span></div>
-            <div><span class="metric-number">Plain</span><span>English questions<br />parsed and answered</span></div>
+            <div><span class="metric-number">8</span><span>three-hour readings per day,<br />the grain behind the &ldquo;tomorrow&rdquo; fix</span></div>
+            <div><span class="metric-number">3</span><span>question types answered:<br />rain, wind and temperature</span></div>
+            <div><span class="metric-number">1</span><span>API call per forecast,<br />cached so it isn&rsquo;t repeated</span></div>
           </div>
 
           <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">OpenWeatherMap API</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Response cache</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Matplotlib and ipywidgets</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Plain-language advice</span></li></ol>
@@ -212,10 +212,6 @@
                 <span class="finding-number"><b class="hl">01</b></span>
                 <p><strong>The temperature and precipitation visualisations</strong>: the charts that make a five-day forecast <b class="hl">readable at a glance instead of as a table</b>.</p>
               </li>
-            </ul>
-            <details class="case-more">
-              <summary>Read more</summary>
-            <ul class="findings">
               <li>
                 <span class="finding-number"><b class="hl">02</b></span>
                 <p><strong>Data-caching logic</strong> that stores API responses and <b class="hl">avoids repeated calls</b>. Public weather APIs are <b class="hl">rate-limited</b>, so re-fetching the same forecast on every interaction will eventually break the app.</p>
@@ -229,8 +225,17 @@
                 <p><strong>The interactive ipywidgets interface</strong>, turning a notebook of function calls into <b class="hl">something a non-technical person can use</b>.</p>
               </li>
             </ul>
-            </details>
           </section>
+
+          <section class="case-block" data-stage="Limits">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></svg></span>What it can&rsquo;t do</h2>
+            <ul>
+              <li><strong>The question parser matches keywords, not meaning.</strong> It looks for words like &ldquo;rain&rdquo;, &ldquo;wind&rdquo; or &ldquo;temperature&rdquo; and &ldquo;today&rdquo;, &ldquo;tomorrow&rdquo; or &ldquo;next 3 days&rdquo;, so a question phrased another way gets no answer.</li>
+              <li><strong>The advice thresholds are fixed numbers</strong>, such as &ldquo;scorching&rdquo; above 32&deg;C, and are not tuned to the city or the season.</li>
+              <li><strong>The demo on this page uses Open-Meteo</strong>, because OpenWeatherMap needs a private key, so its figures can differ slightly from the notebook&rsquo;s.</li>
+            </ul>
+          </section>
+
 
           <section class="case-block">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="1" fill="currentColor" stroke="none"/></svg></span>Why it's here</h2>

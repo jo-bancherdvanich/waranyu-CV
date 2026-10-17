@@ -69,7 +69,8 @@
             An analytical brief for a government audience: twenty years of Australian electricity data, benchmarked against three comparison countries and forecast to <b class="hl">2035</b>, to answer one question honestly.
           </p>
           <div class="case-actions">
-            <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button primary" href="#explore">Explore the dashboard <span aria-hidden="true">&darr;</span></a>
+            <a class="button text-button" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
             <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
           </div>
 
@@ -97,7 +98,7 @@
 
           <div class="metrics case-metrics" aria-label="Project at a glance">
             <div><span class="metric-number">9% &rarr; 35%</span><span>renewable share<br />2005 to 2024</span></div>
-            <div><span class="metric-number">44.6%</span><span>forecast for 2035<br />against an 82% target</span></div>
+            <div><span class="metric-number">37.8%</span><span>forecast for 2030,<br />against an 82% target</span></div>
             <div><span class="metric-number">R&sup2; 0.85</span><span>linear regression in R<br />p &lt; 0.001, n = 20</span></div>
           </div>
 
@@ -193,8 +194,6 @@
             <p>
               The dashboard's forecast <b class="hl">runs in R so the reader can check the method</b>. Here is the same linear regression, computed in your browser from the project's actual data, with the equation, fit and <b class="hl">95% prediction interval</b> included.
             </p>
-            <details class="case-more">
-              <summary>Read more</summary>
             <div id="rf-widget" class="rf">
               <div class="rf-tabs" role="tablist" aria-label="Forecast measure">
                 <button type="button" class="rf-tab is-active" data-mode="share" role="tab" aria-selected="true">Renewable share %</button>
@@ -204,7 +203,6 @@
               <p class="rf-stats"></p>
               <p class="rf-note">Dots are DCCEEW annual data, 2005–2024. The shaded band is the 95% prediction interval; the line extends the historical trend to 2035. On the current trajectory, the 82%-by-2030 target is out of reach, which is the report's central finding.</p>
             </div>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Result">
@@ -212,7 +210,7 @@
             <ul class="findings">
               <li>
                 <span class="finding-number"><b class="hl">01</b></span>
-                <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about <b class="hl">9%</b> in <b class="hl">2005</b> to <b class="hl">35%</b> in <b class="hl">2024</b>, but a <b class="hl">linear forecast</b> reaches only <strong>44.6% by 2035</strong>, roughly half the <b class="hl">82</b>%-by-2030 target.</p>
+                <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about <b class="hl">9%</b> in <b class="hl">2005</b> to <b class="hl">35%</b> in <b class="hl">2024</b>, but a <b class="hl">linear forecast</b> reaches only <strong>37.8% by 2030</strong>, less than half the <b class="hl">82%</b> target for that year, and 44.6% by 2035.</p>
               </li>
             </ul>
             <details class="case-more">
@@ -245,9 +243,12 @@
 
           <section class="case-block" data-stage="Limits">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>Limitations I'd state up front</h2>
-            <p>
-              The forecast is a simple linear regression and should be read as a <b class="hl">planning signal, not a prediction</b>. Renewable growth accelerated after the mid-2010s, so including the slower early years makes the trend <b class="hl">deliberately conservative</b>, and the real figure may land higher. Saying so is part of the analysis, not a footnote to it.
-            </p>
+            <ul>
+              <li><strong>The forecast is a simple linear regression</strong>, so read it as a <b class="hl">planning signal, not a prediction</b>. Growth sped up after the mid-2010s, so including the slower early years makes the trend <b class="hl">deliberately conservative</b>, and the real figure may land higher.</li>
+              <li><strong>Twenty data points.</strong> One per year from 2005 to 2024 is enough to show a clear trend, not to model a policy change on its own.</li>
+              <li><strong>The four countries are not measured identically.</strong> New Zealand reports net generation, about 1 to 2% below gross. Germany&rsquo;s figures were keyed by hand from the official PDF, and China&rsquo;s come through Our World in Data. Treat close cross-country gaps with care.</li>
+              <li><strong>Australian financial years were converted to calendar years</strong> by end year, so a single year&rsquo;s figure can sit up to six months off the others.</li>
+            </ul>
           </section>
 
           <section class="case-block" data-stage="Links">
