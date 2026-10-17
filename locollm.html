@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="description"
+      content="LocoLLM capstone: training a small local AI model into an Australian privacy-law specialist and proving it on a sealed 170-question benchmark, by Waranyu Bancherdvanich."
+    />
+    <title>LocoLLM privacy-law adapter | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="components.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="canonical" href="https://waranyu-cv.vercel.app/locollm.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Waranyu Bancherdvanich" />
+    <meta property="og:title" content="LocoLLM privacy-law adapter | Waranyu Bancherdvanich" />
+    <meta property="og:description" content="Training a small local AI model into an Australian privacy-law specialist, and proving it on a sealed 170-question benchmark." />
+    <meta property="og:url" content="https://waranyu-cv.vercel.app/locollm.html" />
+    <meta property="og:image" content="https://waranyu-cv.vercel.app/images/locollm-results.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LocoLLM privacy-law adapter | Waranyu Bancherdvanich" />
+    <meta name="twitter:description" content="Training a small local AI model into an Australian privacy-law specialist, and proving it on a sealed 170-question benchmark." />
+    <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/locollm-results.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
+        <div class="topbar-right">
+          <a class="github-link" href="https://github.com/michael-borck/loco-llm" target="_blank" rel="noreferrer">
+          LocoLLM on GitHub <span aria-hidden="true">↗</span>
+        </a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+      </div>
+      </header>
+
+      <main id="main">
+        <article class="case case-locollm">
+          <p class="eyebrow">02 / AI model evaluation · Client capstone</p>
+          <h1>Building and benchmarking a domain-specialist AI model</h1>
+          <p class="lede">
+            A consultancy for LocoLabo, a research lab at Curtin Business School. Its LocoLLM project runs a small AI model on an ordinary laptop, free and private, and adds plug-in &ldquo;adapters&rdquo; that make it an expert in one subject. Our team was asked to build the first real adapter and <b class="hl">prove, with numbers, whether the idea works</b>.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="#explore">Explore the results <span aria-hidden="true">&darr;</span></a>
+            <a class="button text-button" href="https://github.com/michael-borck/loco-llm" target="_blank" rel="noreferrer">LocoLLM on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="metrics case-metrics" aria-label="Project at a glance">
+            <div><span class="metric-number">81%</span><span>correct on one-principle<br />questions after training</span></div>
+            <div><span class="metric-number">170</span><span>benchmark questions,<br />sealed from training</span></div>
+            <div><span class="metric-number">615</span><span>training examples<br />across 13 principles</span></div>
+          </div>
+
+          <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Test 15 domains</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Seal the benchmark</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h6M9 16h6"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">615 training examples</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Train on a free GPU</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V8M16 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">Score every run</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/></svg></span><span class="fl-num" aria-hidden="true">6</span></span><span class="fl-label">Hand over a recipe</span></li></ol>
+
+          <figure class="case-diagram"><svg viewBox="0 0 560 250" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="A question goes to a router, which sends it to one plug-in adapter, such as privacy law, on top of a single small base model that runs on a laptop"><path class="dg-link" d="M128 44H196"/><path class="dg-link" d="M248 60V104"/><path class="dg-link" d="M248 60 C248 80 120 80 120 104"/><path class="dg-link" d="M248 60 C248 80 376 80 376 104"/><path class="dg-link" d="M120 136V176"/><path class="dg-link" d="M248 136V176"/><path class="dg-link" d="M376 136V176"/><g><rect x="24" y="28" width="104" height="32" rx="5"/><text x="76" y="48" class="dg-t" text-anchor="middle">Your question</text></g><g><rect x="196" y="28" width="104" height="32" rx="5"/><text x="248" y="48" class="dg-t" text-anchor="middle">Router</text></g><g class="dg-fact"><rect x="56" y="104" width="128" height="32" rx="5"/><text x="120" y="124" class="dg-t" text-anchor="middle">Privacy law (ours)</text></g><g class="dg-bad"><rect x="196" y="104" width="104" height="32" rx="5"/><text x="248" y="124" class="dg-t" text-anchor="middle">HR (next team)</text></g><g class="dg-bad"><rect x="324" y="104" width="104" height="32" rx="5"/><text x="376" y="124" class="dg-t" text-anchor="middle">Any new subject</text></g><g><rect x="56" y="176" width="372" height="40" rx="5"/><text x="242" y="194" class="dg-t" text-anchor="middle">One small base model: Qwen3-4B</text><text x="242" y="207" class="dg-s" text-anchor="middle">runs on your own laptop · no data leaves the machine · no subscription</text></g></svg><figcaption>LocoLLM&rsquo;s idea: one small base model, plus plug-in adapters that each make it an expert in one subject. Our project built and tested the first real one, for Australian privacy law.</figcaption></figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
+              <dd>Quality and Documentation Manager in a four-student team</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
+              <dd>Qwen3-4B · LoRA fine-tuning · Python · Google Colab · GitHub</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
+              <dd>MGMT6052 Consultancy Project, Curtin University · client LocoLabo</dd>
+            </div>
+          </dl>
+
+          <section class="case-block" data-stage="Problem">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The question</h2>
+            <p>
+              Out of the box, the base model is a generalist and weak on specialist questions. No adapter had ever been built on it, the training notebook no longer ran as it was, and nobody had proof that the idea works at this size. So the client&rsquo;s question was: <strong>can a small, locally run model be trained into a genuine specialist that clearly beats the base model, and how do we prove it?</strong>
+            </p>
+          </section>
+
+          <section class="case-block" data-stage="Data">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span>Choosing a domain with room to improve</h2>
+            <p>
+              The client let us pick the test subject, so we tested the untrained model first: <b class="hl">15 business domains, five questions each</b>. Eleven scored five out of five, which leaves nothing to prove. Compliance and privacy law scored zero, with made-up supporting evidence, and its answers are easy to mark because there are 13 numbered principles. <b class="hl">The client approved it as the project domain.</b>
+            </p>
+            <div class="ll-domains" id="ll-domains" role="img" aria-label="Base model test: 11 of 15 domains scored 5 out of 5; customer service 4, cybersecurity 3, HR and privacy law 0"></div>
+            <details class="case-more">
+              <summary>Read more</summary>
+              <p>
+                A follow-up test of 20 privacy scenarios scored 2, or <b class="hl">10%</b>, close to the 8% you would get by picking one of the 13 principles at random. The model knew the law existed but scrambled the numbers, calling the security rule APP 13 when it is APP 11. In a larger 228-question test it scored 21%, and <b class="hl">79% of its answers cited foreign law</b> such as GDPR.
+              </p>
+              <p>
+                A weak domain was a deliberate choice. If the base model is already good, a small gain could be luck. A big gap leaves a result everyone can see.
+              </p>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Building a fair test before any training</h2>
+            <p>
+              The benchmark came first and was <b class="hl">sealed: never used for training</b>. Both question sets were written from the OAIC&rsquo;s APP Guidelines and the Privacy Act 1988, with the same mix of question types in each.
+            </p>
+            <ul class="icon-list">
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+                <span><strong>Sealed benchmark</strong> — <b class="hl">170</b> questions: 130 with one right principle, 20 with several, and 20 trick questions where none applies</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h6M9 16h6"/></svg></span>
+                <span><strong>Training set</strong> — <b class="hl">615</b> examples, about 35 per principle, including compliant cases so the model does not treat every story as a breach</span>
+              </li>
+              <li>
+                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.8 2.8L16.5 9.5"/></svg></span>
+                <span><strong>Checks</strong> — no overlap between the two sets, benchmark answers reviewed by our privacy-law expert and the client, and automated checks in Python</span>
+              </li>
+            </ul>
+            <details class="case-more">
+              <summary>Read more</summary>
+              <p>
+                Every item uses the same question stem and the same four-part answer, so results can be <b class="hl">scored automatically</b>. One training example:
+              </p>
+              <blockquote class="ll-example">
+                <p><strong>Question.</strong> My local florist wanted to charge me a fee just to take me off their mailing list. Which single Australian Privacy Principle, if any, is most directly relevant?</p>
+                <p><strong>Answer.</strong> Category: violation. Applicable APP: APP 7 (direct marketing). Reasoning: opting out of direct marketing must be free of charge. Citation: OAIC APP Guidelines, chapter 7.</p>
+              </blockquote>
+              <p>
+                Automated word-overlap checks passed, but <b class="hl">my manual review found 30 of my 105 training questions described the same situation as a benchmark question</b>. I rewrote them, 37 changes in all, so the final score measures what the model learned rather than what it memorised.
+              </p>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Result" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the results</h2>
+            <p>
+              We trained the adapter with <b class="hl">LoRA fine-tuning on a free Google Colab GPU</b>, about 15 minutes a run, and <b class="hl">changed one setting per run</b> so every jump has a cause. Each run was then scored on all 170 sealed questions. <strong>Pick a run</strong> to see what changed and what it did.
+            </p>
+
+            <div id="ll-dash" class="fmd" role="region" aria-label="Interactive results of the LocoLLM training runs"></div>
+
+            <p class="fm-note">
+              The team report scores the untrained model at <b class="hl">2%</b> on one-principle questions. A like-for-like comparison, with the same model and prompt layout, gives <b class="hl">15%</b>. Either way, the trained adapter is far ahead.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the runs showed</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number"><b class="hl">01</b></span>
+                <p><strong>Train more of the model.</strong> The client&rsquo;s notebook trained only the attention layers. Adding the MLP layers, one line of settings, took one-principle accuracy from <b class="hl">38% to 81%</b>: the biggest gain in the project.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">02</b></span>
+                <p><strong>Reasoning first, then the answer.</strong> Reordering each training answer so the model explains before it names the principle cut wrong &ldquo;no principle applies&rdquo; guesses from <b class="hl">54 to 5</b>. Same data, new order.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>It learns the format before the facts.</strong> Run 1 used the right answer layout 169 times out of 170 but named the right principle only 42 times. <b class="hl">Score the answer, not the look.</b></p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">04</b></span>
+                <p><strong>Randomness is real.</strong> The same recipe with a different random seed scored <b class="hl">75% and 81%</b> on all 170 questions, the same within chance. One score alone can be luck, so test at least twice and report a range.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">05</b></span>
+                <p><strong>It kept its general knowledge.</strong> The recommended adapter still answered <b class="hl">57 of 60</b> general maths, geography and instruction questions, so it learned privacy law without losing general ability.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Handover">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/></svg></span>What the client gets</h2>
+            <p>
+              Five deliverables, all in the shared repository: <b class="hl">the privacy-law adapter</b>, the sealed benchmark with its scoring script, the 615-example training set, a repaired Colab notebook that trains a new adapter in one click, and reports on all eight runs. The three recommended changes are free: no new data, no new hardware, the same 15-minute training.
+            </p>
+            <details class="case-more">
+              <summary>The six-step recipe for the next domain</summary>
+              <ol>
+                <li><strong>Build and seal the test first</strong>, with single-answer, multi-answer and trick questions, and never train on it.</li>
+                <li><strong>Agree one answer format</strong> on day one: category, answer, reasoning, citation, with reasoning first.</li>
+                <li><strong>Write 35 to 50 examples per topic</strong>, including compliant cases.</li>
+                <li><strong>Score the base model fairly</strong>, with the same model and prompt layout.</li>
+                <li><strong>Start from the fixed notebook</strong>, then change one setting per run.</li>
+                <li><strong>Train twice with different seeds</strong> and report the range.</li>
+              </ol>
+              <p>Followed in order, the next team can reach our best result in week one, not week six.</p>
+            </details>
+          </section>
+
+          <section class="case-block" data-stage="Limits">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><circle cx="12" cy="16.3" r="1" fill="currentColor" stroke="none"/></svg></span>What the numbers can&rsquo;t tell you</h2>
+            <ul>
+              <li><strong>Questions with several right answers are still weak</strong>, with an F1 score of about 0.65.</li>
+              <li><strong>Some answers still need a lawyer&rsquo;s sign-off</strong>, such as tax file numbers, the Spam Act and employee records.</li>
+              <li><strong>Every benchmark question ends with the same wording.</strong> A 25-question probe with different wording scored 21, but it is a small test.</li>
+              <li><strong>One full benchmark run takes about two hours</strong>, so each recipe was tested only once or twice. Treat every number as a range.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="My part">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>What I did as Quality and Documentation Manager</h2>
+            <ul>
+              <li>Wrote <b class="hl">105 training examples</b> and 40 test questions, plus 30 trick items and the 25-question probe in different wording</li>
+              <li>Ran the overlap review between the training set and the sealed benchmark, and <b class="hl">rewrote the items that mirrored it</b></li>
+              <li>Wrote the team&rsquo;s documentation standard and template, and took the meeting minutes</li>
+              <li>Drafted the final report&rsquo;s structure, methodology and literature review, checking every source against the original paper</li>
+              <li>Produced the training results reports, the <b class="hl">27-slide client presentation</b> and the six-step handover recipe</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
+            <a class="button primary" href="https://github.com/michael-borck/loco-llm" target="_blank" rel="noreferrer">LocoLLM on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="https://locollm.org" target="_blank" rel="noreferrer">locollm.org <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+          </section>
+
+          <a class="next-project" href="freshmart.html">
+            <span class="np-text">
+              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
+              <span class="np-eyebrow">03 / Retail · Academic</span>
+              <span class="np-title">FreshMart sales dashboard</span>
+              <span class="np-blurb">A Power BI retail dashboard that turns raw transaction data into a view of where the money actually comes from.</span>
+            </span>
+            <img class="np-shot" src="images/freshmart-dashboard.webp" width="1447" height="818" alt="" loading="lazy" decoding="async" />
+          </a>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <div class="sf-top">
+          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <nav class="sf-links" aria-label="Footer">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+        <div class="sf-bottom">
+          <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+          <span>Last updated October 2026</span>
+          <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
+          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+    <script src="locollm-results.js"></script>
+  </body>
+</html>

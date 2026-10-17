@@ -613,3 +613,49 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .cl-arrow { color: var(--muted); text-align: center; }
 .cl-after { color: var(--accent); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .92rem; font-weight: 600; white-space: nowrap; }
 .cl-note { color: var(--muted); font-size: .88rem; line-height: 1.5; }
+
+/* ---- LocoLLM results explorer (locollm-results.js) ------------------- */
+.ll-domains { margin-top: 1.4rem; padding: 1.1rem 1.2rem 1.2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.ll-domains .dash-row { grid-template-columns: minmax(130px, 220px) minmax(0, 1fr) auto; }
+.ll-domains .dash-row:not(.is-picked) .dash-fill { background: color-mix(in srgb, var(--muted) 42%, transparent); }
+.ll-flag { margin-left: .3rem; padding: .05rem .4rem; border-radius: 999px; font-family: "DM Mono", "DM Mono Fallback", monospace;
+  font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); white-space: nowrap; }
+.ll-cols { grid-template-columns: repeat(5, minmax(0, 1fr)); height: 180px; }
+.ll-col { padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.ll-col .dash-colbar { opacity: .32; max-width: 44px; }
+.ll-col:hover .dash-colbar { opacity: .6; }
+.ll-col.is-on .dash-colbar { opacity: 1; }
+.ll-col.is-on .dash-colval, .ll-col.is-on .dash-collab { color: var(--ink); font-weight: 600; }
+.ll-col:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.ll-types .dash-row { grid-template-columns: minmax(118px, 160px) minmax(0, 1fr) 3.2em; }
+.ll-types .dash-val { text-align: right; }
+.ll-sub { display: block; color: var(--muted); font-size: .74rem; }
+.ll-change { margin: 1.1rem 0 0; padding: .8rem .9rem; border-radius: 10px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); color: var(--muted); font-size: .9rem; line-height: 1.55; }
+.ll-change strong { color: var(--ink); font-weight: 600; }
+.ll-delta { display: block; margin-top: .4rem; color: var(--accent); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .74rem; }
+.ll-heatwrap { overflow-x: auto; }
+.ll-heat { --ll-k: 6.6%; width: 100%; min-width: 300px; border-collapse: separate; border-spacing: 3px; font-variant-numeric: tabular-nums; }
+:root[data-theme="dark"] .ll-heat, :root[data-theme="dark"] .ll-legend { --ll-k: 4.1%; }
+.ll-heat th { padding: .25rem .3rem; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .68rem; font-weight: 500; text-align: center; }
+.ll-heat thead th.is-on { color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); }
+.ll-heat th[scope="row"] { text-align: left; white-space: nowrap; color: var(--ink); }
+.ll-heat th[scope="row"] span { display: block; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; font-size: .72rem; font-weight: 400; }
+.ll-heat td { height: 34px; border-radius: 5px; text-align: center; color: var(--ink); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .8rem;
+  background: color-mix(in srgb, var(--accent) calc(var(--v) * var(--ll-k) + 4%), var(--surface)); }
+.ll-heat td.is-on { box-shadow: inset 0 0 0 1.5px var(--ink); font-weight: 600; }
+.ll-legend { --ll-k: 6.6%; display: flex; align-items: center; gap: .3rem; margin: .8rem 0 0; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem; }
+.ll-legend i { display: inline-block; width: 22px; height: 12px; border-radius: 3px; background: color-mix(in srgb, var(--accent) calc(var(--v) * var(--ll-k) + 4%), var(--surface)); }
+@media (max-width: 720px) {
+  .ll-domains .dash-row { grid-template-columns: minmax(110px, 150px) minmax(0, 1fr) auto; }
+  .ll-cols { height: 150px; }
+}
+.ll-example { margin: 1rem 0; padding: .9rem 1.1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); font-size: .95rem; }
+.ll-example p { margin: 0; }
+.ll-example p + p { margin-top: .6rem; }
+#ll-dash .dash-slicers .dash-chip.is-on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+@media (max-width: 720px) {
+  #ll-dash .dash-grid-wrap { grid-template-columns: minmax(0, 1fr); }
+  #ll-dash .dash-slicer { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+}
+.ll-heat thead th:first-child { text-align: left; }
+.exp-actions { margin-top: 1rem; }

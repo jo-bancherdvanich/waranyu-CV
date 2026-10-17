@@ -21,7 +21,7 @@
       "text": "Perth, Western Australia"
     }
   ],
-  "summary": "Master of Information Systems and Technology student at Curtin University, specialising in data analytics and visualisation, with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Four portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
+  "summary": "Master of Information Systems and Technology student at Curtin University, specialising in data analytics and visualisation, with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I led the financial analysis for a Curtin Consulting Group engagement with Hockey WA. Five portfolio projects run on their real data at waranyu-cv.vercel.app. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
   "sections": [
     {
       "title": "Education and Training",
@@ -94,8 +94,12 @@
         {
           "title": "Building and Benchmarking a Domain-Specialist AI Model (LocoLLM)",
           "org": "Quality and Documentation Manager – Client: LocoLabo, Curtin Business School",
+          "link": {
+            "text": "See the project",
+            "url": "https://waranyu-cv.vercel.app/locollm.html"
+          },
           "bullets": [
-            "Tested the base AI model across 15 business areas and identified Australian privacy law as its weakest, giving the client clear evidence to approve the project focus.",
+            "Tested the base AI model across 15 business areas and pinpointed Australian privacy law as a weak spot, giving the client clear evidence to approve the project focus.",
             "Trained a privacy-law expert adapter that reached 81% accuracy on a sealed 170-question test, using only free tools, proving the client’s “small model, plug-in expert” idea works.",
             "Used LoRA fine-tuning on the model’s MLP layers to increase accuracy from 38% to 81%, the project’s biggest gain and now the core of the recipe recommended to the client.",
             "Delivered a 6-step handover recipe and client presentation, so the next team can build an adapter for a new subject much faster."
