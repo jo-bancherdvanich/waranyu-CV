@@ -18,6 +18,10 @@
   // stylesheet is light by default and dark under data-theme="dark".
   function apply(theme) {
     root.setAttribute("data-theme", theme);
+    // The browser bar follows the chosen theme, not just the OS setting.
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+      m.setAttribute("content", theme === "dark" ? "#151411" : "#f7f4ee");
+    });
     var btn = document.querySelector(".theme-toggle");
     if (btn) {
       var isDark = theme === "dark";

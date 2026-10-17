@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://waranyu-cv.vercel.app/sitemap.xml

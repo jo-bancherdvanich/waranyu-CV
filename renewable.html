@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <script>
+      /* Applied before the first paint so dark-theme visitors never see a light flash; app.js keeps it in sync after. */
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
+        if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+        var bar = t === "dark" ? "#151411" : "#f7f4ee";
+        document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute("content", bar); });
+      })();
+    </script>
     <meta
       name="description"
       content="Australia's renewable electricity transition — a Power BI dashboard and R forecast to 2035, by Waranyu Bancherdvanich."
