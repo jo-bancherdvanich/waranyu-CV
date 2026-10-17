@@ -90,9 +90,9 @@
 
     var lead;
     if (parsed.attribute === "precipitation") {
-      if (rain > 5) lead = "Yes — about " + rain.toFixed(1) + " mm of rain is forecast for " + place + " " + when + ". Take a raincoat.";
-      else if (rain > 0.5) lead = "Possibly — around " + rain.toFixed(1) + " mm of light rain for " + place + " " + when + ".";
-      else lead = "No — no meaningful rain forecast for " + place + " " + when + ".";
+      if (rain > 5) lead = "Yes, about " + rain.toFixed(1) + " mm of rain is forecast for " + place + " " + when + ". Take a raincoat.";
+      else if (rain > 0.5) lead = "Possibly, around " + rain.toFixed(1) + " mm of light rain for " + place + " " + when + ".";
+      else lead = "No, there is no meaningful rain forecast for " + place + " " + when + ".";
     } else if (parsed.attribute === "wind") {
       lead = "Winds in " + place + " " + when + " peak around " + wind.toFixed(1) + " km/h.";
     } else if (parsed.attribute === "temperature") {
@@ -239,7 +239,7 @@
     els.desc.textContent = (c && c.desc) || d.desc;
     els.high.textContent = d.tMax.toFixed(1) + "°";
     els.low.textContent = d.tMin.toFixed(1) + "°";
-    els.humidity.textContent = c && typeof c.humidity === "number" ? Math.round(c.humidity) + "%" : "—";
+    els.humidity.textContent = c && typeof c.humidity === "number" ? Math.round(c.humidity) + "%" : "-";
     els.wind.textContent =
       "Wind " + ((c && typeof c.wind === "number" ? c.wind : d.wind).toFixed(0)) +
       " km/h · rain today " + d.rain.toFixed(1) + " mm";

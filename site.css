@@ -131,7 +131,7 @@ p:last-child { margin-bottom: 0; }
 .hf-num { font-family: "Fraunces", Georgia, serif; font-size: 1.7rem; font-weight: 500; line-height: 1; color: var(--ink); }
 .hf-label { font-family: "DM Mono", monospace; font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 .intro .availability { margin: 1.6rem 0 0; font-size: 1.05rem; line-height: 1.5; color: var(--ink); }
-.availability::before { content: "— "; color: var(--accent); }
+.availability::before { content: ""; display: inline-block; width: .5em; height: .5em; margin-right: .5em; border-radius: 50%; background: var(--accent); vertical-align: .1em; }
 .intro-actions { display: flex; flex-wrap: wrap; gap: .8rem 1.6rem; align-items: center; margin-top: 1.8rem; }
 .portrait-wrap { margin: 0; }
 .portrait-frame { border: 1px solid var(--line); padding: 6px; background: var(--surface); }

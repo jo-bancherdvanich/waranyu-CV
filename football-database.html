@@ -18,7 +18,7 @@
     </script>
     <meta
       name="description"
-      content="A normalised 16-table Oracle SQL database for a soccer competition — ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich."
+      content="A normalised 16-table Oracle SQL database for a soccer competition: ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich."
     />
     <title>Football club database | Waranyu Bancherdvanich</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,12 +40,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Waranyu Bancherdvanich" />
     <meta property="og:title" content="Football club database | Waranyu Bancherdvanich" />
-    <meta property="og:description" content="A normalised 16-table Oracle SQL database for a soccer competition — ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich." />
+    <meta property="og:description" content="A normalised 16-table Oracle SQL database for a soccer competition: ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich." />
     <meta property="og:url" content="https://waranyu-cv.vercel.app/football-database.html" />
     <meta property="og:image" content="https://waranyu-cv.vercel.app/images/football-erd.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Football club database | Waranyu Bancherdvanich" />
-    <meta name="twitter:description" content="A normalised 16-table Oracle SQL database for a soccer competition — ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich." />
+    <meta name="twitter:description" content="A normalised 16-table Oracle SQL database for a soccer competition: ERD, business rules, DDL, and analytical queries, by Waranyu Bancherdvanich." />
     <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/football-erd.png" />
   </head>
   <body>
@@ -67,7 +67,7 @@
           <p class="eyebrow">04 / Database design</p>
           <h1>A soccer competition, modelled properly</h1>
           <p class="lede">
-            Clubs, players, games, referees, goals, cards and awards — turned into a normalised 16-table Oracle database with full DDL, sample data, and the analytical queries a competition organiser would actually run.
+            Clubs, players, games, referees, goals, cards and awards, turned into a normalised 16-table Oracle database with full DDL, sample data, and the analytical queries a competition organiser would actually run.
           </p>
           <div class="case-actions">
             <a class="button primary" href="https://github.com/jo-bancherdvanich/soccer-competition-database" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
@@ -86,7 +86,7 @@
             <noscript>
               <img width="1114" height="696" src="images/football-erd.webp" alt="Entity relationship diagram showing 16 tables linking clubs, games, players, referees, goals, cards and awards" />
             </noscript>
-            <figcaption>The entity-relationship diagram — 16 tables, 18 foreign keys, read straight from the DDL</figcaption>
+            <figcaption>The entity-relationship diagram: 16 tables, 18 foreign keys, read straight from the DDL</figcaption>
           </figure>
 
           <details class="erd-original">
@@ -94,7 +94,7 @@
             <figure class="case-shot">
               <img width="1114" height="696" src="images/football-erd.webp" alt="The originally submitted entity-relationship diagram, drawn by hand, showing the same 16 tables in four bands" loading="lazy" />
               <figcaption>
-                The original hand-drawn ERD. The interactive version above follows its layout, but takes every column name and relationship from <code>01_create_tables.sql</code> — so where the drawing and the DDL disagree, the DDL wins.
+                The original hand-drawn ERD. The interactive version above follows its layout, but takes every column name and relationship from <code>01_create_tables.sql</code>, so where the drawing and the DDL disagree, the DDL wins.
               </figcaption>
             </figure>
           </details>
@@ -102,7 +102,7 @@
           <dl class="case-meta">
             <div>
               <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
-              <dd>Three-person group project — I contributed across the design, schema and SQL implementation</dd>
+              <dd>Three-person group project. I contributed across the design, schema and SQL implementation</dd>
             </div>
             <div>
               <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
@@ -117,7 +117,7 @@
           <section class="case-block" data-stage="Problem">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>The problem</h2>
             <p>
-              A soccer competition generates a surprising amount of <b class="hl">interlocking data</b>. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions — <strong>"what's the ladder?"</strong> — become impossible to answer without duplicating data everywhere.
+              A soccer competition generates a surprising amount of <b class="hl">interlocking data</b>. Who played, who came on as a substitute and when, who scored, who was booked, who refereed, who won best on ground and by how many points. Model it carelessly and simple questions like <strong>"what's the ladder?"</strong> become impossible to answer without duplicating data everywhere.
             </p>
           </section>
 
@@ -129,7 +129,7 @@
             <details class="case-more">
               <summary>Read more</summary>
             <p>
-              Substitutions are captured <b class="hl">inside the player-appearance table</b> using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters — see below.
+              Substitutions are captured <b class="hl">inside the player-appearance table</b> using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters, as explained below.
             </p>
             </details>
           </section>
@@ -137,7 +137,7 @@
           <section class="case-block" data-stage="Result" id="run-it">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z"/></svg></span>Run the queries</h2>
             <p>
-              <b class="hl">Eight queries running here</b> on the same sample season the Oracle script inserts — <b class="hl">8 clubs, 96 players, 56 games, 154 goals</b>. Five are adapted from the repository's analytical script; three more were written for this page. Pick a question and the result is computed in your browser.
+              <b class="hl">Eight queries running here</b> on the same sample season the Oracle script inserts: <b class="hl">8 clubs, 96 players, 56 games, 154 goals</b>. Five are adapted from the repository's analytical script; three more were written for this page. Pick a question and the result is computed in your browser.
             </p>
 
             <div id="sql-demo" class="sq">
@@ -177,19 +177,19 @@
             <ul class="findings">
               <li>
                 <span class="finding-number"><b class="hl">01</b></span>
-                <p><strong>Season ladder</strong> — total competition points per club, combining result points and best-on-ground points, with goals and home/away wins.</p>
+                <p><strong>Season ladder</strong>: total competition points per club, combining result points and best-on-ground points, with goals and home/away wins.</p>
               </li>
               <li>
                 <span class="finding-number"><b class="hl">02</b></span>
-                <p><strong>Club summary</strong> — each club's complete home and away win–loss–draw record.</p>
+                <p><strong>Club summary</strong>: each club's complete home and away win–loss–draw record.</p>
               </li>
               <li>
                 <span class="finding-number"><b class="hl">03</b></span>
-                <p><strong>Top goal scorers</strong>, and every individual goal by the leading scorer with opponent and ground — found using a <b class="hl">HAVING subquery rather than a hardcoded name</b>.</p>
+                <p><strong>Top goal scorers</strong>, and every individual goal by the leading scorer with opponent and ground, found using a <b class="hl">HAVING subquery rather than a hardcoded name</b>.</p>
               </li>
               <li>
                 <span class="finding-number"><b class="hl">04</b></span>
-                <p><strong>Goals per ground</strong> — average goals per game at each venue. A <b class="hl">LEFT JOIN keeps goalless games in the denominator</b>, which an inner join would have <b class="hl">silently dropped</b> and inflated every average.</p>
+                <p><strong>Goals per ground</strong>: average goals per game at each venue. A <b class="hl">LEFT JOIN keeps goalless games in the denominator</b>, which an inner join would have <b class="hl">silently dropped</b> and inflated every average.</p>
               </li>
               <li>
                 <span class="finding-number"><b class="hl">05</b></span>
@@ -202,16 +202,16 @@
           <section class="case-block" data-stage="Limits">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5V8h-4.5"/></svg></span>Revised after review</h2>
             <p>
-              The version in the repository is a <b class="hl">revised one</b>. Reviewing the first design, three things were wrong — so I <b class="hl">went back and fixed them rather than leaving them</b>:
+              The version in the repository is a <b class="hl">revised one</b>. Reviewing the first design, three things were wrong, so I <b class="hl">went back and fixed them rather than leaving them</b>:
             </p>
             <details class="case-more">
               <summary>Read more</summary>
             <ul>
-              <li><strong>Removed the Substitution table.</strong> It created an <b class="hl">unresolved many-to-many</b> relationship — two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
+              <li><strong>Removed the Substitution table.</strong> It created an <b class="hl">unresolved many-to-many</b> relationship: two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
               <li><strong>Corrected two business rules.</strong> The club-to-ground relationship now describes training and ownership rather than where games are played, which is what the data actually represents.</li>
               <li><strong>Unfiltered the away-record query.</strong> A HAVING clause had quietly narrowed it to a single club, which contradicted the query's own heading. Removing it returns every club's away record, ordered so the best one is still the top row.</li>
             </ul>
-            <figure class="case-diagram"><svg viewBox="0 0 580 236" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><text x="20" y="20" class="dg-h">Before</text><path class="dg-link dg-bad-line" d="M150 56L154 100"/><path class="dg-link dg-bad-line" d="M150 164L154 120"/><g class=""><rect x="26" y="40" width="124" height="32" rx="5"/><text x="88" y="60" class="dg-t" text-anchor="middle">GamePlayer</text></g><g class=""><rect x="26" y="148" width="124" height="32" rx="5"/><text x="88" y="168" class="dg-t" text-anchor="middle">GamePlayer</text></g><g class="dg-bad"><rect x="154" y="94" width="124" height="32" rx="5"/><text x="216" y="114" class="dg-t" text-anchor="middle">Substitution</text></g><text x="20" y="218" class="dg-s dg-bad-text">Two FKs into one parent &#8212; unresolved many-to-many.</text><path d="M312 24V206" opacity=".28" stroke-dasharray="4 5"/><text x="340" y="20" class="dg-h">After</text><path class="dg-link" d="M430 106V146" opacity=".6"/><g class="dg-fact"><rect x="346" y="62" width="168" height="44" rx="5"/><text x="430" y="81" class="dg-t" text-anchor="middle">GamePlayer</text><text x="430" y="95" class="dg-s" text-anchor="middle">+ gameMinute</text></g><g class=""><rect x="346" y="146" width="168" height="44" rx="5"/><text x="430" y="165" class="dg-t" text-anchor="middle">StartPosition</text><text x="430" y="179" class="dg-s" text-anchor="middle">&#8220;Substitute&#8221;</text></g><text x="340" y="218" class="dg-s">One row per appearance, with its minute.</text></svg><figcaption>Removing the Substitution table resolved a many-to-many that should never have existed. A substitution is just an appearance with a minute and a starting position.</figcaption></figure>
+            <figure class="case-diagram"><svg viewBox="0 0 580 236" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><text x="20" y="20" class="dg-h">Before</text><path class="dg-link dg-bad-line" d="M150 56L154 100"/><path class="dg-link dg-bad-line" d="M150 164L154 120"/><g class=""><rect x="26" y="40" width="124" height="32" rx="5"/><text x="88" y="60" class="dg-t" text-anchor="middle">GamePlayer</text></g><g class=""><rect x="26" y="148" width="124" height="32" rx="5"/><text x="88" y="168" class="dg-t" text-anchor="middle">GamePlayer</text></g><g class="dg-bad"><rect x="154" y="94" width="124" height="32" rx="5"/><text x="216" y="114" class="dg-t" text-anchor="middle">Substitution</text></g><text x="20" y="218" class="dg-s dg-bad-text">Two FKs into one parent: an unresolved many-to-many.</text><path d="M312 24V206" opacity=".28" stroke-dasharray="4 5"/><text x="340" y="20" class="dg-h">After</text><path class="dg-link" d="M430 106V146" opacity=".6"/><g class="dg-fact"><rect x="346" y="62" width="168" height="44" rx="5"/><text x="430" y="81" class="dg-t" text-anchor="middle">GamePlayer</text><text x="430" y="95" class="dg-s" text-anchor="middle">+ gameMinute</text></g><g class=""><rect x="346" y="146" width="168" height="44" rx="5"/><text x="430" y="165" class="dg-t" text-anchor="middle">StartPosition</text><text x="430" y="179" class="dg-s" text-anchor="middle">&#8220;Substitute&#8221;</text></g><text x="340" y="218" class="dg-s">One row per appearance, with its minute.</text></svg><figcaption>Removing the Substitution table resolved a many-to-many that should never have existed. A substitution is just an appearance with a minute and a starting position.</figcaption></figure>
             <p>
               Going back to <b class="hl">correct a design I had already finished</b> is the part of this project I would point to first.
             </p>

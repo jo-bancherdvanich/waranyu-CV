@@ -27,7 +27,7 @@
   D.gamePlayer.forEach(function (gp) { gamePlayerByID[gp.gamePlayerID] = gp; });
   D.bestOnGround.forEach(function (b) { bogByID[b.bogID] = b; });
 
-  var fullName = function (p) { return p ? p.firstName + " " + p.lastName : "—"; };
+  var fullName = function (p) { return p ? p.firstName + " " + p.lastName : "-"; };
 
   /* ---- Query 1: season ladder ----------------------------------------- */
   function ladder() {
@@ -60,7 +60,7 @@
     return {
       cols: ["Club Name", "Result Points", "BOG Points", "Goals Scored", "Home Wins", "Away Wins", "Total Points"],
       rows: rows,
-      note: "Every club appears even with no home wins, no away wins or no best-on-ground points — that is what the LEFT JOIN and COALESCE are protecting."
+      note: "Every club appears even with no home wins, no away wins or no best-on-ground points. That is what the LEFT JOIN and COALESCE are protecting."
     };
   }
 
@@ -75,13 +75,13 @@
     var rows = Object.keys(count).map(function (pid) {
       var p = playerByID[pid];
       var c = p ? clubByID[p.clubID] : null;
-      return [fullName(p), c ? c.clubName : "—", count[pid]];
+      return [fullName(p), c ? c.clubName : "-", count[pid]];
     });
     rows.sort(function (x, y) { return y[2] - x[2] || x[0].localeCompare(y[0]); });
     return {
       cols: ["Player", "Club", "Goals"],
       rows: rows.slice(0, 15),
-      note: "154 goals across the season, grouped by the player behind each appearance — on playerID, not on the name. " +
+      note: "154 goals across the season, grouped by the player behind each appearance, on playerID rather than on the name. " +
         "That matters here: two different players in this competition are both called Grant Jarvis, at the same club. Showing the top 15."
     };
   }
@@ -108,7 +108,7 @@
       cols: ["Ground", "Games Played", "Goals", "Avg Goals / Game"],
       rows: rows,
       note: "Five games this season finished 0-0. A LEFT JOIN keeps them in the denominator; an inner join would drop them " +
-        "and inflate three of these eight averages — Eagle Bay Centre would read 2.25 rather than 1.29."
+        "and inflate three of these eight averages: Eagle Bay Centre would read 2.25 rather than 1.29."
     };
   }
 
@@ -134,9 +134,9 @@
       var opp = sides.filter(function (cg) { return cg.clubID !== own; })[0];
       rows.push([
         fullName(p),
-        g ? g.gameDate : "—",
-        opp && clubByID[opp.clubID] ? clubByID[opp.clubID].clubName : "—",
-        g && groundByID[g.groundID] ? groundByID[g.groundID].name : "—",
+        g ? g.gameDate : "-",
+        opp && clubByID[opp.clubID] ? clubByID[opp.clubID].clubName : "-",
+        g && groundByID[g.groundID] ? groundByID[g.groundID].name : "-",
         sg.gameMinute + "'"
       ]);
     });
@@ -144,7 +144,7 @@
     return {
       cols: ["Player", "Date", "Opponent", "Ground", "Minute"],
       rows: rows,
-      note: "The leading scorer is found with a HAVING subquery on MAX(total goals), not a hardcoded name — so this query still works next season."
+      note: "The leading scorer is found with a HAVING subquery on MAX(total goals), not a hardcoded name, so this query still works next season."
     };
   }
 
@@ -168,7 +168,7 @@
       cols: ["Minute", "Goals", "Share"],
       rows: rows,
       note: "All " + total + " goals fall inside 90 minutes" + (outside ? ", except " + outside + " outside the bands" : "") +
-        ". Banding a continuous column is a CASE expression, not a join — the kind of thing that is easy to get " +
+        ". Banding a continuous column is a CASE expression, not a join, and the kind of thing that is easy to get " +
         "off by one at the boundaries, so the ranges are written inclusive on both ends."
     };
   }
@@ -203,7 +203,7 @@
     return {
       cols: ["Club", "Games", "Clean Sheets", "Conceded", "Conceded / Game"],
       rows: rows,
-      note: "Goals conceded are not stored anywhere — they are the opponent's goalScored in the same game. " +
+      note: "Goals conceded are not stored anywhere. They are the opponent's goalScored in the same game. " +
         "That is a self-join of ClubGame on gameID with the club deliberately not equal to itself."
     };
   }
@@ -229,7 +229,7 @@
       cols: ["Round", "Games", "Goals", "Goals / Game"],
       rows: rows,
       note: "Fourteen rounds, four games each. Grouping by the week rather than the date is what makes the " +
-        "rounds comparable — the fixtures inside a round are not all played on the same day."
+        "rounds comparable, because the fixtures inside a round are not all played on the same day."
     };
   }
 
@@ -250,14 +250,14 @@
       var p = playerByID[pid];
       var c = p ? clubByID[p.clubID] : null;
       var a = acc[pid];
-      return [fullName(p), c ? c.clubName : "—", a.awards, a.first, a.pts];
+      return [fullName(p), c ? c.clubName : "-", a.awards, a.first, a.pts];
     });
     rows.sort(function (x, y) { return y[4] - x[4] || y[3] - x[3] || x[0].localeCompare(y[0]); });
     return {
       cols: ["Player", "Club", "Awards", "Firsts", "BOG Points"],
       rows: rows.slice(0, 15),
       note: "Three awards a game across 56 games is 168 rows, and the points come from BestOnGround rather " +
-        "than being hardcoded — so changing what a first placing is worth changes this table and the ladder together."
+        "than being hardcoded, so changing what a first placing is worth changes this table and the ladder together."
     };
   }
 

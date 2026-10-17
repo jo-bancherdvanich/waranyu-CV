@@ -74,7 +74,7 @@
 
   var hint = document.createElement("p");
   hint.className = "erd-hint";
-  hint.textContent = "Click the diagram, then scroll to zoom — or hold Ctrl. Drag to look around, and click a table to trace what it joins to.";
+  hint.textContent = "Click the diagram, then scroll to zoom (or hold Ctrl). Drag to look around, and click a table to trace what it joins to.";
 
   frame.appendChild(bar);
   frame.appendChild(stage);

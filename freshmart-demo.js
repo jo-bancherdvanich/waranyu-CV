@@ -22,7 +22,7 @@
     { label: "Category labels", before: q.categories, after: 6,
       note: "dairy · Dairy · Diary all meant Dairy" },
     { label: "Date formats", before: Object.keys(q.dateFormatCounts || {}).length, after: 1,
-      note: fmt + " — parsed from DateKey instead" },
+      note: fmt + ", parsed from DateKey instead" },
     { label: "Rows with no customer", before: q.orphanRows, after: q.orphanRows, kept: true,
       note: "mapped to “Not Applicable”, never dropped" }
   ];

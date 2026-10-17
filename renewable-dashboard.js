@@ -153,7 +153,7 @@
 
     var lret = "";
     var li = R.years.indexOf(LRET.year);
-    if (li >= 0) {
+    if (li >= 0 && state.country === "Australia") {
       var lx = x(li).toFixed(1);
       lret = '<line x1="' + lx + '" y1="' + PT + '" x2="' + lx + '" y2="' + (H - PB) + '" class="dash-event"/>' +
              '<text x="' + (+lx - 6) + '" y="' + (PT + 10) + '" class="dash-axis dash-eventlab" text-anchor="end">' +
@@ -346,8 +346,9 @@
       return { k: k, d: a.mixSel[k] - a.mixFirst[k] };
     }).sort(function (x, y) { return y.d - x.d; });
     var movers = growth.filter(function (g) { return g.d > 0; }).slice(0, 2).map(function (g) { return g.k; });
-    var t2 = (movers.length ? movers.join(" and ") : "The mix") + " reshape" +
-             (movers.length === 1 ? "s" : "") + " " + esc(state.country) + "'s renewable mix";
+    var t2 = movers.length
+      ? movers.join(" and ") + " reshape" + (movers.length === 1 ? "s" : "") + " " + esc(state.country) + "'s renewable mix"
+      : esc(state.country) + "'s renewable mix held steady";
 
     var volRank = Object.keys(a.volByCountry).sort(function (x, y) { return a.volByCountry[y] - a.volByCountry[x]; });
     var shareRank = Object.keys(a.shareByCountry).sort(function (x, y) { return a.shareByCountry[y] - a.shareByCountry[x]; });
@@ -392,7 +393,10 @@
 
       '<div class="dash-grid-wrap">' +
         panel(t1,
-          "Growth accelerated after the 2015 LRET revision targeted an extra 33,000 GWh annually by 2020.",
+          // The LRET is Australian policy, so the note only belongs on Australia.
+          state.country === "Australia"
+            ? "Growth accelerated after the 2015 LRET revision targeted an extra 33,000 GWh annually by 2020."
+            : "Renewable share of total generation each year.",
           shareLine(a), true) +
 
         panel(t2,
