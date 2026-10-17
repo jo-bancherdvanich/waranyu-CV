@@ -69,24 +69,6 @@
             <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
           </div>
 
-          <figure class="case-video" id="demo" aria-describedby="case-video-desc">
-            <video class="cv-player" muted loop playsinline preload="metadata" width="1920" height="1080"
-                   poster="video/locollm-demo-poster.webp" aria-label="The team's 25-second demo: the base model against the model with our privacy-law adapter">
-              <source src="video/locollm-demo.mp4" type="video/mp4" />
-            </video>
-            <div class="cv-controls">
-              <button type="button" class="cv-toggle" aria-pressed="false">
-                <span class="cv-ico" aria-hidden="true"></span><span class="cv-label">Pause</span>
-              </button>
-            </div>
-            <figcaption>Our team&rsquo;s demo from the client presentation: the same question on the same laptop, asked of the base model and of the model with our privacy-law adapter.</figcaption>
-            <p class="sr-only" id="case-video-desc">
-              Two laptops side by side are asked the same question: a gym stores fingerprint scans on an unencrypted laptop, the laptop is lost, which principle applies?
-              The base model answers APP 6, use or disclosure of personal information, which is wrong. The model with the privacy-law adapter answers APP 11, security of personal information, the data was not kept secure, which is correct.
-              The closing line reads: same laptop, same base model, one small adapter file makes the difference.
-            </p>
-          </figure>
-
           <div class="metrics case-metrics" aria-label="Project at a glance">
             <div><span class="metric-number">81%</span><span>correct on one-principle<br />questions after training</span></div>
             <div><span class="metric-number">170</span><span>benchmark questions,<br />sealed from training</span></div>
