@@ -120,7 +120,7 @@ p:last-child { margin-bottom: 0; }
 
 /* ---- home: introduction ----------------------------------------------- */
 .intro {
-  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); gap: 3rem 4rem; align-items: start;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 3rem 4rem; align-items: start;
   padding: 4.5rem 0 4rem;
 }
 .intro-copy { max-width: 620px; }
