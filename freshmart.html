@@ -112,8 +112,6 @@
           <section class="case-block" data-stage="Data">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span>The data</h2>
             <p>Five raw CSV extracts, modelled into a <b class="hl">single star schema</b>:</p>
-            <details class="case-more">
-              <summary>Read more</summary>
             <ul class="icon-list">
               <li>
                 <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18l2-1.5L10 21l2-1.5L14 21l2-1.5L18 21V3l-2 1.5L14 3l-2 1.5L10 3 8 4.5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
@@ -140,7 +138,6 @@
                 <span><strong>Date</strong>: a generated calendar dimension for time intelligence</span>
               </li>
             </ul>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Approach">
@@ -167,13 +164,10 @@
             <p>
               The warehouse follows <b class="hl">Kimball's four-stage method</b>. <strong>Business process:</strong> retail sales. <strong>Grain:</strong> <b class="hl">one row per product, per customer, per store, per date, per promotion</b>, the most detailed level available, so no future analytical question is closed off. <strong>Dimensions:</strong> Product, Customer, Store, Promotion, Date. <strong>Facts:</strong> QuantitySold, UnitPrice, DiscountAmount, COGS.
             </p>
-            <details class="case-more">
-              <summary>Read more</summary>
             <p>
               Facts were classified deliberately: QuantitySold, DiscountAmount and COGS are additive; UnitPrice is non-additive and used only inside calculations, <b class="hl">never summed</b>. Getting that distinction wrong is how dashboards end up reporting a nonsense "total unit price".
             </p>
             <figure class="case-diagram"><svg viewBox="0 0 560 262" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path class="dg-link " d="M96 56L216 108"/><path class="dg-link " d="M280 56L280 108"/><path class="dg-link " d="M464 56L344 108"/><path class="dg-link " d="M150 206L235 152"/><path class="dg-link " d="M410 206L326 152"/><g class=""><rect x="44" y="24" width="104" height="32" rx="5"/><text x="96" y="44" class="dg-t" text-anchor="middle">Customer</text></g><g class=""><rect x="228" y="24" width="104" height="32" rx="5"/><text x="280" y="44" class="dg-t" text-anchor="middle">Product</text></g><g class=""><rect x="412" y="24" width="104" height="32" rx="5"/><text x="464" y="44" class="dg-t" text-anchor="middle">Store</text></g><g class=""><rect x="98" y="206" width="104" height="32" rx="5"/><text x="150" y="226" class="dg-t" text-anchor="middle">Promotion</text></g><g class=""><rect x="358" y="206" width="104" height="32" rx="5"/><text x="410" y="226" class="dg-t" text-anchor="middle">Date</text></g><g class="dg-fact"><rect x="214" y="108" width="132" height="44" rx="5"/><text x="280" y="127" class="dg-t" text-anchor="middle">Sales</text><text x="280" y="141" class="dg-s" text-anchor="middle">17,697 rows</text></g></svg><figcaption>One fact table at the centre, five dimensions around it. The grain is one row per product, per customer, per store, per date, per promotion.</figcaption></figure>
-            </details>
           </section>
 
           <section class="case-block">
@@ -187,10 +181,7 @@
                 <span class="finding-number"><b class="hl">02</b></span>
                 <p><strong>Margin is not where profit differs.</strong> Gross margin sits between <b class="hl">28% and 29%</b> in every region, category and store, against 28.67% overall. Profit follows revenue, so the way to grow it is selling more of the high-value lines, not moving sales to a &ldquo;better margin&rdquo; store.</p>
               </li>
-            </ul>
-            <details class="case-more">
-              <summary>Read more</summary>
-            <ul class="findings">
+            
               <li>
                 <span class="finding-number"><b class="hl">03</b></span>
                 <p><strong>South leads only because it has more stores.</strong> It earns 33.2% of revenue from four stores, but revenue per store is level across the chain: about <b class="hl">$26,400 to $27,600</b> in every region. No region is underperforming.</p>
@@ -204,7 +195,6 @@
                 <p><strong>2024 grew 1.6% on 2023</strong> ($106,353 against $104,674) but stayed below 2022. The comparison is built with DAX time intelligence, so growth is measured against <b class="hl">the same period last year rather than a raw total</b>.</p>
               </li>
             </ul>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Limits">

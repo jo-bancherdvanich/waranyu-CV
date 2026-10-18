@@ -107,15 +107,12 @@
               The client let us pick the test subject, so we tested the untrained model first: <b class="hl">15 business domains, five questions each</b>. Eleven scored five out of five, which leaves nothing to prove. Compliance and privacy law scored zero, with made-up supporting evidence, and its answers are easy to mark because there are 13 numbered principles. <b class="hl">The client approved it as the project domain.</b>
             </p>
             <div class="ll-domains" id="ll-domains" role="img" aria-label="Base model test: 11 of 15 domains scored 5 out of 5; customer service 4, cybersecurity 3, HR and privacy law 0"></div>
-            <details class="case-more">
-              <summary>Read more</summary>
               <p>
                 A follow-up test of 20 privacy scenarios scored 2, or <b class="hl">10%</b>, close to the 8% you would get by picking one of the 13 principles at random. The model knew the law existed but scrambled the numbers, calling the security rule APP 13 when it is APP 11. In a larger 228-question test it scored 21%, and <b class="hl">79% of its answers cited foreign law</b> such as GDPR.
               </p>
               <p>
                 A weak domain was a deliberate choice. If the base model is already good, a small gain could be luck. A big gap leaves a result everyone can see.
               </p>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Approach">
@@ -137,8 +134,6 @@
                 <span><strong>Checks</strong>: no overlap between the two sets, benchmark answers reviewed by our privacy-law expert and the client, and automated checks in Python</span>
               </li>
             </ul>
-            <details class="case-more">
-              <summary>Read more</summary>
               <p>
                 Every item uses the same question stem and the same four-part answer, so results can be <b class="hl">scored automatically</b>. One training example:
               </p>
@@ -149,7 +144,6 @@
               <p>
                 Automated word-overlap checks passed, but <b class="hl">my manual review found 30 of my 105 training questions described the same situation as a benchmark question</b>. I rewrote them, 37 changes in all, so the final score measures what the model learned rather than what it memorised.
               </p>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Result" id="explore">

@@ -126,12 +126,9 @@
             <p>
               The schema has <strong>16 tables linked by 18 documented business rules</strong>. A central <strong>Game</strong> connects to clubs, players and referees through <b class="hl">junction tables</b>. From each player's appearance in a game, the model branches into goals, disciplinary cards, starting positions, and best-on-ground awards.
             </p>
-            <details class="case-more">
-              <summary>Read more</summary>
             <p>
               Substitutions are captured <b class="hl">inside the player-appearance table</b> using a game minute and a "Substitute" start position, rather than as a separate entity. That choice matters, as explained below.
             </p>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Result" id="run-it">
@@ -172,8 +169,6 @@
             <p>
               The analytical layer is the interesting part: <b class="hl">joins, aggregation, subqueries, HAVING clauses and LEFT JOINs</b>, each written to answer a question an organiser would genuinely ask. The three queries written for this page go further, with a <b class="hl">window function</b> (each time band's share of all goals), <b class="hl">CASE banding</b> and a <b class="hl">self-join</b> (goals conceded are the opponent's goals in the same game).
             </p>
-            <details class="case-more">
-              <summary>Read more</summary>
             <ul class="findings">
               <li>
                 <span class="finding-number"><b class="hl">01</b></span>
@@ -196,7 +191,6 @@
                 <p><strong>Best-on-ground rankings</strong> with a breakdown of <b class="hl">3</b>, <b class="hl">2</b> and 1-point awards, plus each club's away form.</p>
               </li>
             </ul>
-            </details>
           </section>
 
           <section class="case-block" data-stage="Limits">
@@ -204,8 +198,6 @@
             <p>
               The version in the repository is a <b class="hl">revised one</b>. Reviewing the first design, three things were wrong, so I <b class="hl">went back and fixed them rather than leaving them</b>:
             </p>
-            <details class="case-more">
-              <summary>Read more</summary>
             <ul>
               <li><strong>Removed the Substitution table.</strong> It created an <b class="hl">unresolved many-to-many</b> relationship: two foreign keys pointing into the same parent. Capturing substitutions inside the player-appearance record is the cleaner relational answer.</li>
               <li><strong>Corrected two business rules.</strong> The club-to-ground relationship now describes training and ownership rather than where games are played, which is what the data actually represents.</li>
@@ -215,7 +207,6 @@
             <p>
               Going back to <b class="hl">correct a design I had already finished</b> is the part of this project I would point to first.
             </p>
-            </details>
           </section>
 
           <section class="case-block" data-stage="My part">
