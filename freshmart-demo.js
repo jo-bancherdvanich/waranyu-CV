@@ -1,7 +1,6 @@
-/* FreshMart — what the cleaning changed, before and after.
+/* FreshMart: what the cleaning changed, before and after.
  *
- * Figures come from the data quality audit of the five source CSVs. The
- * dashboard itself is built separately in freshmart-dashboard.js.
+ * Figures come from the data quality audit of the five source CSVs.
  */
 (function () {
   "use strict";
