@@ -659,3 +659,9 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 }
 .ll-heat thead th:first-child { text-align: left; }
 .exp-actions { margin-top: 1rem; }
+.ic-table-wrap { margin: 1.2rem 0; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+.ic-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: .9rem; line-height: 1.45; }
+.ic-table th, .ic-table td { padding: .65rem .8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.ic-table thead th { background: var(--surface); color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .68rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.ic-table tbody th { font-weight: 600; }
+.ic-table tbody tr:last-child > * { border-bottom: 0; }

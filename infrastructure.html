@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <script>
+      /* Applied before the first paint so dark-theme visitors never see a light flash; app.js keeps it in sync after. */
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
+        if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+        var bar = t === "dark" ? "#151411" : "#f7f4ee";
+        document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute("content", bar); });
+      })();
+    </script>
+    <meta
+      name="description"
+      content="IT infrastructure plan for a government department: choosing connections for five remote WA training centres, designing for outages, and a network diagram, by Waranyu Bancherdvanich."
+    />
+    <title>IT infrastructure plan | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         the page is readable before they arrive -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="components.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="canonical" href="https://waranyu-cv.vercel.app/infrastructure.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Waranyu Bancherdvanich" />
+    <meta property="og:title" content="IT infrastructure plan | Waranyu Bancherdvanich" />
+    <meta property="og:description" content="IT infrastructure plan for a government department: choosing connections for five remote WA training centres, designing for outages, and a network diagram, by Waranyu Bancherdvanich." />
+    <meta property="og:url" content="https://waranyu-cv.vercel.app/infrastructure.html" />
+    <meta property="og:image" content="https://waranyu-cv.vercel.app/images/dort-network-diagram.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="IT infrastructure plan | Waranyu Bancherdvanich" />
+    <meta name="twitter:description" content="IT infrastructure plan for a government department: choosing connections for five remote WA training centres, designing for outages, and a network diagram, by Waranyu Bancherdvanich." />
+    <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/dort-network-diagram.jpg" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
+        <div class="topbar-right">
+          <a class="github-link" href="index.html#projects">All projects</a>
+        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+      </div>
+      </header>
+
+
+      <main id="main">
+        <article class="case case-infra">
+          <p class="eyebrow">06 / IT infrastructure · Pair project</p>
+          <h1>Connecting five remote training centres to a Perth head office</h1>
+          <p class="lede">
+            An IT infrastructure and capital plan for a government department: replace end-of-life PCs at five remote Indigenous community resource centres, link them to a 60-staff head office, and design it so <b class="hl">calls and learning keep working</b> when the connection or the power fails.
+          </p>
+          <div class="case-actions">
+            <a class="button primary" href="#explore">See what we found <span aria-hidden="true">&darr;</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="metrics case-metrics" aria-label="Project at a glance">
+            <div><span class="metric-number">6</span><span>sites connected: a Perth head<br />office and 5 remote centres</span></div>
+            <div><span class="metric-number">5</span><span>WAN options compared<br />for the remote sites</span></div>
+            <div><span class="metric-number">29.8 ms</span><span>Starlink latency, against<br />664.9 ms on Sky Muster</span></div>
+          </div>
+
+          <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Assess 12 old PCs</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Compare 5 WAN options</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Design the network</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Cost every item in Excel</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">Plan security and power</span></li></ol>
+
+          <figure class="case-shot">
+            <img width="1807" height="1280" src="images/dort-network-diagram.jpg" alt="Network diagram of the Perth head office and five remote centres: Starlink satellite links to four centres, NBN fibre to Halls Creek and the head office, a 5G backup, Iridium satellite phones, hybrid solar and UPS at each site, and the Microsoft cloud services" />
+            <figcaption>The network diagram, drawn in Visio. <a href="images/dort-network-diagram.jpg" target="_blank" rel="noreferrer">Open full size <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
+              <dd>Pair project with Jatuporn Thongmo. We designed every part together, and I drew the network diagram in Visio</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
+              <dd>Excel cost model · Visio · WAN and LAN design · CapEx and OpEx budgeting</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
+              <dd>Technological Infrastructure (ISYS5003), Curtin University, Semester 1 2026</dd>
+            </div>
+          </dl>
+
+          <section class="case-block" data-stage="Problem">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 1.9V17h6v-1.5c0-.7.3-1.4.8-1.9A6 6 0 0 0 12 3z"/><path d="M9.5 20h5"/></svg></span>The problem</h2>
+            <p>
+              The Department of Remote Training (DoRT), a fictional WA government department in the case study, runs a 60-staff head office in Perth and five resource centres in remote Indigenous communities: <strong>Halls Creek, Bidyadanga, Kalumburu, Meekatharra and Djarindjin</strong>. The centres were running on <b class="hl">12 end-of-life PCs</b>, from Windows XP to 8.1, which we assessed against <b class="hl">8 service requirements</b>.
+            </p>
+            <ul>
+              <li><strong>Unstable connections</strong> between the remote sites and Perth, so staff could not rely on the learning system.</li>
+              <li><strong>Frequent power cuts</strong>, with no solar or battery backup at the remote sites.</li>
+              <li><strong>Costly, dated phone calls</strong>, with no VoIP or Teams calling between sites.</li>
+              <li><strong>Disconnected systems and security gaps</strong>, with no VPN, no cloud backup and no central way to manage devices.</li>
+            </ul>
+            <p>The brief: a secure, resilient network that gives every site the same access to the head office&rsquo;s systems, within a <b class="hl">A$2.1M</b> budget.</p>
+          </section>
+
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>Choosing a connection for each site</h2>
+            <p>
+              Remote WA has no single right answer, so we compared <b class="hl">five WAN options</b> on reliability, latency, availability and cost, using published supplier prices.
+            </p>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Option</th><th scope="col">Cost</th><th scope="col">Strength</th><th scope="col">Weakness</th><th scope="col">Used for</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">NBN Enterprise Ethernet</th><td>A$449 a month</td><td>Dedicated fibre, best reliability</td><td>Highest cost, depends on the premises</td><td><strong>Head office</strong></td></tr>
+                  <tr><th scope="row">NBN Business FTTP</th><td>A$110 a month</td><td>Stable and cost-effective</td><td>Depends on the premises</td><td><strong>Halls Creek</strong></td></tr>
+                  <tr><th scope="row">5G Business</th><td>From A$70 a month</td><td>Fast to set up, flexible</td><td>Depends on coverage and congestion</td><td><strong>Head office backup</strong></td></tr>
+                  <tr><th scope="row">Starlink Business</th><td>A$486 a month, A$3,684 per kit</td><td>Low latency, about 29.8 ms</td><td>Needs stable power, sensitive to extreme weather</td><td><strong>Four remote centres</strong></td></tr>
+                  <tr><th scope="row">NBN Sky Muster</th><td>A$59.95 to A$109.95 a month</td><td>Cheapest, no upfront hardware</td><td>Very high latency, about 664.9 ms, and data caps</td><td>Not chosen</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              <strong>Why Starlink over Sky Muster.</strong> Sky Muster is much cheaper, but at about <b class="hl">664.9 ms</b> of latency a Teams or VoIP call lags badly. Starlink runs at about <b class="hl">29.8 ms</b>, so staff at Bidyadanga, Kalumburu, Meekatharra and Djarindjin can call head office as if they were next door. Halls Creek has NBN fibre available, so it gets the cheaper fixed line instead.
+            </p>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg></span>The network design</h2>
+            <ul>
+              <li><strong>Head office:</strong> an extended star across two floors, with two 48-port PoE switches joined by a <b class="hl">10 Gbps redundant trunk link</b>, two routers with firewalls, 60 Windows 11 PCs, 20 VoIP phones, three wireless access points, a domain controller with backup, and two UPS units.</li>
+              <li><strong>Each remote centre:</strong> a star with one 16-port PoE switch, a router with firewall, one to five PCs (12 in all), VoIP phones, a wireless access point, a UPS and a <b class="hl">hybrid solar system with battery</b>, so a power cut does not take the site offline.</li>
+              <li><strong>Backup calling:</strong> an <b class="hl">Iridium satellite phone</b> at every site for when both the internet and the power fail.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Result" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What we found</h2>
+            <ul class="findings">
+              <li>
+                <span class="finding-number"><b class="hl">01</b></span>
+                <p><strong>Latency decided the remote links, not price.</strong> Sky Muster is the cheapest option, but at about <b class="hl">664.9 ms</b> a Teams or VoIP call lags badly. Starlink at about <b class="hl">29.8 ms</b> costs more and gives the four most remote centres calls that work.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">02</b></span>
+                <p><strong>One connection does not fit every site.</strong> The head office gets dedicated NBN Enterprise Ethernet with a <b class="hl">5G backup</b>, Halls Creek can reach NBN fibre so it gets the cheaper fixed line, and only the four sites with no fixed option go to Starlink.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>Power is the weak point, not the network.</strong> Starlink needs stable power and the remote sites lose it often, so every centre gets <b class="hl">hybrid solar with a battery and a UPS</b>. Without that, the rest of the design cannot stay online.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">04</b></span>
+                <p><strong>Calls keep working even when the internet does not.</strong> Teams Phone makes calls between all six sites free, and an <b class="hl">Iridium satellite phone</b> at every site covers the times when both the internet and the power are down.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">05</b></span>
+                <p><strong>It fits comfortably in the budget.</strong> Year 1 uses about a third of the A$2.1M, leaving the rest for maintenance and future upgrades.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>What we recommended</h2>
+            <p>These are recommendations for the department, not systems we set up or ran ourselves.</p>
+            <ul>
+              <li><strong>Cloud and devices:</strong> Microsoft 365 and Teams Phone for email, files and calls between all six sites, Azure with Entra ID for the learning system&rsquo;s data and staff logins, and Intune to manage and update every PC remotely.</li>
+              <li><strong>Security:</strong> firewalls at every site, an encrypted site-to-site VPN back to head office, separate staff and guest wifi, multi-factor authentication, role-based access and automatic patching.</li>
+              <li><strong>Green IT:</strong> certified e-waste recycling for the old PCs, energy-efficient hardware with after-hours sleep schedules, less printing, and remote support instead of travel.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Limits">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></svg></span>What the plan can&rsquo;t tell you</h2>
+            <ul>
+              <li><strong>The department is fictional</strong>, so the plan was never tested against a real site survey.</li>
+              <li><strong>Prices are published list prices, not quotes.</strong> Freight and installation in remote communities could add to them.</li>
+              <li><strong>The solar systems are costed per site, not engineered</strong> for each centre&rsquo;s actual load.</li>
+              <li><strong>The Microsoft cloud tools are recommendations.</strong> We did not configure or test them hands-on.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="My part">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>What we did</h2>
+            <p>Jatuporn Thongmo and I designed every part of the plan together:</p>
+            <ul>
+              <li><strong>Assessed the 12 old PCs</strong> against the department&rsquo;s 8 service requirements.</li>
+              <li><strong>Compared the five WAN options</strong> and chose a connection for each site.</li>
+              <li><strong>Designed the head office and remote-site networks</strong>, with the hardware for each.</li>
+              <li><strong>Built the Excel cost model</strong>, pricing every item from cited suppliers and splitting it into capital and running costs.</li>
+              <li><strong>Drew the network diagram in Visio</strong>.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
+            <a class="button primary" href="images/dort-network-diagram.jpg" target="_blank" rel="noreferrer">Network diagram, full size <span aria-hidden="true">↗</span></a>
+            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+          </div>
+          </section>
+
+          <a class="next-project" href="renewable.html">
+            <span class="np-text">
+              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
+              <span class="np-eyebrow">01 / Energy · Academic</span>
+              <span class="np-title">Australia's renewable transition</span>
+              <span class="np-blurb">A dashboard tracking Australia's shift to renewable electricity from 2005 to 2024, and where it lands by 2035.</span>
+            </span>
+            <img class="np-shot" src="images/renewable-dashboard.webp" width="1337" height="752" alt="" loading="lazy" decoding="async" />
+          </a>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <div class="sf-top">
+          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <nav class="sf-links" aria-label="Footer">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          </nav>
+        </div>
+        <div class="sf-bottom">
+          <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+          <span>Last updated October 2026</span>
+          <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
+          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
