@@ -103,7 +103,7 @@
 
           <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V8M16 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Electricity data 2005 to 2024</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M5 16l4-3 4 1 6-6"/><circle cx="7" cy="14" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="17" cy="9" r="1.2"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">R linear regression</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Power BI dashboard</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 8-8"/><path d="M16 7h4v4"/><path d="M4 21h16" stroke-dasharray="2 3"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">2035 forecast</span></li></ol>
 
-          <figure class="case-shot case-pbi" id="powerbi">
+          <figure class="case-shot case-pbi" id="explore">
             <div class="pbi-embed">
               <iframe title="Australia's Renewable Electricity Transition, the original Power BI report" src="https://app.powerbi.com/view?r=eyJrIjoiZDMxYmRmY2UtZmIyOC00ODVkLTllYzUtNGNmMTVjMjUyOGUwIiwidCI6IjVhNzQwY2Q3LTU3NjgtNGQwOS1hZTEzLWY3MDZiMDlmYTIyYyIsImMiOjEwfQ%3D%3D" allowfullscreen></iframe>
             </div>
@@ -204,29 +204,23 @@
                 <span class="finding-number"><b class="hl">01</b></span>
                 <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about <b class="hl">9%</b> in <b class="hl">2005</b> to <b class="hl">35%</b> in <b class="hl">2024</b>, but a <b class="hl">linear forecast</b> reaches only <strong>37.8% by 2030</strong>, less than half the <b class="hl">82%</b> target for that year, and 44.6% by 2035.</p>
               </li>
-            
               <li>
                 <span class="finding-number"><b class="hl">02</b></span>
-                <p><strong>Solar and wind are carrying the transition, not hydro.</strong> Solar grew from ~<b class="hl">0.1 TWh</b> to ~<b class="hl">48.6 TWh</b> and wind from ~<b class="hl">0.9 TWh</b> to ~<b class="hl">31.0 TWh</b> between <b class="hl">2005</b> and <b class="hl">2024</b>, while hydro stayed roughly flat. The growth is entirely in the newer technologies.</p>
+                <p><strong>Solar and wind took over from hydro.</strong> In <b class="hl">2005</b> they made up just <b class="hl">4.7%</b> of Australia&rsquo;s renewable electricity; by <b class="hl">2024</b> it was <b class="hl">81.3%</b>. Wind overtook hydro in <b class="hl">2019</b> and solar overtook both in <b class="hl">2020</b>, growing from 0.1 to <b class="hl">48.6 TWh</b> while hydro stayed around 15 TWh.</p>
               </li>
               <li>
                 <span class="finding-number"><b class="hl">03</b></span>
+                <p><strong>Renewables covered all the growth in demand.</strong> Total generation rose about <b class="hl">51 TWh</b> between 2005 and 2024 while renewables grew about <b class="hl">77 TWh</b>, so fossil generation actually fell, from <b class="hl">208 to 182 TWh</b>.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">04</b></span>
+                <p><strong>Policy changed the pace.</strong> The share stalled at <b class="hl">13 to 15%</b> while the Renewable Energy Target was under review, then grew about <b class="hl">2.5 points a year</b> after the 2015 reset, nearly <b class="hl">5&times;</b> its 2005 to 2015 pace.</p>
+              </li>
+              <li>
+                <span class="finding-number"><b class="hl">05</b></span>
                 <p><strong>International comparison depends entirely on the measure you pick.</strong> China generates the most renewable electricity by volume (<b class="hl">3,398</b>.<b class="hl">8 TWh</b>), but Australia's renewable <em>share</em> of <b class="hl">35.0%</b> slightly edged China's <b class="hl">33.7%</b> in <b class="hl">2024</b>. New Zealand (<b class="hl">85.5%</b>) and Germany (<b class="hl">54.5%</b>) remain well ahead on share. Choosing volume or share tells two opposite stories, so the dashboard shows both.</p>
               </li>
             </ul>
-          </section>
-
-          <section class="case-block" id="explore">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>Explore the dashboard</h2>
-            <p>
-              The Power BI report, <b class="hl">rebuilt to run in your browser</b>. All <b class="hl">480 generation facts</b> are loaded from the same cleaned workbook, across four countries and fourteen sources, and every figure is <b class="hl">calculated here rather than typed in</b>. <strong>Switch country, narrow to a single source group, or pick a single year</strong>, and the whole report follows.
-            </p>
-
-            <div id="re-dash" class="dash" aria-label="Interactive renewable electricity dashboard"></div>
-
-            <p class="dash-foot">
-              Share is renewable generation divided by that country's total generation in the same year, which is why the ranking changes depending on whether you read volume or share.
-            </p>
           </section>
 
           <section class="case-block" data-stage="Limits">
@@ -281,8 +275,5 @@
     <script src="app.js"></script>
     <script src="chart-hover.js"></script>
     <script src="renewable-forecast.js"></script>
-    <script src="dash-interactions.js"></script>
-    <script src="renewable-rows.js"></script>
-    <script src="renewable-dashboard.js"></script>
   </body>
 </html>
