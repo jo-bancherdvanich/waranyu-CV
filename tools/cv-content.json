@@ -114,7 +114,7 @@
           },
           "bullets": [
             "Cleaned data from 5 raw operational files in Power Query, remapping 93 orphaned sales rows instead of dropping them, keeping revenue totals accurate and the data gap visible.",
-            "Modelled 17,697 transactions across 12 stores into a Kimball star schema, so managers can see which regions and categories drive profit without stitching spreadsheets together.",
+            "Modelled 17,697 transaction lines across 12 stores into a Kimball star schema, so managers can see which regions and categories drive profit without stitching spreadsheets together.",
             "Built DAX measures for revenue, gross margin and year-on-year time intelligence, so growth is judged against a fair like-for-like comparison rather than a raw total."
           ]
         },
