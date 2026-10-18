@@ -138,6 +138,18 @@ p:last-child { margin-bottom: 0; }
 .portrait-frame img { display: block; width: 100%; height: auto; }
 .portrait-wrap figcaption { margin-top: .6rem; font-family: "DM Mono", monospace; font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
 .pt-name { color: var(--ink); }
+@media (min-width: 861px) {
+  .intro { grid-template-columns: minmax(0, 620px) minmax(0, 1fr); }
+}
+.hero-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 1rem; align-self: center; }
+.hw-tile { display: block; color: var(--ink); text-decoration: none; }
+.hw-tile img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; border: 1px solid var(--line); background: #fff; transition: transform .2s ease, border-color .2s ease; }
+.hw-tile:hover img, .hw-tile:focus-visible img { border-color: var(--accent); transform: translateY(-2px); }
+.hw-label { display: block; margin-top: .45rem; font-family: "DM Mono", monospace; font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.hw-tile:hover .hw-label { color: var(--ink); }
+.hw-num { margin-right: .45rem; color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .hw-tile img { transition: none; } }
+@media (max-width: 860px) { .hero-work { display: none; } }
 
 /* ---- sections ------------------------------------------------------------ */
 .section { padding: 4rem 0; border-top: 1px solid var(--line); }
