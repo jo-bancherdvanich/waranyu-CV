@@ -339,6 +339,8 @@ p:last-child { margin-bottom: 0; }
   .wordmark { font-size: 1rem; }
   .topbar-cta { padding: .35rem .6rem; font-size: .85rem; white-space: nowrap; }
   .topbar-cta span { display: none; }
+  .topbar { gap: .6rem; }
+  .topbar-right { gap: .6rem; }
   .portrait-wrap { max-width: 240px; }
   .site-shell { padding: 0 18px; }
   .hero-facts { gap: .8rem 1.4rem; }

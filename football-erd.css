@@ -74,6 +74,7 @@
   overflow: hidden;
   border: 1px solid var(--img-border);
   border-radius: 10px;
+  --dot: color-mix(in srgb, var(--ink) 16%, transparent);
   background:
     radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0) 0 0 / 22px 22px,
     var(--surface);
