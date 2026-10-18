@@ -675,3 +675,6 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
   .cl-label, .cl-note { grid-column: 1 / -1; }
   .cl-after { white-space: normal; }
 }
+.pbi-title { margin: 2.6rem 0 .3rem; font-size: 1.25rem; }
+.pbi-embed { position: relative; margin-top: 1rem; aspect-ratio: 1024 / 612; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.pbi-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }

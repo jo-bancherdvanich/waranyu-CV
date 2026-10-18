@@ -366,24 +366,28 @@
           <div class="section-label"><span>06</span><h2 id="approach-title"><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13.5 14 8.5 15.5 10.5 10z"/></svg></span>How I think about data</h2></div>
           <ol class="principle-list">
             <li>
-              <span class="pr-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l6-6"/><path d="M14 4l6 6-8 8-6-6z"/><path d="M12 12l4-4"/></svg></span>
               <h3>Clean it before you model it</h3>
-              <p>On FreshMart I <b class="hl">audited five source tables before touching the schema</b>: duplicate customers, three spellings of the same category, <b class="hl">93</b> rows pointing at a customer who didn't exist. A dashboard built on unaudited data is <b class="hl">confidently wrong</b>, which is worse than no dashboard.</p>
+              <p>On FreshMart I <b class="hl">audited five source tables before touching the schema</b>: 15 duplicate customers, three spellings of one category, dates written three ways, and <b class="hl">93</b> rows pointing at a customer who didn't exist. A dashboard built on unaudited data is <b class="hl">confidently wrong</b>.</p>
             </li>
             <li>
-              <span class="pr-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M12 8v3"/><circle cx="12" cy="13" r=".6" fill="currentColor"/></svg></span>
+              <h3>Build the test before the result</h3>
+              <p>On LocoLLM we <b class="hl">sealed a 170-question benchmark before any training</b>. When I found 30 of my training questions described the same situations as test questions, I rewrote them, so the <b class="hl">81%</b> measures what the model learned, not what it memorised.</p>
+            </li>
+            <li>
               <h3>Say what the analysis can't tell you</h3>
-              <p>My renewable forecast is a linear regression, so I wrote in the report that it should be read as a <b class="hl">planning signal, not a prediction</b>, and that including the slow early years makes it <b class="hl">deliberately conservative</b>. Stating the limits is how the rest of the number earns trust.</p>
+              <p>My renewable forecast is a linear regression, so I wrote that it is a <b class="hl">planning signal, not a prediction</b>, and forecast in R so the <b class="hl">equation, R&sup2; and p-value print on the chart</b>. Anyone senior can check the reasoning without asking me.</p>
             </li>
             <li>
-              <span class="pr-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M8.5 11h5M11 8.5v5"/></svg></span>
-              <h3>Choose the method that shows its working</h3>
-              <p>I forecast in R rather than Power BI's built-in tool specifically because R <b class="hl">prints the equation, R² and p-value onto the chart</b>. If someone senior wants to check my reasoning, they shouldn't have to ask me for it.</p>
+              <h3>Know what one row means</h3>
+              <p>WeatherWise answered &ldquo;tomorrow&rdquo; confidently and wrongly, because the API returns <b class="hl">3-hour blocks, not days</b>, and the lookup was reading today&rsquo;s eight. Checking the grain of the data is the first step, not a detail.</p>
             </li>
             <li>
-              <span class="pr-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg></span>
-              <h3>Decide who the answer is for</h3>
-              <p>A star schema is <b class="hl">for the next analyst</b>; an executive dashboard is for someone with <b class="hl">four minutes between meetings</b>. Same data, different job.</p>
+              <h3>Write the rules before the tables</h3>
+              <p>On the football database I wrote <b class="hl">18 business rules before a single table</b>, then the schema followed from them. Two players in the season share a name, so every query <b class="hl">groups by player ID, never by name</b>.</p>
+            </li>
+            <li>
+              <h3>Let the requirement decide, not the price</h3>
+              <p>For the remote training centres, Sky Muster was the cheapest link, but at about <b class="hl">665 ms</b> a call lags badly. We chose Starlink at about <b class="hl">30 ms</b>, because the requirement was <b class="hl">calls that work</b>, not the lowest bill.</p>
             </li>
           </ol>
         </section>
