@@ -67,7 +67,7 @@
         {
           "title": "Student Consultant (Finance Lead)",
           "org": "Curtin Consulting Group – Client: Hockey WA",
-          "date": "Jul 2026 – Nov 2026",
+          "date": "Jul 2026 – Present",
           "bullets": [
             "Led the financial analysis in a 9-person team developing Hockey WA’s broadcast streaming strategy.",
             "Built a 20-year Excel break-even model across 3 scenarios, giving the board a payback range to decide on, in place of a provider arrangement that returned no revenue.",
@@ -127,7 +127,7 @@
           },
           "bullets": [
             "Reconciled data from national energy agencies into a Power BI galaxy schema, showing Australia’s renewable share rising from 9% to 35%, benchmarked against Germany, New Zealand and China.",
-            "Linked the trend to policy: share stalled while the Renewable Energy Target was under review, then grew nearly 5× faster after the 2015 target reset.",
+            "Linked the trend to policy: share stalled while the Renewable Energy Target was under review, then grew about 2.5 points a year after the 2015 target reset, nearly 5× its 2005 to 2015 pace.",
             "Forecast with R linear regression that Australia reaches only 37.8% renewable share by 2030 against the 82% target, so the target is unlikely on the current trend."
           ]
         },
