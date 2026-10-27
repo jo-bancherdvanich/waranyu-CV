@@ -255,6 +255,7 @@ def mix_card(L, t):
     prog = 2005 + 19 * ease((t - t0) / (t1 - t0)) ** 1.0
     X = lambda yr: cx + cw * (yr - 2005) / 19
     Y = lambda v: cy + ch - ch * v / 50
+    ends = []
     for key, col, name in (("hydro", HYDRO, "Hydro"), ("wind", WIND, "Wind"), ("solar", SOLAR, "Solar")):
         vals = DATA[key]
         pts = [(X(yr), Y(v)) for yr, v in zip(YEARS, vals) if yr <= prog]
@@ -263,8 +264,14 @@ def mix_card(L, t):
         L.line(pts, col, a, 4)
         ex, ey = pts[-1]
         L.dot(ex, ey, 5, col, a)
-        if prog > 2006:
-            L.text(ex + 12, ey, f"{name} {series(vals, prog):.1f}", 18, col, a, weight=700, anchor="lm")
+        ends.append([ey, ex, col, f"{name} {series(vals, prog):.1f}"])
+    if prog > 2006:
+        # keep the end labels at least 22 px apart
+        ends.sort()
+        for i in range(1, len(ends)):
+            ends[i][0] = max(ends[i][0], ends[i - 1][0] + 22)
+        for ly, ex, col, txt in ends:
+            L.text(ex + 12, ly, txt, 18, col, a, weight=700, anchor="lm")
     # crossovers, in step with the narration
     l1 = SC["mix"]["lines"][1]
     mid = l1["start"] + (l1["end"] - l1["start"]) * 0.48
@@ -296,11 +303,11 @@ def mix_bars(L, t):
         by = y + 86 + i * 78
         L.text(x + 30, by + 18, f"{yr}", 22, MUTED, a, weight=700, anchor="lm")
         bx, bw = x + 110, w - 280
-        L.rect(bx, by, bw, 36, HYDRO, a * 0.35, r=6)
+        L.rect(bx, by, bw, 36, (0, 0, 0), a * 0.35, r=6)
         L.rect(bx, by, bw * v / 100 * g, 36, SOLAR if i else WIND, b, r=6)
         if g > 0:
             L.text(x + w - 30, by + 18, f"{v * g:.1f}%", 38, INK, b, weight=700, anchor="rm")
-    kicker(L, x + 110, y + h - 26, "Rest: hydro, biomass, geothermal", a)
+    kicker(L, x + 110, y + h - 26, "Percent of renewable electricity", a)
 
 
 def world_card(L, t):
@@ -441,7 +448,7 @@ def main():
     out = os.path.join(VIDEO, "renewable-transition.mp4")
     cmd = ["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
            "-r", str(FPS), "-i", "-", "-i", os.path.join(BUILD, "narration.wav"),
-           "-c:v", "libx264", "-preset", "slow", "-crf", "23", "-pix_fmt", "yuv420p", "-profile:v", "high",
+           "-c:v", "libx264", "-preset", "slow", "-crf", "24", "-pix_fmt", "yuv420p", "-profile:v", "high",
            "-c:a", "aac", "-b:a", "96k", "-shortest", "-movflags", "+faststart", out]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for f in range(n):
