@@ -133,7 +133,7 @@ html { scroll-padding-top: 88px; }
 
 /* ---- sections ------------------------------------------------------------ */
 .section { padding: 4.5rem 0; border-top: 1px solid var(--line); }
-.section-head, .section-label h2 { margin: 0 0 2.6rem; font-family: inherit; font-size: .95rem; font-weight: 600; letter-spacing: 0; color: var(--accent); }
+.section-head, .section-label h2 { margin: 0 0 2.6rem; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--accent); }
 
 .section-note { margin: -1.8rem 0 2.6rem; color: var(--muted); }
 
