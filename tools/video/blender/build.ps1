@@ -27,4 +27,4 @@ if ($Stills) {
 
 & $blender -b --factory-startup --python scene.py -- render 0 $last
 & $py hud.py encode
-ffmpeg -v error -y -ss 50 -i ..\..\..\video\renewable-transition.mp4 -frames:v 1 -c:v libwebp -quality 82 ..\..\..\video\renewable-transition-poster.webp
+ffmpeg -v error -y -ss 33.4 -i ..\..\..\video\renewable-transition.mp4 -frames:v 1 -c:v libwebp -quality 82 ..\..\..\video\renewable-transition-poster.webp
