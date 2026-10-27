@@ -1,34 +1,43 @@
 WEBVTT
 
-00:00.600 --> 00:06.661
-Australia's renewable electricity transition, 2005 to 2035.
+00:00.800 --> 00:05.840
+Australia has committed to 82 percent renewable electricity by 2030.
 
-00:06.500 --> 00:09.252
-A wind and solar farm in the wheatbelt.
+00:06.290 --> 00:07.018
+Is it on track?
 
-00:09.800 --> 00:15.559
-In 2005, renewables made just 8.9 percent of Australia's electricity.
+00:08.218 --> 00:16.110
+In 2005, about 9 percent of Australia's electricity was renewable. Coal and gas made the rest.
 
-00:15.800 --> 00:23.301
-After the 2015 target revision, growth took off. By 2024 the share reached 35 percent.
+00:17.510 --> 00:20.162
+The share stalled while the target was under review.
 
-00:23.200 --> 00:29.877
-Solar rose from almost nothing to 48.6 terawatt hours, overtaking wind and hydro.
+00:20.612 --> 00:27.944
+After the 2015 reset, it grew about 2.5 points a year, reaching 35 percent in 2024.
 
-00:30.400 --> 00:33.814
-Hydro, the old leader, barely moved.
+00:28.394 --> 00:33.821
+Fossil generation fell from 208 to 182 terawatt hours.
 
-00:37.400 --> 00:44.355
-By volume, China leads: 3,399 terawatt hours, to Australia's 98.
+00:35.321 --> 00:45.723
+Solar and wind took over. They made 4.7 percent of renewable electricity in 2005, and 81.3 percent in 2024.
 
-00:44.200 --> 00:51.271
-By share, New Zealand leads at 85 percent, and Australia, at 35, edges China.
+00:46.173 --> 00:51.574
+Wind overtook hydro in 2019. Solar overtook both a year later.
 
-00:51.000 --> 00:55.111
-As the farm builds, a regression in R projects the trend.
+00:53.074 --> 00:58.940
+New Zealand runs at 85.5 percent renewable, and Germany at 54.5.
 
-00:55.600 --> 01:03.832
-123 terawatt hours by 2035, but only 44.6 percent renewable, well short of the target.
+00:59.389 --> 01:04.366
+Australia, at 35, is just ahead of China at 33.7.
 
-01:03.600 --> 01:05.749
+01:05.966 --> 01:13.389
+On a linear trend, the share reaches 37.8 percent by 2030, less than half the 82 percent target.
+
+01:13.839 --> 01:17.272
+By 2035 it reaches 44.6 percent.
+
+01:18.872 --> 01:22.490
+Australia is moving in the right direction, but not fast enough.
+
+01:22.940 --> 01:24.285
 The dashboard is below.
