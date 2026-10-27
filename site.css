@@ -74,9 +74,14 @@ p:last-child { margin-bottom: 0; }
 
 /* ---- shell and top bar ------------------------------------------------ */
 .site-shell { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+html { scroll-padding-top: 88px; }
 .topbar {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   min-height: 84px; padding: .6rem 0;
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper); border-bottom: 1px solid var(--line);
+  /* The paper colour runs edge to edge so content never shows beside the bar. */
+  box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax);
 }
 .wordmark { color: var(--ink); text-decoration: none; font-size: 1rem; font-weight: 600; white-space: nowrap; }
 .topbar-right { display: flex; align-items: center; gap: 1.75rem; }
