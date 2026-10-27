@@ -31,6 +31,7 @@ DURATION = 48.0
 rng = random.Random(3)
 
 HOSP = Vector((1000, 0, 0))
+HAZE = (0.74, 0.8, 0.88)
 SHOP = Vector((2000, 0, 0))
 
 
@@ -299,7 +300,22 @@ def build_world():
     mp.inputs["Rotation"].default_value = (0, 0, want_az - hdr_az)
     nt.links.new(tc.outputs["Generated"], mp.inputs["Vector"])
     nt.links.new(mp.outputs[0], env.inputs["Vector"])
-    nt.links.new(env.outputs[0], nt.nodes["Background"].inputs["Color"])
+    # fade the sky below the horizon into the haze so the ground has no visible edge
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["Generated"], sep.inputs[0])
+    mr = nt.nodes.new("ShaderNodeMapRange")
+    mr.interpolation_type = "SMOOTHSTEP"
+    mr.inputs["From Min"].default_value = 0.0
+    mr.inputs["From Max"].default_value = 0.06
+    mr.inputs["To Min"].default_value = 1.0
+    mr.inputs["To Max"].default_value = 0.0
+    nt.links.new(sep.outputs["Z"], mr.inputs["Value"])
+    mix = nt.nodes.new("ShaderNodeMix")
+    mix.data_type = "RGBA"
+    nt.links.new(mr.outputs[0], mix.inputs[0])
+    nt.links.new(env.outputs[0], socket(mix, "A", "RGBA"))
+    socket(mix, "B", "RGBA").default_value = (*HAZE, 1)
+    nt.links.new([o for o in mix.outputs if o.type == "RGBA"][0], nt.nodes["Background"].inputs["Color"])
     for attr, val in (("sun_threshold", 5.0), ("sun_angle", math.radians(1.5)), ("use_sun_shadow", True)):
         if hasattr(w, attr):
             setattr(w, attr, val)
@@ -308,6 +324,51 @@ def build_world():
 # ---------------------------------------------------------------- town
 
 BADGES = {}
+
+
+def vary_and_haze(mat, scale, amount):
+    """Break up texture repeats with large soft patches, and fade into haze with distance."""
+    nt = mat.node_tree
+    p = nt.nodes["Principled BSDF"]
+    out = nt.nodes["Material Output"]
+    src = p.inputs["Base Color"].links[0].from_socket
+    tc = [n for n in nt.nodes if n.type == "TEX_COORD"][0]
+    if amount:
+        n = nt.nodes.new("ShaderNodeTexNoise")
+        n.inputs["Scale"].default_value = 1.0 / scale
+        n.inputs["Detail"].default_value = 3
+        nt.links.new(tc.outputs["Object"], n.inputs["Vector"])
+        mix = nt.nodes.new("ShaderNodeMix")
+        mix.data_type = "RGBA"
+        mix.blend_type = "OVERLAY"
+        mix.inputs[0].default_value = amount
+        nt.links.new(src, socket(mix, "A", "RGBA"))
+        nt.links.new(n.outputs["Color"], socket(mix, "B", "RGBA"))
+        nt.links.new([o for o in mix.outputs if o.type == "RGBA"][0], p.inputs["Base Color"])
+    cam = nt.nodes.new("ShaderNodeCameraData")
+    d = nt.nodes.new("ShaderNodeMath")
+    d.operation = "DIVIDE"
+    nt.links.new(cam.outputs["View Distance"], d.inputs[0])
+    d.inputs[1].default_value = -6000.0
+    e = nt.nodes.new("ShaderNodeMath")
+    e.operation = "EXPONENT"
+    nt.links.new(d.outputs[0], e.inputs[0])
+    f = nt.nodes.new("ShaderNodeMath")
+    f.operation = "SUBTRACT"
+    f.use_clamp = True
+    f.inputs[0].default_value = 1.0
+    nt.links.new(e.outputs[0], f.inputs[1])
+    em = nt.nodes.new("ShaderNodeEmission")
+    em.inputs["Color"].default_value = (*HAZE, 1)
+    g = nt.nodes.new("ShaderNodeMath")
+    g.operation = "MULTIPLY"
+    nt.links.new(f.outputs[0], g.inputs[0])
+    g.inputs[1].default_value = 0.75
+    ms = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(g.outputs[0], ms.inputs[0])
+    nt.links.new(p.outputs[0], ms.inputs[1])
+    nt.links.new(em.outputs[0], ms.inputs[2])
+    nt.links.new(ms.outputs[0], out.inputs["Surface"])
 
 
 def building(name, x0, y0, sx, sy, h, mat, roof_mat, pitched=False, badge=None):
@@ -364,19 +425,21 @@ def car(x, y, rot, color):
 def build_town(trees_mid, trees_full, shrubs):
     grass = textured("grass", "aerial_grass_rock", 22.0, tint=(0.58, 0.72, 0.46))
     asphalt = textured("asphalt", "asphalt_02", 4.0, tint=(0.7, 0.7, 0.72))
-    paving = textured("paving", "rectangular_paving", 2.0, tint=(0.95, 0.93, 0.9))
+    paving = textured("paving", "rectangular_paving", 2.0, tint=(0.8, 0.82, 0.86))
     white = pbr("line", (0.9, 0.9, 0.88), rough=0.6)
 
+    vary_and_haze(grass, 70.0, 0.18)
+    vary_and_haze(asphalt, 200.0, 0.0)
     bm = bmesh.new()
-    box(bm, (0, 0, -0.05), (900, 900, 0.1))
+    box(bm, (0, 0, -0.05), (9000, 9000, 0.1))
     new_mesh("ground", bm, grass)
     bm = bmesh.new()
-    box(bm, (0, 0, 0.02), (900, 11, 0.04))
-    box(bm, (0, 0, 0.02), (11, 900, 0.04))
-    box(bm, (0, 110, 0.02), (900, 9, 0.04))
-    box(bm, (0, -110, 0.02), (900, 9, 0.04))
-    box(bm, (110, 0, 0.02), (9, 900, 0.04))
-    box(bm, (-110, 0, 0.02), (9, 900, 0.04))
+    box(bm, (0, 0, 0.02), (9000, 11, 0.04))
+    box(bm, (0, 0, 0.02), (11, 9000, 0.04))
+    box(bm, (0, 110, 0.02), (9000, 9, 0.04))
+    box(bm, (0, -110, 0.02), (9000, 9, 0.04))
+    box(bm, (110, 0, 0.02), (9, 9000, 0.04))
+    box(bm, (-110, 0, 0.02), (9, 9000, 0.04))
     new_mesh("roads", bm, asphalt)
     bm = bmesh.new()
     for sxn in (-1, 1):
@@ -434,6 +497,24 @@ def build_town(trees_mid, trees_full, shrubs):
         o.rotation_euler = (0, 0, rng.choice((0, math.pi / 2)) + rng.uniform(-0.05, 0.05))
         bpy.data.objects[f"house_{i}_roof"].rotation_euler = o.rotation_euler
         houses.append((x, y))
+    # outer suburbs, from their own random stream so the rest of the town keeps its layout
+    r2 = random.Random(11)
+    for i in range(240):
+        a = r2.uniform(0, 2 * math.pi)
+        r = r2.uniform(340, 1500)
+        x, y = r * math.cos(a), r * math.sin(a)
+        if min(abs(x), abs(y), abs(abs(x) - 110), abs(abs(y) - 110)) < 14:
+            continue
+        sx, sy = r2.uniform(9, 14), r2.uniform(8, 11)
+        o = building(f"suburb_{i}", x, y, sx, sy, r2.choice((3.3, 3.3, 6.6)), r2.choice((brick, beige)),
+                     r2.choice((roof_grey, roof_clay)), pitched=True)
+        o.rotation_euler = (0, 0, r2.choice((0, math.pi / 2)))
+        bpy.data.objects[f"suburb_{i}_roof"].rotation_euler = o.rotation_euler
+    for i in range(420):
+        a = r2.uniform(0, 2 * math.pi)
+        r = r2.uniform(420, 1600)
+        instance(trees_mid, (r * math.cos(a), r * math.sin(a), 0.1), r2.uniform(0, 6.28), r2.uniform(1.6, 2.4),
+                 f"far_tree_{i}")
     hx, hy = min(houses, key=lambda h: math.hypot(h[0] + 90, h[1] + 150))
     BADGES["Real estate"] = Vector((hx, hy, 14))
     BADGES["centre"] = Vector((0, 0, 3))
@@ -1037,6 +1118,7 @@ def pose_frame(t, cam, people):
     inside = loc.x > 500
     if bpy.context.scene.eevee.use_raytracing != inside:
         bpy.context.scene.eevee.use_raytracing = inside
+    cam.data.clip_start = 0.05 if inside else 1.0
     cam.location = loc
     cam.rotation_euler = (tgt - loc).to_track_quat("-Z", "Y").to_euler()
     cam.data.lens = lens
@@ -1095,7 +1177,7 @@ def build():
     owner = build_shop(models)
     cd = bpy.data.cameras.new("cam")
     cd.clip_start = 0.05
-    cd.clip_end = 3000
+    cd.clip_end = 9000
     cam = link(bpy.data.objects.new("cam", cd))
     scene.camera = cam
     return scene, cam, [(doc, 0), (owner, 0)]
