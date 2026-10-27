@@ -24,24 +24,7 @@
   "summary": "Master of Information Systems and Technology student at Curtin University (Data Analytics and Visualisation, CWA 82.18), with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. As Finance Lead on Curtin Consulting Group’s Hockey WA engagement, I gathered requirements in fortnightly client meetings and built a 20-year model whose sensitivity testing reshaped the strategy recommendation. Most projects in my portfolio at waranyu-cv.vercel.app have a live demo you can try. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
   "sections": [
     {
-      "title": "Education",
-      "entries": [
-        {
-          "title": "Master of Information Systems and Technology",
-          "org": "Curtin University (Faculty of Business and Law), Western Australia",
-          "date": "2025 – Present",
-          "note": "Specialisation: Data Analytics and Visualisation | Expected graduation: July 2027 | Course Weighted Average: 82.18\nRelevant units: Business Analytics and Data Visualisation (92), Business Intelligence and Analytics (90), Systems Analysis (84)"
-        },
-        {
-          "title": "Bachelor of Science and Technology",
-          "org": "Thammasat University, Thailand",
-          "date": "2019 – 2023",
-          "note": "Major: Statistics | Minor: Finance"
-        }
-      ]
-    },
-    {
-      "title": "Key Skills",
+      "title": "Skills",
       "skills": [
         [
           "Data Analysis",
@@ -74,7 +57,12 @@
             "Priced an 18-camera AI streaming setup across 6 playing surfaces from 9 public sources, splitting one-off setup from annual running costs (CapEx/OpEx) for the model.",
             "Led the financial analysis in a 9-person team, gathering and confirming requirements with Hockey WA in fortnightly client meetings and feeding them into the model's scenarios and assumptions.",
             "Created an 18-camera 3D venue render and a 3-view streaming prototype, turning the plan into something the client and panel could see and use."
-          ]
+          ],
+          "link": {
+            "text": "3D venue model",
+            "label": "3D venue model",
+            "url": "https://waranyu-cv.vercel.app/streaming-concept.html"
+          }
         },
         {
           "title": "Digital Marketing & Data Analytics Intern",
@@ -96,7 +84,8 @@
           "org": "Power BI, Power Query, Data Cleaning, DAX, Kimball Star Schema",
           "link": {
             "text": "See the project",
-            "url": "https://waranyu-cv.vercel.app/freshmart.html"
+            "url": "https://waranyu-cv.vercel.app/freshmart.html",
+            "label": "Project"
           },
           "bullets": [
             "Audited data quality and cleaned 5 raw operational files in Power Query, remapping 93 orphaned sales rows instead of dropping them, keeping revenue totals accurate and the data gap visible.",
@@ -108,7 +97,8 @@
           "org": "Power BI, Power Query, DAX, R, Linear Regression, Policy Analysis",
           "link": {
             "text": "See the project",
-            "url": "https://waranyu-cv.vercel.app/renewable.html"
+            "url": "https://waranyu-cv.vercel.app/renewable.html",
+            "label": "Project"
           },
           "bullets": [
             "Reconciled data from national energy agencies into a Power BI galaxy schema, showing Australia’s renewable share rising from 9% in 2005 to 35% in 2024, benchmarked against Germany, New Zealand and China.",
@@ -121,7 +111,8 @@
           "org": "Quality and Documentation Manager – Client: LocoLabo, Curtin Business School",
           "link": {
             "text": "See the project",
-            "url": "https://waranyu-cv.vercel.app/locollm.html"
+            "url": "https://waranyu-cv.vercel.app/locollm.html",
+            "label": "Project"
           },
           "bullets": [
             "Evaluated the base AI model across 15 business areas and pinpointed Australian privacy law as a weak spot, giving the client clear evidence to approve the project focus.",
@@ -134,7 +125,8 @@
           "org": "Group project (3) – Oracle SQL, ERD, Normalisation",
           "link": {
             "text": "See the project",
-            "url": "https://waranyu-cv.vercel.app/football-database.html"
+            "url": "https://waranyu-cv.vercel.app/football-database.html",
+            "label": "Project"
           },
           "bullets": [
             "Translated 18 business requirements into an ERD and a normalised 16-table Oracle schema with a data dictionary, loaded with a full sample season of 56 games.",
@@ -146,7 +138,8 @@
           "org": "Pair project, designed jointly – Excel, Visio",
           "link": {
             "text": "See the project",
-            "url": "https://waranyu-cv.vercel.app/infrastructure.html"
+            "url": "https://waranyu-cv.vercel.app/infrastructure.html",
+            "label": "Project"
           },
           "bullets": [
             "Costed every item from cited supplier prices in Excel, splitting CapEx and OpEx and keeping Year 1 to about a third of the A$2.1M budget, with the rest reserved for failures and upgrades.",
@@ -156,11 +149,28 @@
       ]
     },
     {
-      "title": "Additional Experience",
+      "title": "Education",
       "entries": [
         {
-          "title": "Supervisor",
-          "org": "Six Senses Gourmet, Leederville, Western Australia – promoted twice in 12 months from Waiter and Bartender",
+          "title": "Master of Information Systems and Technology",
+          "org": "Curtin University (Faculty of Business and Law), Western Australia",
+          "date": "2025 – Present",
+          "note": "Specialisation: Data Analytics and Visualisation | Expected graduation: July 2027 | Course Weighted Average: 82.18\nRelevant units: Business Analytics and Data Visualisation (92), Business Intelligence and Analytics (90), Systems Analysis (84)"
+        },
+        {
+          "title": "Bachelor of Science and Technology",
+          "org": "Thammasat University, Thailand",
+          "date": "2019 – 2023",
+          "note": "Major: Statistics | Minor: Finance"
+        }
+      ]
+    },
+    {
+      "title": "Work Experience",
+      "entries": [
+        {
+          "title": "Six Senses Gourmet – Leederville, Western Australia",
+          "org": "Supervisor (Nov 2024 – Present), promoted twice in 12 months from Waiter and Bartender",
           "date": "Nov 2023 – Present",
           "bullets": [
             "Supervise a team of around 5 staff per shift, handling customer requests and coordinating service so orders and payments stay accurate during busy periods.",
