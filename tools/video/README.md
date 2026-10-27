@@ -1,7 +1,7 @@
 # Renewable transition video
 
-The 30-second overview at the top of `renewable.html` is a three.js scene
-rendered frame by frame in a headless browser, then encoded with ffmpeg.
+The film on `renewable.html` is now built in Blender: see `blender/README.md`.
+The notes below describe the earlier three.js version, kept for reference.
 
 ## What is real and what is illustration
 

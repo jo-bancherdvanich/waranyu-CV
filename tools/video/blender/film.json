@@ -1,0 +1,37 @@
+{
+  "voice": "en-AU-NatashaNeural",
+  "rate": "+0%",
+  "fps": 30,
+  "width": 1280,
+  "height": 720,
+  "scenes": [
+    {"id": "title", "min": 6.0, "lead": 0.8, "tail": 0.8, "lines": [
+      "Australia has committed to 82 percent renewable electricity by 2030.",
+      "Is it on track?"
+    ]},
+    {"id": "sides", "min": 7.5, "lead": 0.4, "tail": 0.8, "lines": [
+      "In 2005, about 9 percent of Australia's electricity was renewable. Coal and gas made the rest."
+    ]},
+    {"id": "growth", "min": 16.0, "lead": 0.6, "tail": 1.0, "lines": [
+      "The share stalled while the target was under review.",
+      "After the 2015 reset, it grew about 2.5 points a year, reaching 35 percent in 2024.",
+      "Fossil generation fell from 208 to 182 terawatt hours."
+    ]},
+    {"id": "mix", "min": 12.0, "lead": 0.5, "tail": 1.0, "lines": [
+      "Solar and wind took over. They made 4.7 percent of renewable electricity in 2005, and 81.3 percent in 2024.",
+      "Wind overtook hydro in 2019. Solar overtook both a year later."
+    ]},
+    {"id": "world", "min": 9.0, "lead": 0.5, "tail": 1.0, "lines": [
+      "New Zealand runs at 85.5 percent renewable, and Germany at 54.5.",
+      "Australia, at 35, is just ahead of China at 33.7."
+    ]},
+    {"id": "forecast", "min": 11.0, "lead": 0.6, "tail": 1.2, "lines": [
+      "On a linear trend, the share reaches 37.8 percent by 2030, less than half the 82 percent target.",
+      "By 2035 it reaches 44.6 percent."
+    ]},
+    {"id": "end", "min": 6.0, "lead": 0.4, "tail": 1.6, "lines": [
+      "Australia is moving in the right direction, but not fast enough.",
+      "The dashboard is below."
+    ]}
+  ]
+}
