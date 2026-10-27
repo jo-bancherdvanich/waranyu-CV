@@ -45,7 +45,7 @@ for (const [page, src] of Object.entries(html)) {
   if (src.includes("portrait")) fail(page, "no-photo");
 
   const mono = ["eyebrow", "np-eyebrow", "section-label", "finding-number", "card-top", "key-numbers",
-    "mini-chart", "hero-work", "hero-tools", "hero-facts"].filter((c) => new RegExp(`class="(?:[^"]* )?${c}[ "]`).test(b));
+    "mini-chart", "hw-num", "hero-tools", "hero-facts"].filter((c) => new RegExp(`class="(?:[^"]* )?${c}[ "]`).test(b));
   if (mono.length) fail(page, "no-mono-labels", mono.join(", "));
 
   const arrows = [...b.matchAll(/<(a|button)\b[^>]*>([\s\S]*?)<\/\1>/g)]

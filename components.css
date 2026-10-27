@@ -629,6 +629,7 @@
 .ll-example p { margin: 0; }
 .ll-example p + p { margin-top: .6rem; }
 #ll-dash .dash-slicers .dash-chip.is-on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+#ll-dash .dash-grid-wrap { align-items: start; }
 @media (max-width: 720px) {
   #ll-dash .dash-grid-wrap { grid-template-columns: minmax(0, 1fr); }
   #ll-dash .dash-slicer { grid-template-columns: minmax(0, 1fr); gap: .5rem; }

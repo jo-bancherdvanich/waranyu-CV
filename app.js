@@ -40,7 +40,18 @@
     toggle.addEventListener("click", function () {
       var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
-      apply(next);
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!document.startViewTransition || reduce || document.hidden) { apply(next); return; }
+      // The new theme grows as a circle out of the toggle button.
+      var r = toggle.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      document.startViewTransition(function () { apply(next); }).ready.then(function () {
+        root.animate(
+          { clipPath: ["circle(0px at " + x + "px " + y + "px)", "circle(" + end + "px at " + x + "px " + y + "px)"] },
+          { duration: 550, easing: "cubic-bezier(.4, 0, .2, 1)", pseudoElement: "::view-transition-new(root)" }
+        );
+      }).catch(function () { /* skipped, e.g. a background tab: the theme still changes */ });
     });
   }
 
