@@ -65,7 +65,7 @@ for (const s of C.sections) {
       : e.link ? [run("\t"), link(e.link.text + " ↗", e.link.url, { color: GREEN, size: 17 })] : [];
     children.push(new Paragraph({ tabStops: right, keepNext: true, spacing: { before: k ? 120 : 0 }, children: [run(e.title, { bold: true }), ...r] }));
     children.push(new Paragraph({ keepNext: !!(e.note || e.bullets), children: [run(e.org, { italics: true, color: GREEN })] }));
-    if (e.note) children.push(new Paragraph({ children: [run(e.note)] }));
+    if (e.note) for (const n of e.note.split("\n")) children.push(new Paragraph({ children: [run(n)] }));
     for (const b of e.bullets || []) children.push(new Paragraph({ numbering: { reference: "bullets", level: 0 }, children: [run(b)] }));
   });
 }

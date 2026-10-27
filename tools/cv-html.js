@@ -25,7 +25,7 @@ for (const s of C.sections) {
   else for (const e of s.entries) {
     const r = e.date ? `<b class="date">${esc(e.date)}</b>` : e.link ? `<span class="date">${a(e.link.text + " ↗", e.link.url)}</span>` : "";
     body += `<div class="entry"><p class="head"><b>${esc(e.title)}</b>${r}</p><p class="org">${esc(e.org)}</p>`;
-    if (e.note) body += `<p>${esc(e.note)}</p>`;
+    if (e.note) body += e.note.split("\n").map((n) => `<p>${esc(n)}</p>`).join("");
     if (e.bullets) body += `<ul>${e.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`;
     body += `</div>\n`;
   }
