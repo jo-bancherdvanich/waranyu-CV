@@ -218,22 +218,6 @@ def share_panel(L, t, year):
     L.rect(tx - 1.5, by - 12, 3, bh + 18, GOLD, a)
     L.text(tx - 8, by - 6, "2030 target 82%", 17, GOLD, a, weight=700, anchor="rs")
 
-    # what happened that year
-    g = SC["growth"]
-    if 2009.6 < year < 2015.0:
-        msg, c = "Stalled while the target was under review", MUTED
-    elif 2015.0 <= year < 2016.2:
-        msg, c = "2015: target reset", GOLD
-    elif year >= 2016.2:
-        msg, c = "About +2.5 points a year since the reset", GREEN
-    else:
-        msg = None
-    if msg and t < g["end"]:
-        mw = L.width(msg, 18, 600) + 28
-        mx = x + w - 32 - mw
-        L.card(mx, y - 52, mw, 38, a, r=19, alpha=0.88)
-        L.text(mx + 14, y - 33, msg, 18, c, a, weight=600, anchor="lm")
-
 
 def mix_card(L, t):
     s = SC["mix"]
@@ -310,33 +294,110 @@ def mix_bars(L, t):
     kicker(L, x + 110, y + h - 26, "Percent of renewable electricity", a)
 
 
-def world_card(L, t):
+VOLUME = [("China", 3398.8), ("Germany", 288.3), ("Australia", 97.9), ("New Zealand", 37.5)]
+CCOL = {"China": (219, 69, 56), "Germany": (237, 161, 0), "Australia": GREEN, "New Zealand": (57, 135, 229)}
+
+
+def world_card(L, t, st):
+    """Volume and share side by side: the order flips."""
     s = SC["world"]
-    a = fade(t, s["start"] + 0.2, s["end"] + 0.1)
+    a = fade(t, s["start"] + 0.3, s["end"] + 0.1)
     if a <= 0:
         return
-    x, y, w, h = 40, 150, 760, 400
+    l0, l1, l2 = s["lines"]
+    x, y, w, h = 40, 30, 580, 600
     L.card(x, y, w, h, a)
-    L.text(x + 30, y + 28, "Renewable share of electricity, 2024", 28, INK, a, weight=700)
-    kicker(L, x + 30, y + 68, "Percent of all electricity generated", a)
-    bx, bw = x + 200, w - 300
-    l0, l1 = s["lines"][0], s["lines"][1]
-    starts = [l0["start"], l0["start"] + (l0["end"] - l0["start"]) * 0.55,
-              l1["start"], l1["start"] + (l1["end"] - l1["start"]) * 0.6]
-    for i, ((name, v), when) in enumerate(zip(COUNTRIES, starts)):
-        g = ease((t - when) / 0.9)
-        by = y + 112 + i * 64
-        aus = name == "Australia"
-        col = GREEN if aus else (128, 122, 110)
-        L.text(bx - 18, by + 20, name, 22, INK if aus else MUTED, a, weight=700 if aus else 500, anchor="rm")
-        L.rect(bx, by, bw, 40, (0, 0, 0), a * 0.35, r=6)
-        L.rect(bx, by, bw * v / 100 * g, 40, col, a, r=6)
-        if g > 0:
-            L.text(bx + bw * v / 100 * g - 12, by + 20, f"{v * g:.1f}%", 24, CARD if aus else INK,
-                   a * min(1, g * 2), weight=700, anchor="rm")
-    tx = bx + bw * TARGET / 100
-    L.dashed((tx, y + 100), (tx, y + 112 + 4 * 64 - 14), GOLD, a, 2)
-    L.text(tx, y + 112 + 4 * 64 - 2, "Australia's 2030 target 82%", 17, GOLD, a, weight=700, anchor="ma")
+    L.text(x + 28, y + 24, "Renewable electricity, 2024", 28, INK, a, weight=700)
+    kicker(L, x + 28, y + 62, "Two measures, two different leaders", a)
+    bx, bw = x + 178, w - 310
+
+    def panel(py, heading, rows, when, unit_max, fmt, target=False):
+        b = a * ease((t - when) / 0.5)
+        if b <= 0:
+            return
+        L.text(x + 28, py, heading, 21, INK, b, weight=700)
+        for i, (name, v) in enumerate(rows):
+            g = ease((t - when - 0.15 * i) / 0.9)
+            ry = py + 38 + i * 44
+            hi = name == "Australia" or (name == "China" and t >= l2["start"])
+            L.text(bx - 14, ry + 15, name, 19, INK if hi else MUTED, b, weight=700 if hi else 500, anchor="rm")
+            L.rect(bx, ry, bw, 30, (0, 0, 0), b * 0.35, r=5)
+            L.rect(bx, ry, max(3, bw * v / unit_max * g), 30, CCOL[name], b, r=5)
+            L.text(bx + bw + 14, ry + 15, fmt(v * g), 21, INK, b * min(1, g * 2), weight=700, anchor="lm")
+        if target:
+            tx = bx + bw * TARGET / 100
+            L.dashed((tx, py + 30), (tx, py + 38 + 4 * 44 - 8), GOLD, b, 2)
+            L.text(tx, py + 38 + 4 * 44 + 2, "Australia's 2030 target 82%", 15, GOLD, b, weight=700, anchor="ma")
+
+    panel(y + 110, "By volume (TWh)", VOLUME, l0["start"] + 0.2, 3398.8, lambda v: f"{v:,.1f}")
+    panel(y + 345, "By share of electricity", list(COUNTRIES), l1["start"] + 0.6, 100, lambda v: f"{v:.1f}%",
+          target=True)
+    # labels on the globe, following the columns
+    gw = st.get("globe", 0)
+    phase_share = t >= l1["start"] + 1.4
+    vol = dict(VOLUME)
+    share = dict(COUNTRIES)
+    for name, (cx, cy, facing) in st.get("countries", {}).items():
+        b = a * gw * clamp((facing - 0.05) / 0.15) * ease((t - l0["start"] - 0.6) / 0.5)
+        if b <= 0:
+            continue
+        txt = f"{name} {share[name]:.1f}%" if phase_share else f"{name} {vol[name]:,.1f} TWh"
+        tw = L.width(txt, 17, 700) + 24
+        px, py = cx * W - tw / 2, cy * H - 40
+        L.card(px, py, tw, 30, b, r=15, alpha=0.9)
+        L.text(px + 12, py + 15, txt, 17, CCOL[name], b, weight=700, anchor="lm")
+    if t >= l2["start"] + 0.3:
+        b = a * ease((t - l2["start"] - 0.3) / 0.5)
+        msg = "Australia's share just edges China's"
+        mw = L.width(msg, 19, 700) + 32
+        L.card(x + w / 2 - mw / 2, y + h + 14, mw, 40, b, r=20, alpha=0.92)
+        L.text(x + w / 2, y + h + 34, msg, 19, GREEN, b, weight=700, anchor="mm")
+
+
+def trend_card(L, t, year):
+    """Share line like the dashboard's, with the stall and the 2015 revision marked."""
+    s = SC["growth"]
+    a = fade(t, s["start"] + 0.4, s["end"] + 0.1)
+    if a <= 0:
+        return
+    x, y, w, h = 40, 34, 640, 420
+    L.card(x, y, w, h, a)
+    L.text(x + 28, y + 22, "Australia's renewable share rose", 25, INK, a, weight=700)
+    L.text(x + 28, y + 54, "from 9% to 35% since 2005", 25, GREEN, a, weight=700)
+    cx, cy, cw, ch = x + 70, y + 120, w - 120, h - 175
+    X = lambda yr: cx + cw * (yr - 2005) / 19
+    Y = lambda v: cy + ch - ch * v / 40
+    for v in (0, 10, 20, 30, 40):
+        L.line([(cx, Y(v)), (cx + cw, Y(v))], MUTED, a * 0.22, 1)
+        L.text(cx - 12, Y(v), f"{v}%", 15, MUTED, a, anchor="rm")
+    for yr in (2005, 2010, 2015, 2020, 2024):
+        L.text(X(yr), cy + ch + 16, f"{yr}", 15, MUTED, a, anchor="ma")
+    # the stall band, then the line on top
+    st_a = a * ease((year - 2012.8) / 0.6)
+    if st_a > 0:
+        L.rect(X(2012.6), Y(15.4), X(2016.4) - X(2012.6), Y(12.6) - Y(15.4), GOLD, st_a * 0.22, r=4)
+        L.text(X(2014.5), Y(21.5), "Stalled at 13 to 15%", 17, GOLD, st_a, weight=700, anchor="ms")
+        L.text(X(2014.5), Y(21.5) + 18, "while the target was under review", 15, GOLD, st_a, anchor="ms")
+    pts = [(X(yr), Y(v)) for yr, v in zip(YEARS, SHARE) if yr <= year]
+    if year < 2024:
+        pts.append((X(year), Y(series(SHARE, year))))
+    L.line(pts, GREEN, a, 4)
+    L.dot(*pts[-1], 6, GREEN, a)
+    L.text(X(2005) + 8, Y(SHARE[0]) - 14, "8.9%", 16, GREEN, a, weight=700, anchor="ls")
+    r_a = a * ease((year - 2014.95) / 0.3)
+    if r_a > 0:
+        L.dashed((X(2015), Y(40)), (X(2015), Y(0)), GOLD, r_a, 3, 7, 5)
+        L.dot(X(2015), Y(SHARE[10]), 8, GOLD, r_a)
+        tw = L.width("2015: target revised", 17, 700) + 24
+        L.card(X(2015) - tw / 2, Y(40) - 34, tw, 30, r_a, r=15, alpha=0.95)
+        L.text(X(2015), Y(40) - 19, "2015: target revised", 17, GOLD, r_a, weight=700, anchor="mm")
+    p_a = a * ease((year - 2017.5) / 0.6)
+    if p_a > 0:
+        L.text(X(2005.3), Y(38), "After the reset: about +2.5 points a year", 18, INK, p_a, weight=700)
+        L.text(X(2005.3), Y(38) + 22, "nearly 5× the 2005 to 2015 pace", 15, MUTED, p_a)
+    if year >= 2023.95:
+        e_a = a * ease((t - s["lines"][1]["end"] + 0.6) / 0.5)
+        L.text(X(2024) - 8, Y(SHARE[-1]) - 14, "35.0%", 18, GREEN, e_a, weight=700, anchor="rs")
 
 
 def forecast_card(L, t):
@@ -419,17 +480,26 @@ def draw(t, st):
     title(L, t)
     labels(L, t, st)
     share_panel(L, t, st["year"])
+    trend_card(L, t, st["year"])
     mix_card(L, t)
     mix_bars(L, t)
-    world_card(L, t)
+    world_card(L, t, st)
     forecast_card(L, t)
     end_card(L, t)
     return L.image()
 
 
 def compose(f):
-    base = Image.open(os.path.join(BUILD, "frames" if MODE == "encode" else "stills", f"f{f:05d}.png")).convert("RGBA")
+    folder = os.path.join(BUILD, "frames" if MODE == "encode" else "stills")
     st = json.load(open(os.path.join(BUILD, "state", f"f{f:05d}.json")))
+    gw = st.get("globe", 0.0)
+    if gw >= 1.0:
+        base = Image.open(os.path.join(folder, f"g{f:05d}.png")).convert("RGBA")
+    else:
+        base = Image.open(os.path.join(folder, f"f{f:05d}.png")).convert("RGBA")
+        if gw > 0.0:
+            g = Image.open(os.path.join(folder, f"g{f:05d}.png")).convert("RGBA")
+            base = Image.blend(base, g, gw)
     out = Image.alpha_composite(base, draw(f / FPS, st))
     return out.convert("RGB")
 
