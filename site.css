@@ -239,8 +239,9 @@ a[href*="github.com"] { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www
 .icon-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: .8rem; align-items: start; margin: .6rem 0; }
 .il-icon { display: block; width: 24px; }
 .il-icon svg { display: block; width: 24px; height: auto; }
-.findings { padding-left: 0 !important; list-style: none; }
-.findings li { margin: 1.1rem 0; }
+.case-block ul.findings { padding-left: 1.2rem !important; list-style: disc; }
+.case-block ul.findings > li { margin: 0 0 1rem; padding: 0 0 0 .3rem; border: 0; }
+.case-block ul.findings > li::marker { color: var(--accent); }
 
 /* The rest of a findings list, folded under Read more, continues the first
    list rather than starting a new one with its own accent rule. */
