@@ -21,7 +21,7 @@
       "text": "Perth, Western Australia"
     }
   ],
-  "summary": "Master of Information Systems and Technology student at Curtin University (Data Analytics and Visualisation, CWA 82.18), with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. As Finance Lead on Curtin Consulting Group’s Hockey WA engagement, I gathered requirements in fortnightly client meetings and built a 20-year model whose sensitivity testing reshaped the strategy recommendation. Most projects in my portfolio at waranyu-cv.vercel.app have a live demo you can try. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
+  "summary": "Master of Information Systems and Technology student at Curtin University (Data Analytics and Visualisation, CWA 82.18), with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I was Finance Lead in a 9-person Curtin Consulting Group team working with Hockey WA. Most projects in my portfolio at waranyu-cv.vercel.app have a live demo you can try. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
   "sections": [
     {
       "title": "Skills",
@@ -52,12 +52,10 @@
           "org": "Curtin Consulting Group – Client: Hockey WA",
           "date": "Jul 2026 – Oct 2026",
           "bullets": [
-            "Built a 20-year Excel break-even model across 3 scenarios for Hockey WA's broadcast streaming strategy, with assumptions benchmarked against 15+ case studies, giving the board a clear, traceable payback range.",
-            "Tested 5 drivers at plus or minus 20% and found audience growth moved payback 7 times more than build cost, refocusing the recommendation on marketing over upfront funding.",
-            "Priced an 18-camera AI streaming setup across 6 playing surfaces from 9 public sources, splitting one-off setup from annual running costs (CapEx/OpEx) for the model.",
-            "Led the financial analysis in a 9-person team, gathering and confirming requirements with Hockey WA in fortnightly client meetings and feeding them into the model's scenarios and assumptions.",
-            "Created an 18-camera 3D venue render and a 3-view streaming prototype, turning the plan into something the client and panel could see and use."
+            "Finance Lead in a 9-person Curtin Consulting Group team.",
+            "Built a 3D model of the venue in Blender showing all 18 camera positions across 6 playing surfaces (4 outdoor pitches and 2 indoor courts)."
           ],
+          "note": "Client work, so only details already made public are listed.",
           "link": {
             "text": "3D venue model",
             "label": "3D venue model",
