@@ -1,14 +1,16 @@
 """Download the CC0 and OFL assets listed in assets.json into assets/.
 
-Only data is downloaded (glTF, images, HDRI, fonts). Nothing downloaded is
-ever executed. Run with any Python 3:  python -I fetch_assets.py
+Only data is downloaded (glTF, images, HDRI, fonts, zip packs). Nothing
+downloaded is ever executed. Run with any Python 3:
+    python -I fetch_assets.py            (this folder)
+    python -I fetch_assets.py ../locollm (another film's folder)
 """
 import json
 import os
 import sys
 import urllib.request
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "assets")
 API = "https://api.polyhaven.com"
 UA = {"User-Agent": "waranyu-portfolio-video/1.0"}
@@ -55,10 +57,12 @@ def polyhaven(item):
 
 def main():
     manifest = json.load(open(os.path.join(HERE, "assets.json"), encoding="utf-8"))
-    for item in manifest["polyhaven"]:
+    for item in manifest.get("polyhaven", []):
         polyhaven(item)
-    for font in manifest["fonts"]:
+    for font in manifest.get("fonts", []):
         save(font["url"], os.path.join(OUT, "fonts", font["file"]))
+    for z in manifest.get("zips", []):
+        save(z["url"], os.path.join(OUT, "zips", z["file"]))
     print("done")
 
 

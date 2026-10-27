@@ -1,0 +1,39 @@
+{
+  "polyhaven": [
+    {"id": "kloofendal_48d_partly_cloudy_puresky", "kind": "hdri", "res": "2k"},
+    {"id": "terrazzo_tiles", "kind": "texture", "res": "1k"},
+    {"id": "painted_plaster_wall", "kind": "texture", "res": "1k"},
+    {"id": "laminate_floor_02", "kind": "texture", "res": "1k"},
+    {"id": "asphalt_02", "kind": "texture", "res": "1k"},
+    {"id": "rectangular_paving", "kind": "texture", "res": "1k"},
+    {"id": "brick_wall_001", "kind": "texture", "res": "1k"},
+    {"id": "beige_wall_001", "kind": "texture", "res": "1k"},
+    {"id": "grey_roof_tiles", "kind": "texture", "res": "1k"},
+    {"id": "clay_roof_tiles", "kind": "texture", "res": "1k"},
+    {"id": "aerial_grass_rock", "kind": "texture", "res": "1k"},
+    {"id": "metal_office_desk", "kind": "model", "res": "1k"},
+    {"id": "modern_arm_chair_01", "kind": "model", "res": "1k"},
+    {"id": "wheelchair_01", "kind": "model", "res": "1k"},
+    {"id": "potted_plant_02", "kind": "model", "res": "1k"},
+    {"id": "potted_plant_04", "kind": "model", "res": "1k"},
+    {"id": "wall_clock", "kind": "model", "res": "1k"},
+    {"id": "clipboard", "kind": "model", "res": "1k"},
+    {"id": "CashRegister_01", "kind": "model", "res": "1k"},
+    {"id": "wooden_display_shelves_01", "kind": "model", "res": "1k"},
+    {"id": "office_notepads", "kind": "model", "res": "1k"},
+    {"id": "island_tree_02", "kind": "model", "res": "1k"},
+    {"id": "shrub_02", "kind": "model", "res": "1k"}
+  ],
+  "fonts": [
+    {"file": "PublicSans.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/publicsans/PublicSans%5Bwght%5D.ttf"},
+    {"file": "DMMono-Medium.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/DMMono-Medium.ttf"}
+  ],
+  "zips": [
+    {"file": "mpfb.zip", "url": "https://extensions.blender.org/download/sha256:c075b3e9b94b8e5556a5f03f4653602d02ea306de08126e8f55ed6dee28a2dad/add-on-mpfb-v2.0.18.zip"},
+    {"file": "makehuman_system_assets_cc0.zip", "url": "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip"},
+    {"file": "hair01_cc0.zip", "url": "https://files.makehumancommunity.org/asset_packs/hair01/hair01_cc0.zip"},
+    {"file": "shirts01_cc0.zip", "url": "https://files.makehumancommunity.org/asset_packs/shirts01/shirts01_cc0.zip"},
+    {"file": "pants01_cc0.zip", "url": "https://files.makehumancommunity.org/asset_packs/pants01/pants01_cc0.zip"},
+    {"file": "shoes01_cc0.zip", "url": "https://files.makehumancommunity.org/asset_packs/shoes01/shoes01_cc0.zip"}
+  ]
+}
