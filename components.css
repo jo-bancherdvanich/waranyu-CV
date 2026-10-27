@@ -386,7 +386,7 @@
   line-height: 1.6;
   text-align: center;
 }
-.dg-t { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: "Space Grotesk", "Space Grotesk Fallback", sans-serif; stroke: none; }
+.dg-t { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: "Public Sans", sans-serif; stroke: none; }
 .dg-s { fill: var(--muted); font-size: 8.5px; font-family: "DM Mono", "DM Mono Fallback", monospace; stroke: none; }
 .dg-h { fill: var(--muted); font-size: 9px; font-family: "DM Mono", "DM Mono Fallback", monospace; text-transform: uppercase; stroke: none; }
 .dg-fact rect { fill: color-mix(in srgb, var(--case-accent, var(--accent)) 14%, var(--bg)); }
@@ -551,44 +551,15 @@
 .case .icon-list li:nth-child(n) .il-icon { color: var(--muted); }
 .case .icon-list li:nth-child(n) .il-flag { color: inherit; }
 .findings li:first-child { border-top-color: var(--line); }
-.finding-number { color: var(--highlight); }
-.eyebrow, .section-label > span, .timeline-date, .card-top, .tags, .cap-where, .cap-verb, .project-tech,
-.np-eyebrow, .sf-bottom, .sf-totop, .banner-stats dt, .availability, .dock-num, .case-meta dt,
-.portrait-wrap figcaption, .case-shot figcaption, .ww-card-sub, .ww-tile-label, .ww-wind, .ww-legend,
-.sq-count, .dash-slabel, .dash-alabel, .dash-axistitle, .ch-tip-label, .asst-more, .cap-num { font-size: .74rem; letter-spacing: .02em; }
-footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
+
+.ww-card-sub, .ww-tile-label, .ww-wind, .ww-legend,
+.sq-count, .dash-slabel, .dash-alabel, .dash-axistitle, .ch-tip-label, .asst-more { font-size: .74rem; letter-spacing: .02em; }
+.ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 @media (min-width: 900px) {}
 .project-btn:hover, .topbar-cta:hover, .dock-contact:hover, .dash-chip:hover, .contact-link:hover .cn-ico { transform: none; }
 .case { --st: var(--case-accent, var(--accent)); }
-.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) {
-  counter-reset: chip;
-  list-style: none;
-  display: grid; gap: .5rem;
-  margin: 1rem 0 0; padding: 0;
-  max-width: 760px;
-}
-.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li {
-  position: relative;
-  padding: .75rem 1rem .75rem 3rem;
-  border: 1px solid color-mix(in srgb, var(--st) 30%, var(--line));
-  border-radius: 14px;
-  background: color-mix(in srgb, var(--st) 6%, var(--surface));
-  margin: 0;
-}
-.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li::before {
-  counter-increment: chip;
-  content: counter(chip);
-  position: absolute; left: .8rem; top: .72rem;
-  width: 1.5rem; height: 1.5rem;
-  border-radius: 50%;
-  background: var(--st); color: var(--bg);
-  font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .7rem; font-weight: 500;
-  line-height: 1.5rem; text-align: center;
-}
-:root[data-theme="light"] .case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li::before { color: #ffffff; }
-.finding-number { color: var(--st); }
-.case .icon-list li:nth-child(n) .il-icon { color: var(--st); }
-.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li::marker { content: none; }
+.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) { margin: 1rem 0 0; padding-left: 1.2rem; max-width: 760px; }
+.case-block ul:not(.findings):not(.icon-list):not(.tags):not(.pipeline) > li { margin: .45rem 0; }
 @media (max-width: 720px) {}
 @media print {}
 @media (max-width: 720px) {}
@@ -644,7 +615,7 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .ll-heat th { padding: .25rem .3rem; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .68rem; font-weight: 500; text-align: center; }
 .ll-heat thead th.is-on { color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); }
 .ll-heat th[scope="row"] { text-align: left; white-space: nowrap; color: var(--ink); }
-.ll-heat th[scope="row"] span { display: block; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; font-size: .72rem; font-weight: 400; }
+.ll-heat th[scope="row"] span { display: block; color: var(--muted); font-family: "Public Sans", sans-serif; font-size: .72rem; font-weight: 400; }
 .ll-heat td { height: 34px; border-radius: 5px; text-align: center; color: var(--ink); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .8rem;
   background: color-mix(in srgb, var(--accent) calc(var(--v) * var(--ll-k) + 4%), var(--surface)); }
 .ll-heat td.is-on { box-shadow: inset 0 0 0 1.5px var(--ink); font-weight: 600; }
@@ -678,3 +649,15 @@ footer, .sf-bottom, .ww-credit, .dash-foot, .dash-meta { font-size: .74rem; }
 .pbi-title { margin: 2.6rem 0 .3rem; font-size: 1.25rem; }
 .pbi-embed { position: relative; margin-top: 1rem; aspect-ratio: 1024 / 612; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
 .pbi-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---- demo labels in sentence case --------------------------------------
+ * Labels, tooltips, table headers and small buttons inside the demos use
+ * the body face in sentence case. Code, the ERD boxes and chart axes keep
+ * DM Mono. */
+.ww-card-sub, .ww-tile-label, .ww-wind, .ww-legend, .ch-tip-label, .sq-sql summary, .sq-count,
+.dash-slabel, .dash-alabel, .dash-clear, .ll-flag, .ic-table thead th, .sq-table th,
+.dash-axistitle, .asst-more, .ww-credit, .dash-foot, .dash-meta, .sq-tab, .erd-original summary {
+  font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  text-transform: none; letter-spacing: 0; font-size: .8rem;
+}
+.dash-colval, .dash-collab { font-size: .75rem; }

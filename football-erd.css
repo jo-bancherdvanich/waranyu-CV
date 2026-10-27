@@ -233,3 +233,9 @@
 .erd-original > summary:hover { color: var(--case-accent, var(--accent)); border-color: var(--case-accent, var(--accent)); }
 .erd-original[open] > summary { margin-bottom: 1rem; }
 .erd-original .case-shot { margin: 0; }
+
+/* Labels around the diagram in sentence case; the boxes keep DM Mono. */
+.erd figcaption, .erd-bar, .erd-original > summary, .erd-legend, .erd-zoom, .erd-btn-wide {
+  font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  text-transform: none; letter-spacing: 0; font-size: .8rem;
+}

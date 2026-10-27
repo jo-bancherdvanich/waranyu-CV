@@ -25,9 +25,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Fonts load without blocking the first paint; the fallbacks in
          the page is readable before they arrive -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
     <link rel="stylesheet" href="site.css" />
     <link rel="stylesheet" href="components.css" />
     <!-- The blurred screenshot behind the title is the largest thing on first
@@ -51,26 +51,25 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="site-shell">
       <header class="topbar">
-        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
-        <div class="topbar-right">
-          <a class="github-link" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">
-          Repository <span aria-hidden="true">↗</span>
-        </a>
-        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
-        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
-      </div>
+        <a class="wordmark" href="index.html#top">Waranyu Bancherdvanich</a>
+        <nav class="topbar-right" aria-label="Main">
+          <a class="topbar-link" href="index.html#projects">Work</a>
+          <a class="topbar-link" href="index.html#experience">Experience</a>
+          <a class="topbar-link" href="index.html#contact">Contact</a>
+          <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
+          <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+        </nav>
       </header>
 
       <main id="main">
         <article class="case case-weather">
-          <p class="eyebrow">05 / Python</p>
           <h1>WeatherWise: a weather advisor you can just ask</h1>
           <p class="lede">
             Live weather data, charts, and rule-based advice wrapped in an interface that answers plain-language questions like "should I go outside tomorrow?"
           </p>
           <div class="case-actions">
-            <a class="button primary" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+            <a href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub</a>
+            <a href="index.html#projects">Back to all projects</a>
           </div>
 
           <div class="metrics case-metrics" aria-label="Project at a glance">
@@ -206,22 +205,24 @@
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/></svg></span>What I contributed</h2>
             <ul class="findings">
               <li>
-                <span class="finding-number"><b class="hl">01</b></span>
                 <p><strong>The temperature and precipitation visualisations</strong>: the charts that make a five-day forecast <b class="hl">readable at a glance instead of as a table</b>.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">02</b></span>
                 <p><strong>Data-caching logic</strong> that stores API responses and <b class="hl">avoids repeated calls</b>. Public weather APIs are <b class="hl">rate-limited</b>, so re-fetching the same forecast on every interaction will eventually break the app.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">03</b></span>
                 <p><strong>Fixed the "tomorrow" forecast indexing.</strong> The API returns <b class="hl">3-hour blocks</b>, not days, so the "tomorrow" lookup was <b class="hl">reading the first eight blocks</b>, which are today's, and answering confidently with the wrong day. Stepping a full day of eight blocks forward fixed it.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">04</b></span>
                 <p><strong>The interactive ipywidgets interface</strong>, turning a notebook of function calls into <b class="hl">something a non-technical person can use</b>.</p>
               </li>
             </ul>
+          </section>
+
+          <section class="case-block" id="approach-note">
+            <h2>How I worked</h2>
+            <h3>Know what one row means</h3>
+            <p>WeatherWise answered &ldquo;tomorrow&rdquo; confidently and wrongly, because the API returns <b class="hl">3-hour blocks, not days</b>, and the lookup was reading today&rsquo;s eight. Checking the grain of the data is the first step, not a detail.</p>
           </section>
 
           <section class="case-block" data-stage="Limits">
@@ -244,15 +245,14 @@
           <section class="case-block" data-stage="Links">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
             <div class="case-actions case-footer-actions">
-            <a class="button primary" href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+            <a href="https://github.com/jo-bancherdvanich/Weatherwise_Waranyu.B" target="_blank" rel="noreferrer">View on GitHub</a>
+            <a href="index.html#projects">Back to all projects</a>
           </div>
           </section>
 
           <a class="next-project" href="infrastructure.html">
             <span class="np-text">
-              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
-              <span class="np-eyebrow">06 / IT infrastructure · Pair project</span>
+              <span class="np-label">Next project</span>
               <span class="np-title">IT infrastructure and capital plan</span>
               <span class="np-blurb">Connecting a Perth head office to five remote WA training centres, designed so calls and learning keep working through outages.</span>
             </span>
@@ -263,20 +263,21 @@
 
       <footer class="site-footer">
         <div class="sf-top">
-          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <p class="sf-name">Waranyu Bancherdvanich</p>
           <nav class="sf-links" aria-label="Footer">
-            <a href="index.html#projects">Projects</a>
+            <a href="index.html#projects">Work</a>
+            <a href="index.html#experience">Experience</a>
             <a href="index.html#contact">Contact</a>
-            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
-            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="mailto:jojowaranyu.career@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub</a>
           </nav>
         </div>
         <div class="sf-bottom">
           <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
           <span>Last updated October 2026</span>
           <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
-          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+          <a class="sf-totop" href="#main">Back to top</a>
         </div>
       </footer>
     </div>

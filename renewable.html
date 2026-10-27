@@ -25,9 +25,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Fonts load without blocking the first paint; the fallbacks in
          the page is readable before they arrive -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
     <link rel="stylesheet" href="site.css" />
     <link rel="stylesheet" href="components.css" />
     <!-- The blurred screenshot behind the title is the largest thing on first
@@ -50,27 +50,26 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="site-shell">
       <header class="topbar">
-        <a class="wordmark" href="index.html#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
-        <div class="topbar-right">
-          <a class="github-link" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">
-          Repository <span aria-hidden="true">↗</span>
-        </a>
-        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
-        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
-      </div>
+        <a class="wordmark" href="index.html#top">Waranyu Bancherdvanich</a>
+        <nav class="topbar-right" aria-label="Main">
+          <a class="topbar-link" href="index.html#projects">Work</a>
+          <a class="topbar-link" href="index.html#experience">Experience</a>
+          <a class="topbar-link" href="index.html#contact">Contact</a>
+          <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
+          <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+        </nav>
       </header>
 
       <main id="main">
         <article class="case case-renewable">
-          <p class="eyebrow">01 / Forecasting</p>
           <h1>Is Australia on track for 82% renewable electricity?</h1>
           <p class="lede">
             An analytical brief for a government audience: twenty years of Australian electricity data, benchmarked against three comparison countries and forecast to <b class="hl">2035</b>, to answer one question honestly.
           </p>
           <div class="case-actions">
-            <a class="button primary" href="#explore">Explore the dashboard <span aria-hidden="true">&darr;</span></a>
-            <a class="button text-button" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+            <a href="#explore">Explore the dashboard</a>
+            <a href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub</a>
+            <a href="index.html#projects">Back to all projects</a>
           </div>
 
           <figure class="case-video" id="film" aria-describedby="case-video-desc">
@@ -201,26 +200,27 @@
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What the data showed</h2>
             <ul class="findings">
               <li>
-                <span class="finding-number"><b class="hl">01</b></span>
                 <p><strong>Australia is moving in the right direction, but not fast enough.</strong> Renewable share rose from about <b class="hl">9%</b> in <b class="hl">2005</b> to <b class="hl">35%</b> in <b class="hl">2024</b>, but a <b class="hl">linear forecast</b> reaches only <strong>37.8% by 2030</strong>, less than half the <b class="hl">82%</b> target for that year, and 44.6% by 2035.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">02</b></span>
                 <p><strong>Solar and wind took over from hydro.</strong> In <b class="hl">2005</b> they made up just <b class="hl">4.7%</b> of Australia&rsquo;s renewable electricity; by <b class="hl">2024</b> it was <b class="hl">81.3%</b>. Wind overtook hydro in <b class="hl">2019</b> and solar overtook both in <b class="hl">2020</b>, growing from 0.1 to <b class="hl">48.6 TWh</b> while hydro stayed around 15 TWh.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">03</b></span>
                 <p><strong>Renewables covered all the growth in demand.</strong> Total generation rose about <b class="hl">51 TWh</b> between 2005 and 2024 while renewables grew about <b class="hl">77 TWh</b>, so fossil generation actually fell, from <b class="hl">208 to 182 TWh</b>.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">04</b></span>
                 <p><strong>Policy changed the pace.</strong> The share stalled at <b class="hl">13 to 15%</b> while the Renewable Energy Target was under review, then grew about <b class="hl">2.5 points a year</b> after the 2015 reset, nearly <b class="hl">5&times;</b> its 2005 to 2015 pace.</p>
               </li>
               <li>
-                <span class="finding-number"><b class="hl">05</b></span>
                 <p><strong>International comparison depends entirely on the measure you pick.</strong> China generates the most renewable electricity by volume (<b class="hl">3,398</b>.<b class="hl">8 TWh</b>), but Australia's renewable <em>share</em> of <b class="hl">35.0%</b> slightly edged China's <b class="hl">33.7%</b> in <b class="hl">2024</b>. New Zealand (<b class="hl">85.5%</b>) and Germany (<b class="hl">54.5%</b>) remain well ahead on share. Choosing volume or share tells two opposite stories, so the dashboard shows both.</p>
               </li>
             </ul>
+          </section>
+
+          <section class="case-block" id="approach-note">
+            <h2>How I worked</h2>
+            <h3>Say what the analysis can't tell you</h3>
+            <p>My renewable forecast is a linear regression, so I wrote that it is a <b class="hl">planning signal, not a prediction</b>, and forecast in R so the <b class="hl">equation, R&sup2; and p-value print on the chart</b>. Anyone senior can check the reasoning without asking me.</p>
           </section>
 
           <section class="case-block" data-stage="Limits">
@@ -236,15 +236,14 @@
           <section class="case-block" data-stage="Links">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
             <div class="case-actions case-footer-actions">
-            <a class="button primary" href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button text-button" href="index.html#projects">Back to all projects <span aria-hidden="true">→</span></a>
+            <a href="https://github.com/jo-bancherdvanich/renewable-electricity-dashboard" target="_blank" rel="noreferrer">View on GitHub</a>
+            <a href="index.html#projects">Back to all projects</a>
           </div>
           </section>
 
           <a class="next-project" href="locollm.html">
             <span class="np-text">
-              <span class="np-label">Next project <span aria-hidden="true">&rarr;</span></span>
-              <span class="np-eyebrow">02 / AI · Client capstone</span>
+              <span class="np-label">Next project</span>
               <span class="np-title">LocoLLM privacy-law adapter</span>
               <span class="np-blurb">Training a small AI model that runs on a laptop into an Australian privacy-law specialist, and proving it on a sealed benchmark.</span>
             </span>
@@ -255,20 +254,21 @@
 
       <footer class="site-footer">
         <div class="sf-top">
-          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <p class="sf-name">Waranyu Bancherdvanich</p>
           <nav class="sf-links" aria-label="Footer">
-            <a href="index.html#projects">Projects</a>
+            <a href="index.html#projects">Work</a>
+            <a href="index.html#experience">Experience</a>
             <a href="index.html#contact">Contact</a>
-            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
-            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="mailto:jojowaranyu.career@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub</a>
           </nav>
         </div>
         <div class="sf-bottom">
           <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
           <span>Last updated October 2026</span>
           <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
-          <a class="sf-totop" href="#main">Back to top <span aria-hidden="true">↑</span></a>
+          <a class="sf-totop" href="#main">Back to top</a>
         </div>
       </footer>
     </div>

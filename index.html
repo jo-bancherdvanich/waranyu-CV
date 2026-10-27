@@ -25,9 +25,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Fonts load without blocking the first paint; the fallbacks in
          the page is readable before they arrive -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
     <link rel="stylesheet" href="site.css" />
     <link rel="stylesheet" href="components.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -51,186 +51,105 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="site-shell">
       <header class="topbar">
-        <a class="wordmark" href="#top"><span class="wm-name">Waranyu Bancherdvanich</span></a>
-        <div class="topbar-right">
-          <a class="topbar-link" href="#projects">Projects</a>
+        <a class="wordmark" href="#top">Waranyu Bancherdvanich</a>
+        <nav class="topbar-right" aria-label="Main">
+          <a class="topbar-link" href="#projects">Work</a>
           <a class="topbar-link" href="#experience">Experience</a>
-          <a class="topbar-link" href="mailto:jojowaranyu.career@gmail.com">Email</a>
-          <a class="github-link" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
-          GitHub <span aria-hidden="true">↗</span>
-        </a>
-        <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
-        <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
-      </div>
+          <a class="topbar-link" href="#contact">Contact</a>
+          <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
+          <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+        </nav>
       </header>
 
       <main id="main">
         <section class="intro" id="top" aria-labelledby="intro-title">
-          <div class="intro-copy">
-            <p class="eyebrow">Data analyst &middot; Perth, Western Australia</p>
-            <h1 id="intro-title">Waranyu Bancherdvanich</h1>
-            <p class="lede">
-              I&rsquo;m finishing a Master of Information Systems and Technology at Curtin University, after a statistics and finance degree at Thammasat. I build dashboards and forecasts in Power BI, SQL, Python and R, and I write down every data decision so the next analyst can check my working.
-            </p>
-            <p class="lede">
-              Five of the seven projects below run on their real data in your browser: the dashboards filter, the SQL executes, the forecast recalculates, and the AI model&rsquo;s benchmark results break down run by run.
-            </p>
-            <p class="eyebrow hero-tools" aria-label="Tools">Power BI &middot; DAX &middot; Power Query &middot; SQL &middot; Python &middot; R &middot; Excel</p>
-            <ul class="hero-facts" aria-label="At a glance">
-              <li><span class="hf-num">7</span><span class="hf-label">projects</span></li>
-              <li><span class="hf-num">July 2027</span><span class="hf-label">graduation</span></li>
-            </ul>
-            <p class="availability">Looking for a data analyst internship in Perth now, and graduate roles from July 2027.</p>
-            <div class="intro-actions">
-              <a class="button primary" href="#projects">See the projects <span aria-hidden="true">&rarr;</span></a>
-              <a class="button text-button" href="mailto:jojowaranyu.career@gmail.com">Email me</a>
-              <a class="button text-button" href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
-            </div>
-          </div>
-          <nav class="hero-work" aria-label="Selected projects">
-            <a class="hw-tile" href="renewable.html"><img src="images/renewable-dashboard.webp" alt="" width="1337" height="752" decoding="async" /><span class="hw-label"><span class="hw-num">01</span>Renewable transition</span></a>
-            <a class="hw-tile" href="locollm.html"><img src="images/locollm-results.webp" alt="" width="1520" height="1104" decoding="async" /><span class="hw-label"><span class="hw-num">02</span>LocoLLM adapter</span></a>
-            <a class="hw-tile" href="freshmart.html"><img src="images/freshmart-dashboard.webp" alt="" width="1447" height="818" decoding="async" /><span class="hw-label"><span class="hw-num">03</span>FreshMart dashboard</span></a>
-            <a class="hw-tile" href="football-database.html"><img src="images/football-erd.webp" alt="" width="1114" height="696" decoding="async" /><span class="hw-label"><span class="hw-num">04</span>Football database</span></a>
-            <a class="hw-tile" href="weatherwise.html"><img src="images/weatherwise-demo.webp" alt="" width="587" height="724" decoding="async" /><span class="hw-label"><span class="hw-num">05</span>WeatherWise</span></a>
-            <a class="hw-tile" href="infrastructure.html"><img src="images/dort-network-diagram.jpg" alt="" width="1807" height="1280" decoding="async" /><span class="hw-label"><span class="hw-num">06</span>IT infrastructure plan</span></a>
-          </nav>
+          <h1 id="intro-title">Waranyu Bancherdvanich</h1>
+          <p class="lede">
+            I&rsquo;m finishing a Master of Information Systems and Technology at Curtin University, after a statistics and finance degree at Thammasat. I build dashboards and forecasts in Power BI, SQL, Python and R, and I write down every data decision so the next analyst can check my working. I&rsquo;m looking for a data analyst internship in Perth now, and graduate roles from July 2027.
+          </p>
+          <p class="intro-links">
+            <a href="mailto:jojowaranyu.career@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
+          </p>
         </section>
 
         <section class="section projects" id="projects" aria-labelledby="projects-title">
-          <div class="section-label"><span>01</span><h2 id="projects-title"><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg></span>Selected work</h2></div>
+          <h2 class="section-head" id="projects-title">Selected work</h2>
+          <p class="section-note">Five of these projects run on their real data in your browser.</p>
           <div class="project-grid">
-            <article class="project-card project-card-featured" data-href="renewable.html">
-              <div class="card-top"><span>01 / ENERGY &middot; ACADEMIC</span><a class="live-badge" href="renewable.html#explore"><span class="live-dot" aria-hidden="true"></span>Live demo</a></div>
-              <div class="card-media">
-                <img width="1337" height="752" class="project-shot" src="images/renewable-dashboard.webp" alt="Power BI dashboard of Australia's renewable electricity share with a forecast to 2035" />
-                <video class="project-shot" controls playsinline preload="none" width="1600" height="900"
-                       poster="video/renewable-transition-poster.webp" aria-label="Narrated one-minute film about Australia's renewable electricity, 2005 to 2035">
-                  <source src="video/renewable-transition.mp4" type="video/mp4" />
-                  <track kind="captions" src="video/renewable-transition.vtt" srclang="en" label="English" />
-                </video>
-              </div>
-              <div>
-                <h3>Australia's renewable transition</h3>
-                <p>A dashboard <b class="hl">tracking</b> Australia's shift to renewable electricity from <b class="hl">2005</b> to <b class="hl">2024</b>, and where it lands by <b class="hl">2035</b>.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="35">35%</span><span class="kn-label">share in 2024</span></div><div class="kn"><span class="kn-num stat" data-count="44.6" data-dp="1">44.6%</span><span class="kn-label">forecast for 2035</span></div><div class="kn"><span class="kn-num stat" data-count="0.85" data-dp="2">0.85</span><span class="kn-label">R²</span></div></div>
-                <figure class="mini-chart" data-chart="share"><figcaption>Renewable share of electricity, 2005 to 2024, from the project data</figcaption></figure>
-                <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V8M16 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Electricity data 2005 to 2024</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M5 16l4-3 4 1 6-6"/><circle cx="7" cy="14" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="17" cy="9" r="1.2"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">R linear regression</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Power BI dashboard</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 8-8"/><path d="M16 7h4v4"/><path d="M4 21h16" stroke-dasharray="2 3"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">2035 forecast</span></li></ol>
-                <ul class="project-detail">
-                  <li><b class="hl">Forecast in R</b> that Australia reaches only <b class="hl">37.8% by 2030</b> against the <b class="hl">82% target</b>, so the target is unlikely on the current trend</li>
-                  <li><b class="hl">Linked the trend to policy</b>: the share stalled while the Renewable Energy Target was under review, then grew about 2.5 points a year after the 2015 target reset, <b class="hl">nearly 5&times; its 2005 to 2015 pace</b></li>
-                  <li><b class="hl">Benchmarked</b> against Germany (<b class="hl">54.5%</b>) and New Zealand (<b class="hl">85.5%</b>) to put the gap in context</li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="renewable.html#explore">Try the dashboard <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="renewable.html">Read the case study</a></p>
+            <article class="project-card">
+              <a class="card-media" href="renewable.html" tabindex="-1" aria-hidden="true"><img width="1337" height="752" src="images/renewable-dashboard.webp" alt="" /></a>
+              <div class="card-text">
+                <h3><a href="renewable.html">Australia&rsquo;s renewable transition</a></h3>
+                <p class="meta">Power BI, R &middot; Academic project</p>
+                <p>A Power BI dashboard of Australia&rsquo;s electricity from 2005 to 2024, with a forecast in R. On the current trend the renewable share reaches 37.8% by 2030, against a target of 82%.</p>
+                <p class="card-links"><a href="renewable.html#explore">Try the dashboard</a> <a href="renewable.html">Read the case study</a></p>
               </div>
             </article>
-            <article class="project-card" data-href="locollm.html">
-              <div class="card-top"><span>02 / AI &middot; CLIENT CAPSTONE</span><a class="live-badge" href="locollm.html#explore"><span class="live-dot" aria-hidden="true"></span>Explore results</a></div>
-              <video class="project-shot" controls playsinline preload="none" width="1280" height="720"
-                     poster="video/locollm-future-poster.jpg" aria-label="The future of LocoLLM, a 48-second narrated animation">
-                <source src="video/locollm-future.mp4" type="video/mp4" />
-                <track kind="captions" src="video/locollm-future.vtt" srclang="en" label="English" />
-              </video>
-              <div>
-                <h3>LocoLLM privacy-law adapter</h3>
-                <p>A client capstone: training a small AI model that runs on an <b class="hl">ordinary laptop</b> into an Australian privacy-law specialist, and <b class="hl">proving it with numbers</b>.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="81">81%</span><span class="kn-label">after training</span></div><div class="kn"><span class="kn-num stat" data-count="170">170</span><span class="kn-label">sealed questions</span></div><div class="kn"><span class="kn-num stat" data-count="15">15</span><span class="kn-label">domains tested</span></div></div>
-                <ul class="project-detail">
-                  <li><b class="hl">Tested the base model on 15 domains</b> and chose privacy law, where it scored zero, so any gain would be clear</li>
-                  <li><b class="hl">Built a sealed benchmark</b> before any training, and rewrote the training items that mirrored it, so the score is honest</li>
-                  <li>Changed one setting per run: <b class="hl">training the MLP layers lifted accuracy from 38% to 81%</b></li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="locollm.html#explore">Explore the results <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="locollm.html">Read the case study</a></p>
+            <article class="project-card">
+              <a class="card-media" href="locollm.html" tabindex="-1" aria-hidden="true"><img width="1520" height="1104" src="images/locollm-results.webp" alt="" loading="lazy" /></a>
+              <div class="card-text">
+                <h3><a href="locollm.html">LocoLLM privacy-law adapter</a></h3>
+                <p class="meta">Python, LoRA &middot; Client capstone</p>
+                <p>Training a small AI model that runs on an ordinary laptop into an Australian privacy-law specialist. The 170-question benchmark was sealed before any training, and training the MLP layers lifted accuracy from 38% to 81%.</p>
+                <p class="card-links"><a href="locollm.html#explore">Explore the results</a> <a href="locollm.html">Read the case study</a></p>
               </div>
             </article>
-            <article class="project-card" data-href="freshmart.html">
-              <div class="card-top"><span>03 / RETAIL &middot; ACADEMIC</span><a class="live-badge" href="freshmart.html#explore"><span class="live-dot" aria-hidden="true"></span>Live demo</a></div>
-              <img width="1447" height="818" class="project-shot" src="images/freshmart-dashboard.webp" alt="FreshMart Power BI dashboard showing revenue, margin and store performance" loading="lazy" />
-              <div>
-                <h3>FreshMart sales dashboard</h3>
-                <p>A Power BI retail dashboard that turns <b class="hl">raw transaction data</b> into a view of where the money actually comes from.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="17697">17,697</span><span class="kn-label">transaction lines</span></div><div class="kn"><span class="kn-num stat" data-count="93">93</span><span class="kn-label">rows remapped</span></div><div class="kn"><span class="kn-num stat" data-count="12">12</span><span class="kn-label">stores</span></div></div>
-                <figure class="mini-chart" data-chart="revenue"><figcaption>Revenue by month, 2024, summed from the same 17,697 lines the dashboard reads</figcaption></figure>
-                <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">5 source tables</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M8.5 11l2 2 3.5-4"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Power Query audit</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="1.6"/><circle cx="20" cy="12" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="4" cy="12" r="1.6"/><path d="M12 7v2M15 12h2M12 15v2M7 12h2"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Kimball star schema</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14l-8 7 8 7H5"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">DAX measures</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M7 15l3-4 3 2 4-5"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">Executive dashboard</span></li></ol>
-                <ul class="project-detail">
-                  <li><b class="hl">Cleaned data</b> from five source tables in Power Query, <b class="hl">remapping 93 orphaned sales rows</b> instead of dropping them, so revenue totals stay accurate and the data gap stays visible</li>
-                  <li><b class="hl">Modelled a Kimball star schema</b>, so managers can see which regions and categories drive profit without stitching spreadsheets together</li>
-                  <li><b class="hl">Built DAX measures</b> for revenue, gross margin and <b class="hl">year-on-year time intelligence</b>, so growth is judged like-for-like rather than as a raw total</li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="freshmart.html#explore">Try the dashboard <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="freshmart.html">Read the case study</a></p>
+            <article class="project-card">
+              <a class="card-media" href="freshmart.html" tabindex="-1" aria-hidden="true"><img width="1447" height="818" src="images/freshmart-dashboard.webp" alt="" loading="lazy" /></a>
+              <div class="card-text">
+                <h3><a href="freshmart.html">FreshMart sales dashboard</a></h3>
+                <p class="meta">Power BI, Power Query, DAX &middot; Academic project</p>
+                <p>A retail dashboard built from 17,697 transaction lines across 12 stores. In Power Query I remapped 93 orphaned sales rows instead of dropping them, so revenue totals stay accurate.</p>
+                <p class="card-links"><a href="freshmart.html#explore">Try the dashboard</a> <a href="freshmart.html">Read the case study</a></p>
               </div>
             </article>
-            <article class="project-card" data-href="football-database.html">
-              <div class="card-top"><span>04 / SPORT &middot; GROUP PROJECT</span><a class="live-badge" href="football-database.html#run-it"><span class="live-dot" aria-hidden="true"></span>Live demo</a></div>
-              <img width="1114" height="696" class="project-shot" src="images/football-erd.webp" alt="Entity relationship diagram for the football club database" loading="lazy" />
-              <div>
-                <h3>Football club database</h3>
-                <p>A relational database for football club management, <b class="hl">designed from business rules up</b>.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="16">16</span><span class="kn-label">tables</span></div><div class="kn"><span class="kn-num stat" data-count="9">9</span><span class="kn-label">queries</span></div><div class="kn"><span class="kn-num stat" data-count="18">18</span><span class="kn-label">business rules</span></div></div>
-                <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h6M9 16h6"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">18 business rules</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="5" rx="1"/><rect x="14" y="4" width="7" height="5" rx="1"/><rect x="8.5" y="15" width="7" height="5" rx="1"/><path d="M6.5 9v3h11V9M12 12v3"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">ERD</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">16-table Oracle schema</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">9 analytical queries</span></li></ol>
-                <ul class="project-detail">
-                  <li><b class="hl">Translated the business rules into an ERD</b> and a normalised Oracle schema, so questions like the season ladder are answered without duplicated data</li>
-                  <li><b class="hl">Created a data dictionary</b> and inserted a full sample season of <b class="hl">56 games and 154 goals</b>, so every query is tested on realistic data</li>
-                  <li>Used <b class="hl">joins, subqueries and HAVING</b>, with a <b class="hl">LEFT JOIN</b> so goalless games keep goals-per-ground averages accurate</li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="football-database.html#run-it">Run the queries <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="football-database.html">Read the case study</a></p>
+            <article class="project-card">
+              <a class="card-media" href="football-database.html" tabindex="-1" aria-hidden="true"><img width="1114" height="696" src="images/football-erd.webp" alt="" loading="lazy" /></a>
+              <div class="card-text">
+                <h3><a href="football-database.html">Football club database</a></h3>
+                <p class="meta">Oracle SQL &middot; Group project</p>
+                <p>A database for running a football club, designed from 18 business rules into a normalised 16-table Oracle schema. The queries run in your browser on a full sample season of 56 games and 154 goals.</p>
+                <p class="card-links"><a href="football-database.html#run-it">Run the queries</a> <a href="football-database.html">Read the case study</a></p>
               </div>
             </article>
-            <article class="project-card" data-href="weatherwise.html">
-              <div class="card-top"><span>05 / WEATHER &middot; ACADEMIC</span><a class="live-badge" href="weatherwise.html#ww-demo"><span class="live-dot" aria-hidden="true"></span>Live demo</a></div>
-              <img width="587" height="724" class="project-shot" src="images/weatherwise-demo.webp" alt="WeatherWise notebook interface showing weather charts and controls" loading="lazy" />
-              <div>
-                <h3>WeatherWise</h3>
-                <p>An interactive weather advisor that <b class="hl">answers questions in plain language</b>, built in a Jupyter notebook.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="5">5</span><span class="kn-label">day forecast</span></div><div class="kn"><span class="kn-num stat" data-count="3">3</span><span class="kn-label">hour blocks</span></div></div>
-                <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">OpenWeatherMap API</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Response cache</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Matplotlib and ipywidgets</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Plain-language advice</span></li></ol>
-                <ul class="project-detail">
-                  <li><b class="hl">Charts temperature and rainfall</b> with Matplotlib and ipywidgets controls</li>
-                  <li><b class="hl">Rule-based outdoor activity advice</b>, plus <b class="hl">natural-language question parsing</b></li>
-                  <li><b class="hl">Caches responses</b> to avoid repeat API calls</li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="weatherwise.html#ww-demo">Try the demo <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="weatherwise.html">Read the case study</a></p>
+            <article class="project-card">
+              <a class="card-media" href="weatherwise.html" tabindex="-1" aria-hidden="true"><img width="587" height="724" src="images/weatherwise-demo.webp" alt="" loading="lazy" /></a>
+              <div class="card-text">
+                <h3><a href="weatherwise.html">WeatherWise</a></h3>
+                <p class="meta">Python, Matplotlib, ipywidgets &middot; Academic project</p>
+                <p>A weather advisor built in a Jupyter notebook. It charts temperature and rainfall from a 5-day forecast and answers plain-language questions with rule-based outdoor activity advice.</p>
+                <p class="card-links"><a href="weatherwise.html#ww-demo">Try the demo</a> <a href="weatherwise.html">Read the case study</a></p>
               </div>
             </article>
-            <article class="project-card" data-href="infrastructure.html">
-              <div class="card-top"><span>06 / IT INFRASTRUCTURE &middot; PAIR PROJECT</span><span aria-hidden="true">→</span></div>
-              <img width="1807" height="1280" class="project-shot" src="images/dort-network-diagram.jpg" alt="Network diagram linking a Perth head office to five remote WA training centres by Starlink, NBN fibre and 5G, with solar, UPS and satellite phone backup" loading="lazy" />
-              <div>
-                <h3>IT infrastructure and capital plan</h3>
-                <p>A case-study plan connecting a <b class="hl">Perth head office</b> to five remote WA training centres, designed so <b class="hl">calls and learning keep working</b> through outages.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="29.8" data-dp="1">29.8 ms</span><span class="kn-label">Starlink latency</span></div><div class="kn"><span class="kn-num stat" data-count="5">5</span><span class="kn-label">WAN options compared</span></div><div class="kn"><span class="kn-num stat" data-count="6">6</span><span class="kn-label">sites connected</span></div></div>
-                <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Assess 12 old PCs</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Compare 5 WAN options</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Design the network</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Cost every item in Excel</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">Plan security and power</span></li></ol>
-                <ul class="project-detail">
-                  <li><b class="hl">Compared 5 WAN options</b> and chose Starlink for four remote centres over Sky Muster on latency, about 29.8 ms against 664.9 ms, so VoIP calls work</li>
-                  <li><b class="hl">Designed for outages</b>: hybrid solar and UPS at every remote centre, and an Iridium satellite phone for when the internet is down</li>
-                  <li><b class="hl">Drew the network diagram</b> in Visio, with solar and UPS backup and satellite phones at every remote site</li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="infrastructure.html">Read the case study <span aria-hidden="true">&rarr;</span></a><a class="project-btn" href="images/dort-network-diagram.jpg" target="_blank" rel="noreferrer">Open the network diagram</a></p>
+            <article class="project-card">
+              <a class="card-media" href="infrastructure.html" tabindex="-1" aria-hidden="true"><img width="1807" height="1280" src="images/dort-network-diagram.jpg" alt="" loading="lazy" /></a>
+              <div class="card-text">
+                <h3><a href="infrastructure.html">IT infrastructure and capital plan</a></h3>
+                <p class="meta">Excel, Visio &middot; Pair project</p>
+                <p>A case-study plan connecting a Perth head office to five remote WA training centres. We compared 5 WAN options and chose Starlink over Sky Muster for four of the centres on latency, about 29.8 ms against 664.9 ms, so VoIP calls work.</p>
+                <p class="card-links"><a href="infrastructure.html">Read the case study</a> <a href="images/dort-network-diagram.jpg" target="_blank" rel="noreferrer">Network diagram (image)</a></p>
               </div>
             </article>
-            <article class="project-card" data-href="streaming-concept.html">
-              <div class="card-top"><span>07 / 3D MODELLING &middot; CONSULTING TEAM</span><span aria-hidden="true">→</span></div>
-              <img width="1280" height="720" class="project-shot" src="video/venue-3d-model-poster.jpg" alt="3D model of a sports venue with four outdoor pitches and two indoor courts, built in Blender" loading="lazy" />
-              <div>
-                <h3>3D venue model for a streaming plan</h3>
-                <p>For a student consulting project, a <b class="hl">3D model of a sports venue in Blender</b> that shows where every camera in a live-streaming plan would sit.</p>
-                <div class="key-numbers"><div class="kn"><span class="kn-num stat" data-count="18">18</span><span class="kn-label">cameras placed</span></div><div class="kn"><span class="kn-num stat" data-count="6">6</span><span class="kn-label">playing surfaces</span></div></div>
-                <ul class="project-detail">
-                  <li><b class="hl">Turned a written camera plan into a 3D model</b> so the team and panel could check coverage at a glance</li>
-                  <li><b class="hl">Built in Blender with AI tools</b> as part of a 9-person Curtin Consulting Group team, where I was Finance Lead</li>
-                </ul>
-                <p class="project-actions"><a class="project-btn is-primary" href="streaming-concept.html">Watch the venue model <span aria-hidden="true">&rarr;</span></a></p>
+            <article class="project-card">
+              <a class="card-media" href="streaming-concept.html" tabindex="-1" aria-hidden="true"><img width="1280" height="720" src="video/venue-3d-model-poster.jpg" alt="" loading="lazy" /></a>
+              <div class="card-text">
+                <h3><a href="streaming-concept.html">3D venue model for a streaming plan</a></h3>
+                <p class="meta">Blender &middot; Consulting team project</p>
+                <p>On a 9-person Curtin Consulting Group team, where I was Finance Lead, I built a 3D model of the sports venue in Blender with AI tools. It shows where each of the 18 cameras in the live-streaming plan would sit.</p>
+                <p class="card-links"><a href="streaming-concept.html">Watch the venue model</a></p>
               </div>
             </article>
-            <a class="project-card project-card-wide" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
-              <div class="card-top"><span>08 / GITHUB</span><span aria-hidden="true">↗</span></div>
-              <div><h3>Everything else</h3><p>Coursework, experiments and works in progress, on GitHub.</p><span class="project-cta">View profile &#8599;</span></div>
-            </a>
+            <div class="project-other">
+              <h3>Everything else</h3>
+              <p>Coursework, experiments and works in progress are on <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub</a>.</p>
+            </div>
           </div>
         </section>
 
         <section class="section experience" id="experience" aria-labelledby="experience-title">
-          <div class="section-label"><span>02</span><h2 id="experience-title">Experience</h2></div>
+          <h2 class="section-head" id="experience-title">Experience</h2>
           <div class="timeline">
             <article class="timeline-item">
               <div class="timeline-date">Jul 2026 to Present</div>
@@ -244,23 +163,6 @@
                   <li>Benchmarked assumptions against 15+ case studies, so every forecast could be traced to a public source.</li>
                   <li>Created an 18-camera 3D venue render and a 3-view streaming prototype, turning the plan into something the client and panel could see and use.</li>
                 </ul>
-                <ul class="tags" aria-label="Skills used"><li>Financial modelling</li><li>Sensitivity analysis</li><li>Excel</li><li>Benchmarking</li><li>React</li></ul>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-date">Jul 2026 to Present</div>
-              <div>
-                <p class="role">Building and Benchmarking a Domain-Specialist AI Model (LocoLLM)</p>
-                <p class="company">Quality and Documentation Manager &middot; Client: LocoLabo, Curtin Business School</p>
-                <p class="description">Testing the client&rsquo;s &ldquo;small model, plug-in expert&rdquo; idea: a small AI model with an Australian privacy-law expert adapter, built with free tools.</p>
-                <ul class="exp-points">
-                  <li>Tested the base AI model across 15 business areas and pinpointed Australian privacy law as a weak spot, giving the client clear evidence to approve the project focus.</li>
-                  <li>Trained a privacy-law expert adapter that reached 81% accuracy on a sealed 170-question test, using only free tools, proving the client&rsquo;s idea works.</li>
-                  <li>Used LoRA fine-tuning on the model&rsquo;s MLP layers to increase accuracy from 38% to 81%, the project&rsquo;s biggest gain and now the core of the recipe recommended to the client.</li>
-                  <li>Delivered a 6-step handover recipe and client presentation, so the next team can build an adapter for a new subject much faster.</li>
-                </ul>
-                <ul class="tags" aria-label="Skills used"><li>LoRA fine-tuning</li><li>Model evaluation</li><li>Benchmarking</li><li>Documentation</li></ul>
-                <p class="project-actions exp-actions"><a class="project-btn" href="locollm.html">Read the case study <span aria-hidden="true">&rarr;</span></a></p>
               </div>
             </article>
             <article class="timeline-item">
@@ -283,40 +185,29 @@
         </section>
 
         <section class="section education" id="education" aria-labelledby="education-title">
-          <div class="section-label"><span>03</span><h2 id="education-title"><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5z"/><path d="M6 11.5V17c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/></svg></span>Education</h2></div>
+          <h2 class="section-head" id="education-title">Education</h2>
           <div class="timeline">
-            <article class="timeline-item edu-master">
-              <span class="edu-art edu-art-seal edu-art-curtin"><img src="images/curtin-shield.webp" alt="Curtin University shield" width="480" height="480" loading="lazy" decoding="async" /></span>
+            <article class="timeline-item">
               <div class="timeline-date">2025 to 2027</div>
               <div>
                 <p class="role">Master of Information Systems and Technology</p>
                 <p class="company">Curtin University, Perth, specialising in Data Analytics and Visualisation</p>
-                <p class="description"><b class="hl">Dimensional modelling, dashboard development, forecasting, and database design</b>. Graduating July <b class="hl">2027</b>.</p>
-                <ul class="tags" aria-label="Skills used"><li>Power BI</li><li>SQL</li><li>Python</li><li>R</li></ul>
+                <p class="description">Dimensional modelling, dashboard development, forecasting, and database design. Graduating July 2027.</p>
               </div>
             </article>
-            <article class="timeline-item edu-bach">
-              <span class="edu-art edu-art-seal"><img src="images/thammasat-seal.webp" alt="Thammasat University seal" width="480" height="480" loading="lazy" decoding="async" /></span>
+            <article class="timeline-item">
               <div class="timeline-date">2019 to 2023</div>
               <div>
                 <p class="role">Bachelor of Science and Technology</p>
                 <p class="company">Thammasat University, Thailand, majoring in Statistics with a minor in Finance</p>
-                <p class="description">The statistical foundation behind the analysis work: <b class="hl">regression, time-series methods</b>, and <b class="hl">interpreting what a model is actually telling you</b>.</p>
-                <ul class="tags" aria-label="Skills used"><li>Statistics</li><li>Finance</li><li>Regression</li></ul>
+                <p class="description">The statistical foundation behind the analysis work: regression, time-series methods, and interpreting what a model is actually telling you.</p>
               </div>
             </article>
-          </div>
-        </section>
-
-        <section class="section certificates" id="certificates" aria-labelledby="certificates-title">
-          <div class="section-label"><span>04</span><h2 id="certificates-title"><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.5 7 21l5-2.5L17 21l-1.5-7.5"/></svg></span>Certificates</h2></div>
-          <div class="timeline">
             <article class="timeline-item">
-              <div class="timeline-date">MAY 2026</div>
+              <div class="timeline-date">May 2026</div>
               <div>
                 <p class="role">Google Data Analytics Certificate courses</p>
                 <p class="company">Coursera and Google</p>
-                                <ul class="tags" aria-label="Topics covered"><li>Data foundations</li><li>Asking the right questions</li><li>Data preparation</li></ul>
               </div>
             </article>
             <article class="timeline-item">
@@ -324,134 +215,44 @@
               <div>
                 <p class="role">Best Business Case Pitch</p>
                 <p class="company">NSO Data Camp, Thailand</p>
-                <p class="description">Won for "Branding is All About Counting", a pitch built on <b class="hl">turning brand data into a business case</b>.</p>
+                <p class="description">Won for &ldquo;Branding is All About Counting&rdquo;, a pitch built on turning brand data into a business case.</p>
               </div>
             </article>
           </div>
         </section>
 
-        <section class="section capabilities" aria-labelledby="capabilities-title">
-          <div class="section-label"><span>05</span><h2 id="capabilities-title"><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="7" cy="18" r="2"/></svg></span>Capabilities</h2></div>
-          <ul class="capability-list">
-            <li>
-              <span class="cap-num">01</span>
-              <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V13M12 20V7M19 20V4"/></svg></span>
-              <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-1">Power BI and DAX</button></span>
-              <span class="cap-where">FreshMart &middot; Renewable transition</span>
-              <span class="cap-verb">Visualise</span>
-              <p class="cap-why" id="cap-why-1"><span class="cap-lead">A dashboard is where the analysis meets someone who has <b class="hl">four minutes between meetings</b>.</span></p>
-            </li>
-            <li>
-              <span class="cap-num">02</span>
-              <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/></svg></span>
-              <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-2">SQL and data modelling</button></span>
-              <span class="cap-where">Football club database &middot; FreshMart star schema</span>
-              <span class="cap-verb">Structure</span>
-              <p class="cap-why" id="cap-why-2"><span class="cap-lead">Almost every analyst job is <b class="hl">SQL against a schema somebody else designed</b>.</span></p>
-            </li>
-            <li>
-              <span class="cap-num">03</span>
-              <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span>
-              <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-3">Python, R and Excel</button></span>
-              <span class="cap-where">WeatherWise &middot; Renewable forecast</span>
-              <span class="cap-verb">Analyse</span>
-              <p class="cap-why" id="cap-why-3"><span class="cap-lead">Python and R handle the work that will not fit in a dashboard: <b class="hl">reshaping awkward data, calling an API, fitting a model</b>.</span></p>
-            </li>
-            <li>
-              <span class="cap-num">04</span>
-              <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 7-8"/><path d="M15 7h4v4"/></svg></span>
-              <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-4">Forecasting and statistics</button></span>
-              <span class="cap-where">Renewable transition &middot; Statistics degree</span>
-              <span class="cap-verb">Predict</span>
-              <p class="cap-why" id="cap-why-4"><span class="cap-lead"><b class="hl">Anyone can draw a trend line</b>; statistics is what says how far to trust it.</span></p>
-            </li>
-            <li>
-              <span class="cap-num">05</span>
-              <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10h-8l-4 4v-4H4z"/></svg></span>
-              <span class="cap-name"><button type="button" class="cap-toggle" aria-expanded="false" aria-controls="cap-why-5">Data storytelling</button></span>
-              <span class="cap-where">Every project on this page</span>
-              <span class="cap-verb">Explain</span>
-              <p class="cap-why" id="cap-why-5"><span class="cap-lead"><b class="hl">An analysis nobody acts on has failed</b>, however correct it was.</span></p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="section principles" id="approach" aria-labelledby="approach-title">
-          <div class="section-label"><span>06</span><h2 id="approach-title"><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13.5 14 8.5 15.5 10.5 10z"/></svg></span>How I think about data</h2></div>
-          <ol class="principle-list">
-            <li>
-              <h3>Clean it before you model it</h3>
-              <p>On FreshMart I <b class="hl">audited five source tables before touching the schema</b>: 15 duplicate customers, three spellings of one category, dates written three ways, and <b class="hl">93</b> rows pointing at a customer who didn't exist. A dashboard built on unaudited data is <b class="hl">confidently wrong</b>.</p>
-            </li>
-            <li>
-              <h3>Build the test before the result</h3>
-              <p>On LocoLLM we <b class="hl">sealed a 170-question benchmark before any training</b>. When I found 30 of my training questions described the same situations as test questions, I rewrote them, so the <b class="hl">81%</b> measures what the model learned, not what it memorised.</p>
-            </li>
-            <li>
-              <h3>Say what the analysis can't tell you</h3>
-              <p>My renewable forecast is a linear regression, so I wrote that it is a <b class="hl">planning signal, not a prediction</b>, and forecast in R so the <b class="hl">equation, R&sup2; and p-value print on the chart</b>. Anyone senior can check the reasoning without asking me.</p>
-            </li>
-            <li>
-              <h3>Know what one row means</h3>
-              <p>WeatherWise answered &ldquo;tomorrow&rdquo; confidently and wrongly, because the API returns <b class="hl">3-hour blocks, not days</b>, and the lookup was reading today&rsquo;s eight. Checking the grain of the data is the first step, not a detail.</p>
-            </li>
-            <li>
-              <h3>Write the rules before the tables</h3>
-              <p>On the football database I wrote <b class="hl">18 business rules before a single table</b>, then the schema followed from them. Two players in the season share a name, so every query <b class="hl">groups by player ID, never by name</b>.</p>
-            </li>
-            <li>
-              <h3>Let the requirement decide, not the price</h3>
-              <p>For the remote training centres, Sky Muster was the cheapest link, but at about <b class="hl">665 ms</b> a call lags badly. We chose Starlink at about <b class="hl">30 ms</b>, because the requirement was <b class="hl">calls that work</b>, not the lowest bill.</p>
-            </li>
-          </ol>
-        </section>
-
         <section class="contact" id="contact" aria-labelledby="contact-title">
-          <p class="eyebrow">Contact</p>
           <h2 id="contact-title">Get in touch</h2>
-          <p class="contact-note">Available for a <b class="hl">data analyst internship in Perth</b>, and for <b class="hl">graduate roles from July 2027</b>.</p>
+          <p class="contact-note">Available for a data analyst internship in Perth, and for graduate roles from July 2027.</p>
           <div class="contact-links">
-            <a class="contact-link" href="mailto:jojowaranyu.career@gmail.com">
-              <span class="cn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg></span>
-              jojowaranyu.career@gmail.com
-            </a>
-            <a class="contact-link" href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">
-              <span class="cn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9.5 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.07-1.95-3.07-1.96 0-2.26 1.46-2.26 2.97V21h-4z"/></svg></span>
-              LinkedIn <span aria-hidden="true">↗</span>
-            </a>
-            <a class="contact-link" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">
-              <span class="cn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></span>
-              GitHub <span aria-hidden="true">↗</span>
-            </a>
-            <a class="contact-link" href="Waranyu-Bancherdvanich-CV.pdf" download>
-              <span class="cn-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M4 18.5v1a1.5 1.5 0 0 0 1.5 1.5h13a1.5 1.5 0 0 0 1.5-1.5v-1"/></svg></span>
-              Download CV
-            </a>
+            <a class="contact-link" href="mailto:jojowaranyu.career@gmail.com">jojowaranyu.career@gmail.com</a>
+            <a class="contact-link" href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="contact-link" href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="contact-link" href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
           </div>
         </section>
       </main>
 
       <footer class="site-footer">
         <div class="sf-top">
-          <p class="sf-name">Waranyu Bancherdvanich<span>.</span></p>
+          <p class="sf-name">Waranyu Bancherdvanich</p>
           <nav class="sf-links" aria-label="Footer">
-            <a href="#projects">Projects</a>
+            <a href="#projects">Work</a>
+            <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
-            <a href="Waranyu-Bancherdvanich-CV.pdf" download>Download CV</a>
-            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="mailto:jojowaranyu.career@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub</a>
           </nav>
         </div>
         <div class="sf-bottom">
           <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
           <span>Last updated October 2026</span>
           <span class="sf-built">Hand-built with plain HTML, CSS and JavaScript. No framework. The dashboards run on real data in your browser.</span>
-          <a class="sf-totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+          <a class="sf-totop" href="#top">Back to top</a>
         </div>
       </footer>
     </div>
     <script src="app.js"></script>
-    <script src="chart-hover.js"></script>
-    <script src="home-charts.js"></script>
   </body>
 </html>
