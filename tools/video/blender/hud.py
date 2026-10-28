@@ -153,6 +153,7 @@ def kicker(L, x, y, s, a, c=MUTED):
 
 def corner_note(L, t):
     a = fade(t, SC["sides"]["start"], SC["end"]["start"] + 0.6) * 0.9
+    a *= 1 - fade(t, SC["mix"]["start"], SC["mix"]["end"])
     s = "ILLUSTRATION · FIGURES FROM PROJECT DATA"
     w = L.width(s, 14, mono=True)
     L.card(W - w - 44, 20, w + 24, 32, a, r=16, alpha=0.6)
@@ -305,7 +306,7 @@ def world_card(L, t, st):
     if a <= 0:
         return
     l0, l1, l2 = s["lines"]
-    x, y, w, h = 40, 30, 580, 600
+    x, y, w, h = 40, 30, 580, 660
     L.card(x, y, w, h, a)
     L.text(x + 28, y + 24, "Renewable electricity, 2024", 28, INK, a, weight=700)
     kicker(L, x + 28, y + 62, "Two measures, two different leaders", a)
@@ -350,8 +351,8 @@ def world_card(L, t, st):
         b = a * ease((t - l2["start"] - 0.3) / 0.5)
         msg = "Australia's share just edges China's"
         mw = L.width(msg, 19, 700) + 32
-        L.card(x + w / 2 - mw / 2, y + h + 14, mw, 40, b, r=20, alpha=0.92)
-        L.text(x + w / 2, y + h + 34, msg, 19, GREEN, b, weight=700, anchor="mm")
+        L.card(x + w / 2 - mw / 2, y + h - 58, mw, 40, b, r=20, alpha=0.92)
+        L.text(x + w / 2, y + h - 38, msg, 19, GREEN, b, weight=700, anchor="mm")
 
 
 def trend_card(L, t, year):
@@ -376,8 +377,8 @@ def trend_card(L, t, year):
     st_a = a * ease((year - 2012.8) / 0.6)
     if st_a > 0:
         L.rect(X(2012.6), Y(15.4), X(2016.4) - X(2012.6), Y(12.6) - Y(15.4), GOLD, st_a * 0.22, r=4)
-        L.text(X(2014.5), Y(21.5), "Stalled at 13 to 15%", 17, GOLD, st_a, weight=700, anchor="ms")
-        L.text(X(2014.5), Y(21.5) + 18, "while the target was under review", 15, GOLD, st_a, anchor="ms")
+        L.text(X(2015.5), Y(11), "Stalled at 13 to 15%", 18, GOLD, st_a, weight=700, anchor="la")
+        L.text(X(2015.5), Y(11) + 23, "while the target was under review", 16, GOLD, st_a, anchor="la")
     pts = [(X(yr), Y(v)) for yr, v in zip(YEARS, SHARE) if yr <= year]
     if year < 2024:
         pts.append((X(year), Y(series(SHARE, year))))
@@ -393,8 +394,10 @@ def trend_card(L, t, year):
         L.text(X(2015), Y(40) - 19, "2015: target revised", 17, GOLD, r_a, weight=700, anchor="mm")
     p_a = a * ease((year - 2017.5) / 0.6)
     if p_a > 0:
-        L.text(X(2005.3), Y(38), "After the reset: about +2.5 points a year", 18, INK, p_a, weight=700)
-        L.text(X(2005.3), Y(38) + 22, "nearly 5× the 2005 to 2015 pace", 15, MUTED, p_a)
+        L.text(X(2005.3), Y(38), "After the reset:", 18, INK, p_a, weight=700)
+        L.text(X(2005.3), Y(38) + 23, "about +2.5 points a year,", 18, INK, p_a, weight=700)
+        L.text(X(2005.3), Y(38) + 48, "nearly 5× the 2005 to", 16, MUTED, p_a)
+        L.text(X(2005.3), Y(38) + 69, "2015 pace", 16, MUTED, p_a)
     if year >= 2023.95:
         e_a = a * ease((t - s["lines"][1]["end"] + 0.6) / 0.5)
         L.text(X(2024) - 8, Y(SHARE[-1]) - 14, "35.0%", 18, GREEN, e_a, weight=700, anchor="rs")

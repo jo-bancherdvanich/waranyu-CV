@@ -96,8 +96,8 @@ def globe_heights(t):
     flip = smooth((t - l1["start"] - 0.6) / 1.6)
     out = {}
     for n in VOLUME:
-        hv = 5.0 * VOLUME[n] / VOLUME["China"]
-        hs = 5.0 * SHARE_2024[n] / 100
+        hv = 3.2 * VOLUME[n] / VOLUME["China"]
+        hs = 3.2 * SHARE_2024[n] / 100
         out[n] = max(0.04, lerp(hv, hs, flip)) * grow
     return out
 
@@ -1087,6 +1087,9 @@ def main():
         g.scene.view_layers[0].update()
         state = {"t": t, "year": year, "anchors": anchors, "globe": round(gw, 4), "countries": globe_anchors(g, t)}
         json.dump(state, open(os.path.join(state_dir, f"f{f:05d}.json"), "w"))
+        if mode == "render":
+            need_land = need_land and not os.path.exists(out)
+            need_globe = need_globe and not os.path.exists(gout)
         if need_globe:
             g.scene.render.filepath = gout
             bpy.ops.render.render(write_still=True, scene=g.scene.name)

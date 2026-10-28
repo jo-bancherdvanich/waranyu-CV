@@ -225,7 +225,19 @@ def outline(name, rings, mat, coll):
     return o
 
 
-def prism(name, rings, mat, coll):
+def wall_mat(name, color):
+    """Flat, unlit side colour so the walls read as one clean face."""
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nt = m.node_tree
+    e = nt.nodes.new("ShaderNodeEmission")
+    e.inputs["Color"].default_value = (*[c * 0.5 for c in color], 1)
+    e.inputs["Strength"].default_value = 1.0
+    nt.links.new(e.outputs[0], nt.nodes["Material Output"].inputs["Surface"])
+    return m
+
+
+def prism(name, rings, mat, coll, wall=None):
     """Country raised off the globe. Shape key 'up' lifts the top by 1 unit."""
     bm = bmesh.new()
     for r in rings:
@@ -254,7 +266,8 @@ def prism(name, rings, mat, coll):
     for e in boundary:
         a, b = e.verts
         try:
-            bm.faces.new((a, b, low[b], low[a]))
+            f = bm.faces.new((a, b, low[b], low[a]))
+            f.material_index = 1
         except ValueError:
             pass
     lows = set(low.values())
@@ -268,6 +281,7 @@ def prism(name, rings, mat, coll):
     lift = [(v not in lows) for v in order]
     bm.free()
     me.materials.append(mat)
+    me.materials.append(wall or mat)
     o = bpy.data.objects.new(name, me)
     coll.objects.link(o)
     o.shape_key_add(name="Basis")
@@ -314,7 +328,7 @@ class Globe:
         for n, col in COUNTRIES.items():
             m = emit_mat(f"country_{n}", col, 0.12)
             self.mats[n] = m
-            self.prisms[n] = prism(f"country_{n}", rings[n], m, coll)
+            self.prisms[n] = prism(f"country_{n}", rings[n], m, coll, wall_mat(f"wall_{n}", col))
         self.centroid = {n: self._centroid(rings[n]) for n in COUNTRIES}
         cd = bpy.data.cameras.new("gcam")
         cd.lens = 50
