@@ -1,0 +1,16 @@
+{
+  "voice": "en-AU-WilliamMultilingualNeural",
+  "rate": "-6%",
+  "say": {"LocoLLM": "Loco L L M", "AI": "A.I."},
+  "lines": [
+    {"at": 0.9, "text": "Today, LocoLLM has just one specialist: privacy law."},
+    {"at": 7.0, "text": "Now imagine a specialist for every place in town."},
+    {"at": 13.4, "text": "Hospitals can't send patient records to cloud AI."},
+    {"at": 19.6, "text": "But with a local health specialist, one computer is enough."},
+    {"at": 24.1, "text": "Patient data never leaves the building."},
+    {"at": 26.7, "text": "Small businesses can't pay for big cloud AI."},
+    {"at": 30.2, "text": "Free local specialists help with marketing, finance, compliance, and law."},
+    {"at": 37.7, "text": "One small model. Many free, private specialists."},
+    {"at": 43.2, "text": "This is the future of LocoLLM."}
+  ]
+}

@@ -3,8 +3,8 @@
 python hud.py still f00090 f00600     (writes build/hud/)
 python hud.py encode                  (writes ../../../video/locollm-future.mp4)
 
-The narration is the existing track, kept as build/narration.wav, and the
-captions follow video/locollm-future.vtt.
+The narration is build/narration.wav and the captions follow
+video/locollm-future.vtt, both written by narrate.py.
 """
 import json
 import os
