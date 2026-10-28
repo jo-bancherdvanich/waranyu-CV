@@ -1,6 +1,6 @@
 /* LocoLLM capstone: the results explorer and the domain test.
  *
- * Every number here is copied from the team's client presentation
+ * Every number here is from the team's client presentation and final report
  * (MGMT6052, October 2026): the 15-domain base-model test, the
  * accuracy of each training run on the sealed 170-question benchmark,
  * and the per-principle scores (correct answers out of 10).
@@ -10,8 +10,8 @@
   "use strict";
 
   var RUNS = [
-    { id: "base", label: "Base model", short: "Base", single: 2, n: 3, multi: 5, trick: 45,
-      change: "<strong>No training.</strong> The untrained Qwen3-4B model, scored on the same 170 questions. It knows privacy law exists but mixes up the principle numbers." },
+    { id: "base", label: "Base model", short: "Base", single: 12, n: 15, multi: 5, trick: 45,
+      change: "<strong>No training.</strong> The untrained Qwen3-4B model. It answered 15 of 130 one-principle questions (12%, the like-for-like figure in the final team report); the other two scores come from an earlier test. It knows privacy law exists but mixes up the principle numbers." },
     { id: "r1", label: "Run 1", short: "Run 1", step: "First adapter", single: 32, n: 42, multi: 34, trick: 90,
       change: "<strong>First adapter</strong>, trained on 615 examples. It learned the answer layout almost perfectly, but fell back on &ldquo;no principle applies&rdquo; 54 times, so the trick-question score looks better than it is." },
     { id: "r2", label: "Run 2", short: "Run 2", step: "New random seed", single: 32, n: 41, multi: 35, trick: 70,

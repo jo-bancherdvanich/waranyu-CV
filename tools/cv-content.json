@@ -21,7 +21,7 @@
       "text": "Perth, Western Australia"
     }
   ],
-  "summary": "Master of Information Systems and Technology student at Curtin University (Data Analytics and Visualisation, CWA 82.18), with a bachelor’s degree in statistics and finance. I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I was Finance Lead in a 9-person Curtin Consulting Group team working with Hockey WA. Most projects in my portfolio at waranyu-cv.vercel.app have a live demo you can try. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
+  "summary": "Master of Information Systems and Technology student at Curtin University (Data Analytics and Visualisation, CWA 82.18), with a bachelor’s degree majoring in statistics (finance minor). I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I was Finance Lead in a 9-person Curtin Consulting Group team working with Hockey WA. Most projects in my portfolio at waranyu-cv.vercel.app have a live demo you can try. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
   "sections": [
     {
       "title": "Skills",
@@ -52,10 +52,12 @@
           "org": "Curtin Consulting Group – Client: Hockey WA",
           "date": "Jul 2026 – Oct 2026",
           "bullets": [
-            "Finance Lead in a 9-person Curtin Consulting Group team.",
-            "Built a 3D model of the venue in Blender showing all 18 camera positions across 6 playing surfaces (4 outdoor pitches and 2 indoor courts)."
+            "Led the financial analysis in a 9-person team, gathering and confirming requirements with the client in fortnightly meetings.",
+            "Built a long-term break-even model in Excel across several scenarios, with sensitivity testing on the key drivers.",
+            "Costed the streaming setup from public sources, splitting one-off setup costs from annual running costs (CapEx/OpEx), and benchmarked the assumptions against comparable case studies.",
+            "Built a 3D model of the venue in Blender showing all 18 camera positions across 6 playing surfaces."
           ],
-          "note": "Client work, so only details already made public are listed.",
+          "note": "Client work, so no figures or results are listed.",
           "link": {
             "text": "3D venue model",
             "label": "3D venue model",
@@ -67,9 +69,9 @@
           "org": "Like Me Co., Ltd. – Bangkok, Thailand",
           "date": "Nov 2022 – Jan 2023",
           "bullets": [
-            "Supported digital marketing campaigns through social media content, product research, and competitor analysis.",
-            "Conducted basic data tracking and market research to support campaign planning and business decisions.",
-            "Assisted with content writing and customer trend analysis to improve marketing communication."
+            "Researched 3 customer personas for an online data skills course and benchmarked 2 competing course providers on price, course count and study duration.",
+            "Built the campaign plan from a SWOT analysis, with 3 placement channels and an awareness to conversion funnel.",
+            "Targeted Facebook Ads audiences from the customer profile and ran A/B tests before committing budget, in a marketing team of 4."
           ]
         }
       ]
@@ -100,7 +102,7 @@
           },
           "bullets": [
             "Reconciled data from national energy agencies into a Power BI galaxy schema, showing Australia’s renewable share rising from 9% in 2005 to 35% in 2024, benchmarked against Germany, New Zealand and China.",
-            "Linked the trend to policy: share stalled while the Renewable Energy Target was under review, then grew nearly 5 times faster after the 2015 target reset.",
+            "Showed the share stalled while the Renewable Energy Target was under review, then grew nearly 5 times faster after the 2015 target reset.",
             "Forecast with R linear regression that Australia reaches only 37.8% renewable share by 2030 against the 82% target, showing the target is unlikely on the current trend."
           ]
         },
@@ -114,13 +116,13 @@
           },
           "bullets": [
             "Evaluated the base AI model across 15 business areas and pinpointed Australian privacy law as a weak spot, giving the client clear evidence to approve the project focus.",
-            "Learnt enough Australian privacy law to help train a LoRA privacy-law adapter, raising accuracy on a sealed 170-question test from 15% (original untrained model) to 81% (final run).",
+            "Learnt enough Australian privacy law to help train a LoRA privacy-law adapter, raising accuracy on the 130 single-principle questions of a sealed 170-question test from 12% (original untrained model) to 81% (final run).",
             "Documented controlled experiments (one setting changed per run, repeated with a new random seed) in a 6-step handover recipe and client presentation, so the next team can reproduce the method."
           ]
         },
         {
-          "title": "Football Club Database Design and SQL Implementation",
-          "org": "Group project (3) – Oracle SQL, ERD, Normalisation",
+          "title": "Soccer Competition Database Design and SQL Implementation",
+          "org": "Group project (4) – Oracle SQL, ERD, Normalisation",
           "link": {
             "text": "See the project",
             "url": "https://waranyu-cv.vercel.app/football-database.html",
