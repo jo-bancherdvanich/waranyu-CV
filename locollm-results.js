@@ -12,13 +12,13 @@
   var RUNS = [
     { id: "base", label: "Base model", short: "Base", single: 2, n: 3, multi: 5, trick: 45,
       change: "<strong>No training.</strong> The untrained Qwen3-4B model, scored on the same 170 questions. It knows privacy law exists but mixes up the principle numbers." },
-    { id: "r1", label: "Run 1", short: "Run 1", single: 32, n: 42, multi: 34, trick: 90,
+    { id: "r1", label: "Run 1", short: "Run 1", step: "First adapter", single: 32, n: 42, multi: 34, trick: 90,
       change: "<strong>First adapter</strong>, trained on 615 examples. It learned the answer layout almost perfectly, but fell back on &ldquo;no principle applies&rdquo; 54 times, so the trick-question score looks better than it is." },
-    { id: "r2", label: "Run 2", short: "Run 2", single: 32, n: 41, multi: 35, trick: 70,
+    { id: "r2", label: "Run 2", short: "Run 2", step: "New random seed", single: 32, n: 41, multi: 35, trick: 70,
       change: "<strong>Same data, same settings, new random seed.</strong> Almost the same score (41 against 42), yet about one answer in five flipped. Small gaps between runs can be luck." },
-    { id: "r4", label: "Run 4", short: "Run 4", single: 38, n: 49, multi: 43, trick: 20,
+    { id: "r4", label: "Run 4", short: "Run 4", step: "Reasoning first", single: 38, n: 49, multi: 43, trick: 20,
       change: "<strong>Reasoning first, then the answer.</strong> Same data, new line order. Wrong &ldquo;no principle&rdquo; guesses fell from 54 to 5, but the model still named the wrong principle 78 times." },
-    { id: "r5", label: "Run 5", short: "Run 5", single: 81, n: 105, multi: 65, trick: 85,
+    { id: "r5", label: "Run 5", short: "Run 5", step: "MLP layers trained too", single: 81, n: 105, multi: 65, trick: 85,
       change: "<strong>Train more of the model.</strong> One line of settings also trained the MLP layers, the part that stores knowledge. Wrong principles fell from 78 to 20." }
   ];
 
@@ -109,7 +109,8 @@
     '<div class="dash-grid-wrap">' +
     '<section class="dash-panel"><h3>One-principle accuracy, run by run</h3>' +
     '<p class="dash-subtitle">130 single-answer questions in the sealed benchmark. Click a run.</p>' +
-    '<div class="dash-cols ll-cols" id="ll-cols"></div></section>' +
+    '<div class="dash-cols ll-cols" id="ll-cols"></div>' +
+    '<p class="ll-steps-title">What changed each run</p><ol class="ll-steps" id="ll-steps"></ol></section>' +
     '<section class="dash-panel"><h3 id="ll-type-title"></h3>' +
     '<p class="dash-subtitle">Share of answers correct, by question type.</p>' +
     '<div class="dash-bars ll-types" id="ll-types"></div><p class="ll-change" id="ll-change" aria-live="polite"></p></section>' +
@@ -132,6 +133,12 @@
       '<span class="dash-collab">' + r.short + "</span></button>";
   }).join("");
 
+  root.querySelector("#ll-steps").innerHTML = RUNS.slice(1).map(function (r, i) {
+    var d = r.single - RUNS[i].single;
+    return '<li><button type="button" class="ll-step" data-run="' + r.id + '"><span class="ll-step-run">' + r.short + '</span>' +
+      '<span class="ll-step-what">' + r.step + '</span><span class="ll-step-delta">' + (d > 0 ? "+" : d < 0 ? "&minus;" : "&plusmn;") + Math.abs(d) + " pts</span></button></li>";
+  }).join("");
+
   var head = '<table class="ll-heat"><caption class="sr-only">Correct answers out of 10 for each privacy principle, by training run</caption><thead><tr><th scope="col">Principle</th>' +
     HEAT_RUNS.map(function (id) { return '<th scope="col" data-col="' + id + '">' + byId(id).short + "</th>"; }).join("") + "</tr></thead><tbody>";
   heat.innerHTML = head + APPS.map(function (a) {
@@ -149,7 +156,7 @@
       c.classList.toggle("is-on", on);
       c.setAttribute("aria-pressed", on ? "true" : "false");
     });
-    Array.prototype.forEach.call(cols.children, function (c) { c.classList.toggle("is-on", c.getAttribute("data-run") === state.run); });
+    Array.prototype.forEach.call(root.querySelectorAll(".ll-col, .ll-step"), function (c) { c.classList.toggle("is-on", c.getAttribute("data-run") === state.run); });
     typeTitle.textContent = r.label + ", by question type";
     types.innerHTML = TYPES.map(function (t) {
       return '<div class="dash-row" data-tip-label="' + esc(r.label + " · " + t.label) + '" data-tip-value="' + r[t.key] + '% correct">' +

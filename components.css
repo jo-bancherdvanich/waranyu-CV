@@ -596,13 +596,21 @@
 .ll-domains .dash-row:not(.is-picked) .dash-fill { background: color-mix(in srgb, var(--muted) 42%, transparent); }
 .ll-flag { margin-left: .3rem; padding: .05rem .4rem; border-radius: 999px; font-family: "DM Mono", "DM Mono Fallback", monospace;
   font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); white-space: nowrap; }
-.ll-cols { grid-template-columns: repeat(5, minmax(0, 1fr)); height: 180px; }
+.ll-cols { grid-template-columns: repeat(5, minmax(0, 1fr)); height: 150px; }
 .ll-col { padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 .ll-col .dash-colbar { opacity: .32; max-width: 44px; }
 .ll-col:hover .dash-colbar { opacity: .6; }
 .ll-col.is-on .dash-colbar { opacity: 1; }
 .ll-col.is-on .dash-colval, .ll-col.is-on .dash-collab { color: var(--ink); font-weight: 600; }
 .ll-col:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.ll-steps-title { margin: .8rem 0 .2rem; padding-top: .7rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.ll-steps { margin: 0; padding: 0; list-style: none; }
+.ll-step { display: grid; grid-template-columns: 3.6em minmax(0, 1fr) auto; gap: .6rem; align-items: baseline; width: 100%; min-height: 28px; padding: .2rem .5rem; border: 0; border-radius: 6px; background: none; color: var(--muted); font: inherit; font-size: .88rem; text-align: left; cursor: pointer; }
+.ll-step:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.ll-step.is-on { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--ink); }
+.ll-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ll-step-run { color: var(--ink); font-weight: 600; }
+.ll-step-delta { color: var(--accent); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .8rem; font-variant-numeric: tabular-nums; }
 .ll-types .dash-row { grid-template-columns: minmax(118px, 160px) minmax(0, 1fr) 3.2em; }
 .ll-types .dash-val { text-align: right; }
 .ll-sub { display: block; color: var(--muted); font-size: .74rem; }
@@ -629,7 +637,7 @@
 .ll-example p { margin: 0; }
 .ll-example p + p { margin-top: .6rem; }
 #ll-dash .dash-slicers .dash-chip.is-on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-#ll-dash .dash-grid-wrap { align-items: start; }
+#ll-dash .dash-grid-wrap { align-items: stretch; }
 @media (max-width: 720px) {
   #ll-dash .dash-grid-wrap { grid-template-columns: minmax(0, 1fr); }
   #ll-dash .dash-slicer { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
