@@ -63,6 +63,8 @@ def main():
         save(font["url"], os.path.join(OUT, "fonts", font["file"]))
     for z in manifest.get("zips", []):
         save(z["url"], os.path.join(OUT, "zips", z["file"]))
+    for f in manifest.get("files", []):
+        save(f["url"], os.path.join(OUT, *f["file"].split("/")))
     print("done")
 
 

@@ -18,6 +18,9 @@ import bpy
 from bpy_extras.object_utils import world_to_camera_view
 from mathutils import Euler, Matrix, Vector, noise
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import globe as globe_mod  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(HERE, "assets")
 BUILD = os.path.join(HERE, "build")
@@ -50,9 +53,83 @@ def smooth(u):
 
 
 def year_at(t):
+    """2005 to 2015 while the stall is described, then 2015 to 2024 with the reset."""
     g = SCENES["growth"]
-    a, b = g["start"] + 0.6, g["end"] - 1.2
-    return lerp(2005.0, 2024.0, smooth((t - a) / (b - a)) if t > a else 0.0)
+    l0, l1 = g["lines"][0], g["lines"][1]
+    a0 = g["start"] + 0.3
+    if t <= a0:
+        return 2005.0
+    if t < l1["start"]:
+        return lerp(2005.0, 2015.0, min(1.0, (t - a0) / (l0["end"] - a0)))
+    return lerp(2015.0, 2024.0, smooth((t - l1["start"]) / (l1["end"] - 0.8 - l1["start"])))
+
+
+DISSOLVE = 0.8
+VOLUME = {"China": 3398.8, "Germany": 288.3, "Australia": 97.9, "New Zealand": 37.5}
+SHARE_2024 = {"New Zealand": 85.5, "Germany": 54.5, "Australia": 35.0, "China": 33.7}
+
+
+def globe_weight(t):
+    """1 while the Earth is on screen, 0 over the farm, with dissolves between."""
+    t1 = SCENES["title"]["end"]
+    w0, w1 = SCENES["world"]["start"], SCENES["world"]["end"]
+    d = DISSOLVE / 2
+    if t < t1 - d:
+        return 1.0
+    if t < t1 + d:
+        return 1 - smooth((t - t1 + d) / DISSOLVE)
+    if t < w0 - d:
+        return 0.0
+    if t < w0 + d:
+        return smooth((t - w0 + d) / DISSOLVE)
+    if t < w1 - d:
+        return 1.0
+    if t < w1 + d:
+        return 1 - smooth((t - w1 + d) / DISSOLVE)
+    return 0.0
+
+
+def globe_heights(t):
+    w = SCENES["world"]
+    l0, l1 = w["lines"][0], w["lines"][1]
+    grow = smooth((t - l0["start"] + 0.2) / 1.2)
+    flip = smooth((t - l1["start"] - 0.6) / 1.6)
+    out = {}
+    for n in VOLUME:
+        hv = 3.2 * VOLUME[n] / VOLUME["China"]
+        hs = 3.2 * SHARE_2024[n] / 100
+        out[n] = max(0.04, lerp(hv, hs, flip)) * grow
+    return out
+
+
+def pose_globe(g, t):
+    t1 = SCENES["title"]["end"]
+    if t < t1 + DISSOLVE:
+        u = min(1.0, t / (t1 + DISSOLVE / 2))
+        k = smooth(u)
+        alt = 52.0 * (5.5 / 52.0) ** (u ** 1.4)
+        g.look(lerp(100, 134, k), lerp(4, -26, k), globe_mod.R + alt, offset=0.32 * (1 - k))
+        glow = 3.0 * smooth((u - 0.45) / 0.2) * (1 - smooth((u - 0.88) / 0.1))
+        g.set_heights({}, glow)
+    else:
+        w = SCENES["world"]
+        u = (t - w["start"] + DISSOLVE) / (w["end"] - w["start"] + 2 * DISSOLVE)
+        g.look(lerp(114, 124, u), lerp(8, 3, u), lerp(66, 61, u), offset=0.6, lift=0.1)
+        g.set_heights(globe_heights(t), 0.0)
+    g.sun.rotation_euler = (Vector((0, 0, 0)) - g.cam.location.normalized() * 10
+                            - Vector((0, 0, -3))).to_track_quat("-Z", "Y").to_euler()
+
+
+def globe_anchors(g, t):
+    hs = globe_heights(t)
+    out = {}
+    cam_dir = g.cam.location.normalized()
+    for n in VOLUME:
+        p = g.anchor(n, hs[n])
+        c = world_to_camera_view(g.scene, g.cam, p)
+        facing = p.normalized().dot(cam_dir)
+        out[n] = [round(c.x, 4), round(1 - c.y, 4), round(facing, 3)]
+    return out
 
 
 def series(values, year):
@@ -837,9 +914,9 @@ def shot(scene, u, loc, tgt, lens=32):
 
 def camera_keys():
     return [
-        shot("title", 0.0, (-300, -1750, 640), (40, 350, 0), 30),
-        shot("title", 1.0, (-160, -1250, 430), (0, 150, 10), 30),
-        shot("sides", 0.35, (-40, -760, 230), (30, 40, 40), 30),
+        shot("title", 0.88, (-300, -1750, 640), (40, 350, 0), 30),
+        shot("sides", 0.3, (-140, -1150, 400), (0, 150, 10), 30),
+        shot("sides", 0.7, (-40, -760, 230), (30, 40, 40), 30),
         shot("sides", 1.0, (0, -700, 205), (20, 40, 40), 30),
         shot("growth", 0.5, (-60, -650, 190), (0, 50, 45), 30),
         shot("growth", 1.0, (-120, -600, 175), (-20, 60, 40), 30),
@@ -979,6 +1056,7 @@ def main():
     mode = args[0]
     KEYS = camera_keys()
     scene, cam, rows, turbines, plumes = build()
+    g = globe_mod.Globe(scene)
     frames_dir = os.path.join(BUILD, "frames" if mode == "render" else "stills")
     state_dir = os.path.join(BUILD, "state")
     os.makedirs(frames_dir, exist_ok=True)
@@ -991,20 +1069,33 @@ def main():
     else:
         frames = list(range(int(args[1]), int(args[2]) + 1))
     for f in frames:
-        out = os.path.join(frames_dir, f"f{f:05d}.png")
-        if mode == "render" and os.path.exists(out):
-            continue
         t = f / FPS
+        gw = globe_weight(t)
+        out = os.path.join(frames_dir, f"f{f:05d}.png")
+        gout = os.path.join(frames_dir, f"g{f:05d}.png")
+        need_land = gw < 1.0
+        need_globe = gw > 0.0
+        if mode == "render" and (not need_land or os.path.exists(out)) and (not need_globe or os.path.exists(gout)):
+            continue
         year = pose(t, cam, rows, turbines, plumes)
         bpy.context.view_layer.update()
         anchors = {}
         for k, p in ANCHORS.items():
             c = world_to_camera_view(scene, cam, p)
             anchors[k] = [round(c.x, 4), round(1 - c.y, 4), round(c.z, 1)]
-        json.dump({"t": t, "year": year, "anchors": anchors},
-                  open(os.path.join(state_dir, f"f{f:05d}.json"), "w"))
-        scene.render.filepath = out
-        bpy.ops.render.render(write_still=True)
+        pose_globe(g, t)
+        g.scene.view_layers[0].update()
+        state = {"t": t, "year": year, "anchors": anchors, "globe": round(gw, 4), "countries": globe_anchors(g, t)}
+        json.dump(state, open(os.path.join(state_dir, f"f{f:05d}.json"), "w"))
+        if mode == "render":
+            need_land = need_land and not os.path.exists(out)
+            need_globe = need_globe and not os.path.exists(gout)
+        if need_globe:
+            g.scene.render.filepath = gout
+            bpy.ops.render.render(write_still=True, scene=g.scene.name)
+        if need_land:
+            scene.render.filepath = out
+            bpy.ops.render.render(write_still=True, scene=scene.name)
         print(f"frame {f} done", flush=True)
 
 

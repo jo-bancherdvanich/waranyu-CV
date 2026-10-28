@@ -16,6 +16,8 @@ and is not stored in the repository.
 | Shrub 02, 1k model | Low shrubs by the solar farm | https://polyhaven.com/a/shrub_02 | Rico Cilliers | CC0 1.0 |
 | Searsia Lucida, 1k model | Bushes by the solar farm | https://polyhaven.com/a/searsia_lucida | James Ray Cock, Jenelle van Heerden | CC0 1.0 |
 | Namaqualand Boulder 02, 1k model | Scattered rocks | https://polyhaven.com/a/namaqualand_boulder_02 | Greg Zaal, Rico Cilliers | CC0 1.0 |
+| Blue Marble Next Generation, January (`tools/video/assets/earth-day.jpg`) | The globe in the opening and the country comparison | https://visibleearth.nasa.gov/collection/1484/blue-marble | Reto Stöckli, NASA Earth Observatory | Public domain |
+| Natural Earth 1:50m country outlines, via the world-atlas 2.0.2 package | Australia's outline and the country columns on the globe | https://github.com/topojson/world-atlas | Natural Earth; package by Mike Bostock | Public domain (data); ISC (package) |
 | Public Sans (variable) | On-screen statistics | https://github.com/google/fonts/tree/main/ofl/publicsans | USWDS | SIL Open Font Licence 1.1 |
 | DM Mono Medium | On-screen labels | https://github.com/google/fonts/tree/main/ofl/dmmono | Colophon Foundry | SIL Open Font Licence 1.1 |
 

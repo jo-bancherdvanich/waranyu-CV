@@ -1,17 +1,67 @@
 {
   "polyhaven": [
-    {"id": "kloofendal_48d_partly_cloudy_puresky", "kind": "hdri", "res": "2k"},
-    {"id": "aerial_grass_rock", "kind": "texture", "res": "2k"},
-    {"id": "dry_ground_01", "kind": "texture", "res": "1k"},
-    {"id": "island_tree_02", "kind": "model", "res": "1k"},
-    {"id": "shrub_02", "kind": "model", "res": "1k"},
-    {"id": "searsia_lucida", "kind": "model", "res": "1k"},
-    {"id": "namaqualand_boulder_02", "kind": "model", "res": "1k"}
+    {
+      "id": "kloofendal_48d_partly_cloudy_puresky",
+      "kind": "hdri",
+      "res": "2k"
+    },
+    {
+      "id": "aerial_grass_rock",
+      "kind": "texture",
+      "res": "2k"
+    },
+    {
+      "id": "dry_ground_01",
+      "kind": "texture",
+      "res": "1k"
+    },
+    {
+      "id": "island_tree_02",
+      "kind": "model",
+      "res": "1k"
+    },
+    {
+      "id": "shrub_02",
+      "kind": "model",
+      "res": "1k"
+    },
+    {
+      "id": "searsia_lucida",
+      "kind": "model",
+      "res": "1k"
+    },
+    {
+      "id": "namaqualand_boulder_02",
+      "kind": "model",
+      "res": "1k"
+    }
   ],
   "fonts": [
-    {"file": "PublicSans.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/publicsans/PublicSans%5Bwght%5D.ttf"},
-    {"file": "DMMono-Medium.ttf", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/DMMono-Medium.ttf"},
-    {"file": "OFL-PublicSans.txt", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/publicsans/OFL.txt"},
-    {"file": "OFL-DMMono.txt", "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/OFL.txt"}
+    {
+      "file": "PublicSans.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/publicsans/PublicSans%5Bwght%5D.ttf"
+    },
+    {
+      "file": "DMMono-Medium.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/DMMono-Medium.ttf"
+    },
+    {
+      "file": "OFL-PublicSans.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/publicsans/OFL.txt"
+    },
+    {
+      "file": "OFL-DMMono.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/OFL.txt"
+    }
+  ],
+  "files": [
+    {
+      "file": "geo/countries-50m.json",
+      "url": "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json"
+    },
+    {
+      "file": "geo/LICENSE",
+      "url": "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/LICENSE"
+    }
   ]
 }
