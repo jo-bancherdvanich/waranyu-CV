@@ -30,9 +30,9 @@ FPS = 30
 DURATION = 48.0
 rng = random.Random(3)
 
-HOSP = Vector((1000, 0, 0))
+HOSP = Vector((1000, 6000, 0))
 HAZE = (0.74, 0.8, 0.88)
-SHOP = Vector((2000, 0, 0))
+SHOP = Vector((2000, 6000, 0))
 
 
 # ---------------------------------------------------------------- helpers
@@ -433,6 +433,9 @@ def build_town(trees_mid, trees_full, shrubs):
     bm = bmesh.new()
     box(bm, (0, 0, -0.05), (9000, 9000, 0.1))
     new_mesh("ground", bm, grass)
+    bm = bmesh.new()
+    box(bm, ((HOSP.x + SHOP.x) / 2, HOSP.y, -0.08), (6000, 6000, 0.1))
+    new_mesh("ground_rooms", bm, grass)
     bm = bmesh.new()
     box(bm, (0, 0, 0.02), (9000, 11, 0.04))
     box(bm, (0, 0, 0.02), (11, 9000, 0.04))
@@ -1115,7 +1118,7 @@ def set_screen(mat, key, draw):
 
 def pose_frame(t, cam, people):
     loc, tgt, lens = camera_at(t)
-    inside = loc.x > 500
+    inside = loc.y > 3000
     if bpy.context.scene.eevee.use_raytracing != inside:
         bpy.context.scene.eevee.use_raytracing = inside
     cam.data.clip_start = 0.05 if inside else 1.0
