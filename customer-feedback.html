@@ -80,8 +80,8 @@
           <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Check the data</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Rule out simpler causes</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Test the AI tools</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Build the action list</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">A person checks every flag</span></li></ol>
 
           <figure class="case-shot">
-            <a href="images/orange-workflow-full.webp" target="_blank" rel="noreferrer"><img width="2362" height="5976" src="images/orange-workflow-full.webp" alt="The full 86-widget Orange workflow in three parts: Part A, what is the problem, with branches on satisfaction, confounds, churn impact and review clusters; Part B, can we trust the tools, with sentiment, regression, accuracy, word tests and the churn model; and Part C, how we fix it, the weekly action list" /></a>
-            <figcaption>The full Orange workflow: Part A finds the problem, Part B tests the AI tools, and Part C builds the action list. The notes beside each chart record what it showed. <a href="images/orange-workflow-full.webp" target="_blank" rel="noreferrer">Open full size</a></figcaption>
+            <img width="1745" height="748" src="images/cf-solution-flow.webp" alt="Flow diagram of the weekly workflow: weekly export, add churn risk with Logistic Regression, decide if a ticket needs action, keep CloudSync, a person checks every ticket, the product team gets the list, and results are measured every month" />
+            <figcaption>The idea at a glance: a weekly Orange workflow that flags tickets needing action, with a person checking every flag before it reaches the product team.</figcaption>
           </figure>
 
           <dl class="case-meta">
@@ -99,36 +99,19 @@
             </div>
           </dl>
 
-          <section class="case-block" data-stage="Problem">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 1.9V17h6v-1.5c0-.7.3-1.4.8-1.9A6 6 0 0 0 12 3z"/><path d="M9.5 20h5"/></svg></span>The decision: a support problem or a product problem?</h2>
+          <section class="case-block" data-stage="Problem" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 1.9V17h6v-1.5c0-.7.3-1.4.8-1.9A6 6 0 0 0 12 3z"/><path d="M9.5 20h5"/></svg></span>The problem: San Francisco is unhappy and leaving</h2>
             <p>
-              CloudCore Networks, the company in the case study, has support offices in San Francisco, Sydney and Singapore. Customer satisfaction in San Francisco was well below the other two. The Chief Operating Officer needed to know whether that was a <strong>support problem</strong>, which means changing staff and budget, or a <strong>product problem</strong>, which means fixing the product.
+              CloudCore Networks, the company in the case study, has support offices in San Francisco, Sydney and Singapore. Its Chief Operating Officer needed to decide whether San Francisco&rsquo;s low satisfaction was a <strong>support problem</strong>, which means changing staff and budget, or a <strong>product problem</strong>, which means fixing the product. I analysed the data to answer that, and wrote for that non-technical reader.
             </p>
-            <p>I wrote the report for that non-technical reader, and I interviewed two stakeholders, the Customer Support Lead and a Data Analyst, and turned their tests into the standards I used to judge each finding.</p>
-          </section>
-
-          <section class="case-block" data-stage="Approach">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>How I tested it</h2>
-            <ul>
-              <li><strong>Checked the data first.</strong> I looked for broken links between files, impossible values and duplicates, and found the ticket text was heavily standardised: only <b class="hl">48 distinct texts across 360 tickets</b>.</li>
-              <li><strong>Protected privacy.</strong> I removed customer company names and reported only group averages.</li>
-              <li><strong>Ruled out simpler explanations.</strong> I checked support tier, contact channel and timing before blaming the office.</li>
-              <li><strong>Grouped the reviews into themes.</strong> I used TF-IDF and hierarchical clustering, comparing 5, 6 and 7 clusters before settling on six.</li>
-              <li><strong>Tested the sentiment tools.</strong> I compared two tools against the customers&rsquo; own scores, then stress-tested the chosen one with <b class="hl">13 adversarial sentences</b>, including negation, sarcasm, polite complaints and threats to leave.</li>
-              <li><strong>Set a bar for each output</strong> based on what a wrong decision would cost, and placed each one on a trust and risk framework.</li>
-            </ul>
-          </section>
-
-          <section class="case-block" data-stage="Result" id="explore">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What I found</h2>
             <div class="ic-table-wrap">
               <table class="ic-table">
-                <thead><tr><th scope="col">Office</th><th scope="col">Satisfaction out of 5</th></tr></thead>
+                <thead><tr><th scope="col">Office</th><th scope="col">Satisfaction out of 5</th><th scope="col">Customers who churned or are at risk</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Singapore</th><td>3.73</td></tr>
-                  <tr><th scope="row">Sydney</th><td>3.61</td></tr>
-                  <tr><th scope="row">San Francisco</th><td><strong>2.94</strong> (p &lt; 0.001)</td></tr>
-                  <tr><th scope="row">CloudSync in San Francisco</th><td><strong>2.37</strong>, from 30 tickets by 22 customers</td></tr>
+                  <tr><th scope="row">Singapore</th><td>3.73</td><td>16%</td></tr>
+                  <tr><th scope="row">Sydney</th><td>3.61</td><td>20%</td></tr>
+                  <tr><th scope="row">San Francisco</th><td><strong>2.94</strong> (p &lt; 0.001)</td><td><strong>48%</strong> (24 of 50)</td></tr>
+                  <tr><th scope="row">CloudSync in San Francisco</th><td><strong>2.37</strong>, from 30 tickets by 22 customers</td><td>43% of its tickets scored 1 or 2</td></tr>
                 </tbody>
               </table>
             </div>
@@ -144,41 +127,93 @@
             </div>
             <ul class="findings">
               <li>
-                <p><strong>It points to the product, not the support team.</strong> San Francisco is lowest inside every product and every support tier, so tier, channel and timing don&rsquo;t explain it. It logs <b class="hl">23 of 38 complaints</b> with only about a quarter of the tickets, and its worst CloudSync tickets describe the product failing. None of them mention the support team.</p>
+                <p><strong>It points to the product, not the support team.</strong> San Francisco is lowest inside every product and every support tier, and support tier, channel and timing don&rsquo;t explain it. It logs <b class="hl">23 of 38 complaints</b> with only about a quarter of the tickets, and its worst CloudSync tickets describe the product failing. None of them mention the support team.</p>
               </li>
               <li>
-                <p><strong>Low satisfaction goes with losing customers.</strong> Customers who churned or were at risk scored <b class="hl">2.93 against 3.64</b> for those who stayed (p &lt; 0.001), and 24 of the 50 San Francisco customers who logged tickets had churned or were at risk.</p>
-              </li>
-              <li>
-                <p><strong>The sentiment tool failed the bar I set for it.</strong> It caught only <b class="hl">58% of unhappy tickets</b>, and 52% in San Francisco, against an 80% target. It also read threats such as &ldquo;considering AWS&rdquo; as neutral.</p>
+                <p><strong>Low satisfaction goes with losing customers.</strong> Customers who churned or were at risk scored <b class="hl">2.93 against 3.64</b> for those who stayed (p &lt; 0.001). That shows the two go together, not that one causes the other.</p>
               </li>
             </ul>
+            <p>So I advised against staffing or bonus changes, since that would have blamed staff for a product fault. I recommended fixing CloudSync&rsquo;s reliability, starting in San Francisco, and changing how tickets are recorded and routed, so the customer&rsquo;s own words are kept and product faults go to the product team.</p>
+          </section>
+
+          <section class="case-block" data-stage="Impact">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"/></svg></span>The impact</h2>
+            <ul class="findings">
+              <li>
+                <p><strong>$302,520 a month is at risk.</strong> In the case study data, that&rsquo;s the monthly revenue from customers who churned or are at risk, about $3.6 million a year.</p>
+              </li>
+              <li>
+                <p><strong>44% of it is in San Francisco.</strong> That&rsquo;s <b class="hl">$134,270 a month</b>, from an office that earns only 20% of the revenue.</p>
+              </li>
+              <li>
+                <p><strong>Satisfaction is the lever.</strong> Customers whose tickets average 2.5 or less churned or are at risk at 62%. Above 3.5, it&rsquo;s only 9% (r = &minus;0.39).</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Idea">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>Our idea: three checks and a person</h2>
+            <p>Take one real ticket from the case study: a San Francisco customer who scored CloudSync 1 out of 5 and wrote, &ldquo;Honestly considering AWS for this, reliability has to improve.&rdquo; A sentiment tool on its own sees the word &ldquo;improve&rdquo; and reads it as positive, so this unhappy customer slips through. Our action list runs three checks instead:</p>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Check</th><th scope="col">For this ticket</th><th scope="col">How far to trust it</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">1. Is the customer&rsquo;s score 1 or 2?</th><td><strong>Yes</strong>, it scored 1</td><td>Given by the customer, so always trusted</td></tr>
+                  <tr><th scope="row">2. Are the words negative? (Liu Hu)</th><td>No, it reads positive</td><td>Catches 58% of unhappy tickets (22 of 38)</td></tr>
+                  <tr><th scope="row">3. Is the churn risk 50% or more? (Logistic Regression)</th><td><strong>Yes</strong>, 68%</td><td>AUC 0.78 in a 10-fold test</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>A ticket is flagged if check 1 matches, or if checks 2 and 3 both match. This one is caught, and a person checks it before it goes anywhere. The sentiment tool never acts alone, because it failed the bar I set for it: it caught only <b class="hl">58% of unhappy tickets</b>, and 52% in San Francisco, against an 80% target.</p>
             <div class="case-shots">
+              <figure class="case-shot">
+                <img width="651" height="489" src="images/cf-test-sentences.webp" alt="Table of the 13 test sentences and their sentiment scores, where the churn threat and the AWS sentence both score 0" loading="lazy" />
+                <figcaption>I stress-tested the sentiment tool with 13 sentences. A churn threat and &ldquo;considering AWS&rdquo; both scored 0, which reads as neutral.</figcaption>
+              </figure>
               <figure class="case-shot">
                 <img width="708" height="609" src="images/cf-sentiment-by-product.webp" alt="Box plots of ticket sentiment by product: CloudSync sits below zero, while Analytics Pro, DataVault and Account sit above zero" loading="lazy" />
                 <figcaption>Ticket sentiment by product. CloudSync is the only product below zero.</figcaption>
               </figure>
-              <figure class="case-shot">
-                <img width="651" height="489" src="images/cf-test-sentences.webp" alt="Table of the 13 test sentences and their sentiment scores, where the churn threat and the AWS sentence both score 0" loading="lazy" />
-                <figcaption>The 13 test sentences. A churn threat and &ldquo;considering AWS&rdquo; both scored 0, which reads as neutral.</figcaption>
-              </figure>
             </div>
-            <p>So I advised against staffing or bonus changes, since that would have blamed staff for a product fault. I recommended fixing CloudSync&rsquo;s reliability, starting in San Francisco, and changing how tickets are recorded and routed, so the customer&rsquo;s own words are kept and product faults go to the product team. The sentiment tool should only point a person to tickets, never decide alone.</p>
           </section>
 
-          <section class="case-block">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span>Automating the weekly action list</h2>
-            <p>
-              In the second part, my team of three pitched a fix: a weekly Orange workflow that flags the support tickets needing action, ranks them by how likely the customer is to leave, and has a person check every flag before it goes to the product team. I built the whole workflow, <b class="hl">86 widgets</b> in three parts: the problem, testing the AI tools, and the action list.
-            </p>
-            <figure class="case-shot">
-              <img width="1745" height="748" src="images/cf-solution-flow.webp" alt="Flow diagram of the weekly workflow: weekly export, add churn risk with Logistic Regression, decide if a ticket needs action, keep CloudSync, a person checks every ticket, the product team gets the list, and results are measured every month" loading="lazy" />
-              <figcaption>How the weekly workflow runs, from the Monday export to the product team, with a person checking every flag.</figcaption>
-            </figure>
+          <section class="case-block" data-stage="Method">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span>Methodology: four steps</h2>
+            <ol>
+              <li><strong>Find where it hurts.</strong> Orange analysis of 360 support tickets and 240 reviews showed CloudSync is the weakest product everywhere, and worst in San Francisco.</li>
+              <li><strong>Flag the tickets that need action</strong>, using the customer&rsquo;s score, the words and the churn risk. A score filter alone misses customers whose words warn.</li>
+              <li><strong>Put the riskiest customers first, then a person checks.</strong> The customers most likely to leave go to the top, and the support lead checks every flag before it goes to the product team.</li>
+              <li><strong>Prove it works.</strong> By month 3, the lead agrees with at least 80% of flags. By month 6, San Francisco CloudSync tickets scored 1 or 2 fall from 43% to 25%, and satisfaction rises from 2.37 to 3.0.</li>
+            </ol>
+            <h3>How I checked the data first</h3>
             <ul>
-              <li><strong>When a ticket is flagged:</strong> the customer scores it 1 or 2, or its words are negative and the customer&rsquo;s churn risk is 50% or more.</li>
-              <li><strong>A person in the loop:</strong> the support lead removes false alarms with a reason, and a second reviewer checks those removals.</li>
+              <li><strong>Data quality:</strong> I looked for broken links between files, impossible values and duplicates, and found the ticket text was heavily standardised, with only <b class="hl">48 distinct texts across 360 tickets</b>.</li>
+              <li><strong>Privacy:</strong> I removed customer company names and reported only group averages.</li>
+              <li><strong>Stakeholders:</strong> I interviewed the Customer Support Lead and a Data Analyst, and turned their tests into the standards I used to judge each finding.</li>
+              <li><strong>Themes in the reviews:</strong> I grouped them with TF-IDF and hierarchical clustering, comparing 5, 6 and 7 clusters before settling on six.</li>
+              <li><strong>A bar for each output,</strong> based on what a wrong decision would cost, placed on a trust and risk framework.</li>
             </ul>
+          </section>
+
+          <section class="case-block" data-stage="Workflow">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg></span>The Orange workflow</h2>
+            <p>I built the whole workflow, <b class="hl">86 widgets</b>, and ran it live in the pitch. Each week it runs in five steps:</p>
+            <ol>
+              <li><strong>Load</strong> the week&rsquo;s tickets and customer data.</li>
+              <li><strong>Detect:</strong> the AI tools read the score, the words and the churn risk.</li>
+              <li><strong>Flag</strong> the tickets that need action.</li>
+              <li><strong>Staff check:</strong> a person decides whether each flag is a real problem, sent to the product team or the service team, or a false alarm, let go with the reason recorded so the rules can be tuned.</li>
+              <li><strong>Measure</strong> whether satisfaction is rising to the target of 3.0.</li>
+            </ol>
+            <p>The workflow has three parts. <strong>Part A</strong> shows the problem is real, <strong>Part B</strong> tests whether the AI tools can be trusted, and <strong>Part C</strong> builds the action list.</p>
+            <figure class="case-shot">
+              <a href="images/orange-workflow-full.webp" target="_blank" rel="noreferrer"><img width="2362" height="5976" src="images/orange-workflow-full.webp" alt="The full 86-widget Orange workflow in three parts: Part A, what is the problem, with branches on satisfaction, confounds, churn impact and review clusters; Part B, can we trust the tools, with sentiment, regression, accuracy, word tests and the churn model; and Part C, how we fix it, the weekly action list" loading="lazy" /></a>
+              <figcaption>The full Orange workflow. The notes beside each chart record what it showed. <a href="images/orange-workflow-full.webp" target="_blank" rel="noreferrer">Open full size</a></figcaption>
+            </figure>
+          </section>
+
+          <section class="case-block" data-stage="Testing">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>Testing the AI tools</h2>
             <div class="ic-table-wrap">
               <table class="ic-table">
                 <thead><tr><th scope="col">What I tested</th><th scope="col">Result</th><th scope="col">Decision</th></tr></thead>
@@ -192,18 +227,19 @@
             </div>
             <p>I left the office out of the churn model, so it couldn&rsquo;t favour or punish one office. The LLM ran on the laptop, so no customer data left the company.</p>
             <figure class="case-shot case-shot-narrow">
-              <img width="775" height="609" src="images/cf-churn-models.webp" alt="Orange test and score results: Logistic Regression AUC 0.777, Neural Network 0.762 and Tree 0.588" loading="lazy" />
-              <figcaption>The churn model comparison in Orange, with 10-fold cross-validation.</figcaption>
-            </figure>
+                <img width="775" height="609" src="images/cf-churn-models.webp" alt="Orange test and score results: Logistic Regression AUC 0.777, Neural Network 0.762 and Tree 0.588" loading="lazy" />
+                <figcaption>The churn model comparison in Orange, with 10-fold cross-validation.</figcaption>
+              </figure>
+          </section>
+
+          <section class="case-block" data-stage="Result">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span>The result: a weekly action list</h2>
             <ul class="findings">
               <li>
                 <p><strong>The list points at CloudSync.</strong> The workflow flags <b class="hl">49 of 360 tickets</b>, and 34 of them are CloudSync. Half of San Francisco&rsquo;s CloudSync tickets need action, against 32% in Sydney and 17% in Singapore.</p>
               </li>
               <li>
                 <p><strong>The extra checks find tickets the score misses.</strong> They add 9 CloudSync tickets, and 5 of those customers churned or are at risk.</p>
-              </li>
-              <li>
-                <p><strong>The case study puts a size on it.</strong> In the case study data, San Francisco carries $134,270 a month from customers who churned or are at risk, 44% of the company total of $302,520 a month, while earning only 20% of revenue.</p>
               </li>
             </ul>
             <div class="case-shots">
@@ -216,7 +252,53 @@
                 <figcaption>Share of CloudSync tickets needing action, in red: 50% in San Francisco, 17% in Singapore and 32% in Sydney.</figcaption>
               </figure>
             </div>
-            <p>We proposed a 3-month pilot in San Francisco that needs <b class="hl">no new software and no new staff</b>, about 30 minutes a week for the support lead. The targets: the lead agrees with at least 80% of flags, San Francisco CloudSync tickets scored 1 or 2 fall from 43% to 25%, and satisfaction rises from 2.37 to 3.0.</p>
+          </section>
+
+          <section class="case-block" data-stage="Roadmap">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 9 4M20 20 15 4M12 6v2M12 11v2M12 16v2"/></svg></span>Roadmap</h2>
+            <p>Our team&rsquo;s plan starts where it hurts most and widens only when the evidence says so. It needs <b class="hl">no new software and no new staff</b>, about 30 minutes a week for the support lead.</p>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Phase</th><th scope="col">Where and what</th><th scope="col">Who checks</th><th scope="col">To move on</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">1. Weeks 1 to 13</th><td>Set-up and pilot: San Francisco, CloudSync only</td><td>San Francisco support lead</td><td>The lead agrees with 80% of flags</td></tr>
+                  <tr><th scope="row">2. Months 4 to 6</th><td>CloudSync in Sydney and Singapore</td><td>Each office&rsquo;s support lead</td><td>Each lead agrees with 80%, and San Francisco&rsquo;s unhappy CloudSync tickets fall to 25%</td></tr>
+                  <tr><th scope="row">3. Month 7 onwards</th><td>Other products, starting with Account</td><td>Each product&rsquo;s own team</td><td>Satisfaction stays at 3.0 or more, reported monthly to the COO</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="case-block" data-stage="People">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></span>Who gains, and who is left out</h2>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Who gains</th><th scope="col">Who is left out</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Customers:</strong> faults get fixed for good</td><td><strong>Silent customers:</strong> 71 of 280 never log a ticket</td></tr>
+                  <tr><td><strong>Product team:</strong> a weekly list of real faults</td><td><strong>Polite writers:</strong> mild complaints slip past the tool</td></tr>
+                  <tr><td><strong>Support agents:</strong> fewer repeat tickets</td><td><strong>Low-risk customers:</strong> they wait for the monthly spot-check</td></tr>
+                  <tr><td><strong>The COO:</strong> evidence before staffing decisions</td><td><strong>Small offices and other products:</strong> too little data, or a wait until month 7</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>No role is removed. Work moves from closing tickets to fixing what causes them, and one rule protects staff: <strong>the list judges the product, never people</strong>.</p>
+          </section>
+
+          <section class="case-block" data-stage="Risks">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg></span>Risks and how we handle them</h2>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Risk</th><th scope="col">How we handle it</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Missed complaints: the sentiment tool misses about half the unhappy tickets</th><td>Every score of 1 or 2 is flagged anyway, with a monthly spot-check of the rest</td></tr>
+                  <tr><th scope="row">False alarms: some flags are not real problems</th><td>A person checks every flag, and a second reviewer audits the removals</td></tr>
+                  <tr><th scope="row">Missed leavers: the churn model misses many customers who leave</th><td>Retrain and re-test it every quarter, and flag low scores anyway</td></tr>
+                  <tr><th scope="row">Customer privacy: tickets hold customers&rsquo; own words</th><td>Customer data never goes into cloud AI tools, and no shared table can single out one customer</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>Our recommendation:</strong> approve a 3-month San Francisco CloudSync pilot, and widen it only if the lead agrees with 80% of the flags.</p>
           </section>
 
           <section class="case-block" id="demo">
