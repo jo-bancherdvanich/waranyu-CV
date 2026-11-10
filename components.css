@@ -670,3 +670,9 @@
   text-transform: none; letter-spacing: 0; font-size: .8rem;
 }
 .dash-colval, .dash-collab { font-size: .75rem; }
+
+/* Pairs of charts on a case page, stacked on narrow screens */
+.case-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0 0; }
+.case-shots .case-shot { margin: 0; }
+.case-shot-narrow { max-width: 640px; }
+@media (max-width: 640px) { .case-shots { grid-template-columns: 1fr; } }

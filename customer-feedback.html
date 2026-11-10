@@ -131,6 +131,16 @@
                 </tbody>
               </table>
             </div>
+            <div class="case-shots">
+              <figure class="case-shot">
+                <img width="734" height="609" src="images/cf-satisfaction-by-office.webp" alt="Bar chart of average satisfaction by office: San Francisco about 2.9, Singapore about 3.7 and Sydney about 3.6" loading="lazy" />
+                <figcaption>Average satisfaction by office in Orange. San Francisco is well below Singapore and Sydney.</figcaption>
+              </figure>
+              <figure class="case-shot">
+                <img width="734" height="609" src="images/cf-satisfaction-by-tier.webp" alt="Bar chart of satisfaction by support tier and office: San Francisco, in blue, is the lowest bar in the Basic, Enterprise, Premium and Standard tiers" loading="lazy" />
+                <figcaption>Satisfaction by support tier. San Francisco, in blue, is lowest in every tier, so the tier doesn&rsquo;t explain the gap.</figcaption>
+              </figure>
+            </div>
             <ul class="findings">
               <li>
                 <p><strong>It points to the product, not the support team.</strong> San Francisco is lowest inside every product and every support tier, so tier, channel and timing don&rsquo;t explain it. It logs <b class="hl">23 of 38 complaints</b> with only about a quarter of the tickets, and its worst CloudSync tickets describe the product failing. None of them mention the support team.</p>
@@ -142,6 +152,16 @@
                 <p><strong>The sentiment tool failed the bar I set for it.</strong> It caught only <b class="hl">58% of unhappy tickets</b>, and 52% in San Francisco, against an 80% target. It also read threats such as &ldquo;considering AWS&rdquo; as neutral.</p>
               </li>
             </ul>
+            <div class="case-shots">
+              <figure class="case-shot">
+                <img width="708" height="609" src="images/cf-sentiment-by-product.webp" alt="Box plots of ticket sentiment by product: CloudSync sits below zero, while Analytics Pro, DataVault and Account sit above zero" loading="lazy" />
+                <figcaption>Ticket sentiment by product. CloudSync is the only product below zero.</figcaption>
+              </figure>
+              <figure class="case-shot">
+                <img width="651" height="489" src="images/cf-test-sentences.webp" alt="Table of the 13 test sentences and their sentiment scores, where the churn threat and the AWS sentence both score 0" loading="lazy" />
+                <figcaption>The 13 test sentences. A churn threat and &ldquo;considering AWS&rdquo; both scored 0, which reads as neutral.</figcaption>
+              </figure>
+            </div>
             <p>So I advised against staffing or bonus changes, since that would have blamed staff for a product fault. I recommended fixing CloudSync&rsquo;s reliability, starting in San Francisco, and changing how tickets are recorded and routed, so the customer&rsquo;s own words are kept and product faults go to the product team. The sentiment tool should only point a person to tickets, never decide alone.</p>
           </section>
 
@@ -150,6 +170,10 @@
             <p>
               In the second part, my team of three pitched a fix: a weekly Orange workflow that flags the support tickets needing action, ranks them by how likely the customer is to leave, and has a person check every flag before it goes to the product team. I built the whole workflow, <b class="hl">86 widgets</b> in three parts: the problem, testing the AI tools, and the action list.
             </p>
+            <figure class="case-shot">
+              <img width="1745" height="748" src="images/cf-solution-flow.webp" alt="Flow diagram of the weekly workflow: weekly export, add churn risk with Logistic Regression, decide if a ticket needs action, keep CloudSync, a person checks every ticket, the product team gets the list, and results are measured every month" loading="lazy" />
+              <figcaption>How the weekly workflow runs, from the Monday export to the product team, with a person checking every flag.</figcaption>
+            </figure>
             <ul>
               <li><strong>When a ticket is flagged:</strong> the customer scores it 1 or 2, or its words are negative and the customer&rsquo;s churn risk is 50% or more.</li>
               <li><strong>A person in the loop:</strong> the support lead removes false alarms with a reason, and a second reviewer checks those removals.</li>
@@ -166,6 +190,10 @@
               </table>
             </div>
             <p>I left the office out of the churn model, so it couldn&rsquo;t favour or punish one office. The LLM ran on the laptop, so no customer data left the company.</p>
+            <figure class="case-shot case-shot-narrow">
+              <img width="775" height="609" src="images/cf-churn-models.webp" alt="Orange test and score results: Logistic Regression AUC 0.777, Neural Network 0.762 and Tree 0.588" loading="lazy" />
+              <figcaption>The churn model comparison in Orange, with 10-fold cross-validation.</figcaption>
+            </figure>
             <ul class="findings">
               <li>
                 <p><strong>The list points at CloudSync.</strong> The workflow flags <b class="hl">49 of 360 tickets</b>, and 34 of them are CloudSync. Half of San Francisco&rsquo;s CloudSync tickets need action, against 32% in Sydney and 17% in Singapore.</p>
@@ -177,34 +205,17 @@
                 <p><strong>The case study puts a size on it.</strong> In the case study data, San Francisco carries $134,270 a month from customers who churned or are at risk, 44% of the company total of $302,520 a month, while earning only 20% of revenue.</p>
               </li>
             </ul>
+            <div class="case-shots">
+              <figure class="case-shot">
+                <img width="708" height="609" src="images/cf-flags-by-product.webp" alt="Bar chart of flagged tickets by product and office, where CloudSync has by far the most flags" loading="lazy" />
+                <figcaption>Flagged tickets by product. 34 of the 49 are CloudSync.</figcaption>
+              </figure>
+              <figure class="case-shot">
+                <img width="708" height="609" src="images/cf-cloudsync-action-share.webp" alt="Stacked bar chart of the share of CloudSync tickets needing action: about half in San Francisco, a sixth in Singapore and a third in Sydney" loading="lazy" />
+                <figcaption>Share of CloudSync tickets needing action, in red: 50% in San Francisco, 17% in Singapore and 32% in Sydney.</figcaption>
+              </figure>
+            </div>
             <p>We proposed a 3-month pilot in San Francisco that needs <b class="hl">no new software and no new staff</b>, about 30 minutes a week for the support lead. The targets: the lead agrees with at least 80% of flags, San Francisco CloudSync tickets scored 1 or 2 fall from 43% to 25%, and satisfaction rises from 2.37 to 3.0.</p>
-          </section>
-
-          <section class="case-block" id="approach-note">
-            <h2>How I worked</h2>
-            <h3>Let the evidence decide what goes in</h3>
-            <p>The local LLM caught 37 of 38 unhappy tickets with no false alarms, but it found nothing the customer&rsquo;s own score hadn&rsquo;t already flagged. So I left it out of the design, on the evidence from the test.</p>
-          </section>
-
-          <section class="case-block" data-stage="Limits">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></svg></span>What this can&rsquo;t tell you</h2>
-            <ul>
-              <li><strong>CloudCore Networks is a case study company</strong> with a realistic dataset, not a real client.</li>
-              <li><strong>The revenue figures and targets are findings and projections</strong>, not results achieved in a real business.</li>
-              <li><strong>The ticket text was heavily standardised</strong>, with 48 distinct texts across 360 tickets, so the text tools had less real language to work with than real tickets would give them.</li>
-              <li><strong>The action list has a known failure case:</strong> brand-new wording can silently shrink it, which is why a person checks every flag.</li>
-            </ul>
-          </section>
-
-          <section class="case-block" data-stage="My part">
-            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>What I did</h2>
-            <p>The feedback analysis was my own work. The action list was a team project with Thi Kieu Oanh Ha and Shrey Chintankumar Panchal. In it, I:</p>
-            <ul>
-              <li><strong>Built all of the Orange work</strong>, an 86-widget workflow.</li>
-              <li><strong>Wrote the solution and demonstration sections</strong> of the team proposal, and drove the report&rsquo;s final structure.</li>
-              <li><strong>Recorded and voiced the 8-minute demo</strong>.</li>
-              <li><strong>Presented the live Orange demo</strong> in the 10-minute pitch, and answered questions on the workflow and the AI tools.</li>
-            </ul>
           </section>
 
           <section class="case-block" data-stage="Links">
