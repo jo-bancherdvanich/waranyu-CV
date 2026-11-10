@@ -10,6 +10,7 @@ My portfolio and CV. Each project has a case study page, and most have a live de
 |---|---|---|
 | [Australia's renewable transition](https://waranyu-cv.vercel.app/renewable.html) | Renewable share from 9% in 2005 to 35% in 2024, and an R forecast of 37.8% by 2030 against the 82% target | Power BI, DAX, R |
 | [LocoLLM privacy-law adapter](https://waranyu-cv.vercel.app/locollm.html) | Client capstone: a small AI model trained on Australian privacy law and tested on a sealed 170-question benchmark | Python, LoRA |
+| [AI decision support and workflow automation](https://waranyu-cv.vercel.app/customer-feedback.html) | AI text mining and statistics on 360 support tickets to support a data-driven decision, then an automated weekly action list with a churn model and a local LLM test | Orange, Logistic Regression, Ollama |
 | [FreshMart sales dashboard](https://waranyu-cv.vercel.app/freshmart.html) | A Kimball star schema over 17,697 transaction lines, after auditing five source tables | Power BI, Power Query, DAX |
 | [Football club database](https://waranyu-cv.vercel.app/football-database.html) | 18 business rules turned into a normalised 16-table schema, with queries you can run | Oracle SQL, ERD |
 | [WeatherWise](https://waranyu-cv.vercel.app/weatherwise.html) | A weather advisor that charts a 5-day forecast and answers plain-language questions | Python, Matplotlib |

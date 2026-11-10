@@ -121,6 +121,21 @@
           ]
         },
         {
+          "title": "AI-Driven Decision Support and Workflow Automation for Customer Support",
+          "org": "Orange Data Mining, Sentiment Analysis, Churn Prediction, Local LLM (Ollama), Workflow Automation",
+          "link": {
+            "text": "See the project",
+            "url": "https://waranyu-cv.vercel.app/customer-feedback.html",
+            "label": "Project"
+          },
+          "bullets": [
+            "Used AI text mining and statistics on 360 support tickets, 240 reviews and 280 customer profiles for a case study company to support a data-driven decision, showing that low satisfaction in one office (2.94 out of 5, against 3.61 and 3.73, p < 0.001) came from a product fault, not the support team.",
+            "Stress-tested a sentiment tool with 13 adversarial sentences and found it caught only 58% of unhappy tickets against an 80% target, so recommended it only point people to tickets, never decide alone.",
+            "In a team of three, built the 86-widget Orange workflow that automates a weekly action list, flagging support tickets that need action and ranking them by churn risk, choosing Logistic Regression (AUC 0.78) over a Neural Network and a Decision Tree with 10-fold cross-validation.",
+            "Tested a local LLM (qwen3:8b via Ollama) on all 360 tickets: it caught 37 of 38 unhappy tickets but added nothing beyond the customer's own score, so it was left out of the design. Presented the live demo in the team pitch."
+          ]
+        },
+        {
           "title": "Soccer Competition Database Design and SQL Implementation",
           "org": "Group project (4) – Oracle SQL, ERD, Normalisation",
           "link": {

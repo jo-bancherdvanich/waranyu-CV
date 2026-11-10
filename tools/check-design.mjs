@@ -6,7 +6,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 
 const PAGES = ["index.html", "renewable.html", "locollm.html", "freshmart.html", "football-database.html",
-  "weatherwise.html", "infrastructure.html", "streaming-concept.html", "404.html"];
+  "weatherwise.html", "infrastructure.html", "streaming-concept.html", "customer-feedback.html", "404.html"];
 // Pages linked from the CVs and cover letters already sent to employers.
 const SENT = ["index.html", "football-database.html", "freshmart.html", "infrastructure.html", "locollm.html",
   "renewable.html", "streaming-concept.html", "weatherwise.html", "Waranyu-Bancherdvanich-CV.pdf", "images/og-card.png"];

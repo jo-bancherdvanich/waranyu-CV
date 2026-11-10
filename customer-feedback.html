@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151411" media="(prefers-color-scheme: dark)" />
+    <script>
+      /* Applied before the first paint so dark-theme visitors never see a light flash; app.js keeps it in sync after. */
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
+        if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+        var bar = t === "dark" ? "#151411" : "#f7f4ee";
+        document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute("content", bar); });
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Using AI and data to support a business decision, then automating a weekly action list: 360 support tickets, sentiment tools, a churn model and a local LLM test in Orange, by Waranyu Bancherdvanich."
+    />
+    <title>AI decision support and automation | Waranyu Bancherdvanich</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint; the fallbacks in
+         the page is readable before they arrive -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" /></noscript>
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="components.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="canonical" href="https://waranyu-cv.vercel.app/customer-feedback.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Waranyu Bancherdvanich" />
+    <meta property="og:title" content="AI decision support and automation | Waranyu Bancherdvanich" />
+    <meta property="og:description" content="Using AI and data to support a business decision, then automating a weekly action list: 360 support tickets, sentiment tools, a churn model and a local LLM test in Orange, by Waranyu Bancherdvanich." />
+    <meta property="og:url" content="https://waranyu-cv.vercel.app/customer-feedback.html" />
+    <meta property="og:image" content="https://waranyu-cv.vercel.app/images/orange-workflow.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI decision support and automation | Waranyu Bancherdvanich" />
+    <meta name="twitter:description" content="Using AI and data to support a business decision, then automating a weekly action list: 360 support tickets, sentiment tools, a churn model and a local LLM test in Orange, by Waranyu Bancherdvanich." />
+    <meta name="twitter:image" content="https://waranyu-cv.vercel.app/images/orange-workflow.webp" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="wordmark" href="index.html#top">Waranyu Bancherdvanich</a>
+        <nav class="topbar-right" aria-label="Main">
+          <a class="topbar-link" href="index.html#projects">Projects</a>
+          <a class="topbar-link" href="index.html#experience">Experience</a>
+          <a class="topbar-link" href="index.html#contact">Contact</a>
+          <a class="topbar-cta" href="Waranyu-Bancherdvanich-CV.pdf" download>CV (PDF)</a>
+          <button type="button" class="theme-toggle" aria-label="Switch to light theme"><span class="tt-track" aria-hidden="true"><svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg><span class="tt-knob"></span></span></button>
+        </nav>
+      </header>
+
+
+      <main id="main">
+        <article class="case case-feedback">
+          <h1>Using AI and data to support a decision, then automating the action list</h1>
+          <p class="lede">
+            A case study software company had one office with much lower customer satisfaction, and needed to decide whether to change its support staff or fix a product. I used AI text mining and statistics to answer that, working through <b class="hl">360 support tickets, 240 reviews and 280 customer profiles</b> in Orange, then built the workflow behind an automated weekly action list that a person checks.
+          </p>
+          <div class="case-actions">
+            <a href="#explore">See what I found</a>
+            <a href="index.html#projects">Back to all projects</a>
+          </div>
+
+          <div class="metrics case-metrics" aria-label="Project at a glance">
+            <div><span class="metric-number">2.94</span><span>satisfaction out of 5 in San Francisco,<br />against 3.61 and 3.73</span></div>
+            <div><span class="metric-number">58%</span><span>of unhappy tickets caught by the<br />sentiment tool, against an 80% target</span></div>
+            <div><span class="metric-number">0.78</span><span>AUC for the churn model, the best<br />of the three I compared</span></div>
+          </div>
+
+          <ol class="pipeline flow" aria-label="Project pipeline"><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="fl-num" aria-hidden="true">1</span></span><span class="fl-label">Check the data</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="fl-num" aria-hidden="true">2</span></span><span class="fl-label">Rule out simpler causes</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span><span class="fl-num" aria-hidden="true">3</span></span><span class="fl-label">Test the AI tools</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span><span class="fl-num" aria-hidden="true">4</span></span><span class="fl-label">Build the action list</span></li><li><span class="fl-node"><span class="fl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span><span class="fl-num" aria-hidden="true">5</span></span><span class="fl-label">A person checks every flag</span></li></ol>
+
+          <figure class="case-shot">
+            <img width="1960" height="760" src="images/orange-workflow.webp" alt="The first branch of the Orange workflow: the tickets file feeds satisfaction by region and product, ticket templates and ticket type, with notes reading San Francisco 2.94, Sydney 3.61, Singapore 3.73 and complaints at 26% of San Francisco tickets" />
+            <figcaption>The first branch of the Orange workflow. The notes beside each chart record what it showed.</figcaption>
+          </figure>
+
+          <dl class="case-meta">
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>Role</dt>
+              <dd>Sole analyst on the feedback analysis. On the team of three for the action list, I built all of the Orange work</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 1 5.2 5.2l-8 8a2.5 2.5 0 0 1-3.6-3.6l8-8z"/><path d="M9.5 4.5 4 10l3 3"/></svg></span>Tools</dt>
+              <dd>Orange Data Mining · Liu Hu and VADER sentiment · TF-IDF and hierarchical clustering · Logistic Regression · qwen3:8b via Ollama</dd>
+            </div>
+            <div>
+              <dt><span class="cm-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-5h4v5"/></svg></span>Context</dt>
+              <dd>AI-Driven Knowledge Systems (ISYS6014), Curtin University, Semester 2 2026. CloudCore Networks is a case study company</dd>
+            </div>
+          </dl>
+
+          <section class="case-block" data-stage="Problem">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 1.9V17h6v-1.5c0-.7.3-1.4.8-1.9A6 6 0 0 0 12 3z"/><path d="M9.5 20h5"/></svg></span>The decision: a support problem or a product problem?</h2>
+            <p>
+              CloudCore Networks, the company in the case study, has support offices in San Francisco, Sydney and Singapore. Customer satisfaction in San Francisco was well below the other two. The Chief Operating Officer needed to know whether that was a <strong>support problem</strong>, which means changing staff and budget, or a <strong>product problem</strong>, which means fixing the product.
+            </p>
+            <p>I wrote the report for that non-technical reader, and I interviewed two stakeholders, the Customer Support Lead and a Data Analyst, and turned their tests into the standards I used to judge each finding.</p>
+          </section>
+
+          <section class="case-block" data-stage="Approach">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>How I tested it</h2>
+            <ul>
+              <li><strong>Checked the data first.</strong> I looked for broken links between files, impossible values and duplicates, and found the ticket text was heavily standardised: only <b class="hl">48 distinct texts across 360 tickets</b>.</li>
+              <li><strong>Protected privacy.</strong> I removed customer company names and reported only group averages.</li>
+              <li><strong>Ruled out simpler explanations.</strong> I checked support tier, contact channel and timing before blaming the office.</li>
+              <li><strong>Grouped the reviews into themes.</strong> I used TF-IDF and hierarchical clustering, comparing 5, 6 and 7 clusters before settling on six.</li>
+              <li><strong>Tested the sentiment tools.</strong> I compared two tools against the customers&rsquo; own scores, then stress-tested the chosen one with <b class="hl">13 adversarial sentences</b>, including negation, sarcasm, polite complaints and threats to leave.</li>
+              <li><strong>Set a bar for each output</strong> based on what a wrong decision would cost, and placed each one on a trust and risk framework.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Result" id="explore">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>What I found</h2>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Office</th><th scope="col">Satisfaction out of 5</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Singapore</th><td>3.73</td></tr>
+                  <tr><th scope="row">Sydney</th><td>3.61</td></tr>
+                  <tr><th scope="row">San Francisco</th><td><strong>2.94</strong> (p &lt; 0.001)</td></tr>
+                  <tr><th scope="row">CloudSync in San Francisco</th><td><strong>2.37</strong>, from 30 tickets by 22 customers</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ul class="findings">
+              <li>
+                <p><strong>It points to the product, not the support team.</strong> San Francisco is lowest inside every product and every support tier, so tier, channel and timing don&rsquo;t explain it. It logs <b class="hl">23 of 38 complaints</b> with only about a quarter of the tickets, and its worst CloudSync tickets describe the product failing. None of them mention the support team.</p>
+              </li>
+              <li>
+                <p><strong>Low satisfaction goes with losing customers.</strong> Customers who churned or were at risk scored <b class="hl">2.93 against 3.64</b> for those who stayed (p &lt; 0.001), and 24 of the 50 San Francisco customers who logged tickets had churned or were at risk.</p>
+              </li>
+              <li>
+                <p><strong>The sentiment tool failed the bar I set for it.</strong> It caught only <b class="hl">58% of unhappy tickets</b>, and 52% in San Francisco, against an 80% target. It also read threats such as &ldquo;considering AWS&rdquo; as neutral.</p>
+              </li>
+            </ul>
+            <p>So I advised against staffing or bonus changes, since that would have blamed staff for a product fault. I recommended fixing CloudSync&rsquo;s reliability, starting in San Francisco, and changing how tickets are recorded and routed, so the customer&rsquo;s own words are kept and product faults go to the product team. The sentiment tool should only point a person to tickets, never decide alone.</p>
+          </section>
+
+          <section class="case-block">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span>Automating the weekly action list</h2>
+            <p>
+              In the second part, my team of three pitched a fix: a weekly Orange workflow that flags the support tickets needing action, ranks them by how likely the customer is to leave, and has a person check every flag before it goes to the product team. I built the whole workflow, <b class="hl">86 widgets</b> in three parts: the problem, testing the AI tools, and the action list.
+            </p>
+            <ul>
+              <li><strong>When a ticket is flagged:</strong> the customer scores it 1 or 2, or its words are negative and the customer&rsquo;s churn risk is 50% or more.</li>
+              <li><strong>A person in the loop:</strong> the support lead removes false alarms with a reason, and a second reviewer checks those removals.</li>
+            </ul>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">What I tested</th><th scope="col">Result</th><th scope="col">Decision</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Churn model, 10-fold cross-validation</th><td>Logistic Regression AUC 0.78, Neural Network 0.76, Decision Tree 0.59</td><td><strong>Logistic Regression</strong>, because it ranks customers best and its weights can be read</td></tr>
+                  <tr><th scope="row">Sentiment tools against customer scores</th><td>Liu Hu correlation 0.69 and R&sup2; 0.47, VADER 0.56 and 0.31</td><td><strong>Liu Hu</strong></td></tr>
+                  <tr><th scope="row">Local LLM, qwen3:8b via Ollama, on all 360 tickets</th><td>Caught 37 of 38 unhappy tickets with no false alarms</td><td><strong>Left out</strong>, because it added no tickets beyond the customer&rsquo;s own score</td></tr>
+                  <tr><th scope="row">Automation check</th><td>The saved list updated by itself when new tickets arrived, from 49 to 51 flags</td><td>Also found that brand-new wording silently shrank the list, from 49 to 39, and documented it</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>I left the office out of the churn model, so it couldn&rsquo;t favour or punish one office. The LLM ran on the laptop, so no customer data left the company.</p>
+            <ul class="findings">
+              <li>
+                <p><strong>The list points at CloudSync.</strong> The workflow flags <b class="hl">49 of 360 tickets</b>, and 34 of them are CloudSync. Half of San Francisco&rsquo;s CloudSync tickets need action, against 32% in Sydney and 17% in Singapore.</p>
+              </li>
+              <li>
+                <p><strong>The extra checks find tickets the score misses.</strong> They add 9 CloudSync tickets, and 5 of those customers churned or are at risk.</p>
+              </li>
+              <li>
+                <p><strong>The case study puts a size on it.</strong> In the case study data, San Francisco carries $134,270 a month from customers who churned or are at risk, 44% of the company total of $302,520 a month, while earning only 20% of revenue.</p>
+              </li>
+            </ul>
+            <p>We proposed a 3-month pilot in San Francisco that needs <b class="hl">no new software and no new staff</b>, about 30 minutes a week for the support lead. The targets: the lead agrees with at least 80% of flags, San Francisco CloudSync tickets scored 1 or 2 fall from 43% to 25%, and satisfaction rises from 2.37 to 3.0.</p>
+          </section>
+
+          <section class="case-block" id="approach-note">
+            <h2>How I worked</h2>
+            <h3>Let the evidence decide what goes in</h3>
+            <p>The local LLM caught 37 of 38 unhappy tickets with no false alarms, but it found nothing the customer&rsquo;s own score hadn&rsquo;t already flagged. So I left it out of the design, on the evidence from the test.</p>
+          </section>
+
+          <section class="case-block" data-stage="Limits">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></svg></span>What this can&rsquo;t tell you</h2>
+            <ul>
+              <li><strong>CloudCore Networks is a case study company</strong> with a realistic dataset, not a real client.</li>
+              <li><strong>The revenue figures and targets are findings and projections</strong>, not results achieved in a real business.</li>
+              <li><strong>The ticket text was heavily standardised</strong>, with 48 distinct texts across 360 tickets, so the text tools had less real language to work with than real tickets would give them.</li>
+              <li><strong>The action list has a known failure case:</strong> brand-new wording can silently shrink it, which is why a person checks every flag.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="My part">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span>What I did</h2>
+            <p>The feedback analysis was my own work. The action list was a team project with Thi Kieu Oanh Ha and Shrey Chintankumar Panchal. In it, I:</p>
+            <ul>
+              <li><strong>Built all of the Orange work</strong>, an 86-widget workflow.</li>
+              <li><strong>Wrote the solution and demonstration sections</strong> of the team proposal, and drove the report&rsquo;s final structure.</li>
+              <li><strong>Recorded and voiced the 8-minute demo</strong>.</li>
+              <li><strong>Presented the live Orange demo</strong> in the 10-minute pitch, and answered questions on the workflow and the AI tools.</li>
+            </ul>
+          </section>
+
+          <section class="case-block" data-stage="Links">
+            <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg></span>Links</h2>
+            <div class="case-actions case-footer-actions">
+            <a href="images/orange-workflow.webp" target="_blank" rel="noreferrer">Orange workflow, full size</a>
+            <a href="index.html#projects">Back to all projects</a>
+          </div>
+          </section>
+
+          <a class="next-project" href="locollm.html">
+            <span class="np-text">
+              <span class="np-label">Next project</span>
+              <span class="np-title">LocoLLM privacy-law adapter</span>
+              <span class="np-blurb">Training a small AI model that runs on an ordinary laptop into an Australian privacy-law specialist, tested on a sealed benchmark.</span>
+            </span>
+            <img class="np-shot" src="images/locollm-results.webp" width="1520" height="1104" alt="" loading="lazy" decoding="async" />
+          </a>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <div class="sf-top">
+          <p class="sf-name">Waranyu Bancherdvanich</p>
+          <nav class="sf-links" aria-label="Footer">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#experience">Experience</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="mailto:jojowaranyu.career@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/waranyu-ban/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/jo-bancherdvanich" target="_blank" rel="noreferrer">GitHub</a>
+          </nav>
+        </div>
+        <div class="sf-bottom">
+          <span>© <span id="year"></span> Waranyu Bancherdvanich</span>
+          <span>Last updated November 2026</span>
+          <span class="sf-built">Plain HTML, CSS and JavaScript, no framework. The demos run in your browser on each project&rsquo;s data.</span>
+          <a class="sf-totop" href="#main">Back to top</a>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
