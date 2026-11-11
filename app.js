@@ -1,4 +1,4 @@
-/* Site behaviour: footer year, theme toggle, capability rows, phone
+/* Site behaviour: footer year, capability rows, phone
  * navigation, the sticky top bar and the case-study video. No dependencies,
  * no build step. Nothing here animates content into view: the page is
  * complete as plain HTML.
@@ -12,48 +12,6 @@
   /* ---- footer year ---------------------------------------------------- */
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
-
-  /* ---- theme ---------------------------------------------------------- */
-  // The stored choice wins; otherwise follow the operating system. The
-  // stylesheet is light by default and dark under data-theme="dark".
-  function apply(theme) {
-    root.setAttribute("data-theme", theme);
-    // The browser bar follows the chosen theme, not just the OS setting.
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
-      m.setAttribute("content", theme === "dark" ? "#151411" : "#f7f4ee");
-    });
-    var btn = document.querySelector(".theme-toggle");
-    if (btn) {
-      var isDark = theme === "dark";
-      btn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
-      btn.setAttribute("aria-pressed", isDark ? "true" : "false");
-    }
-  }
-
-  var stored = null;
-  try { stored = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
-  var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  apply(stored === "light" || stored === "dark" ? stored : (prefersDark ? "dark" : "light"));
-
-  var toggle = document.querySelector(".theme-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", function () {
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!document.startViewTransition || reduce || document.hidden) { apply(next); return; }
-      // The new theme grows as a circle out of the toggle button.
-      var r = toggle.getBoundingClientRect();
-      var x = r.left + r.width / 2, y = r.top + r.height / 2;
-      var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-      document.startViewTransition(function () { apply(next); }).ready.then(function () {
-        root.animate(
-          { clipPath: ["circle(0px at " + x + "px " + y + "px)", "circle(" + end + "px at " + x + "px " + y + "px)"] },
-          { duration: 550, easing: "cubic-bezier(.4, 0, .2, 1)", pseudoElement: "::view-transition-new(root)" }
-        );
-      }).catch(function () { /* skipped, e.g. a background tab: the theme still changes */ });
-    });
-  }
 
   /* ---- capability rows expand to say why the skill matters ------------ */
   // The skill name is a real <button> (keyboard and screen readers get it

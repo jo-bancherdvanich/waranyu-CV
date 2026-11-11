@@ -17,7 +17,8 @@
   --line-strong: #1c1b18;
   --accent: #0f6b45;
   --accent-ink: #ffffff;
-  --highlight: #8c5200;
+  --highlight: #bf3a20;
+  --tomato: #ff6347;
   --link: #0f6b45;
   /* chart palette, used only by the dashboards */
   /* chart series, validated for colour-vision separation on this paper */
@@ -26,13 +27,6 @@
   --bg: var(--paper); --surface: #ffffff; --accent-soft: #0b5636; --tone: var(--paper-2);
   --img-border: rgba(28, 27, 24, .18); --shadow: none;
   color-scheme: light;
-}
-:root[data-theme="dark"] {
-  --paper: #151411; --paper-2: #1d1b17; --ink: #efe9dc; --muted: #aea793; --line: #2f2c25; --line-strong: #efe9dc;
-  --accent: #4fc98f; --accent-ink: #0f1a14; --highlight: #ffc77a; --link: #6fd6a3;
-  --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300;
-  --bg: var(--paper); --surface: #1d1b17; --accent-soft: #7fe0b3; --img-border: rgba(239, 233, 220, .18);
-  color-scheme: dark;
 }
 
 /* ---- base -------------------------------------------------------------- */
@@ -65,7 +59,7 @@ p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 /* The copy marks its key phrases; a lighter weight keeps them readable
    without turning every sentence into a list of bold fragments. */
-.hl { font-weight: inherit; color: inherit; }
+.hl { font-weight: 600; color: var(--highlight); }
 .lede .hl, .kn .hl, .finding-number .hl { font-weight: inherit; }
 .h1-em { font-style: italic; font-weight: 400; color: var(--accent); }
 
@@ -87,21 +81,6 @@ html { scroll-padding-top: 88px; }
 .topbar-right { display: flex; align-items: center; gap: 1.75rem; }
 .topbar-right a { display: inline-block; padding: .3rem 0; color: var(--ink); text-decoration: none; font-size: .95rem; }
 .topbar-right a:hover { text-decoration: underline; }
-.theme-toggle {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 50%;
-  background: transparent; color: var(--ink); cursor: pointer;
-}
-.theme-toggle:hover { border-color: var(--ink); }
-.tt-track { display: block; width: 18px; height: 18px; }
-.tt-track svg { width: 18px; height: 18px; display: none; }
-.tt-knob { display: none; }
-:root[data-theme="dark"] .tt-sun { display: block; }
-:root:not([data-theme="dark"]) .tt-moon { display: block; }
-.tt-track svg { animation: tt-in .45s cubic-bezier(.4, 0, .2, 1); }
-@keyframes tt-in { from { transform: rotate(-90deg) scale(.4); opacity: 0; } }
-::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-@media (prefers-reduced-motion: reduce) { .tt-track svg { animation: none; } }
 
 /* ---- buttons and text links -------------------------------------------- */
 .button, .project-btn {
@@ -134,6 +113,7 @@ html { scroll-padding-top: 88px; }
 /* ---- sections ------------------------------------------------------------ */
 .section { padding: 4.5rem 0; border-top: 1px solid var(--line); }
 .section-head, .section-label h2 { margin: 0 0 2.6rem; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--accent); }
+.section-head::after, .case-block > h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top: .55rem; border-radius: 2px; background: var(--tomato); }
 
 .section-note { margin: -1.8rem 0 2.6rem; color: var(--muted); }
 
@@ -258,7 +238,7 @@ a[href*="github.com"] { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www
 .np-label { font-size: .95rem; color: var(--muted); }
 .np-title { font-family: "Newsreader", Georgia, serif; font-size: 1.75rem; }
 .next-project:hover .np-title { text-decoration: underline; }
-.np-title::after { content: "\2192" / ""; display: inline-block; margin-left: .45em; font-family: "Public Sans", sans-serif; font-size: .8em; transition: transform .2s ease; }
+.np-title::after { content: "\2192" / ""; display: inline-block; color: var(--highlight); margin-left: .45em; font-family: "Public Sans", sans-serif; font-size: .8em; transition: transform .2s ease; }
 .next-project:hover .np-title::after, .next-project:focus-visible .np-title::after { transform: translateX(.3em); }
 @media (prefers-reduced-motion: reduce) { .np-title::after { transition: none; } }
 .np-blurb { color: var(--muted); }
@@ -304,7 +284,7 @@ a[href*="github.com"] { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www
 
 /* ---- print ---------------------------------------------------------------- */
 @media print {
-  .topbar, .site-footer, .intro-actions, .project-actions, .case-actions, .case-video, .case-film, .theme-toggle { display: none !important; }
+  .topbar, .site-footer, .intro-actions, .project-actions, .case-actions, .case-video, .case-film { display: none !important; }
   body { font-size: 11pt; color: #000; background: #fff; }
   a { color: #000; text-decoration: none; }
 }

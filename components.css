@@ -540,10 +540,10 @@
 .dash-slicers .dash-slicer:nth-child(3) .dash-chip.is-on { background: var(--c3); border-color: var(--c3); }
 .dash-slicers .dash-slicer:nth-child(4) .dash-chip.is-on { background: var(--c4); border-color: var(--c4); }
 .dash-slicers .dash-chip.is-on { color: var(--bg); }
-:root:not([data-theme="dark"]) .dash-slicers .dash-slicer:nth-child(1) .dash-chip.is-on { background: color-mix(in srgb, var(--c1) 55%, var(--ink)); border-color: transparent; }
-:root:not([data-theme="dark"]) .dash-slicers .dash-slicer:nth-child(2) .dash-chip.is-on { background: color-mix(in srgb, var(--c2) 55%, var(--ink)); border-color: transparent; }
-:root:not([data-theme="dark"]) .dash-slicers .dash-slicer:nth-child(3) .dash-chip.is-on { background: color-mix(in srgb, var(--c3) 55%, var(--ink)); border-color: transparent; }
-:root:not([data-theme="dark"]) .dash-slicers .dash-slicer:nth-child(4) .dash-chip.is-on { background: color-mix(in srgb, var(--c4) 55%, var(--ink)); border-color: transparent; }
+:root .dash-slicers .dash-slicer:nth-child(1) .dash-chip.is-on { background: color-mix(in srgb, var(--c1) 55%, var(--ink)); border-color: transparent; }
+:root .dash-slicers .dash-slicer:nth-child(2) .dash-chip.is-on { background: color-mix(in srgb, var(--c2) 55%, var(--ink)); border-color: transparent; }
+:root .dash-slicers .dash-slicer:nth-child(3) .dash-chip.is-on { background: color-mix(in srgb, var(--c3) 55%, var(--ink)); border-color: transparent; }
+:root .dash-slicers .dash-slicer:nth-child(4) .dash-chip.is-on { background: color-mix(in srgb, var(--c4) 55%, var(--ink)); border-color: transparent; }
 .case .icon-list li:nth-child(n) .il-icon { color: var(--muted); }
 .case .icon-list li:nth-child(n) .il-flag { color: inherit; }
 .findings li:first-child { border-top-color: var(--line); }
@@ -615,7 +615,6 @@
 .ll-delta { display: block; margin-top: .4rem; color: var(--accent); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .78rem; }
 .ll-heatwrap { overflow-x: auto; }
 .ll-heat { --ll-k: 6.6%; width: 100%; min-width: 300px; border-collapse: separate; border-spacing: 3px; font-variant-numeric: tabular-nums; }
-:root[data-theme="dark"] .ll-heat, :root[data-theme="dark"] .ll-legend { --ll-k: 4.1%; }
 .ll-heat th { padding: .25rem .3rem; color: var(--muted); font-family: "DM Mono", "DM Mono Fallback", monospace; font-size: .75rem; font-weight: 500; text-align: center; }
 .ll-heat thead th.is-on { color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); }
 .ll-heat th[scope="row"] { text-align: left; white-space: nowrap; color: var(--ink); }
