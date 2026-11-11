@@ -113,7 +113,7 @@
           <section class="case-block" data-stage="Context" id="context">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>2. Context</h2>
 
-            <h3>What we want to achieve</h3>
+            <h3><span class="sub-num">2.1</span> What we want to achieve</h3>
             <p>Same laptop, same base model, same question. One small adapter file makes the difference.</p>
             <figure class="case-shot">
               <video controls muted playsinline preload="metadata" width="1920" height="774"
@@ -122,11 +122,11 @@
               </video>
               <figcaption>A gym loses an unencrypted laptop of fingerprint scans. The base model says APP 6, which is wrong. With our adapter it says APP 11, security of personal information (17 seconds).</figcaption>
             </figure>
-            <h3>What is LocoLLM</h3>
+            <h3><span class="sub-num">2.2</span> What is LocoLLM</h3>
             <p>A project by LocoLabo, a research lab at Curtin Business School: one small open model (Qwen3-4B) that runs privately on your own laptop, plus plug-in <strong>adapters</strong> that each make it a specialist. No adapter had been built yet, and nobody had proof the idea works at this size.</p>
-            <h3>Why privacy law was a weak spot</h3>
+            <h3><span class="sub-num">2.3</span> Why privacy law was a weak spot</h3>
             <p>On 20 privacy scenarios the base model scored <b class="hl">10%</b>, about the same as guessing. It knew the law existed but mixed up the principle numbers, and invented its evidence.</p>
-            <h3>What a good answer looks like</h3>
+            <h3><span class="sub-num">2.4</span> What a good answer looks like</h3>
             <div class="ic-table-wrap">
               <table class="ic-table">
                 <thead><tr><th scope="col"></th><th scope="col">Without the adapter: base Qwen3-4B</th><th scope="col">With our adapter: Run 5</th></tr></thead>
@@ -141,7 +141,7 @@
 
           <section class="case-block" data-stage="Method" id="method">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span>3. Methodology</h2>
-            <h3>Tested the base model on 15 domains</h3>
+            <h3><span class="sub-num">3.1</span> Tested the base model on 15 domains</h3>
             <p>If the base model is already good, a small gain proves nothing. We needed a domain with room to improve.</p>
             <figure class="case-shot">
               <img width="2936" height="1160" src="images/locollm-domain-choice.webp" alt="Two illustrative charts: in a domain where the model is already strong, 85% rising to 90% is a gap too small to prove anything; in a weak domain, 12% rising to 75% is a gap everyone can see" loading="lazy" />
@@ -150,7 +150,8 @@
             <p>We asked the untrained model 5 questions in each of 15 business domains. Eleven scored 5 out of 5. <b class="hl">Compliance and privacy law scored 0</b>, so the client approved it as our domain.</p>
             <div class="ll-domains" id="ll-domains" role="img" aria-label="Base model test: 11 of 15 domains scored 5 out of 5; customer service 4, cybersecurity 3, HR and privacy law 0"></div>
 
-            <h3>Built the dataset</h3>
+            <h3><span class="sub-num">3.2</span> Built the dataset</h3>
+            <h4 class="ll-part">From two official sources to two question sets</h4>
             <div class="ll-flow" role="group" aria-label="How the question sets were built">
               <div class="ll-flow-col">
                 <h4>Sources</h4>
@@ -174,6 +175,7 @@
 
             <div class="ll-mix">
               <div>
+                <h4 class="ll-part">The same question mix in both sets</h4>
                 <div class="ll-mix-legend"><span><i class="ll-single"></i>One principle</span><span><i class="ll-multi"></i>Several</span><span><i class="ll-trick"></i>None (trick)</span></div>
                 <div class="ll-bars">
                   <div>
@@ -193,25 +195,25 @@
                     <p class="ll-bar-label"><strong>Benchmark</strong><br />170 questions, sealed</p>
                   </div>
                 </div>
-                <p class="ll-mix-note">The same mix of question types in both sets.</p>
               </div>
-              <div class="ll-qa">
-                <h4>One training question</h4>
+              <div>
+                <h4 class="ll-part">One training question and its answer</h4>
+                <div class="ll-qa">
                 <p>My local florist wanted to charge me a fee just to take me off their mailing list. Which single Australian Privacy Principle, if any, is most directly relevant?</p>
-                <h4>The answer, in the same four parts every time</h4>
+                <p class="ll-qa-label">The answer, in the same four parts every time</p>
                 <div class="ll-answer">
                   <p>Category: violation</p>
                   <p>Applicable APP: APP 7, direct marketing</p>
                   <p>Reasoning: opting out of direct marketing must be free, so a fee is not allowed</p>
                   <p>Citation: OAIC APP Guidelines, chapter 7</p>
                 </div>
+                </div>
               </div>
             </div>
-            <p>My manual review found <b class="hl">30 of my 105 training questions</b> mirrored a benchmark question, so I rewrote them.</p>
-            <h4>Build the test before the result</h4>
+            <h4 class="ll-part">Build the test before the result</h4>
             <p>On LocoLLM we <b class="hl">sealed a 170-question benchmark before any training</b>. When I found 30 of my training questions described the same situations as test questions, I rewrote them, so the <b class="hl">81%</b> measures what the model learned, not what it memorised.</p>
 
-            <h3>Trained the adapter on a free Colab GPU</h3>
+            <h3><span class="sub-num">3.3</span> Trained the adapter on a free Colab GPU</h3>
             <div class="ll-tools">
               <div>
                 <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg><div><strong>Google Colab</strong><span>Free cloud GPU (T4), about 15 minutes a run</span></div></div>
@@ -243,10 +245,10 @@ stats = trainer.train()</code></pre>
           <section class="case-block" data-stage="Result" id="explore">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>4. Key findings</h2>
 
-            <h3>Accuracy by question type, run by run</h3>
+            <h3><span class="sub-num">4.1</span> Accuracy by question type, run by run</h3>
             <p><strong>Pick a run</strong> to see what changed and what it did.</p>
             <div id="ll-dash" class="fmd" role="region" aria-label="Interactive results of the LocoLLM training runs"></div>
-            <h3>What each training run changed</h3>
+            <h3><span class="sub-num">4.2</span> What each training run changed</h3>
             <div class="ic-table-wrap">
               <table class="ic-table">
                 <thead><tr><th scope="col">Run</th><th scope="col">The change</th><th scope="col">One-principle accuracy</th><th scope="col">What happened</th></tr></thead>
@@ -258,18 +260,18 @@ stats = trainer.train()</code></pre>
                 </tbody>
               </table>
             </div>
-            <h3>Which principles it knows, and which it confuses</h3>
+            <h3><span class="sub-num">4.3</span> Which principles it knows, and which it confuses</h3>
             <p>Run 4 still scored zero on APP 9 and APP 13. Run 5 scored at least 6 out of 10 on all 13, and still answered <b class="hl">57 of 60</b> general questions correctly. Its weak spot is questions where several principles apply (F1 about 0.65).</p>
           </section>
 
           <section class="case-block" data-stage="Handover" id="deliverables">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/></svg></span>5. Deliverables and recommendations</h2>
 
-            <h3>What LocoLab gets</h3>
+            <h3><span class="sub-num">5.1</span> What LocoLab gets</h3>
             <p>All in the shared repository: <b class="hl">the privacy-law adapter</b>, the sealed 170-question benchmark with its scoring script, the 615-example training set, a repaired one-click Colab notebook, and a report on every run.</p>
-            <h3>Three recommended changes and a six-step recipe</h3>
+            <h3><span class="sub-num">5.2</span> Three recommended changes and a six-step recipe</h3>
             <div class="ic-table-wrap">
-              <table class="ic-table">
+              <table class="ic-table ic-table-fit">
                 <thead><tr><th scope="col">Change</th><th scope="col">Effect</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">Train the MLP layers too, one line of settings</th><td>38% to <strong>81%</strong></td></tr>
@@ -279,19 +281,16 @@ stats = trainer.train()</code></pre>
               </table>
             </div>
             <p>All three are free: no new data, no new hardware, the same 15-minute training.</p>
-            <details class="case-more">
-              <summary>The six-step recipe for the next domain</summary>
-              <ol>
-                <li><strong>Build and seal the test first</strong>, with single-answer, multi-answer and trick questions, and never train on it.</li>
-                <li><strong>Agree one answer format</strong> on day one: category, answer, reasoning, citation, with reasoning first.</li>
-                <li><strong>Write 35 to 50 examples per topic</strong>, including compliant cases.</li>
-                <li><strong>Score the base model fairly</strong>, with the same model and prompt layout.</li>
-                <li><strong>Start from the fixed notebook</strong>, then change one setting per run.</li>
-                <li><strong>Train twice with different seeds</strong> and report the range.</li>
-              </ol>
-              <p>Followed in order, the next team can reach our best result in week one, not week six.</p>
-            </details>
-            <h3>What we learned, and what is still open</h3>
+            <ol class="ll-recipe" aria-label="Six-step recipe for the next domain">
+              <li><span class="ll-recipe-top"><span class="ll-recipe-num">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span class="ll-recipe-label">Build and seal the test</span></li>
+              <li><span class="ll-recipe-top"><span class="ll-recipe-num">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span><span class="ll-recipe-label">Agree one answer format</span></li>
+              <li><span class="ll-recipe-top"><span class="ll-recipe-num">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M7 19v-5M12 19V7M17 19v-9"/></svg></span><span class="ll-recipe-label">35 to 50 examples per topic</span></li>
+              <li><span class="ll-recipe-top"><span class="ll-recipe-num">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span><span class="ll-recipe-label">Score the base model first</span></li>
+              <li><span class="ll-recipe-top"><span class="ll-recipe-num">5</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 10l7-7 7 7"/></svg></span><span class="ll-recipe-label">One change per run</span></li>
+              <li><span class="ll-recipe-top"><span class="ll-recipe-num">6</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></span><span class="ll-recipe-label">Test more than once</span></li>
+            </ol>
+            <p>Follow the six steps, and the next team can reach our Run 5 result in week one, not week six.</p>
+            <h3><span class="sub-num">5.3</span> What we learned, and what is still open</h3>
             <ul>
               <li><strong>Small can be smart:</strong> a laptop-sized model learned a narrow domain from 615 examples.</li>
               <li><strong>Format comes before facts:</strong> Run 1 used the right layout 169 times but named the right principle only 42 times.</li>
