@@ -28,25 +28,6 @@
     { key: "trick", label: "None applies", sub: "20 trick questions" }
   ];
 
-  // Correct answers out of 10, per Australian Privacy Principle:
-  // [base model, Run 2, Run 4, Run 5]
-  var HEAT_RUNS = ["base", "r2", "r4", "r5"];
-  var APPS = [
-    ["APP 1", "Open management", [1, 5, 7, 7]],
-    ["APP 2", "Anonymity", [0, 1, 2, 6]],
-    ["APP 3", "Collecting data", [0, 2, 6, 6]],
-    ["APP 4", "Unsolicited data", [0, 0, 1, 8]],
-    ["APP 5", "Notification", [1, 0, 1, 8]],
-    ["APP 6", "Use or disclosure", [0, 8, 3, 10]],
-    ["APP 7", "Direct marketing", [0, 6, 7, 9]],
-    ["APP 8", "Cross-border", [0, 7, 9, 10]],
-    ["APP 9", "Government IDs", [0, 0, 0, 7]],
-    ["APP 10", "Data quality", [1, 7, 6, 7]],
-    ["APP 11", "Security", [0, 0, 5, 9]],
-    ["APP 12", "Access", [0, 0, 2, 9]],
-    ["APP 13", "Correction", [0, 5, 0, 9]]
-  ];
-
   // Base-model test before the domain was chosen: correct out of 5.
   var DOMAINS = [
     ["Business writing", 5], ["Financial analysis", 5], ["Marketing strategy", 5],
@@ -114,10 +95,6 @@
     '<section class="dash-panel"><h3 id="ll-type-title"></h3>' +
     '<p class="dash-subtitle">Share of answers correct, by question type.</p>' +
     '<div class="dash-bars ll-types" id="ll-types"></div><p class="ll-change" id="ll-change" aria-live="polite"></p></section>' +
-    '<section class="dash-panel dash-wide"><h3>Which principles does it know?</h3>' +
-    '<p class="dash-subtitle">Correct answers out of 10 for each Australian Privacy Principle. Per-principle scores were reported for the base model and Runs 2, 4 and 5.</p>' +
-    '<div class="ll-heatwrap" id="ll-heat"></div>' +
-    '<p class="ll-legend" aria-hidden="true">0 <i style="--v:0"></i><i style="--v:3"></i><i style="--v:6"></i><i style="--v:10"></i> 10 out of 10</p></section>' +
     "</div>";
 
   var chips = root.querySelectorAll(".dash-chip");
@@ -125,7 +102,6 @@
   var types = root.querySelector("#ll-types");
   var change = root.querySelector("#ll-change");
   var typeTitle = root.querySelector("#ll-type-title");
-  var heat = root.querySelector("#ll-heat");
 
   cols.innerHTML = RUNS.map(function (r) {
     return '<button type="button" class="dash-col ll-col" data-run="' + r.id + '" data-tip-label="' + esc(r.label) + ' · one principle" data-tip-value="' + r.single + "% (" + r.n + ' of 130)" aria-label="' + esc(r.label) + ": " + r.single + '% correct">' +
@@ -138,15 +114,6 @@
     return '<li><button type="button" class="ll-step" data-run="' + r.id + '"><span class="ll-step-run">' + r.short + '</span>' +
       '<span class="ll-step-what">' + r.step + '</span><span class="ll-step-delta">' + (d > 0 ? "+" : d < 0 ? "&minus;" : "&plusmn;") + Math.abs(d) + " pts</span></button></li>";
   }).join("");
-
-  var head = '<table class="ll-heat"><caption class="sr-only">Correct answers out of 10 for each privacy principle, by training run</caption><thead><tr><th scope="col">Principle</th>' +
-    HEAT_RUNS.map(function (id) { return '<th scope="col" data-col="' + id + '">' + byId(id).short + "</th>"; }).join("") + "</tr></thead><tbody>";
-  heat.innerHTML = head + APPS.map(function (a) {
-    return '<tr><th scope="row">' + a[0] + "<span>" + esc(a[1]) + "</span></th>" + a[2].map(function (v, i) {
-      var r = byId(HEAT_RUNS[i]);
-      return '<td data-col="' + r.id + '" style="--v:' + v + '" data-tip-label="' + a[0] + " · " + esc(a[1]) + " · " + r.label + '" data-tip-value="' + v + ' of 10 correct">' + v + "</td>";
-    }).join("") + "</tr>";
-  }).join("") + "</tbody></table>";
 
   function render() {
     var r = byId(state.run);
@@ -170,7 +137,6 @@
       delta = '<span class="ll-delta">' + (d > 0 ? "+" : d < 0 ? "&minus;" : "&plusmn;") + Math.abs(d) + " points on one-principle questions against " + prev.label + "</span>";
     }
     change.innerHTML = r.change + delta;
-    Array.prototype.forEach.call(heat.querySelectorAll("[data-col]"), function (c) { c.classList.toggle("is-on", c.getAttribute("data-col") === state.run); });
   }
 
   root.addEventListener("click", function (e) {
