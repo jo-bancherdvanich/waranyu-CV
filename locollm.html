@@ -260,8 +260,6 @@ stats = trainer.train()</code></pre>
                 </tbody>
               </table>
             </div>
-            <h3><span class="sub-num">4.3</span> Which principles it knows, and which it confuses</h3>
-            <p>Run 4 still scored zero on APP 9 and APP 13. Run 5 scored at least 6 out of 10 on all 13, and still answered <b class="hl">57 of 60</b> general questions correctly. Its weak spot is questions where several principles apply (F1 about 0.65).</p>
           </section>
 
           <section class="case-block" data-stage="Handover" id="deliverables">
@@ -270,6 +268,7 @@ stats = trainer.train()</code></pre>
             <h3><span class="sub-num">5.1</span> What LocoLab gets</h3>
             <p>All in the shared repository: <b class="hl">the privacy-law adapter</b>, the sealed 170-question benchmark with its scoring script, the 615-example training set, a repaired one-click Colab notebook, and a report on every run.</p>
             <h3><span class="sub-num">5.2</span> Three recommended changes and a six-step recipe</h3>
+            <h4 class="ll-part">Three recommended changes</h4>
             <div class="ic-table-wrap">
               <table class="ic-table ic-table-fit">
                 <thead><tr><th scope="col">Change</th><th scope="col">Effect</th></tr></thead>
@@ -281,6 +280,7 @@ stats = trainer.train()</code></pre>
               </table>
             </div>
             <p>All three are free: no new data, no new hardware, the same 15-minute training.</p>
+            <h4 class="ll-part">The six-step recipe for the next domain</h4>
             <ol class="ll-recipe" aria-label="Six-step recipe for the next domain">
               <li><span class="ll-recipe-top"><span class="ll-recipe-num">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span class="ll-recipe-label">Build and seal the test</span></li>
               <li><span class="ll-recipe-top"><span class="ll-recipe-num">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span><span class="ll-recipe-label">Agree one answer format</span></li>
