@@ -116,13 +116,13 @@ html { scroll-padding-top: 88px; }
 .text-button:hover { background: transparent; color: var(--accent); }
 
 /* ---- home: introduction ----------------------------------------------- */
-.intro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 4rem; align-items: center; padding: 5.5rem 0 5rem; }
+.intro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 4rem; align-items: center; padding: 3.5rem 0 4.5rem; }
 .intro-copy { max-width: 44rem; }
-.hero-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 1rem; }
+.hero-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem 1rem; }
 .hw-tile { display: block; color: var(--muted); text-decoration: none; }
-.hw-tile img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; border: 1px solid var(--line); border-radius: 4px; background: #fff; transition: transform .2s ease, border-color .2s ease; }
+.hw-tile img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center; border: 1px solid var(--line); border-radius: 4px; background: #fff; transition: transform .2s ease, border-color .2s ease; }
 .hw-tile:hover img, .hw-tile:focus-visible img { border-color: var(--ink); transform: translateY(-2px); }
-.hw-label { display: block; margin-top: .45rem; font-size: .85rem; }
+.hw-label { display: block; margin-top: .3rem; font-size: .85rem; }
 .hw-tile:hover .hw-label { color: var(--ink); text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) { .hw-tile img { transition: none; } }
 @media (max-width: 860px) { .intro { grid-template-columns: minmax(0, 1fr); } .hero-work { display: none; } }
