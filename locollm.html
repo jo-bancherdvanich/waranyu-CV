@@ -79,7 +79,7 @@
 
           <section class="case-block" data-stage="Overview" id="overview">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>1. Overview</h2>
-            <p>The whole project on one page, then the 48-second animation that closed our client presentation.</p>
+
             <figure class="case-shot" id="poster">
             <a href="images/locollm-poster.webp" target="_blank" rel="noreferrer"><img width="2400" height="3397" src="images/locollm-poster.webp" alt="The team's A1 poster, Teaching a small, local AI Australian privacy law: background, objectives, the method and journey from 12% to 81%, evidence charts for single-principle accuracy and F1 by category, the impact for privacy help that stays on the device, and conclusions with limitations, recommendations and a recipe for the next domain" /></a>
             <figcaption>The team&rsquo;s poster for the MGMT6052 consultancy capstone. <a href="images/locollm-poster.webp" target="_blank" rel="noreferrer">Open full size</a></figcaption>
@@ -91,7 +91,7 @@
               <source src="video/locollm-future.mp4" type="video/mp4" />
               <track kind="captions" src="video/locollm-future.vtt" srclang="en" label="English" />
             </video>
-            <figcaption>The future of LocoLLM, the closing animation from our client presentation (48 seconds, narrated, with captions). LocoLLM&rsquo;s idea: one small base model on your own laptop, plus plug-in adapters that each make it an expert in one subject. Our project built and tested the first real one, for Australian privacy law.</figcaption>
+            <figcaption>The future of LocoLLM: one small model on your own laptop, plus plug-in specialists (48 seconds, with captions).</figcaption>
           </figure>
 
             <dl class="case-meta">
@@ -110,40 +110,29 @@
           </dl>
             <h3>My role</h3>
             <ul>
-              <li>Wrote <b class="hl">105 training examples</b> and 40 test questions, plus 30 trick items and the 25-question probe in different wording</li>
-              <li>Ran the overlap review between the training set and the sealed benchmark, and <b class="hl">rewrote the items that mirrored it</b></li>
-              <li>Wrote the team&rsquo;s documentation standard and template, and took the meeting minutes</li>
-              <li>Drafted the final report&rsquo;s structure, methodology and literature review, checking every source against the original paper</li>
-              <li>Produced the training results reports, the <b class="hl">27-slide client presentation</b> and the six-step handover recipe</li>
+              <li>Wrote <b class="hl">105 training examples</b> and 40 test questions, and checked the training set never mirrored the sealed test</li>
+              <li>Set the team&rsquo;s documentation standard, and drafted the final report&rsquo;s structure and methodology</li>
+              <li>Produced the run reports, the <b class="hl">27-slide client presentation</b> and the six-step handover recipe</li>
             </ul>
           </section>
 
           <section class="case-block" data-stage="Context" id="context">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></svg></span>2. Context</h2>
+
             <h3>What we want to achieve</h3>
-            <p>Same laptop, same base model, same question. The only difference is one small adapter file.</p>
+            <p>Same laptop, same base model, same question. One small adapter file makes the difference.</p>
             <figure class="case-shot">
               <video controls muted playsinline preload="metadata" width="1920" height="774"
                      poster="video/locollm-before-after-poster.webp" aria-label="A 17-second animation: asked which principle applies when a gym loses an unencrypted laptop of fingerprint scans, the base model wrongly answers APP 6, and the model with the adapter correctly answers APP 11, security of personal information">
                 <source src="video/locollm-before-after.mp4" type="video/mp4" />
               </video>
-              <figcaption>A gym stores fingerprint scans on an unencrypted laptop, and the laptop is lost. The base model answers APP 6, which is wrong. With our adapter, it answers APP 11, security of personal information, which is right. From our client presentation (17 seconds, no sound).</figcaption>
+              <figcaption>A gym loses an unencrypted laptop of fingerprint scans. The base model says APP 6, which is wrong. With our adapter it says APP 11, security of personal information (17 seconds).</figcaption>
             </figure>
             <h3>What is LocoLLM</h3>
-            <p>
-              LocoLabo is a research lab at Curtin Business School, led by Dr Michael Borck. Its LocoLLM project is &ldquo;frontier AI on a budget&rdquo;: one small open model, Qwen3-4B, that runs on your own laptop, with no data leaving the machine and no subscription. The plan is to add plug-in <strong>adapters</strong>, each one a specialist in a single subject, and every adapter has to beat the base model on a real test.
-            </p>
+            <p>A project by LocoLabo, a research lab at Curtin Business School: one small open model (Qwen3-4B) that runs privately on your own laptop, plus plug-in <strong>adapters</strong> that each make it a specialist. No adapter had been built yet, and nobody had proof the idea works at this size.</p>
             <h3>Why privacy law was a weak spot</h3>
-            <p>
-                A follow-up test of 20 privacy scenarios scored 2, or <b class="hl">10%</b>, close to the 8% you would get by picking one of the 13 principles at random. The model knew the law existed but scrambled the numbers, calling the security rule APP 13 when it is APP 11. In a larger 228-question test it scored 21%, and <b class="hl">79% of its answers cited foreign law</b> such as GDPR.
-              </p>
-            <ul class="findings">
-              <li><p><strong>The complication.</strong> Out of the box, the base model is a generalist and weak on specialist questions. No adapter had been built on it, the training notebook no longer ran as supplied, and nobody had proof that the idea works at this size.</p></li>
-              <li><p><strong>The question.</strong> Can a small, locally run model be trained into a genuine specialist that clearly beats the base model, and how do we prove it?</p></li>
-              <li><p><strong>The answer.</strong> Yes. We chose Australian privacy law as the test subject, trained an adapter, and measured it against the untrained model on a sealed benchmark: one-principle accuracy rose from <b class="hl">12% to 81%</b>.</p></li>
-            </ul>
+            <p>On 20 privacy scenarios the base model scored <b class="hl">10%</b>, about the same as guessing. It knew the law existed but mixed up the principle numbers, and invented its evidence.</p>
             <h3>What a good answer looks like</h3>
-            <p>An Australian retailer sends customer details to its separate overseas parent company, assumes no privacy obligations arise, and takes no protective steps. Which Australian Privacy Principle applies? Both models ran on a laptop with no internet.</p>
             <div class="ic-table-wrap">
               <table class="ic-table">
                 <thead><tr><th scope="col"></th><th scope="col">Without the adapter: base Qwen3-4B</th><th scope="col">With our adapter: Run 5</th></tr></thead>
@@ -154,101 +143,148 @@
                 </tbody>
               </table>
             </div>
-            <p class="fm-note">The base model&rsquo;s answer is from our earlier test, on a near-identical question about a subsidiary sending customer records to its overseas parent.</p>
           </section>
 
           <section class="case-block" data-stage="Method" id="method">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span>3. Methodology</h2>
             <h3>Tested the base model on 15 domains</h3>
-            <p>
-              The client let us pick the test subject, so we tested the untrained model first: <b class="hl">15 business domains, five questions each</b>. Eleven scored five out of five, which leaves nothing to prove. Compliance and privacy law scored zero, with made-up supporting evidence, and its answers are easy to mark because there are 13 numbered principles. <b class="hl">The client approved it as the project domain.</b>
-            </p>
+            <p>If the base model is already good, a small gain proves nothing. We needed a domain with room to improve.</p>
+            <figure class="case-shot">
+              <img width="2936" height="1160" src="images/locollm-domain-choice.webp" alt="Two illustrative charts: in a domain where the model is already strong, 85% rising to 90% is a gap too small to prove anything; in a weak domain, 12% rising to 75% is a gap everyone can see" loading="lazy" />
+              <figcaption>Why we wanted a weak domain. The bars are illustrative, from our client presentation.</figcaption>
+            </figure>
+            <p>We asked the untrained model 5 questions in each of 15 business domains. Eleven scored 5 out of 5. <b class="hl">Compliance and privacy law scored 0</b>, so the client approved it as our domain.</p>
             <div class="ll-domains" id="ll-domains" role="img" aria-label="Base model test: 11 of 15 domains scored 5 out of 5; customer service 4, cybersecurity 3, HR and privacy law 0"></div>
-            <p>
-                A weak domain was a deliberate choice. If the base model is already good, a small gain could be luck. A big gap leaves a result everyone can see.
-              </p>
+
             <h3>Built the dataset</h3>
-            <p>
-              The benchmark came first and was <b class="hl">sealed: never used for training</b>. Both question sets were written from the OAIC&rsquo;s APP Guidelines and the Privacy Act 1988, with the same mix of question types in each.
-            </p>
-            <ul class="icon-list">
-              <li>
-                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
-                <span><strong>Sealed benchmark</strong>: <b class="hl">170</b> questions: 130 with one right principle, 20 with several, and 20 trick questions where none applies</span>
-              </li>
-              <li>
-                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h6M9 16h6"/></svg></span>
-                <span><strong>Training set</strong>: <b class="hl">615</b> examples, about 35 per principle, including compliant cases so the model does not treat every story as a breach</span>
-              </li>
-              <li>
-                <span class="il-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.8 2.8L16.5 9.5"/></svg></span>
-                <span><strong>Checks</strong>: no overlap between the two sets, benchmark answers reviewed by our privacy-law expert and the client, and automated checks in Python</span>
-              </li>
-            </ul>
-              <p>
-                Every item uses the same question stem and the same four-part answer, so results can be <b class="hl">scored automatically</b>. One training example:
-              </p>
-              <blockquote class="ll-example">
-                <p><strong>Question.</strong> My local florist wanted to charge me a fee just to take me off their mailing list. Which single Australian Privacy Principle, if any, is most directly relevant?</p>
-                <p><strong>Answer.</strong> Category: violation. Applicable APP: APP 7 (direct marketing). Reasoning: opting out of direct marketing must be free of charge. Citation: OAIC APP Guidelines, chapter 7.</p>
-              </blockquote>
-              <p>
-                Automated word-overlap checks passed, but <b class="hl">my manual review found 30 of my 105 training questions described the same situation as a benchmark question</b>. I rewrote them, 37 changes in all, so the final score measures what the model learned rather than what it memorised.
-              </p>
+            <div class="ll-flow" role="group" aria-label="How the question sets were built">
+              <div class="ll-flow-col">
+                <h4>Sources</h4>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6M9 11h6"/></svg><div><strong>OAIC APP Guidelines</strong><span>oaic.gov.au</span></div></div>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/></svg><div><strong>Privacy Act 1988 (Cth)</strong><span>legislation.gov.au</span></div></div>
+              </div>
+              <div class="ll-flow-arrow" aria-hidden="true">&rsaquo;</div>
+              <div class="ll-flow-col">
+                <h4>Question sets</h4>
+                <div class="ll-card ll-train"><div><span class="ll-big">615</span><strong>Training set</strong></div></div>
+                <div class="ll-card ll-bench"><div><span class="ll-big">170</span><strong>Benchmark, sealed</strong><span>Never used for training</span></div></div>
+              </div>
+              <div class="ll-flow-arrow" aria-hidden="true">&rsaquo;</div>
+              <div class="ll-flow-col">
+                <h4>Checks</h4>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg><div><strong>No overlap between the two sets</strong></div></div>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 15l2 2 4-4"/></svg><div><strong>Benchmark reviewed by the client</strong></div></div>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/></svg><div><strong>Automated checks in Python</strong></div></div>
+              </div>
+            </div>
+
+            <div class="ll-mix">
+              <div>
+                <div class="ll-mix-legend"><span><i class="ll-single"></i>One principle</span><span><i class="ll-multi"></i>Several</span><span><i class="ll-trick"></i>None (trick)</span></div>
+                <div class="ll-bars">
+                  <div>
+                    <div class="ll-bar" role="img" aria-label="Training set: 455 one-principle, 100 several, 60 trick">
+                      <span class="ll-single" style="height:74%">455<br />74%</span>
+                      <span class="ll-multi" style="height:16%">100 | 16%</span>
+                      <span class="ll-trick" style="height:10%">60 | 10%</span>
+                    </div>
+                    <p class="ll-bar-label"><strong>Training set</strong><br />615 questions</p>
+                  </div>
+                  <div>
+                    <div class="ll-bar" role="img" aria-label="Benchmark: 130 one-principle, 20 several, 20 trick">
+                      <span class="ll-single" style="height:76%">130<br />76%</span>
+                      <span class="ll-multi" style="height:12%">20 | 12%</span>
+                      <span class="ll-trick" style="height:12%">20 | 12%</span>
+                    </div>
+                    <p class="ll-bar-label"><strong>Benchmark</strong><br />170 questions, sealed</p>
+                  </div>
+                </div>
+                <p class="ll-mix-note">The same mix of question types in both sets.</p>
+              </div>
+              <div class="ll-qa">
+                <h4>One training question</h4>
+                <p>My local florist wanted to charge me a fee just to take me off their mailing list. Which single Australian Privacy Principle, if any, is most directly relevant?</p>
+                <h4>The answer, in the same four parts every time</h4>
+                <div class="ll-answer">
+                  <p>Category: violation</p>
+                  <p>Applicable APP: APP 7, direct marketing</p>
+                  <p>Reasoning: opting out of direct marketing must be free, so a fee is not allowed</p>
+                  <p>Citation: OAIC APP Guidelines, chapter 7</p>
+                </div>
+              </div>
+            </div>
+            <p>My manual review found <b class="hl">30 of my 105 training questions</b> mirrored a benchmark question, so I rewrote them.</p>
             <h4>Build the test before the result</h4>
             <p>On LocoLLM we <b class="hl">sealed a 170-question benchmark before any training</b>. When I found 30 of my training questions described the same situations as test questions, I rewrote them, so the <b class="hl">81%</b> measures what the model learned, not what it memorised.</p>
+
             <h3>Trained the adapter on a free Colab GPU</h3>
-            <p>
-              We trained the adapter with <b class="hl">LoRA fine-tuning on a free Google Colab GPU</b>, about 15 minutes a run, using the client&rsquo;s notebook from GitHub. We <b class="hl">changed one setting per run</b>, so every jump has a cause, and scored each run on all 170 sealed questions.
-            </p>
+            <div class="ll-tools">
+              <div>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg><div><strong>Google Colab</strong><span>Free cloud GPU (T4), about 15 minutes a run</span></div></div>
+                <div class="ll-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><div><strong>GitHub</strong><span>The client&rsquo;s repository: the notebook and our scripts</span></div></div>
+                <p>We changed <b class="hl">one setting per run</b>, so every jump has a cause.</p>
+              </div>
+              <div class="ll-nb" role="group" aria-label="The training section of the notebook">
+                <div class="ll-nb-bar">train_compliance_colab.ipynb &middot; T4 GPU (free)</div>
+                <div class="ll-nb-step">
+                  <h4>Step 6: add the LoRA layer</h4>
+                  <p>Freeze the 4 billion base weights, train a small extra layer</p>
+<pre><code>model = FastModel.get_peft_model(
+    model, r=16, lora_alpha=32, lora_dropout=0.05,
+    target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+)</code></pre>
+                </div>
+                <div class="ll-nb-step">
+                  <h4>Step 8: train</h4>
+                  <p>615 question-and-answer pairs, 3 passes over the data</p>
+<pre><code>trainer = SFTTrainer(model=model, train_dataset=dataset,
+    args=TrainingArguments(num_train_epochs=3, learning_rate=2e-4,
+        per_device_train_batch_size=2, seed=42))
+stats = trainer.train()</code></pre>
+                </div>
+              </div>
+            </div>
           </section>
 
           <section class="case-block" data-stage="Result" id="explore">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19v-6M11 19V7M16 19v-9"/></svg></span>4. Key findings</h2>
+
             <h3>Accuracy by question type, run by run</h3>
-            <p>
-              Every run, side by side. <strong>Pick a run</strong> to see what changed and what it did.
-            </p>
-
+            <p><strong>Pick a run</strong> to see what changed and what it did.</p>
             <div id="ll-dash" class="fmd" role="region" aria-label="Interactive results of the LocoLLM training runs"></div>
-
-            <p class="fm-note">
-              The untrained model answered <b class="hl">15 of 130</b> one-principle questions correctly (<b class="hl">12%</b>), the like-for-like figure the final team report uses. The trained adapter reached <b class="hl">81%</b>.
-            </p>
-            <h3>What change each training run made</h3>
-            <h4>Run 3: it learned the layout, not the law</h4>
-            <p>The client&rsquo;s recipe as supplied, with the export fixed. It learned the four-line answer layout and one-principle accuracy rose from 12% to <b class="hl">20%</b>. But it said &ldquo;no principle applies&rdquo; on 52 of the 130 questions where one did, so its good score on the trick questions mostly came from saying &ldquo;none&rdquo; too readily.</p>
-            <h4>Run 4: think first, then answer</h4>
-            <p>Same data, with only the order of each answer changed, so the model explains its reasoning before it names the principle. Wrong &ldquo;none&rdquo; answers fell from 52 to 1, and accuracy rose to <b class="hl">38%</b>. But it still named the wrong principle 78 times: it knew the layout, not yet the law.</p>
-            <h4>Run 5: train the knowledge layers too</h4>
-            <p>One change from Run 4: the MLP layers were trained as well as the attention layers, one line of settings. Trainable parameters went from 11.8 million to 33.0 million, still about 1% of the model, and one-principle accuracy jumped to <b class="hl">81%</b>. Run 4 had still scored zero on APP 9 and APP 13. Run 5 scored at least 6 out of 10 on every principle.</p>
-            <h3>Which principles the model knows, and which it confuses</h3>
-            <p>Run 4 still scored zero on APP 9 and APP 13. Run 5 scored at least 6 out of 10 on every principle, and its weakest area is questions where several principles apply, with an F1 score of about 0.65.</p>
-            <ul class="findings">
-              <li>
-                <p><strong>It kept its general knowledge.</strong> The recommended adapter still answered <b class="hl">57 of 60</b> general maths, geography and instruction questions, so it learned privacy law without losing general ability.</p>
-              </li>
-            </ul>
+            <h3>What each training run changed</h3>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Run</th><th scope="col">The change</th><th scope="col">One-principle accuracy</th><th scope="col">What happened</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Untrained</th><td>None</td><td>12%</td><td>Mixed up the principles</td></tr>
+                  <tr><th scope="row">Run 3</th><td>The client&rsquo;s recipe as supplied</td><td>20%</td><td>Learned the answer layout, but said &ldquo;no principle&rdquo; 52 times when one applied</td></tr>
+                  <tr><th scope="row">Run 4</th><td>Reasoning first, then the answer</td><td>38%</td><td>Wrong &ldquo;no principle&rdquo; answers fell from 52 to 1</td></tr>
+                  <tr><th scope="row">Run 5</th><td>Train the MLP layers too</td><td><strong>81%</strong></td><td>At least 6 out of 10 on every principle</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Which principles it knows, and which it confuses</h3>
+            <p>Run 4 still scored zero on APP 9 and APP 13. Run 5 scored at least 6 out of 10 on all 13, and still answered <b class="hl">57 of 60</b> general questions correctly. Its weak spot is questions where several principles apply (F1 about 0.65).</p>
           </section>
 
           <section class="case-block" data-stage="Handover" id="deliverables">
             <h2><span class="h2-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/></svg></span>5. Deliverables and recommendations</h2>
+
             <h3>What LocoLab gets</h3>
-            <p>
-              Five deliverables, all in the shared repository: <b class="hl">the privacy-law adapter</b>, the sealed benchmark with its scoring script, the 615-example training set, a repaired Colab notebook that trains a new adapter in one click, and a report on each training run. The three recommended changes are free: no new data, no new hardware, the same 15-minute training.
-            </p>
+            <p>All in the shared repository: <b class="hl">the privacy-law adapter</b>, the sealed 170-question benchmark with its scoring script, the 615-example training set, a repaired one-click Colab notebook, and a report on every run.</p>
             <h3>Three recommended changes and a six-step recipe</h3>
-            <ul class="findings">
-              <li>
-                <p><strong>Train more of the model.</strong> The client&rsquo;s notebook trained only the attention layers. Adding the MLP layers, one line of settings, took one-principle accuracy from <b class="hl">38% to 81%</b>: the biggest gain in the project.</p>
-              </li>
-              <li>
-                <p><strong>Reasoning first, then the answer.</strong> Reordering each training answer so the model explains before it names the principle cut wrong &ldquo;no principle applies&rdquo; guesses from <b class="hl">54 to 5</b>. Same data, new order.</p>
-              </li>
-              <li>
-                <p><strong>Test more than once.</strong> Run 1 and Run 2 used the same data and settings with only a new random seed, and about one answer in five changed. One run alone can be luck, so test at least twice.</p>
-              </li>
-            </ul>
+            <div class="ic-table-wrap">
+              <table class="ic-table">
+                <thead><tr><th scope="col">Change</th><th scope="col">Effect</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Train the MLP layers too, one line of settings</th><td>38% to <strong>81%</strong></td></tr>
+                  <tr><th scope="row">Reasoning first, then the answer</th><td>Wrong &ldquo;no principle&rdquo; guesses: 54 to 5</td></tr>
+                  <tr><th scope="row">Test every recipe at least twice</th><td>A new random seed flipped 1 answer in 5</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>All three are free: no new data, no new hardware, the same 15-minute training.</p>
             <details class="case-more">
               <summary>The six-step recipe for the next domain</summary>
               <ol>
@@ -262,19 +298,10 @@
               <p>Followed in order, the next team can reach our best result in week one, not week six.</p>
             </details>
             <h3>What we learned, and what is still open</h3>
-            <ul class="findings">
-              <li>
-                <p><strong>It learns the format before the facts.</strong> Run 1 used the right answer layout 169 times out of 170 but named the right principle only 42 times. <b class="hl">Score the answer, not the look.</b></p>
-              </li>
-              <li>
-                <p><strong>Randomness is real.</strong> Run 2 repeated Run 1 with only a new random seed. The scores were almost the same (<b class="hl">41 against 42</b> of 130), yet about one answer in five flipped. One score alone can be luck, so test at least twice and report a range.</p>
-              </li>
-            </ul>
             <ul>
-              <li><strong>Questions with several right answers are still weak</strong>, with an F1 score of about 0.65.</li>
-              <li><strong>Some answers still need a lawyer&rsquo;s sign-off</strong>, such as tax file numbers, the Spam Act and employee records.</li>
-              <li><strong>Every benchmark question ends with the same wording.</strong> A 25-question probe with different wording scored 21 of 25, but it is a small test.</li>
-              <li><strong>One full benchmark run takes about two hours</strong>, so each recipe was tested only once or twice. Treat every number as a range.</li>
+              <li><strong>Small can be smart:</strong> a laptop-sized model learned a narrow domain from 615 examples.</li>
+              <li><strong>Format comes before facts:</strong> Run 1 used the right layout 169 times but named the right principle only 42 times.</li>
+              <li><strong>Still open:</strong> questions with several right answers, a lawyer&rsquo;s sign-off on some answers, and more varied question wording.</li>
             </ul>
           </section>
 
