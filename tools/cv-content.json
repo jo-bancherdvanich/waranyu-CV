@@ -24,6 +24,23 @@
   "summary": "Master of Information Systems and Technology student at Curtin University (Data Analytics and Visualisation, CWA 82.18), with a bachelor’s degree majoring in statistics (finance minor). I build Power BI dashboards on data I have audited and modelled myself, and I forecast in R so the method can be checked. Most recently I was Finance Lead in a 9-person Curtin Consulting Group team working with Hockey WA. Most projects in my portfolio at waranyu-cv.vercel.app have a live demo you can try. Seeking a data analyst internship in Perth, and graduate roles from July 2027.",
   "sections": [
     {
+      "title": "Education",
+      "entries": [
+        {
+          "title": "Master of Information Systems and Technology",
+          "org": "Curtin University (Faculty of Business and Law), Western Australia",
+          "date": "2025 – Present",
+          "note": "Specialisation: Data Analytics and Visualisation | Expected graduation: July 2027 | Course Weighted Average: 82.18"
+        },
+        {
+          "title": "Bachelor of Science and Technology",
+          "org": "Thammasat University, Thailand",
+          "date": "2019 – 2023",
+          "note": "Major: Statistics | Minor: Finance"
+        }
+      ]
+    },
+    {
       "title": "Skills",
       "skills": [
         [
@@ -160,23 +177,6 @@
             "Costed every item from cited supplier prices in Excel, splitting CapEx and OpEx and keeping Year 1 to about a third of the A$2.1M budget, with the rest reserved for failures and upgrades.",
             "Compared 5 WAN options on cost, latency and reliability, choosing Starlink over Sky Muster for 4 remote sites because of latency (~30 ms vs ~665 ms) for VoIP calls."
           ]
-        }
-      ]
-    },
-    {
-      "title": "Education",
-      "entries": [
-        {
-          "title": "Master of Information Systems and Technology",
-          "org": "Curtin University (Faculty of Business and Law), Western Australia",
-          "date": "2025 – Present",
-          "note": "Specialisation: Data Analytics and Visualisation | Expected graduation: July 2027 | Course Weighted Average: 82.18"
-        },
-        {
-          "title": "Bachelor of Science and Technology",
-          "org": "Thammasat University, Thailand",
-          "date": "2019 – 2023",
-          "note": "Major: Statistics | Minor: Finance"
         }
       ]
     },
